@@ -11,14 +11,10 @@ $secondary-color: #5E1175 !default;
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
+
 .toop {
   margin-top:10px;
   margin-right:5px;
-}
-
-.moover{
-  margin-right: 25px;
-  padding-top: 5.5%;
 }
 
 .biggers {
@@ -43,10 +39,6 @@ $secondary-color: #5E1175 !default;
 .tesst {
   font-size:75px;
 }
-
-.moove {
-  margin-right:155px;
- }
 
 .fright {
   position:absolute;
@@ -330,12 +322,17 @@ position: absolute;
   height: 5px;
 }
 
+#UserLog {
+  width: 95% !important;
+  position: initial;
+}
+
 .logout {
   margin-left: 2px !important;
   letter-spacing: 0 !important;
   text-align: center !important;
   height: 17% !important;
-  width: 65% !important;
+  width: 65%;
   padding: 0 0 !important;
   font-size: 1.3vw !important;
 }
@@ -412,7 +409,6 @@ position: absolute;
   margin-right: 2%;
 }
 
-/*Brians*/
 body {
   background: #896891; /* fallback for old browsers */
   background: -webkit-linear-gradient(to left, #5E1175, #896891); /* Chrome 10-25, Safari 5.1-6 */
@@ -423,15 +419,13 @@ body {
   background: #576CDB; /* fallback for old browsers */
   background: -webkit-linear-gradient(to left, #576CDB , #717CCE); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to left, #576CDB , #717CCE); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-/*Brians*/
 }
 
 .border {
- border: 80px solid grey; 
+ border: 80px solid grey;
 }
 
 .bigger {
-  margin-top: 5%;
   font-size: 18px;
   position:relative;
 }
@@ -471,4 +465,17 @@ body {
 
 .inner{
   display: inline;
+}
+
+#FAQ{
+  margin-right: 95px;
+}
+
+
+#crd-txt{
+  font-size: 1.2vw !important;
+}
+
+.rounded{
+  border-radius: 10px;
 }

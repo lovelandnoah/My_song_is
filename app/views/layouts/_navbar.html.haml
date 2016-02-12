@@ -3,8 +3,10 @@
     %a{:href => "#"}= image_tag("Tmix_logo_small_text_and_skull.png", class: "logo")
     %ul#nav-mobile.right
       %li
-        %a.moover.bigger{:href => "static_pages/bio"} About Us
+        %a.bigger{:href => "/static_pages/bio"} About Us
       %li
-        %a.moove.bigger{:href => "static_pages/topsongs"} Top Songs
+        %a.bigger{:href => "/static_pages/topsongs"} Top Songs
       %li
-        %a{:href => "#"} home
+        %a#FAQ.bigger{:href => "/static_pages/faq"} FAQ
+      %li
+        .btn#UserLog.logout.waves-effect.waves-light.center= link_to 'Logout', destroy_user_session_path, method: 'delete', class: "white-text"

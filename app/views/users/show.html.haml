@@ -1,22 +1,26 @@
+= render 'layouts/navbar'
 %h1 you are checkout out a user page
 %h3 #{@user.email}
 %h3 #{@user.username}
 
 -if @mixtape.any?
-	%div.card-panel.cyan
-		%div.card-content.white-text
-			%h5.center
-				= @mixtape.name
-				- @songs.each do |song|
-					.tex
-						.paddin
-							%h5.inline
-								%span
-									= song.name
-								%span By:
-								%span
-									= song.artist
-								%button.btn.inlin.flo Play
+	%div.container
+		%div.card-panel.cyan
+			%div.card-content.white-text
+				%h5.center.salt.subtit
+					= @mixtape.name
+				%p
+					- @songs.each do |song|
+						.tex
+							.paddin
+								%h5.inline
+									%span.crd
+										= song.name
+									%span.crd By:
+									%span.crd
+										= song.artist
+									%button.btn.inlin.flo Play
 -else
 %img{:alt => "My QR code", :src => @qr}
+%br
 %a.moove.bigger{:href => "home#index"} Mixtape
