@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'static_pages/bio'
   get 'static_pages/faq'
   get 'static_pages/topsongs'
+  get 'users/show'
   # root 'users#show'
   root 'home#index'
 
