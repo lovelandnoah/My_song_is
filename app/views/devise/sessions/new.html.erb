@@ -1,15 +1,10 @@
 <nav>
   <div class="nav-wrapper z-depth-3 cyan">
     <a href="#" class="brand-logo center">
-      <h3 class="nav-stuff salt">
-        T-Mix
-      </h3>
     </a>
     <ul id="nav-mobile" class="left">
       <li>
-        <a class="bigger" href="/static_pages/bio">
-          About Us
-        </a>
+
       </li>
     </ul>
   </div>
@@ -35,6 +30,14 @@
         </div>
       </div>
     <% end -%>
+        <br/>
+        <br/>
+        <br/>
+        <br/>        
+        <br/>
+        <br/>
+
+
         <p class="faced fourteen">Sign in with</p>
         <div>
           <%= link_to user_omniauth_authorize_path(:facebook) do %>
@@ -42,13 +45,11 @@
           <% end %>
         </div>
         <p class="tweetd fourteen">Sign in with</p>
+        <br/>
         <div>
           <%= link_to user_omniauth_authorize_path(:twitter) do %>
             <i class="twet fa fa-twitter fa-5x"></i>   
           <% end %>
         </div>
-    <div class="center"><%= image_tag("cassette_tape_black.jpg", id: "img") %></div>
-  </div>
-         <!--<%#= f.submit "Log in" %>-->
   <br />
 </div>

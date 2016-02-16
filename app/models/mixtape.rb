@@ -1,5 +1,4 @@
 class Mixtape < ActiveRecord::Base
 	has_many :songs
-	has_many :ratings
-	has_many :users, through: :ratings 
+	has_one :user
 end

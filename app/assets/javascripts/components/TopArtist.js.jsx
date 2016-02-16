@@ -24,19 +24,13 @@ class TopArtist extends React.Component{
     } 
   }
 
-
-
-
-
-
-
   add(songName, artist){
-    // debugger
     let self = this;
+    // mixtape = Mixtape.where(user_id: current_user.id)
     $.ajax({
       url: '/song',
       type: 'POST',
-      data: {name: songName, artist: artist, mixtape_id: this.props.mixtapeId}
+      data: {name: songName, artist: artist, mixtape_id: mixtape}
 
     }).success( data => {
 

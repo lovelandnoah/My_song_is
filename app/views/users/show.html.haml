@@ -1,13 +1,13 @@
 .container
 	-if current_user.id == @user.id
-		%h1 Your profile, #{@user.username}.
+		%h1 mysong.is/#{@user.username}
 	-else
-		%h1 #{@user.username}'s Profile
+		%h1 mysong.is/#{@user.username}
 
 	%h3 #{@user.email}
 	%h2 Preferred music: #{@user.permalink}
 
-	-if @mixtape.any?
+	-if @mixtape
 		%div.card-panel.cyan
 			%div.card-content.white-text
 				%h5.center
@@ -23,7 +23,7 @@
 										= song.artist
 									%button.btn.inlin.flo Play
 	-else
-	%img{:alt => "My QR code", :src => @qr}
-	%a.moove.bigger{:href => "home#index"} Mixtape
+		%img{:alt => "My QR code", :src => @qr}
+		%a.moove.bigger{:href => "home#index"} Mixtape
 	-if current_user.id == @user.id
 		%a.moove.bigger{:href => "users_edit"} Edit

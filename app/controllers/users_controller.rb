@@ -13,7 +13,6 @@ class UsersController < ApplicationController
 
 	def update
 		@user = current_user
-		binding.pry
 	end
 
 	def show
@@ -21,10 +20,22 @@ class UsersController < ApplicationController
 		else
 			@user = current_user
 		end
-
 		@mixtape = Mixtape.where(user_id: @user.id)
 		if @mixtape.any?
-    	@songs = Song.where(mixtape_id: @mixtape[0].id)
+			if Song.where(mixtape_id: @mixtape[0].id)
+    		@songs = Song.where(mixtape_id: @mixtape[0].id)
+    	end
+    # else
+    # 	@mixtape = Mixtape.new do |m|
+    # 		m.name = "Mixtape:"
+    # 		m.category = "Mix"
+    # 		m.author_id = current_user.id
+    # 		m.user_id = current_user.id
+    # 		# m.id = 1
+    # 		# m.created_at = Time.now
+    # 		# m.updated_at = Time.now
+    # 		m.save
+    # 	end
 		end
     url_prefix = 'https://chart.googleapis.com/chart?chs=300x300&cht=qr&chld=H&chl='
     profile_url = request.original_url

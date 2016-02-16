@@ -7,8 +7,7 @@ class User < ActiveRecord::Base
 
   # before_save :create_permalink
 
-  has_many :ratings, dependent: :destroy
-  has_many :mixtapes, through: :ratings, dependent: :destroy
+  has_one :mixtape, dependent: :destroy
   #TODO: User can't have many songs unless songs has a user_id!
   has_many :songs, dependent: :destroy
 
@@ -19,6 +18,8 @@ class User < ActiveRecord::Base
   validates_presence_of :username
 
   validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
+
+  after_create :build_mixtape
 
 
   def self.find_for_oauth(auth, signed_in_resource = nil)
@@ -70,6 +71,13 @@ class User < ActiveRecord::Base
   # end
   # vanity URL
   private
+
+  def build_mixtape
+    mixtape = Mixtape.create()
+    # binding.pry
+    mixtape.user_id = self.id
+    mixtape.save
+  end
     # vanity URL
     # def create_permalink
     #   self.permalink = username.downcase
