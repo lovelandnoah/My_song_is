@@ -4,4 +4,4 @@
       %li
         %a.moove.bigger{:href => "static_pages/topsongs"} Top Songs
       %li
-        %a{:href => "#"} home
+        .btn#UserLog.logout.waves-effect.waves-light.center= link_to 'Logout', destroy_user_session_path, method: 'delete', class: "white-text"

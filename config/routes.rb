@@ -2,8 +2,9 @@ Rails.application.routes.draw do
   get 'static_pages/bio'
   get 'static_pages/faq'
   get 'static_pages/topsongs'
-  root 'users#show'
-  # root 'home#index'
+  get 'users/show'
+  # root 'users#show'
+  root 'home#index'
 
   post 'home_play', to: 'home#play'
 
