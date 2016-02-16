@@ -46,16 +46,23 @@ class Song extends React.Component{
   }
 
   render(){
-      
-      return(
-         <div>
-          <div className="paddin">  
-            <h5 className="inlin">{this.props.song_name} By: {this.props.artist_name}</h5><button onClick={() => this.mobilePlayBtn(station)} className='btn inlin flo'>Play</button>
-          </div>
-          <hr />
-          </div>
-        );
-    }
+
+    return(
+       <div>
+        <div className="paddin">  
+          <h5 className='inlin'>
+          <span className='song-name'>{this.props.song_name}</span>
+          <span> By:  </span> 
+          <span className='artist-name'>{this.props.artist_name}</span>
+          </h5>
+          <button className='btn inlin flo play-button button-grey'>Play</button>
+        </div>
+        <hr />
+        </div>
+      );
+  
+  }
+
 }
 
 

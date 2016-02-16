@@ -53,7 +53,6 @@ class Mixtape extends React.Component{
              { this.deleteBtn() }
              <div className="toop">
               <button className="btn" onClick={this.playMixtape}>Play</button>
-              <a className="btn" href={this.state.mixtapeUrl}>LINK</a>
 
              </div> 
               <div className='card-content white-text boxreset' >
