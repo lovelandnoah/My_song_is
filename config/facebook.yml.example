@@ -1,2 +1,4 @@
 APP_ID: 'your id'
 APP_SECRET: 'your secret'
+TWITTER_CONSUMER_KEY: 'your key'
+TWITTER_SECRET: 'your secret'
