@@ -1,3 +1,4 @@
+// Place all the styles related to the song controller here.
 /*
  *= require jquery-ui
 */
@@ -8,6 +9,7 @@ $secondary-color: #5E1175 !default;
 @import "materialize";
 @import "newstyle.css.scss";
 @import "player.css.scss";
+@import "song.scss";
 @import "font-awesome-sprockets";
 @import "font-awesome";
 

@@ -6,21 +6,13 @@
 
 	%h2 Preferred music: #{@user.permalink}
 
-	-if @mixtape
-		%div.card-panel.cyan
-			%div.card-content.white-text
-				%h5.center
-					= @mixtape[0].name
-					- @songs.each do |song|
-						.tex
-							.paddin
-								%h5.inline
-									%span.crd
-										= song.name
-									%span.crd By:
-									%span.crd
-										= song.artist
-									%button.btn.inlin.flo Play
+	.row
+	.col.s8.offset-s2
+		- if params[:mixtape_id]
+			= react_component 'MySongIsHome', { current_user: current_user, mixtape_id: params[:mixtape_id] }
+		- else
+			= react_component 'MySongIsHome', { current_user: current_user, mixtape_id: @mixtape_id }
+		
 	%img{:alt => "My QR code", :src => @qr}
 	%a.moove.bigger{:href => "home#index"} Mixtape
 	-if current_user.id == @user.id

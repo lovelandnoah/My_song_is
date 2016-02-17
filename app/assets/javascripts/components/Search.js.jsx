@@ -2,7 +2,7 @@
 
   constructor(props){
     super(props);
-    this.state = {results: [], searched: false, mixtape_id: 0, mixtapeName: '', mixTapeCategory: '', songs: []};
+    this.state = {results: [], searched: false, mixtape_id: this.props.mixtape_id, mixtapeName: '', mixTapeCategory: '', songs: []};
     this.getSearchResults = this.getSearchResults.bind(this);
     this.createMixtape = this.createMixtape.bind(this);
     this.getSongs = this.getSongs.bind(this);
@@ -111,13 +111,6 @@
     return(
         <div>
           <div id="mixtapeForm">
-            <div className="row">
-              <input className="col s6" autofocus='true' placeholder='MixTape Name' ref='mixtapeName'/>
-            </div>
-            <div className="row">
-              <input className="col s6" placeholder='Category' ref='category'/>
-            </div>
-              <button onClick={this.createMixtape} className='btn'>Create New Mixtape</button>
           </div>
           <br />
            <div id='cardHolder' className='row'>

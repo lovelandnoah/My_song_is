@@ -21,6 +21,8 @@ class UsersController < ApplicationController
 			@user = current_user
 		end
 		@mixtape = Mixtape.where(user_id: @user.id)
+		@mixtape_id = @mixtape[0].id
+ 
 		if @mixtape.any?
 			if Song.where(mixtape_id: @mixtape[0].id)
     		@songs = Song.where(mixtape_id: @mixtape[0].id)
@@ -40,7 +42,6 @@ class UsersController < ApplicationController
     url_prefix = 'https://chart.googleapis.com/chart?chs=300x300&cht=qr&chld=H&chl='
     profile_url = request.original_url
     @qr = url_prefix + profile_url
-		# binding.pry
 	end
 
 	def update
