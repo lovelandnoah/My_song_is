@@ -11,7 +11,7 @@
 		%div.card-panel.cyan
 			%div.card-content.white-text
 				%h5.center
-					= @mixtape.name
+					= @mixtape[0].name
 					- @songs.each do |song|
 						.tex
 							.paddin
@@ -22,8 +22,7 @@
 									%span.crd
 										= song.artist
 									%button.btn.inlin.flo Play
-	-else
-		%img{:alt => "My QR code", :src => @qr}
-		%a.moove.bigger{:href => "home#index"} Mixtape
+	%img{:alt => "My QR code", :src => @qr}
+	%a.moove.bigger{:href => "home#index"} Mixtape
 	-if current_user.id == @user.id
 		%a.moove.bigger{:href => "users_edit"} Edit
