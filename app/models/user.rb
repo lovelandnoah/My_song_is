@@ -8,8 +8,6 @@ class User < ActiveRecord::Base
   # before_save :create_permalink
 
   has_one :mixtape, dependent: :destroy
-  #TODO: User can't have many songs unless songs has a user_id!
-  has_many :songs, dependent: :destroy
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,

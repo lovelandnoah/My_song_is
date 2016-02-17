@@ -3,7 +3,6 @@ class MixtapesController < ApplicationController
 	def index
   end
 
-
 	def create
 		mixtape_name = params[:name]
 		mixtape_category = params[:category]
@@ -23,7 +22,6 @@ class MixtapesController < ApplicationController
 
   def users_mixtapes
   	 search_terms = params[:search_term]
-     # binding.pry
   	if search_terms == 'all'
   		@mixtapes = Mixtape.all
     elsif search_terms == 'users'
