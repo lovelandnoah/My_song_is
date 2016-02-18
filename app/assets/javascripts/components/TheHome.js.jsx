@@ -10,11 +10,7 @@ class TheHome extends React.Component{
 
 
       this.state = {sortMixtapesVisible: false, searchVisible: false, playMixtapeVisible: true, mixtape_id: this.props.mixtape_id};
-    } else {
-    	debugger
-      this.state = {sortMixtapesVisible: true, searchVisible: false, playMixtapeVisible: false};
-
-    }
+    };
 
     this.DisplaySearch = this.DisplaySearch.bind(this);
 	}

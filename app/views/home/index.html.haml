@@ -47,9 +47,9 @@
 .row
 	.col.s8.offset-s2
 		- if params[:mixtape_id]
-			= react_component 'TheHome', { current_user: current_user, mixtape_id: params[:mixtape_id] }
+			= react_component 'PlayMixtape', { current_user: current_user, mixtape_id: params[:mixtape_id] }
 		- else
-			= react_component 'TheHome', { current_user: current_user }
+			= react_component 'PlayMixtape', { current_user: current_user, mixtape_id: @mixtape_id }
 
 
 

@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'static_pages/topsongs'
   get 'users/show'
   # root 'users#show'
-  root 'home#index'
+  root 'users#show'
 
   post 'home_play', to: 'home#play'
 

@@ -23,8 +23,7 @@ class Artist extends React.Component{
       data: {name: songName, artist: artist, mixtape_id: this.props.mixtapeId}
 
     }).success( data => {
-      // debugger
-      // self.props.getSongs();
+       self.props.getSongs();
 
     });
   }

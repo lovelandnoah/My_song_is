@@ -3,7 +3,9 @@ class Song extends React.Component{
     super(props);
     this.state = {results: [], station_id: 0};
     this.renderPlayButton = this.renderPlayButton.bind(this);
-    this.play = this.play.bind(this);  
+    this.play = this.play.bind(this); 
+    this.deleteBtn = this.deleteBtn.bind(this); 
+    this.deleteSong = this.deleteSong.bind(this);
   }
 
   componentDidMount(){
@@ -45,6 +47,23 @@ class Song extends React.Component{
     player.src = "http://api.dar.fm/player_api.php?station_id=" + this.state.station_id + "&custom_style=radioslice&partner_token=9388418650"
   }
 
+  deleteSong(){
+    // let self = this;
+    // $.ajax({
+    //   url: '/mixtapes/' + this.props.id,
+    //   type: "DELETE",
+    // }).success( data => {
+    //   self.props.displayUsersMixTapes('users');
+    // });
+  }
+
+  deleteBtn(){
+    return(<div onClick={this.deleteSong} className="btn inlin flo waves-effect waves-light btn white-text">
+              X
+            </div>)
+   
+  }
+
   render(){
 
     return(
@@ -56,7 +75,7 @@ class Song extends React.Component{
           <span className='artist-name'>{this.props.artist_name}</span>
           </h5>
           <button className='btn inlin flo play-button button-grey'>Play</button>
-          <button onClick={this.deleteSong} className='btn waves-effect waves-light'>X</button>
+          { this.deleteBtn() }
         </div>
         <hr />
         </div>

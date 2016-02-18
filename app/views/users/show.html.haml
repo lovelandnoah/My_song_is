@@ -17,3 +17,5 @@
 	%a.moove.bigger{:href => "home#index"} Mixtape
 	-if current_user.id == @user.id
 		%a.moove.bigger{:href => "users_edit"} Edit
+
+.sam= react_component 'Player'
