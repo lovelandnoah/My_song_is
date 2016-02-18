@@ -20,6 +20,11 @@ $(document).ready(function(){
 		 
 	}
 
+	function checkForNewSongsAdded(){
+		songNamesFound = false;
+		getSongNames();
+	}
+
 
 
 	function getSongNames(){
@@ -152,7 +157,9 @@ $(document).ready(function(){
 	// }
 
 	setInterval(checkIfMixtapeIsPlaying, 1000);
-	setInterval(checkIfSongsDataFilled, 500);
+	setInterval(checkIfSongsDataFilled, 513);
+	setInterval(checkForNewSongsAdded, 333);
+	// setInterval(getSongNames, 500);
  	// setInterval(assignStationID, 1000);
 
 

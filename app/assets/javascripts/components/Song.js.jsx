@@ -56,6 +56,7 @@ class Song extends React.Component{
           <span className='artist-name'>{this.props.artist_name}</span>
           </h5>
           <button className='btn inlin flo play-button button-grey'>Play</button>
+          <button onClick={this.deleteSong} className='btn waves-effect waves-light'>X</button>
         </div>
         <hr />
         </div>

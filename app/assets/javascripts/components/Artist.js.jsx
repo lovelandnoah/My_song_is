@@ -3,6 +3,8 @@ class Artist extends React.Component{
     super(props)
     this.play = this.play.bind(this)
     this.add = this.add.bind(this)
+    // debugger
+    // this.getSongs = this.getSongs.bind(this)
   }
   componentDidMount(){
   }
@@ -21,8 +23,8 @@ class Artist extends React.Component{
       data: {name: songName, artist: artist, mixtape_id: this.props.mixtapeId}
 
     }).success( data => {
-
-      self.props.getSongs();
+      // debugger
+      // self.props.getSongs();
 
     });
   }
