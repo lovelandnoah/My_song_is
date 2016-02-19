@@ -42,15 +42,15 @@ class TopArtist extends React.Component{
 
 
   
-
   render(){
+    
     return(<div>
             <div className="nav4 card-panel height cyan z-depth-3">
               <div className="card-content purple">
                 <div className="stylez center truncate">
                   <h4 className="salt white-text"># {this.props.rank}</h4>
-                  <h3 className="salt white-text">{this.props.songtitle}</h3>
-                  <h4 className="salt white-text">By: {this.props.songartist}</h4>
+                  <h3 className="salt white-text">{this.props.name}</h3>
+                  <h4 className="salt white-text">By: {this.props.artist}</h4>
                 </div>
                 <div className="row center">
                 	<br />

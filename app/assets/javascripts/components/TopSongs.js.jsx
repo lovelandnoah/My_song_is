@@ -12,13 +12,15 @@ class TopSongs extends React.Component{
     let self = this;
     $.ajax({
       url: "/static_pages/topsongs/song_popular_mysongis",
-      type: 'GET'
+      type: 'GET',
+      data: {name: this.state.name}
     }).success( data => {
-      //////// this.state.searched = true;
       alert("working")
       this.setState({results: data});
     });
   }
+
+  data: 
 
   // topCharts(){
   //   let self = this;
@@ -38,6 +40,7 @@ class TopSongs extends React.Component{
 	render(){
 		self = this;
     let i = 0;
+    debugger
     let topartists = this.state.results.map( topartist => {
       let key = `topartist-${i += 1}`
       return(<TopArtist key={key} rank={i} {...topartist} rplay={self.playSong} mixtapeId={self.state.mixtape_id} getSongs={this.getSongs}/>);

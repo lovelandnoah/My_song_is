@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :home
   resources :mixtapes
 
-  get 'static_pages/topsongs/song_popular_mysongis', to: 'song#popular_mysongis'
+  get 'static_pages/topsongs/song_popular_mysongis', to: 'static_pages#popular_mysongis'
 
   get 'users_edit', to: 'users#edit', via: [:patch]
   get 'mixtapes_find_single_mixtape', to: 'mixtapes#find_single_mixtape'
