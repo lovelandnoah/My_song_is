@@ -114,7 +114,7 @@
           </div>
           <br />
            <div id='cardHolder' className='row'>
-             <div className='card-panel cyan'>
+             <div className='card-panel mix-color'>
                 <div className='card-content'>
                   <h3> {this.state.mixtapeName}</h3>
                 {songArray}
