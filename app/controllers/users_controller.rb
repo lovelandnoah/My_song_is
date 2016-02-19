@@ -20,19 +20,20 @@ class UsersController < ApplicationController
 
 	def show
 
-		@img = nil
+		# @img = nil
 
-    if /\.twimg/.match(current_user.picture)
-      @img = current_user.picture.gsub("_normal", "")
-    end
+    # if /\.twimg/.match(current_user.picture)
+    #   @img = current_user.picture.gsub("_normal", "")
+    # end
 
-    if /\.graph\.facebook\.com/.match(current_user.picture)
-      @img = current_user.picture + "?width=500&height=500"
-    end
+    # if /\.graph\.facebook\.com/.match(current_user.picture)
+    #   @img = current_user.picture + "?width=500&height=500"
+    # end
 
 
-		if @user = User.find_by_username(params[:id])
-
+		if current_user == nil && params[:id] == nil
+			redirect_to new_user_session_path
+			# @user = User.find_by_username(params[:id])
 		else
 			show_user
 		end
@@ -44,7 +45,9 @@ class UsersController < ApplicationController
 		elsif
 			@user = current_user
 		end
+		
 		@mixtape = Mixtape.where(user_id: @user.id)
+		
 		if @mixtape.any?
     	@songs = Song.where(mixtape_id: @mixtape[0].id)
 		end
