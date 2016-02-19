@@ -1,3 +1,4 @@
+= link_to 'Logout', destroy_user_session_path, method: 'delete', class: "white-text"
 %div.card-panel.cyan
 	%div.card-content.white-text
 		%h5.center
@@ -13,6 +14,8 @@
 								= song.artist
 							%button.btn.inlin.flo Play
 %img{:alt => "My QR code", :src => @qr}
+
+
 
 
 

@@ -5,7 +5,7 @@
 		%h1 mysong.is/#{@user.username}
 
 	%h2 Preferred music: #{@user.permalink}
-
+	.btn.logout.waves-effect.waves-light.center= link_to 'Logout', destroy_user_session_path, method: 'delete', class: "white-text"
 	.row
 	.col.s8.offset-s2
 		- if params[:mixtape_id]

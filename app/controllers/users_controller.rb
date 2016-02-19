@@ -43,6 +43,11 @@ class UsersController < ApplicationController
     url_prefix = 'https://chart.googleapis.com/chart?chs=300x300&cht=qr&chld=H&chl='
     profile_url = request.original_url
     @qr = url_prefix + profile_url
+
+    # @songs = Song.all
+    # binding.pry
+    # # @super=@songs.as_json
+    # # @songs.pluck :name
 	end
 
 	def update

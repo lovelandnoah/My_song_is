@@ -8,18 +8,30 @@ class TopSongs extends React.Component{
 
 	}
 
-	topCharts(){
+  topCharts(){
     let self = this;
     $.ajax({
-      url: "http://api.dar.fm/topsongs.php?q=Music&web=1&partner_token=9388418650",
-      jsonp: 'callback',
-      type: 'GET',
-      dataType: 'jsonp',
+      url: "/static_pages/topsongs/song_popular_mysongis",
+      type: 'GET'
     }).success( data => {
-      // this.state.searched = true;
+      //////// this.state.searched = true;
+      alert("working")
       this.setState({results: data});
     });
   }
+
+  // topCharts(){
+  //   let self = this;
+  //   $.ajax({
+  //     url: "http://api.dar.fm/topsongs.php?q=Music&web=1&partner_token=9388418650",
+  //     jsonp: 'callback',
+  //     type: 'GET',
+  //     dataType: 'jsonp',
+  //   }).success( data => {
+  //     // this.state.searched = true;
+  //     this.setState({results: data});
+  //   });
+  // }
 
 
 
