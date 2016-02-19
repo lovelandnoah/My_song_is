@@ -30,18 +30,18 @@ class StaticPagesController < ApplicationController
 
 
     @tophash = Struct.new(:name, :artist)
-		
+
 		@forecasts = []
 		@top10.each do |s|
 			@forecasts << [@tophash.new(s, @songs.where(name: s).first.artist)]
 		end
-		
-		# @forecasts.flatten.first.name
-		@flattened = @forecasts.flatten
 
-		binding.pry
+		# @forecasts.flatten.first.name
+		@flatsongs = @forecasts.flatten
+
+		# binding.pry
 		# Hash[@forecasts.map{|@tophash| [@tophash.name, @tophash.artist]}]
-		# => {"mary"=>2, "bob"=>1}    
+		# => {"mary"=>2, "bob"=>1}
 
     # @songs.where(name: @yes.keys.last).first.artist
     # @songs.where(name: "Love Yourself").first.artist

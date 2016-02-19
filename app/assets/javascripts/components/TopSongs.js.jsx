@@ -1,7 +1,7 @@
 class TopSongs extends React.Component{
 	constructor(props){
 		super(props);
-		
+
 		this.state = {results: [], searched: false, mixtape_id: 0, mixtapeName: '', mixTapeCategory: '', songs: []};
     this.topCharts = this.topCharts.bind(this);
 
@@ -15,12 +15,12 @@ class TopSongs extends React.Component{
       type: 'GET',
       data: {name: this.state.name}
     }).success( data => {
-      alert("working")
-      this.setState({results: data});
+      // alert("working")
+      this.setState({results: data.songs});
     });
   }
 
-  data: 
+
 
   // topCharts(){
   //   let self = this;
@@ -40,20 +40,20 @@ class TopSongs extends React.Component{
 	render(){
 		self = this;
     let i = 0;
-    debugger
+    // debugger
     let topartists = this.state.results.map( topartist => {
       let key = `topartist-${i += 1}`
       return(<TopArtist key={key} rank={i} {...topartist} rplay={self.playSong} mixtapeId={self.state.mixtape_id} getSongs={this.getSongs}/>);
     });
-		
+
 		return(
-	  	<div className="center container" > 
+	  	<div className="center container" >
 	           		{this.topCharts()}
                 <br />
 	           		<br />
 						<div className='row' onMouseEnter={this.topCharts}>
             	{topartists}
-          </div>          
+          </div>
 	    </div>
 
 		)

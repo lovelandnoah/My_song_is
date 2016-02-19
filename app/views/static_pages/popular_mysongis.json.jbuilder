@@ -1,8 +1,6 @@
-json.static_pages @flattened do |song|
-
-		json.song_name song.name
-		json.artist_name song.artist
+# json.topsongs @songs do |song|
+json.songs @songs do |song|
+		json.name song.name
+		json.artist song.artist
 
 	end
-
-	
