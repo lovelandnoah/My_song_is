@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 	before_action :set_user, only: [:show, :edit, :update, :destroy]
 	before_filter :ensure_sign_complete, only: [:new, :create, :update, :destroy]
-	# skip_before_filter :authenticate_user!
+	skip_before_filter :authenticate_user!, only: [:show]
 	def edit
 		# binding.pry
 		# id = current_user.id
@@ -16,33 +16,31 @@ class UsersController < ApplicationController
 
 	end
 
+
+
 	def show
-		if @user = User.find_by_username(params[:id])
+		if current_user == nil && params[:id] == nil
+			# binding.pry
+			redirect_to new_user_session_path
 		else
+			show_user
+		end
+	end
+	
+	def show_user
+		if
+			@user = User.find_by_username(params[:id])
+		elsif
 			@user = current_user
 		end
 		@mixtape = Mixtape.where(user_id: @user.id)
-		@mixtape_id = @mixtape[0].id
- 
 		if @mixtape.any?
-			if Song.where(mixtape_id: @mixtape[0].id)
-    		@songs = Song.where(mixtape_id: @mixtape[0].id)
-    	end
-    # else
-    # 	@mixtape = Mixtape.new do |m|
-    # 		m.name = "Mixtape:"
-    # 		m.category = "Mix"
-    # 		m.author_id = current_user.id
-    # 		m.user_id = current_user.id
-    # 		# m.id = 1
-    # 		# m.created_at = Time.now
-    # 		# m.updated_at = Time.now
-    # 		m.save
-    # 	end
+    	@songs = Song.where(mixtape_id: @mixtape[0].id)
 		end
     url_prefix = 'https://chart.googleapis.com/chart?chs=300x300&cht=qr&chld=H&chl='
     profile_url = request.original_url
     @qr = url_prefix + profile_url
+		# binding.pry
 	end
 
 	def update
