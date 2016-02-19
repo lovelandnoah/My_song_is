@@ -45,8 +45,8 @@ class TopArtist extends React.Component{
 
   render(){
     return(<div>
-            <div className="nav4 card-panel height cyan z-depth-3">
-              <div className="card-content purple">
+            <div className="nav4 card-panel height mix-color z-depth-3">
+              <div className="card-content custom">
                 <div className="stylez center truncate">
                   <h4 className="salt white-text"># {this.props.rank}</h4>
                   <h3 className="salt white-text">{this.props.songtitle}</h3>

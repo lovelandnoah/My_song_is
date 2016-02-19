@@ -1,5 +1,19 @@
+<div class="row">
+  <%= image_tag('real_b.png', :class =>"one image") %>
+  <a id="about-us" class="text-glow-hover bigger image white-text stroke" href="/static_pages/bio">
+    About Us
+  </a>
+</div>
+<h3 class="salt center rel white-text stroke">
+  <strong>
+    MySong.is
+  </strong>
+</h3>
+<br>
+  
+<body class="home-body">
 <div class="container">
-  <h2 class="center salt white-text">Sign up</h2>
+  <h2 class="center salt">Sign up</h2>
   <br />
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -29,8 +43,9 @@
     </div>
 
     <div class="actions center">
-      <button class="btn cyan waves-effect waves-light"><%= f.submit "Sign up" %></button>
-      <!-- <button class="btn cyan waves-effect waves-light">Back</button> -->
+      <button class="btn waves-effect waves-light"><%= f.submit "Submit" %></button>
+      <!-- <button class="btn mix-color waves-effect waves-light">Back</button> -->
     </div>
   <% end %>
 </div>
+</body>

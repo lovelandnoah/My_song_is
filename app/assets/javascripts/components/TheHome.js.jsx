@@ -29,7 +29,7 @@ class TheHome extends React.Component{
 					<button className="btn nav1" onClick={this.DisplaySearch}>Create Mixtape</button>
 				</div>
 				<br />
-				<h1 className="center salt white-text tit">Creating a Mixtape</h1>
+				<h1 className="center salt tit">Creating a Mixtape</h1>
 				<br/ >
 				<Search current_user={this.props.current_user}/>
 			</div>);
