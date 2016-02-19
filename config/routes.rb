@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   get 'static_pages/faq'
   get 'static_pages/topsongs'
   get 'users/show'
+
+  get 'static_pages/topsongs/song_popular_mysongis', to: 'static_pages#popular_mysongis'
+
   # root 'users#show'
   root 'users#show'
 

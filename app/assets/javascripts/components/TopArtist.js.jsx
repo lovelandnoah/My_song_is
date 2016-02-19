@@ -49,8 +49,8 @@ class TopArtist extends React.Component{
               <div className="card-content custom">
                 <div className="stylez center truncate">
                   <h4 className="salt white-text"># {this.props.rank}</h4>
-                  <h3 className="salt white-text">{this.props.songtitle}</h3>
-                  <h4 className="salt white-text">By: {this.props.songartist}</h4>
+                  <h3 className="salt white-text">{this.props.name}</h3>
+                  <h4 className="salt white-text">By: {this.props.artist}</h4>
                 </div>
                 <div className="row center">
                 	<br />

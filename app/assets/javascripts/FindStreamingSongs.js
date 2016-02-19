@@ -21,8 +21,8 @@ $(document).ready(function(){
 	}
 
 	function checkForNewSongsAdded(){
-		songNamesFound = false;
-		getSongNames();
+		// songNamesFound = false;
+		// getSongNames();
 	}
 
 
@@ -120,12 +120,13 @@ $(document).ready(function(){
 				  playButtons[i].className = playButtons[i].className.replace("button-grey", "");
 				  playButtons[i].addEventListener('click', function() {
 				  	 play(this.id);
+				  debugger
 					});
 			}else{
 				
-				if (playButtons[i].classList.contains('button-grey') == false) {
-					playButtons[i].className += ("button-grey");
-				};
+				// if (playButtons[i].classList.contains('button-grey') == false) {
+				// 	playButtons[i].className += ("button-grey");
+				// };
 				
 			};
 		} 
