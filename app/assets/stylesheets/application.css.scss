@@ -15,6 +15,10 @@ $secondary-color: #DE429B !default;
   background-image: url("assets/Bckgrnd.jpg");
 }
 
+#titled{
+  background-image: url("assets/titled.png");
+}
+
 .nav-color{
   background-color:#4DBAB8;
 }
@@ -39,6 +43,10 @@ $secondary-color: #DE429B !default;
   margin-left:50px;
   padding-right:10px;
 }
+
+.custom{
+  background: #55C6C3
+  }
 
 .home-link{
   margin-top:10px;
@@ -106,6 +114,10 @@ $secondary-color: #DE429B !default;
 
 .centerbutton {
   margin-left: 45%;
+}
+
+.five{
+  margin-right:5%;
 }
 
 .tesst {
@@ -412,7 +424,7 @@ position: absolute;
 .log{
   float:right;
   padding-right:5%;
-  padding-left:25px;
+  padding-left:20px;
 }
 
 .push {
