@@ -3,9 +3,13 @@
 %h3 #{@user.email}
 %h3 #{@user.username}
 
+
+
+
+%img.center.pushlot{alt: "profile_pic", src: @img}
 -if @mixtape.any?
 	%div.container
-		%div.card-panel.cyan
+		%div.card-panel.mix-color
 			%div.card-content.white-text
 				%h5.center.salt.subtit
 					= @mixtape.name

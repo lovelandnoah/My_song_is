@@ -1,9 +1,8 @@
-%nav
-  .nav-wrapper.z-depth-3.cyan
-    %h1.brand-logo.salt.center Meet The Team
-    %ul#nav-mobile.left
-      %li
-        %a.bigger{:href => "/"} Home
+
+.row
+  = image_tag('real_b.png', :class =>"one image")
+  %a#about-us.bigger.image.white-text.stroke.text-glow-hover{:href => "/"} Home
+%h3.salt.center.rel.stroke.white-text MySong.is
 %br
 %br
 %body.bck
@@ -13,7 +12,7 @@
     .container.center
       .row
         .col.s4
-          .card-panel.cyan.z-depth-3.hoverable.rounded
+          .card-panel.nav-color.z-depth-3.hoverable.rounded
             =image_tag("glenn_600.png", class: 'pic')
             %h5.card-title.center.salt.crd Glenn Sullivan
             %span#crd-txt.white-text
@@ -37,7 +36,7 @@
             %br
             %a.buttonvw{:href => "#!", :class => "purpl"} schristopherson@gmail.com
         .col.s4
-          .card-panel.cyan.z-depth-3.hoverable.rounded
+          .card-panel.nav-color.z-depth-3.hoverable.rounded
             =image_tag("noah_600.png", class: 'pic')
             %h5.card-title.center.salt.crd Noah Loveland
             %span#crd-txt.white-text
@@ -63,7 +62,7 @@
               %br
               %a.buttonvw{:href => "#!", :class => "purpl"} phelpsb92@gmail.com
           .col.s4
-            .card-panel.cyan.z-depth-3.hoverable.rounded
+            .card-panel.nav-color.z-depth-3.hoverable.rounded
               =image_tag("sam_600.png", class: 'pic')
               %h5.card-title.center.salt.crd Sam Hammer
               %span#crd-txt.white-text

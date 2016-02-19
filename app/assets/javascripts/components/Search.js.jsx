@@ -120,7 +120,7 @@
               <button onClick={this.createMixtape} className='btn'>Create New Mixtape</button>
           </div>
            <div id='cardHolder' className='row'>
-             <div className='card-panel cyan'>
+             <div className='card-panel mix-color'>
                 <div className='card-content'>
                   <h3> {this.state.mixtapeName}</h3>
                 {songArray}
@@ -129,14 +129,14 @@
               </div>
             </div>
 
-          <h5 className="subtit white-text salt center">Search for an artist:</h5>
+          <h5 className="subtit salt center">Search for an artist:</h5>
           <input id='search' type='text' ref='searchText' autofocus='true' placeholder="Artist"/>
           <div className="center">
             <button onClick={this.getSearchResults} className='btn waves-effect waves-light'>Search</button>
           </div>
           <br />
           <br />
-          <h4 className='center-align center subtit white-text salt'>Artists playing:</h4>
+          <h4 className='center-align center subtit salt'>Artists playing:</h4>
           <br />
           <div className='row'>
             {this.noArtists(artists)}

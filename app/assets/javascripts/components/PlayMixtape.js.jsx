@@ -29,7 +29,7 @@
   });
 
     return(<div>
-            <div className= 'card-panel cyan'>
+            <div className= 'card-panel mix-color'>
               <div className='card-content white-text'>
                 <h5 className="center">{this.state.mixtapeName} </h5>
                 {songs}

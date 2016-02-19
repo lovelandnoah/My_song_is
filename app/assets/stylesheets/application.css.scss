@@ -4,12 +4,85 @@
 
 @import "materialize/components/color";
 $primary-color: #595959 !default;
-$secondary-color: #5E1175 !default;
+$secondary-color: #DE429B !default;
 @import "materialize";
 @import "newstyle.css.scss";
 @import "player.css.scss";
 @import "font-awesome-sprockets";
 @import "font-awesome";
+
+#navigation, .navbar, .navbar-default{
+  background-image: url("assets/Bckgrnd.jpg");
+}
+
+.nav-color{
+  background-color:#4DBAB8;
+}
+
+.new-c{
+  border: 1px solid rgba(32, 16, 37, 0.14);
+  border-width: 5px;
+  border-radius: 10px;
+}
+
+.graph{
+  padding-left:23%;
+  padding-right:23%;
+}
+
+.second{
+  color: #DE429B !important;
+}
+#about-us{
+  margin-top:10px;
+  float:left;
+  margin-left:50px;
+  padding-right:10px;
+}
+
+.home-link{
+  margin-top:10px;
+  float:left;
+  padding-left:20px;
+  position:absolute;
+}
+
+#us-link{
+  margin-top:10px;
+  float:left;
+  margin-left:50px;
+}
+.adduser{
+  margin-bottom: -20px;
+}
+
+.stroke
+{
+    color: white;
+    text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+    
+}
+
+.container{
+  position:relative;
+}
+
+.image{
+  position: absolute;
+}
+
+.one{
+  width:100%;
+  height:120px;
+}
+
+.rel{
+  position:relative;
+}
 
 
 .toop {
@@ -20,7 +93,6 @@ $secondary-color: #5E1175 !default;
 .biggers {
   margin-top: 15%;
   font-size: 18px;
-  position:relative;
 }
 
 .downli {
@@ -337,6 +409,12 @@ position: absolute;
   font-size: 1.3vw !important;
 }
 
+.log{
+  float:right;
+  padding-right:5%;
+  padding-left:25px;
+}
+
 .push {
   margin-left: 1px;
 }
@@ -369,8 +447,12 @@ position: absolute;
   right: 0px;
   width: 15%;
   height: 205px;
-  background-color: rgba(62, 138, 123, 0.89);
+  background-color:#F0F0F0;
   border: 5px solid #201025
+}
+
+.mix-color{
+  background-color: #F0F0F0;
 }
 
 .iframe{
@@ -409,6 +491,11 @@ position: absolute;
   margin-right: 2%;
 }
 
+.home-body{
+  background-image: url("background_image.jpg");
+  background-repeat: repeat-xy;
+}
+
 body {
   background: #896891; /* fallback for old browsers */
   background: -webkit-linear-gradient(to left, #5E1175, #896891); /* Chrome 10-25, Safari 5.1-6 */
@@ -419,6 +506,19 @@ body {
   background: #576CDB; /* fallback for old browsers */
   background: -webkit-linear-gradient(to left, #576CDB , #717CCE); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to left, #576CDB , #717CCE); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.text-glow-hover{
+  color: #fff;
+}
+
+.text-glow-hover:hover{
+  text-shadow: 0 0 10px #fff;
+}
+
+.def{
+  background: url("real_b.png");
+
 }
 
 .border {

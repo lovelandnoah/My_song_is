@@ -66,7 +66,7 @@ class SortMixtapes extends React.Component{
           <button className="btn waves-effect waves-light buttonnav" onClick={this.displayUsersMixTapes.bind(this, "all" )}>Popular Mixtapes</button>
           <button className="btn waves-effect waves-light buttonnav" onClick={this.displayUsersMixTapes.bind(this, "users" )}>My Mixtapes</button>
           
-          <h3 className="tit salt white-text center">Mixtapes:</h3>
+          <h3 className="tit salt center">Mixtapes:</h3>
            {mixtapes}
           <div className = 'center'>
             {this.renderFastRewind()}

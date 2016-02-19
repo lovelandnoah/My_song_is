@@ -1,12 +1,27 @@
-%nav
-  .nav-wrapper.z-depth-3.cyan.bott
-    %a{:href => "#"}= image_tag("Tmix_logo_small_text_and_skull.png", class: "logo")
-    %ul#nav-mobile.right
-      %li
-        %a.bigger{:href => "/static_pages/bio"} About Us
-      %li
-        %a.bigger{:href => "/static_pages/topsongs"} Top Songs
-      %li
-        %a#FAQ.bigger{:href => "/static_pages/faq"} FAQ
-      %li
-        .btn#UserLog.logout.waves-effect.waves-light.center= link_to 'Logout', destroy_user_session_path, method: 'delete', class: "white-text"
+/ %nav
+/   .nav-wrapper.z-depth-3.bott
+/     %ul#nav-mobile.right
+/       %li
+/         %a.bigger{:href => "/static_pages/bio"} About Us
+/       %li
+/         %a.bigger{:href => "/static_pages/topsongs"} Top Songs
+/       %li
+/         %a#FAQ.bigger{:href => "/static_pages/faq"} FAQ
+/       %li
+        
+
+
+
+
+.row
+  = image_tag('real_b.png', :class =>"one image")
+  %a#us-link.bigger.image.white-text.stroke.text-glow-hover{:href => "/static_pages/bio"} About Us
+  %a.home-link.bigger.image.white-text.stroke.text-glow-hover{:href => "/static_pages/topsongs"} Top Songs
+  %a.home-link.bigger.image.white-text.stroke.text-glow-hover{:href => "/static_pages/faq"} FAQ
+  %a.home-link.bigger.image.stroke.text-glow-hover.second.log{:href => "/users/sign_out"} Logout
+%h3.salt.center.rel.white-text.stroke MySong.is
+.btn#UserLog.logout.waves-effect.waves-light.center
+/ .row
+/   = image_tag('real_b.png', :class =>"one image")
+/   %a#about-us.bigger.image.white-text.stroke{:href => "/static_pages/bio"} About Us
+/ %h3.salt.center.rel.white-text.stroke MySong.is

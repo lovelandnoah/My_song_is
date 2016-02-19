@@ -1,30 +1,24 @@
 !!!
-%nav
-  .nav-wrapper.z-depth-3.cyan.bott
-    %h1.brand-logo.salt.center F.A.Q
-    %ul#nav-mobile.right.hide-on-med-and-down
-      %li
-        %a.bigger{:href => "/"} Home
+.row
+  = image_tag('real_b.png', :class =>"one image")
+  %a#about-us.bigger.image.white-text.stroke.text-glow-hover{:href => "/"} Home
+%h3.salt.center.rel.stroke.white-text MySong.is
+
+%br
 %br
 %br
 %body.bck
-  .container.cyan.white-text.center.z-depth-3
-    %br
-    %h4.center-align.ooooh How does this whole thing work?
-    %p.ooooh T-Mix works by using an existing API to locate song that you want to
-    listen to and play them for you.  This API that we use with our App scours
-    all the websites that host radio broadcast. With these two sources we can
-    bring all kinds of music to you via the internet.
-    %h4.center-align.ooooh How can I create a mixtape?
-    %p.ooooh You can create a mixtape once you are logged into our App.  Once you are
-    logged in, you will hit the create mixtape button with the title and
-    category filled in. Next, you will search for artist for the song you
-    would like to listen to on the mixtape.
-    %h4.center-align.ooooh Why isn't my song playing?
-    %p.ooooh Unfortunately your song might not be playing anywhere on the internet at
-    this time.
-    %h4.center-align.ooooh Why does my mixtape leave when I click done?
-    %p.ooooh The Mixtape leaves because your mixtape was created successfully.
-    %h4.center-align.ooooh Why does this not work on FireFox?
-    %p.ooooh Try updating your flash.
+.container
+  .card.container
+    %h4.tit.center-align How does this whole thing work?
+    %p.graph.center T-Mix works by using an existing API to locate song that you want to listen to and play them for you.  This API that we use with our App scours all the websites that host radio broadcast. With these two sources we can bring all kinds of music to you via the internet.
+  .card.container
+    %h4.tit.center-align How can I create a mixtape?
+    %p.graph.center You can create a mixtape once you are logged into our App. Once you are logged in, you will hit the create mixtape button with the title and category filled in. Next, you will search for artist for the song you would like to listen to on the mixtape.
+  .card.container
+    %h4.tit.center-align Why isn't my song playing?
+    %p.graph.center Unfortunately your song might not be playing anywhere on the internet at this time.
+  .card.container
+    %h4.tit.center-align Why does this not work on FireFox?
+    %p.graph.center Try updating your flash.
     %br

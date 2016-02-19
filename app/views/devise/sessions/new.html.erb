@@ -1,20 +1,70 @@
-<nav>
-  <div class="nav-wrapper z-depth-3 cyan">
-    <a href="#" class="brand-logo center">
-      <h3 class="nav-stuff salt">
-        T-Mix
-      </h3>
-    </a>
-    <ul id="nav-mobile" class="left">
-      <li>
-        <a class="bigger" href="/static_pages/bio">
-          About Us
-        </a>
-      </li>
-    </ul>
-  </div>
-</nav>
+<div class="row">
+  <%= image_tag('real_b.png', :class =>"one image") %>
+  <a id="about-us" class="text-glow-hover bigger image white-text stroke" href="/static_pages/bio">
+    About Us
+  </a>
+</div>
+  <h3 class="salt center rel white-text stroke">
+    <strong>
+      MySong.is
+    </strong>
+   </h3>
 
+<body class="home-body">
+
+
+
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col s10">
+      <h1 class="center salt subtit">
+         CHOOSE YOUR SONG! 
+      </h1>
+      <p class="center"> 
+        Use Facebook / Twitter? Sign into our App with one click! (Below) 
+      </p>
+    </div>
+    <div class="col s2">
+      <%= link_to image_tag('add-user-128.png', :style =>"height:100px; margin-bottom: -20px;"), new_registration_path(resource_name) %>
+    </div>
+  </div>
+
+  <div class="container col s8">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %> 
+        <div class="">
+          <%= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true %>
+        </div>
+        <div class="">
+          <%= f.label :password %><br />
+          <%= f.password_field :password, autocomplete: "off" %>
+        </div>
+        <div class="row">
+          <%= f.submit "Log in", :class => 'btn' %>
+        </div>
+    <% end -%>
+  </div>
+    <div class="row">
+        <div class="col s3 offset-s2">
+          <%= link_to image_tag('add-user-128.png', :style =>"height:100px; margin-bottom: -20px;"), new_registration_path(resource_name) %>
+        </div>
+        <div class="col s3">
+          <%= link_to user_omniauth_authorize_path(:facebook) do %>
+            <i class="fbook fa fa-facebook-official fa-5x"></i>
+          <% end %>
+        </div>
+        <div class="col s3">
+          <%= link_to user_omniauth_authorize_path(:twitter) do %>
+            <i class="twet fa fa-twitter fa-5x"></i>   
+          <% end %>
+        </div>
+    </div>
+</div>
+
+
+</body>
+<!-- 
 <br />
 <div class="container responsive-img">
   <div class="imageback">
@@ -29,9 +79,9 @@
         <%= f.password_field :password, autocomplete: "off" %>
       </div>
         <div class="row">
-          <button class="btn signin cyan waves-effect buttonvw"><%= f.submit "Log in" %></button>
+          <button class="btn signin mix-color waves-effect buttonvw"><%= f.submit "Log in" %></button>
           <div class="myclass">
-            <button class="btn cyan signup waves-effect buttonvw"><%= link_to "Sign up", new_registration_path(resource_name) %></button>
+            <button class="btn mix-color signup waves-effect buttonvw"><%= link_to "Sign up", new_registration_path(resource_name) %></button>
         </div>
       </div>
     <% end -%>
@@ -49,6 +99,6 @@
         </div>
     <div class="center"><%= image_tag("cassette_tape_black.jpg", id: "img") %></div>
   </div>
-         <!--<%#= f.submit "Log in" %>-->
+         <%#= f.submit "Log in" %>
   <br />
-</div>
+</div> -->
