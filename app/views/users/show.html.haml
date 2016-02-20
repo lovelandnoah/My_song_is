@@ -16,7 +16,6 @@
 			= react_component 'PlayMixtape', { current_user: current_user, mixtape_id: @mixtape_id }
 	-if current_user == nil || current_user.id != @user.id
 	-else
-		%a.moove.bigger{:href => "users_edit", :class => "second"} Edit Mix
 	%img{:alt => "My QR code", :src => @qr}
 
 

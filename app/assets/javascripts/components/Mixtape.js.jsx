@@ -44,7 +44,7 @@ class Mixtape extends React.Component{
     
     let songs = this.props.mixtape.map( song => {
       let key = `mixtapeSong-${song.song_id}`;
-      return(<SongDetails key={key} songName={song.song_name} artistName={song.artist_name} />);
+      return(<SongDetails key={key} songName={song.song_name} artistName={song.artist_name} songId={song.song_id} />);
     });
 
     return(<div className="pagination">

@@ -47,22 +47,50 @@ class Song extends React.Component{
     player.src = "http://api.dar.fm/player_api.php?station_id=" + this.state.station_id + "&custom_style=radioslice&partner_token=9388418650"
   }
 
-  deleteSong(){
-    // let self = this;
-    // $.ajax({
-    //   url: '/mixtapes/' + this.props.id,
-    //   type: "DELETE",
-    // }).success( data => {
-    //   self.props.displayUsersMixTapes('users');
-    // });
+  // deleteSong(){
+  //   // let self = this;
+  //   // $.ajax({
+  //   //   url: '/mixtapes/' + this.props.id,
+  //   //   type: "DELETE",
+  //   // }).success( data => {
+  //   //   self.props.displayUsersMixTapes('users');
+  //   // });
+  // }
+
+  // deleteBtn(){
+  //   return(<div onClick={this.deleteSong} className="btn inlin flo waves-effect waves-light btn white-text">
+  //             X
+  //           </div>)
+   
+  // }
+
+
+
+
+
+
+  deleteSong(song_id){
+    let self = this;
+    $.ajax({
+      url: '/song/' + song_id,
+      type: 'DELETE'
+    }).success( data => {
+      self.props.getSongs();
+    });
   }
 
-  deleteBtn(){
-    return(<div onClick={this.deleteSong} className="btn inlin flo waves-effect waves-light btn white-text">
-              X
-            </div>)
+
+  deleteBtn(song_id){
+    return(<div onClick={() => this.deleteSong(song_id)} className="btn inlin flo waves-effect waves-light btn white-text">
+              delete
+            </div>);
    
   }
+
+
+
+
+
 
   render(){
 
@@ -70,12 +98,12 @@ class Song extends React.Component{
        <div>
         <div className="paddin">  
           <h5 className='inlin'>
-          <span className='song-name'>{this.props.song_name}</span>
-          <span> By:  </span> 
-          <span className='artist-name'>{this.props.artist_name}</span>
+          <span className='black-text song-name'>{this.props.song_name}</span>
+          <span className="grey-text"> By:  </span> 
+          <span className='black-text artist-name'>{this.props.artist_name}</span>
           </h5>
           <button className='btn inlin flo play-button button-grey'>Play</button>
-          { this.deleteBtn() }
+          { this.deleteBtn(this.props.song_id) }
         </div>
         <hr />
         </div>
