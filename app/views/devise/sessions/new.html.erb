@@ -1,8 +1,5 @@
 <div class="row">
   <%= image_tag('real_b.png', :class =>"one image") %>
-  <a id="about-us" class="text-glow-hover bigger image white-text stroke" href="/static_pages/bio">
-    About Us
-  </a>
 </div>
   <h3 class="salt center rel white-text stroke">
     <strong>
@@ -46,9 +43,9 @@
     <% end -%>
   </div>
     <div class="row">
-        <div class="col s3 offset-s2">
-          <%= link_to image_tag('add-user-128.png', :style =>"height:100px; margin-bottom: -20px;"), new_registration_path(resource_name) %>
-        </div>
+    <br>
+    <br>
+    <br>
         <div class="col s3">
           <%= link_to user_omniauth_authorize_path(:facebook) do %>
             <i class="fbook fa fa-facebook-official fa-5x"></i>
