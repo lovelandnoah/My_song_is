@@ -17,26 +17,32 @@ class UsersController < ApplicationController
 	end
 
 
-
-	def show
-
-		# @img = nil
-
-    # if /\.twimg/.match(current_user.picture)
-    #   @img = current_user.picture.gsub("_normal", "")
-    # end
-
-    # if /\.graph\.facebook\.com/.match(current_user.picture)
-    #   @img = current_user.picture + "?width=500&height=500"
-    # end
+def show
 
 
-		if current_user == nil && params[:id] == nil
+	if current_user == nil && params[:id] == nil
+			# binding.pry
 			redirect_to new_user_session_path
 			# @user = User.find_by_username(params[:id])
 		else
-			show_user
-		end
+			if @user = User.find_by_username(params[:id])
+			else
+				@user = current_user
+			end
+				@mixtape = Mixtape.where(user_id: @user.id)
+				@mixtape_id = @mixtape[0].id
+
+				if @mixtape.any?
+					if Song.where(mixtape_id: @mixtape[0].id)
+			  		@songs = Song.where(mixtape_id: @mixtape[0].id)
+			  	end
+				end
+			  url_prefix = 'https://chart.googleapis.com/chart?chs=300x300&cht=qr&chld=H&chl='
+			  profile_url = request.original_url
+			  @qr = url_prefix + profile_url
+			end
+
+		
 	end
 	
 	def show_user
@@ -56,6 +62,7 @@ class UsersController < ApplicationController
     @qr = url_prefix + profile_url
 		# binding.pry
 	end
+	
 
 	def update
 		respond_to do |f|
