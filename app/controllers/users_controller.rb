@@ -17,31 +17,58 @@ class UsersController < ApplicationController
 	end
 
 
+def show
 
-	def show
-		if current_user == nil && params[:id] == nil
+	if current_user == nil && params[:id] == nil
 			# binding.pry
 			redirect_to new_user_session_path
 		else
-			show_user
-		end
+			if @user = User.find_by_username(params[:id])
+			else
+				@user = current_user
+			end
+				@mixtape = Mixtape.where(user_id: @user.id)
+				@mixtape_id = @mixtape[0].id
+
+				if @mixtape.any?
+					if Song.where(mixtape_id: @mixtape[0].id)
+			  		@songs = Song.where(mixtape_id: @mixtape[0].id)
+			  	end
+				end
+			  url_prefix = 'https://chart.googleapis.com/chart?chs=300x300&cht=qr&chld=H&chl='
+			  profile_url = request.original_url
+			  @qr = url_prefix + profile_url
+			end
+
+		
 	end
 	
-	def show_user
-		if
-			@user = User.find_by_username(params[:id])
-		elsif
-			@user = current_user
-		end
-		@mixtape = Mixtape.where(user_id: @user.id)
-		if @mixtape.any?
-    	@songs = Song.where(mixtape_id: @mixtape[0].id)
-		end
-    url_prefix = 'https://chart.googleapis.com/chart?chs=300x300&cht=qr&chld=H&chl='
-    profile_url = request.original_url
-    @qr = url_prefix + profile_url
-		# binding.pry
-	end
+	# def show
+	# 	if current_user == nil && params[:id] == nil
+	# 		# binding.pry
+	# 		redirect_to new_user_session_path
+	# 	else
+	# 		show_user
+	# 	end
+	# end
+	
+	# def show_user
+	# 	if
+	# 		@user = User.find_by_username(params[:id])
+	# 	elsif
+	# 		@user = current_user
+	# 	end
+		
+	# 	@mixtape = Mixtape.where(user_id: @user.id)
+	# 	if @mixtape.any?
+ #    	@songs = Song.where(mixtape_id: @mixtape[0].id)
+ #    	# binding.pry
+	# 	end
+ #    url_prefix = 'https://chart.googleapis.com/chart?chs=300x300&cht=qr&chld=H&chl='
+ #    profile_url = request.original_url
+ #    @qr = url_prefix + profile_url
+	# 	# binding.pry
+	# end
 
 	def update
 		respond_to do |f|

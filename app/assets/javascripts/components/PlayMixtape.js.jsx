@@ -5,7 +5,7 @@
     this.getSongs = this.getSongs.bind(this);
 
 
-
+      // debugger
     this.getSearchResults = this.getSearchResults.bind(this);
     this.noArtists = this.noArtists.bind(this);
     this.pass = this.pass.bind(this);
@@ -27,6 +27,7 @@
       type: 'GET',
       data: {mixtape_id: this.props.mixtape_id}
     }).success( data => {
+
       this.setState({mixtapeName: data.name});
       this.setState({songs: data.songs});
     })
