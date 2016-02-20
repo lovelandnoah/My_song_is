@@ -1,31 +1,31 @@
-.container
-	%a{:href => "static_pages/topsongs"} Top Songs
-	=link_to "Log out", destroy_user_session_path, :method => :delete
-	-if current_user == nil || current_user.id != @user.id
-	-else
-		%h1 mysong.is/#{@user.username}
+= render 'layouts/navbar'
+%body.home-body
+	.container
+		-if current_user == nil || current_user.id != @user.id
+		-else
+			%h1 mysong.is/#{@user.username}
 
-	%h2 Preferred music: #{@user.permalink}
+		%h2 Preferred music: #{@user.permalink}
 
-	.row
-	.col.s8.offset-s2
-		- if params[:mixtape_id]
-			= react_component 'PlayMixtape', { current_user: current_user, mixtape_id: params[:mixtape_id] }
-		- else
-			= react_component 'PlayMixtape', { current_user: current_user, mixtape_id: @mixtape_id }
-		
-	%img{:alt => "My QR code", :src => @qr}
-	%a.moove.bigger{:href => "home#index"} Mixtape
-	-if current_user == nil || current_user.id != @user.id
-	-else
-		%a.moove.bigger{:href => "users_edit"} Edit
+		.row
+		.col.s8.offset-s2
+			- if params[:mixtape_id]
+				= react_component 'PlayMixtape', { current_user: current_user, mixtape_id: params[:mixtape_id] }
+			- else
+				= react_component 'PlayMixtape', { current_user: current_user, mixtape_id: @mixtape_id }
+			
+		%img{:alt => "My QR code", :src => @qr}
+		%a.moove.bigger{:href => "home#index"} Mixtape
+		-if current_user == nil || current_user.id != @user.id
+		-else
+			%a.moove.bigger{:href => "users_edit"} Edit
 
 
 
-.sam= react_component 'Player'
-%br
-%br
-%br
-%br
-%br
+	.sam= react_component 'Player'
+	%br
+	%br
+	%br
+	%br
+	%br
 
