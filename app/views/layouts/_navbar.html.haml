@@ -17,7 +17,8 @@
 .row
   = image_tag('real_b.png', :class =>"one image")
   %a.home-link.bigger.image.white-text.stroke.text-glow-hover{:href => "/static_pages/topsongs"} Top Songs
-  %a.home-link.bigger.image.stroke.text-glow-hover.second.log{:href => "/users/sign_out"} Logout
+  %a.home-link.bigger.image.white-text.stroke.text-glow-hover{:href => "/home/index"} Mixtape
+  =link_to "Log out", destroy_user_session_path, :method => :delete, :class => "home-link bigger image white-text stroke text-glow-hover log second"
 %h3.salt.center.rel.white-text.stroke MySong.is
 / .row
 /   = image_tag('real_b.png', :class =>"one image")

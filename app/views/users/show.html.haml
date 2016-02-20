@@ -1,6 +1,7 @@
+= render 'layouts/navbar'
+%body.home-body
+
 .container
-	%a{:href => "static_pages/topsongs"} Top Songs
-	=link_to "Log out", destroy_user_session_path, :method => :delete
 	-if current_user == nil || current_user.id != @user.id
 	-else
 		%h1 mysong.is/#{@user.username}
@@ -14,13 +15,12 @@
 		- else
 			= react_component 'PlayMixtape', { current_user: current_user, mixtape_id: @mixtape_id }
 		
-	%img{:alt => "My QR code", :src => @qr}
-	%a.moove.bigger{:href => "home#index"} Mixtape
 	-if current_user == nil || current_user.id != @user.id
 	-else
-		%a.moove.bigger{:href => "users_edit"} Edit
+		%a.moove.bigger{:href => "users_edit", :class => "second"} Edit Mix
+	%img{:alt => "My QR code", :src => @qr}
 
-
+	
 
 .sam= react_component 'Player'
 %br
