@@ -49,13 +49,12 @@ class Mixtape extends React.Component{
 
     return(<div className="pagination">
 
-            <div className='card small mix-color z-depth-3 col s6 over new-c'>
+            <div className='card small cyan z-depth-3 col s6 over playing-mixtape'>
              { this.deleteBtn() }
              <div className="toop">
               <button className="btn" onClick={this.playMixtape}>Play</button>
-
              </div> 
-              <div className='card-content boxreset' >
+              <div className='card-content white-text boxreset' >
                 <p className="salt crd center">{this.props.name}</p>
                 <br />
                  {songs}
