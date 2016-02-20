@@ -20,15 +20,15 @@ class UsersController < ApplicationController
 
 	def show
 
-		@img = nil
+		# @img = nil
 
-    if /\.twimg/.match(current_user.picture)
-      @img = current_user.picture.gsub("_normal", "")
-    end
+  #   if /\.twimg/.match(current_user.picture)
+  #     @img = current_user.picture.gsub("_normal", "")
+  #   end
 
-    if /\.graph\.facebook\.com/.match(current_user.picture)
-      @img = current_user.picture + "?width=500&height=500"
-    end
+  #   if /\.graph\.facebook\.com/.match(current_user.picture)
+  #     @img = current_user.picture + "?width=500&height=500"
+  #   end
 
 
 		if @user = User.find_by_username(params[:id])
