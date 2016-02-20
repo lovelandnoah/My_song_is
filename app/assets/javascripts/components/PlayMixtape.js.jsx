@@ -110,14 +110,14 @@
             </div>
           
             <br />
-            <h5 className="subtit white-text salt center">Search for an Artist or Song:</h5>
+            <h5 className="subtit salt center">Search for an Artist or Song:</h5>
             <input id='search' type='text' ref='searchText' autofocus='true' placeholder="Artist"/>
             <div className="center">
               <button onClick={this.getSearchResults} className='btn waves-effect waves-light'>Search</button>
             </div>
             <br />
             <br />
-            <h4 className='center-align center subtit white-text salt'>Songs Playing:</h4>
+            <h4 className='center-align center subtit salt'>Songs Playing:</h4>
             <br />
             <div className='row'>
               {this.noArtists(artists)}
