@@ -1,6 +1,7 @@
 = render 'layouts/navbar'
 %body.home-body
 	.container
+		=link_to "Log out", destroy_user_session_path, :method => :delete
 		-if current_user == nil || current_user.id != @user.id
 		-else
 			%h1 mysong.is/#{@user.username}
