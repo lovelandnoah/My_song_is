@@ -107,5 +107,5 @@
 
 	setInterval(checkIfMixtapeIsPlaying, 1000);
 	setInterval(checkIfSongsDataFilled, 513);
-	setInterval(checkForNewSongsAdded, 333);
+	// setInterval(checkForNewSongsAdded, 333);
 	
