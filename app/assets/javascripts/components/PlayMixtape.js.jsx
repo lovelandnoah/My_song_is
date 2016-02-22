@@ -114,7 +114,7 @@
             <h5 className="subtit salt center">Search for an Artist or Song:</h5>
             <input id='search' type='text' ref='searchText' autofocus='true' placeholder="Artist"/>
             <div className="center">
-              <button onClick={this.getSearchResults} className='btn waves-effect waves-light'>Search</button>
+              <button onClick={this.getSearchResults} className='btn waves-effect waves-light'>Pick Your Song</button>
             </div>
             <br />
             <br />
