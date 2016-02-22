@@ -32,10 +32,10 @@ class Artist extends React.Component{
     return(<div>
             <div className="nav4 card-panel height mix-color col l4 m6 s12 z-depth-3">
               <div className="card-content">
-                <p className="stylez center truncate">
-                  {this.props.title}
+                <p className="stylez truncate">
+                  <em>{this.props.title}</em>
                   <br />
-                  By: {this.props.artist}
+                  {this.props.artist}
                 </p>
                 <div className="row center">
                   <a className="btn waves-effect waves-light marg" onClick={() => this.play(this.props.station_id)}>play</a>
