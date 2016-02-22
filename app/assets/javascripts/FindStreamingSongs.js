@@ -42,17 +42,17 @@
 			var name = songNames[i].replace(/\s/g, '%20');
 			var artist = artistNames[i].replace(/\s/g, '%20');
 			var url = "http://api.dar.fm/playlist.php?q=" + artist + "%20" + name + "&callback=jsonp&web=1&partner_token=1234567890";
-
 			$.ajax({
 	      url: url,
 	      jsonp: 'callback',
 	      type: 'GET',
 	      dataType: 'jsonp',
-	      }).success( data => {
+				success: function(data) {
 	     		songsData.push(data);
-	    });
-		};
+	    	}
+			});
 		songsDataFilled = false;	
+		}
 	}
 
 	function play(station){
