@@ -8,18 +8,38 @@
 
 		%h2 Preferred music: #{@user.permalink}
 
-	.row
-	.col.s8.offset-s2
+.row
+	.col.s6
+		-if current_user == nil || current_user.id != @user.id
+		-else
+		%div
+			%br
+			.center
+				%img{:alt => "My QR code", :src => @qr}
+			= react_component 'TopSongs'
+	.col.s6.m4.l3
 		- if params[:mixtape_id]
 			= react_component 'PlayMixtape', { current_user: current_user, mixtape_id: params[:mixtape_id] }
 		- else
 			= react_component 'PlayMixtape', { current_user: current_user, mixtape_id: @mixtape_id }
-	-if current_user == nil || current_user.id != @user.id
-	-else
-	%img{:alt => "My QR code", :src => @qr}
+	.col.s6
+	%br
+	%br
+	%br
+	%br
+	%br
+	%br
+	%br
+	%br
+	%br
 
-	= link_to("Edit Profile", users_edit_path)
 
+	/ %button.btn= link_to "Edit Profile", users_edit_path, class: "white-text"
+	%br
+	%br
+	%br
+	%br
+	%br
 	.sam= react_component 'Player'
 	%br
 	%br
