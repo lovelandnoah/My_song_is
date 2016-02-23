@@ -11,10 +11,20 @@ class HomeController < ApplicationController
     # end
 
     # if /\.graph\.facebook\.com/.match(current_user.picture)
-    #   @img = current_user.picture + "?width=500&height=500"
+      # @img = current_user.picture + "?width=500&height=500"
     # end
 
 
+  end
+
+  def show
+    if /\.twimg/.match(current_user.picture)
+      @img = current_user.picture.gsub("_normal", "")
+    end
+
+    if /\.graph\.facebook\.com/.match(current_user.picture)
+      @img = current_user.picture + "?width=500&height=500"
+    end
   end
 
   def play
