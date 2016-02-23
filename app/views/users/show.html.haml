@@ -5,8 +5,10 @@
 	-if current_user == nil || current_user.id != @user.id
 	-else
 		%h1 mysong.is/#{@user.username}
-
-		%h2 Preferred music: #{@user.permalink}
+		-if current_user.picture == nil
+			%h3.salt #{@user.username}'s Preferred music: #{@user.permalink}
+		-else
+			%h3.salt #{current_user.name}'s Preferred music: #{@user.permalink}
 
 .row
 	.col.s6
@@ -15,13 +17,23 @@
 		%div
 			%br
 			.center
-				%img{:alt => "My QR code", :src => @qr}
+				- if current_user.picture == nil
+				- else
+					%img.center.borderr.z-depth-3{alt: "profile_pic", src: @img}
 			= react_component 'TopSongs'
 	.col.s6.m4.l3
 		- if params[:mixtape_id]
 			= react_component 'PlayMixtape', { current_user: current_user, mixtape_id: params[:mixtape_id] }
+			%img{:alt => "My QR code", :src => @qr}
 		- else
 			= react_component 'PlayMixtape', { current_user: current_user, mixtape_id: @mixtape_id }
+			.center
+				%img{:alt => "My QR code", :src => @qr}
+				%br
+				%br
+				%br
+				%br
+				%br
 	.col.s6
 	%br
 	%br
@@ -46,3 +58,6 @@
 	%br
 	%br
 	%br
+
+	%link{:href => "https://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}/
+

@@ -42,6 +42,18 @@ def show
 			  @qr = url_prefix + profile_url
 			end
 
+
+		if current_user == nil
+		else
+			if /\.twimg/.match(current_user.picture)
+	      @img = current_user.picture.gsub("_normal", "")
+	    end
+
+	    if /\.graph\.facebook\.com/.match(current_user.picture)
+	      @img = current_user.picture + "?width=500&height=500"
+	    end
+	   end
+
 		
 	end
 	
