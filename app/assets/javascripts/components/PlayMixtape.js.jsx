@@ -10,6 +10,7 @@
     this.noArtists = this.noArtists.bind(this);
     this.pass = this.pass.bind(this);
     this.showSuggestions = this.showSuggestions.bind(this);
+    // this.doSearch = this.doSearch.bind(this);
   }
 
   componentDidMount(){
@@ -33,7 +34,12 @@
     })
   }
 
-   getSearchResults(){
+  // doSearch(){
+  //   this.getSearchResults();
+  //   this.getImages();
+  // }
+
+  getSearchResults(){
     let self = this;
     let searchTerm = self.refs.searchText.value.replace(/\s/g, "%20")
     $.ajax({
@@ -124,10 +130,6 @@
               {this.noArtists(artists)}
               {artists}
             </div>
-
-
-
-
           </div>
 
 
