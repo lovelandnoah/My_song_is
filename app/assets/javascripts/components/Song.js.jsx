@@ -58,7 +58,7 @@ class Song extends React.Component{
   // }
 
   // deleteBtn(){
-  //   return(<div onClick={this.deleteSong} className="btn inlin flo waves-effect waves-light btn white-text">
+  //   return(<div onClick={this.deleteSong} className="btn inner flo waves-effect waves-light btn white-text">
   //             X
   //           </div>)
    
@@ -81,7 +81,7 @@ class Song extends React.Component{
 
 
   deleteBtn(song_id){
-    return(<div onClick={() => this.deleteSong(song_id)} className="ply inlin flo waves-effect waves-light btn white-text">
+    return(<div onClick={() => this.deleteSong(song_id)} className="ply inner flo waves-effect waves-light btn black-text">
               delete
             </div>);
    
@@ -97,12 +97,12 @@ class Song extends React.Component{
     return(
        <div>
         <div className="paddin">  
-          <h5 className='inlin'>
+          <h5 className='inner'>
           <span className='black-text song-name'>{this.props.song_name}</span>
           <span className="grey-text">  </span> 
           <span className='black-text artist-name'>{this.props.artist_name}</span>
           </h5>
-          <button className='ply btn inlin flo play-button button-grey'>Play</button>
+          <button className='ply btn inner flo play-button button-grey black-text'>Play</button>
           { this.deleteBtn(this.props.song_id) }
         </div>
         <hr />

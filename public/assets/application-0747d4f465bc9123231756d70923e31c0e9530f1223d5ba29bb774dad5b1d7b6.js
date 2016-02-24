@@ -56367,7 +56367,7 @@ var Song = (function (_React$Component) {
     value: function deleteBtn() {
       return React.createElement(
         'div',
-        { onClick: this.deleteSong, className: 'btn inlin flo waves-effect waves-light btn white-text' },
+        { onClick: this.deleteSong, className: 'btn inner flo waves-effect waves-light btn white-text' },
         'X'
       );
     }
@@ -56383,7 +56383,7 @@ var Song = (function (_React$Component) {
           { className: 'paddin' },
           React.createElement(
             'h5',
-            { className: 'inlin' },
+            { className: 'inner' },
             React.createElement(
               'span',
               { className: 'song-name' },
@@ -56402,7 +56402,7 @@ var Song = (function (_React$Component) {
           ),
           React.createElement(
             'button',
-            { className: 'btn inlin flo play-button button-grey' },
+            { className: 'btn inner flo play-button button-grey' },
             'Play'
           ),
           this.deleteBtn()

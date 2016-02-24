@@ -5,7 +5,7 @@
 
 @import "materialize/components/color";
 $primary-color: #595959 !default;
-$secondary-color: #DE429B !default;
+$secondary-color: #00CED1 !default;
 @import "materialize";
 @import "newstyle.css.scss";
 @import "player.css.scss";
@@ -15,6 +15,10 @@ $secondary-color: #DE429B !default;
 
 #navigation, .navbar, .navbar-default{
   background-image: url("assets/Bckgrnd.jpg");
+}
+
+.one{
+  padding-right: 1px !important;
 }
 
 #titled{
@@ -291,10 +295,6 @@ $secondary-color: #DE429B !default;
   position:absolute;
   top:12%;
   left:60%;
-}
-
-.inlin {
-  display:inline;
 }
 
 .flo {
