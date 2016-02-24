@@ -52,7 +52,7 @@ class Mixtape extends React.Component{
             <div className='card small cyan z-depth-3 col s6 over playing-mixtape'>
              { this.deleteBtn() }
              <div className="toop">
-              <button className="btn" onClick={this.playMixtape}>Play</button>
+              <button className="btn black-text" onClick={this.playMixtape}>Play</button>
              </div> 
               <div className='card-content white-text boxreset' >
                 <p className="salt crd center">{this.props.name}</p>
