@@ -33,8 +33,7 @@ class TopSongs extends React.Component{
     
     return(
       <div className="" > 
-                <br />
-                <br />
+                
             <div className=''>
               {topartists}
           </div>        
