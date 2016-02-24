@@ -17,9 +17,7 @@
 	-if current_user == nil || current_user.id != @user.id
 	-else
 	%img{:alt => "My QR code", :src => @qr}
-
-	= link_to("Edit Profile", users_edit_path)
-
+	= link_to("Edit Your Profile", edit_user_registration_path)
 	.sam= react_component 'Player'
 	%br
 	%br

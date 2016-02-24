@@ -23,13 +23,11 @@ class Artist extends React.Component{
       url: '/song',
       type: 'POST',
       data: {name: songName, artist: artist, mixtape_id: this.props.mixtapeId}
-
     }).success( data => {
        self.props.getSongs();
-
     });
   }
-
+  
   albumCover(){
     self = this;
     $.ajax({
