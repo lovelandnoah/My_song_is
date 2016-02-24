@@ -2,7 +2,6 @@ class Player extends React.Component{
   constructor(props){
     super(props);
     this.state = {stationUrl: ""}
-    debugger
   }
 
   mobilePlayer(){

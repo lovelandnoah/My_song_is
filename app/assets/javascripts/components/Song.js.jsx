@@ -99,7 +99,7 @@ class Song extends React.Component{
         <div className="paddin">  
           <h5 className='inlin'>
           <span className='black-text song-name'>{this.props.song_name}</span>
-          <span className="grey-text"> By:  </span> 
+          <span className="grey-text">  </span> 
           <span className='black-text artist-name'>{this.props.artist_name}</span>
           </h5>
           <button className='ply btn inlin flo play-button button-grey'>Play</button>

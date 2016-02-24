@@ -55,7 +55,7 @@ class Mixtape extends React.Component{
               <button className="btn" onClick={this.playMixtape}>Play</button>
              </div> 
               <div className='card-content white-text boxreset' >
-                <p className="salt crd center">{this.props.name}</p>
+                <p className="salt crd">{this.props.name}</p>
                 <br />
                  {songs}
               </div>
