@@ -129,7 +129,7 @@
             </div>
             <br />
             <br />
-            <h4 className='center-align subtit salt'>Songs Playing:</h4>
+            <h4 className='subtit salt'>Songs Playing:</h4>
             <br />
             <div className='row'>
               {this.noArtists(artists)}
