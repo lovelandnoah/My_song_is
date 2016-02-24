@@ -1,7 +1,8 @@
 class Player extends React.Component{
   constructor(props){
     super(props);
-    this.state = {}
+    this.state = {stationUrl: ""}
+    debugger
   }
 
   mobilePlayer(){
@@ -10,9 +11,8 @@ class Player extends React.Component{
         </div>
         )
   } else {
-
     return(<div>
-              <iframe className="player" id="player" src="http://api.dar.fm/player_api.php?station_id=6480&custom_style=radioslice&partner_token=9388418650"></iframe>
+              <iframe className="player" id="player" src={this.stationUrl}></iframe>
             </div>
       )
     }

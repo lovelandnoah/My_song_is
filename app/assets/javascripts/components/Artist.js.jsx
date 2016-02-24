@@ -1,7 +1,7 @@
 class Artist extends React.Component{
   constructor(props){
     super(props)
-    this.state = {albumCoverUrl: ""}
+    this.state = {albumCoverUrl: "", songTitle: ""}
     this.play = this.play.bind(this)
     this.add = this.add.bind(this)
     this.albumCover = this.albumCover.bind(this)
@@ -10,6 +10,7 @@ class Artist extends React.Component{
   }
   componentDidMount(){
    this.albumCover();
+   this.state.songTitle = self.props.title;
   }
 
   play(station){
@@ -40,7 +41,11 @@ class Artist extends React.Component{
     });
   }
 
-
+  newImage(currentTitle){
+    if(this.state.songTitle != currentTitle){
+      this.albumCover();
+    }
+  }
 
   render(){
     return(<div>
@@ -51,6 +56,7 @@ class Artist extends React.Component{
                   <br />
                   {this.props.artist}
                 </p>
+                {this.newImage(this.props.title)}
                 <img src={this.state.albumCoverUrl} width="200" height="200" />
 
 
@@ -59,6 +65,7 @@ class Artist extends React.Component{
                   <a className="btn waves-effect waves-light marg" onClick={() => this.play(this.props.station_id)}>play</a>
                   <a className="btn bluezs waves-effect waves-light" onClick={() => this.add(this.props.title, this.props.artist)}>Add</a>
                 </div>
+
               </div>
             </div>
           </div>);

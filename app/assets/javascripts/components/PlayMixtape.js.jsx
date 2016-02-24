@@ -3,9 +3,6 @@
     super(props)
     this.state = { searched: false, mixtape_id: this.props.mixtape_id, mixtapeName: '', mixTapeCategory: '', songs: [], songsSearchedFor: [], results: []};
     this.getSongs = this.getSongs.bind(this);
-
-
-      // debugger
     this.getSearchResults = this.getSearchResults.bind(this);
     this.noArtists = this.noArtists.bind(this);
     this.pass = this.pass.bind(this);
@@ -15,7 +12,6 @@
 
   componentDidMount(){
     this.getSongs();
-
     self = this;
     self.showSuggestions();
   }
@@ -83,6 +79,14 @@
     }
   }
 
+  showPlayer(player){
+    if(player.src == ""){
+      return;
+    }else{
+      return player;
+    }
+  }
+
   render(){
 
     self = this;
@@ -115,6 +119,8 @@
 
             <div id="mixtapeForm">
             </div>
+
+            {this.showPlayer(<Player />)}
           
             <br />
             <h5 className="subtit salt center">Search for an Artist or Song:</h5>
