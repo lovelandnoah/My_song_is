@@ -47,9 +47,9 @@ class TopArtist extends React.Component{
               <div className="pooop">
                 <div className="">
                   <div className="inline">
-                    <a className="btn ply white  black-text waves-effect waves-light left" onClick={() => this.mobilePlayButton(this.props.station_id)}>play</a>
-                    <a className="btn ply white black-text bluezs waves-effect waves-light left" onClick={() => this.add(this.props.title, this.props.artist)}>Add</a>
-                    <h5 className="salt white-text"># {this.props.rank}:  {this.props.name} <span className="salt white-text right teot">By: {this.props.artist}</span></h5>
+                    <a className="btn ply white-text waves-effect waves-light left" onClick={() => this.mobilePlayButton(this.props.station_id)}>play</a>
+                    <a className="btn ply white-text bluezs waves-effect waves-light left" onClick={() => this.add(this.props.title, this.props.artist)}>Add</a>
+                    <h5 className="salt cyan-text"># {this.props.rank}:  {this.props.name} <span className="salt cyan-text right teot">By: {this.props.artist}</span></h5>
                     
                   </div>
                 </div>
