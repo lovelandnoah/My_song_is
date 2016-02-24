@@ -61,7 +61,7 @@ class Artist extends React.Component{
 
 
 
-                <div className="row center">
+                <div className="row">
                   <a className="btn waves-effect waves-light marg" onClick={() => this.play(this.props.station_id)}>play</a>
                   <a className="btn bluezs waves-effect waves-light" onClick={() => this.add(this.props.title, this.props.artist)}>Add</a>
                 </div>

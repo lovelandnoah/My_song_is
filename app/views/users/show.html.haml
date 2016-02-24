@@ -4,27 +4,25 @@
 .container
 	-if current_user == nil || current_user.id != @user.id
 	-else
-		%h1 mysong.is/#{@user.username}
+		%h5 mysong.is/#{@user.username}
 
 .row
 	.col.s6.m4.l3
 		-if current_user == nil || current_user.id != @user.id
 		-else
 		%div
-			.center
-				- if current_user.picture == nil
-				- else
-					%br
-					%img.center.borderr.z-depth-3{alt: "profile_pic", src: @img}
-					%br
-					%br
-				-if current_user.picture == nil
-					%h5.salt #{@user.username}'s Preferred music: #{@user.permalink}
-				-else
-					%h5.salt #{current_user.name}'s Preferred music: #{@user.permalink}
-		.center
-			%br
-			= react_component 'PlayMixtape', { current_user: current_user, mixtape_id: @mixtape_id }
+			- if current_user.picture == nil
+			- else
+				%br
+				%img.borderr.z-depth-3{alt: "profile_pic", src: @img, height: 200, width: 200}
+				%br
+				%br
+			-if current_user.picture == nil
+				%h5.salt #{@user.username}'s Preferred music: #{@user.permalink}
+			-else
+				%p.salt My songs: #{@user.permalink}
+		%br
+		= react_component 'PlayMixtape', { current_user: current_user, mixtape_id: @mixtape_id }
 	.col.s6.m4.l3.backround.z-depth-3
 		%h2.salt.center Top Songs
 		= react_component 'TopSongs'
