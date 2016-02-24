@@ -125,7 +125,7 @@
             <p className="salt">Search for an Artist or Song:</p>
             <input id='search' type='text' ref='searchText' autofocus='true' placeholder="Artist"/>
             <div className="center">
-              <button onClick={this.getSearchResults} className='btn waves-effect waves-light'>Pick Your Song</button>
+              <button onClick={this.getSearchResults} className='btn waves-effect waves-light black-text'>Pick Your Song</button>
             </div>
             <br />
             <br />
