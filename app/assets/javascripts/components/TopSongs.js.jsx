@@ -32,12 +32,11 @@ class TopSongs extends React.Component{
     });
     
     return(
-      <div className="center container" > 
-                <br />
-                <br />
-            <div className='row'>
+      <div className="" > 
+                
+            <div className=''>
               {topartists}
-          </div>          
+          </div>        
       </div>
     )
   }

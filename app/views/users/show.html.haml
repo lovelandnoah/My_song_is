@@ -6,21 +6,49 @@
 	-else
 		%h1 mysong.is/#{@user.username}
 
-		%h2 Preferred music: #{@user.permalink}
-
-	.row
-	.col.s8.offset-s2
-		- if params[:mixtape_id]
-			= react_component 'PlayMixtape', { current_user: current_user, mixtape_id: params[:mixtape_id] }
-		- else
+.row
+	.col.s6.m4.l3
+		-if current_user == nil || current_user.id != @user.id
+		-else
+		%div
+			.center
+				- if current_user.picture == nil
+				- else
+					%br
+					%img.center.borderr.z-depth-3{alt: "profile_pic", src: @img}
+					%br
+					%br
+				-if current_user.picture == nil
+					%h5.salt #{@user.username}'s Preferred music: #{@user.permalink}
+				-else
+					%h5.salt #{current_user.name}'s Preferred music: #{@user.permalink}
+		.center
+			%br
 			= react_component 'PlayMixtape', { current_user: current_user, mixtape_id: @mixtape_id }
-	-if current_user == nil || current_user.id != @user.id
-	-else
-	%img{:alt => "My QR code", :src => @qr}
-	= link_to("Edit Your Profile", edit_user_registration_path)
-	.sam= react_component 'Player'
+	.col.s6.m4.l3.backround.z-depth-3
+		%h2.salt.center Top Songs
+		= react_component 'TopSongs'
+		-if params[:mixtape_id]
+			= react_component 'PlayMixtape', { current_user: current_user, mixtape_id: params[:mixtape_id] }
+			%img{:alt => "My QR code", :src => @qr}
+		-else
+			.center
+				%br
+				%br
+				%img{:alt => "My QR code", :src => @qr}
+				%br
+				%br
+				%br
+%br
+	.col.s6
+
+
+	/ %button.btn= link_to "Edit Profile", users_edit_path, class: "white-text"
 	%br
-	%br
-	%br
-	%br
-	%br
+	.center
+		%br
+		%br
+		.sam= react_component 'Player'
+
+	%link{:href => "https://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}/
+
