@@ -25,16 +25,21 @@ $secondary-color: #00CED1 !default;
   background-image: url("assets/titled.png");
 }
 
+.backgrr {
+  background-color: darkturquoise;
+  width: 30.0vw!important;
+}
+
 .subtitler {
-  font-size: 4.5vw!important;
+  font-size: 3.5vw!important;
 }
 
 .subti {
-  font-size: 1.25vw!important;
+  font-size: 0.75vw!important;
 }
 
 .subtitlez {
-  font-size: 1.42vw!important;
+  font-size: 0.82vw!important;
 }
 
 .ply {
@@ -46,6 +51,10 @@ $secondary-color: #00CED1 !default;
   padding: 0.017px 10px 8px 5px;
   margin-bottom: 10px;
   background-color: white;
+}
+
+.newstyle {
+  width: 100px;
 }
 
 .hi {
@@ -587,8 +596,7 @@ body {
 }
 
 .backround {
-  background-color: darkturquoise;
-  color: white;
+  background-color: darkturquoise;  
 }
 
 .borderr {
@@ -614,6 +622,10 @@ body {
 
 .buttonnav{
   margin:8px 10px;
+}
+
+.hei {
+  height: 170px!important;
 }
 
 .pic{

@@ -7,7 +7,7 @@
 		%h5 mysong.is/#{@user.username}
 
 .row
-	.col.s6.m4.l3
+	.col.s8
 		-if current_user == nil || current_user.id != @user.id
 		-else
 		%div
@@ -23,7 +23,7 @@
 				%p.salt My songs: #{@user.permalink}
 		%br
 		= react_component 'PlayMixtape', { current_user: current_user, mixtape_id: @mixtape_id }
-	.col.s6.m4.l3.backround.z-depth-3
+	.col.s4.backround.z-depth-3
 		%h2.salt.center Top Songs
 		= react_component 'TopSongs'
 		-if params[:mixtape_id]
