@@ -17,12 +17,34 @@ $secondary-color: #00CED1 !default;
   background-image: url("assets/Bckgrnd.jpg");
 }
 
+
+#titled{
+  background-image: url("assets/titled.png");
+}
+
+.title-spacing{
+  margin-top: 25px;
+  margin-bottom: 20px;
+}
+
+.nav-title{
+  float: left;
+  height: 50%;
+  width: 50%;
+  margin: 30px;
+}
+
+.top-songs{
+  float: right;
+}
+
 .one{
   padding-right: 1px !important;
 }
 
-#titled{
-  background-image: url("assets/titled.png");
+.signin{
+  height: 0px;
+  width: 800px;
 }
 
 .subtitler {
