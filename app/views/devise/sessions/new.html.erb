@@ -7,10 +7,11 @@
     </strong>
    </h3>
 <body class="home-body">
-<br>
-<div class="container">
-  <div class="row">
-    <div class="col s10">
+<div class="row">
+<div class="col s8 inner ">
+  <div class="">
+    <div class=" inner">
+      <br /> 
       <h1 class="center salt subtit">
          CHOOSE YOUR SONG! 
       </h1>
@@ -51,21 +52,26 @@
     <br>
     <br>
     <br>
-        <div class="col s3">
+        <div class="col s2">
           <%= link_to user_omniauth_authorize_path(:facebook) do %>
-            <i class="fbook fa fa-facebook-official fa-5x"></i>
+            <i class=" fa fa-facebook-official fa-5x"></i>
           <% end %>
         </div>
-        <div class="col s3">
+        <div class="col s2">
           <%= link_to user_omniauth_authorize_path(:twitter) do %>
-            <i class="twet fa fa-twitter fa-5x"></i>   
+            <i class=" fa fa-twitter fa-5x"></i>   
           <% end %>
         </div>
     </div>
 </div>
+  <div class="backround z-depth-3 col s4">
+  <br />
+  <br />  
+  <h2 class="salt center subtitler">Top Songs</h2>
+  <br />
+  <div class=""><%= react_component 'TopSongs' %></div>
+  <br />
+  </div>
 <br />
-<h2 class="salt center subtitler">Top Songs </h2>
-<br />
-<div class="container"><%= react_component 'TopSongs' %></div>
-<br />
+</div>
 </body>

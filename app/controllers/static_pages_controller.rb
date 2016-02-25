@@ -17,7 +17,7 @@ class StaticPagesController < ApplicationController
     @organizedsong = Hash[@songhash.sort_by{|k,v| -v}]
     # @topsongarray = @organizedsong.first(10)
     @keys = @organizedsong.keys
-    @top10 = @keys.first(10)
+    @top10 = @keys.first(9)
     @tophash = Struct.new(:name, :artist)
 		
 		@forecasts = []

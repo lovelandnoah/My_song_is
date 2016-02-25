@@ -43,21 +43,19 @@ class TopArtist extends React.Component{
 
   render(){
     return(<div>
-            <div className="white z-depth-3 ">
-              <div className="pooop">
-                <div className="">
-                  <div className="inline">
-                    <a className="subtitlez btn ply white-text waves-effect waves-light left" onClick={() => this.mobilePlayButton(this.props.station_id)}>play</a>
-                    <a className="subtitlez btn ply white-text bluezs waves-effect waves-light left" onClick={() => this.add(this.props.title, this.props.artist)}>Add</a>
-                    <h5 className="subtitlez salt cyan-text"># {this.props.rank}:  {this.props.name} <span className="subti salt cyan-text right teot"> {this.props.artist}</span></h5>
-                    
-                  </div>
-                </div>
-                <div className="">
+            <div className="nav4 hei card-panel height mix-color col l4 m6 s12 z-depth-3">
+              <div className="card-content">
+                <p className="stylez  center">
+                  <em className=""># {this.props.rank}:  {this.props.name} </em>
+                  <br />
+                  By: {this.props.artist}  
+                </p>
+                <div className="row">
+                  <a className="btn waves-effect waves-light marg paddin ply subtitlez" onClick={() => this.mobilePlayButton(this.props.station_id)}>play</a>
+                  <a className="btn bluezs waves-effect waves-light ply subtitlez" onClick={() => this.add(this.props.title, this.props.artist)}>Add</a>
                 </div>
               </div>
-            </div>
-            
+            </div>  
           </div>);
   }
 }
