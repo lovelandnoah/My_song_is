@@ -1,71 +1,86 @@
-<div class="row">
+<div>
   <%= image_tag('real_b.png', :class =>"one image") %>
-</div>
-  <h3 class="salt center rel white-text stroke">
-    <strong>
-      MySong.is
-    </strong>
-   </h3>
-<body class="home-body">
-<br>
-<div class="container">
-  <div class="row">
-    <div class="col s10">
-      <h1 class="center salt subtit">
-         CHOOSE YOUR SONG! 
-      </h1>
-      <p class="center"> 
-        Use Facebook / Twitter? Sign into our App with one click! (Below) 
-      </p>
-    </div>
-    <div class="col s2">
-      <%= link_to image_tag('add-user-128.png', :style =>"height:100px; margin-bottom: -20px;"), new_registration_path(resource_name) %>
-    </div>
-  </div>
-  <div class="container col s8">
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %> 
-        <div class="">
-          <%= text_field :email, 
+
+
+<!--   <div class="rightbot home-link bigger image white-text stroke text-glow-hover log">
+    <%#= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %> 
+          <%#= f.text_field :email, 
             "Email",
             :value => "Email",
-            :style => "color:#aaa;",
+            :style => "color:#000000;",
             :onfocus => "if(this.value=='Email'){this.value='';this.style.color = '#000';}",  
             :onblur => "if(this.value==''){this.value='Email';this.style.color = '#aaa';}"
             %>
-        </div>
-        <div class="">
-          <%= f.text_field :password, 
+          <%#= f.text_field :password, 
             :value => "Password",
             :autocomplete => "off",
-            :style => "color:#aaa;",
+            :style => "color:#000000;",
             :onfocus => "if(this.value=='Password'){this.value='';this.style.color = '#000';this.type='password'}",  
             :onblur => "if(this.value==''){this.value='Password';this.style.color = '#aaa';this.type='text'}"
           %>
+          <%#= f.submit "Log in", :class => 'btn black-text' %>
+    <%# end %>
+  </div> -->
+
+  <div class="rightbot home-link bigger image white-text stroke text-glow-hover log">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %> 
+      <div class="row">
+        <div class="col s4">
+          <%= f.text_field :email, 
+            :value => "Email",
+            :style => "color:#000000;",
+            :onfocus => "if(this.value=='Email'){this.value='';this.style.color = '#000000';}",  
+            :onblur => "if(this.value==''){this.value='Email';this.style.color = '#000000';}"
+            %>
         </div>
-        <div class="row">
+        <div class="col s4">
+          <%= f.text_field :password, 
+            :value => "Password",
+            :autocomplete => "off",
+            :style => "color:#000000;",
+            :onfocus => "if(this.value=='Password'){this.value='';this.style.color = '#000000';this.type='password'}",  
+            :onblur => "if(this.value==''){this.value='Password';this.style.color = '#000000';this.type='text'}"
+          %>
+        </div>
+        <div class="col s4">
           <%= f.submit "Log in", :class => 'btn black-text' %>
         </div>
-    <% end -%>
+      </div>
+    <%end%>
   </div>
-    <div class="row">
-    <br>
-    <br>
-    <br>
-        <div class="col s3">
-          <%= link_to user_omniauth_authorize_path(:facebook) do %>
-            <i class="fbook fa fa-facebook-official fa-5x"></i>
-          <% end %>
-        </div>
-        <div class="col s3">
-          <%= link_to user_omniauth_authorize_path(:twitter) do %>
-            <i class="twet fa fa-twitter fa-5x"></i>   
-          <% end %>
-        </div>
-    </div>
+
+
+
 </div>
-<br />
-<h2 class="salt center subtitler">Top Songs </h2>
-<br />
-<div class="container"><%= react_component 'TopSongs' %></div>
-<br />
+
+<h3 class="salt rel white-text stroke nav-title">
+  <strong>
+    MySong.is
+  </strong>
+</h3>
+
+<body class="home-body">
+  <div class="nav-title">
+    <h5 class="salt title-spacing">
+       Sign in:
+    </h1>
+
+    <%= link_to user_omniauth_authorize_path(:twitter) do %>
+      <i class="fa fa-twitter fa-5x"></i>   
+    <% end %>
+
+    <%= link_to user_omniauth_authorize_path(:facebook) do %>
+      <i class="fa fa-facebook-official fa-5x"></i>
+    <% end %>
+    <h5 class="salt"> Or: </h5>
+
+      <%= link_to image_tag('add-user-128.png', :style =>"height:75px; margin-bottom: -20px;"), new_registration_path(resource_name) %>
+  </div>
+
+  <div class="top-songs">
+    <h5 class="salt">Top Songs </h5>
+
+    <div class="container"><%= react_component 'TopSongs' %></div>
+  </div>
+
 </body>
