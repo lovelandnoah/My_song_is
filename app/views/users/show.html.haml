@@ -6,36 +6,27 @@
 	-else
 
 .row
-	.col.s6.m4.l3
+	.col.s8
 		-if current_user == nil || current_user.id != @user.id
 		-else
 		%div
 			- if current_user.picture == nil
 			- else
-				%br
-				%img.borderr.z-depth-3{alt: "profile_pic", src: @img, height: 200, width: 200}
-				%br
-				%br
+				%img.nav-profile-pic.borderr.z-depth-3{alt: "profile_pic", src: @img, height: 200, width: 200}
 			-if current_user.picture == nil
 				%h5.salt #{@user.username}'s Preferred music: #{@user.permalink}
 			-else
-				%p.salt My songs: #{@user.permalink}
+				%h5.salt.center My songs: #{@user.permalink}
 		%br
 		= react_component 'PlayMixtape', { current_user: current_user, mixtape_id: @mixtape_id }
-	.col.s6.m4.l3.backround.z-depth-3
+	.col.s4.backround.z-depth-3
+		.center.title-spacing
+			%img{:alt => "My QR code", :src => @qr}
 		%h2.salt.center Top Songs
 		= react_component 'TopSongs'
 		-if params[:mixtape_id]
 			= react_component 'PlayMixtape', { current_user: current_user, mixtape_id: params[:mixtape_id] }
-			%img{:alt => "My QR code", :src => @qr}
 		-else
-			.center
-				%br
-				%br
-				%img{:alt => "My QR code", :src => @qr}
-				%br
-				%br
-				%br
 %br
 	.col.s6
 
