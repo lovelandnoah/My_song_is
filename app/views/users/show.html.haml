@@ -9,15 +9,15 @@
 	.col.s8
 		-if current_user == nil || current_user.id != @user.id
 		-else
-		%div
-			- if current_user.picture == nil
-			- else
-				%img.nav-profile-pic.borderr.z-depth-3{alt: "profile_pic", src: @img, height: 200, width: 200}
-			-if current_user.picture == nil
-				%h5.salt #{@user.username}'s Preferred music: #{@user.permalink}
-			-else
-				%h5.salt.center My songs: #{@user.permalink}
-		%br
+			%div
+				- if current_user.picture == nil
+				- else
+					%img.nav-profile-pic.borderr.z-depth-3{alt: "profile_pic", src: @img, height: 200, width: 200}
+				-if current_user.picture == nil
+					%h5.salt #{@user.username}'s Preferred music: #{@user.permalink}
+				-else
+					%h5.salt.center My songs: #{@user.permalink}
+			%br
 		= react_component 'PlayMixtape', { current_user: current_user, mixtape_id: @mixtape_id }
 	.col.s4.backround.z-depth-3
 		.center.title-spacing

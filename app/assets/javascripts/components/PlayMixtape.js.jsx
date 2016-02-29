@@ -13,8 +13,13 @@
 
   componentDidMount(){
     this.getSongs();
-    self = this;
+    let self = this;
     self.showSuggestions();
+    $(document).keypress(function(e) {
+      if(e.which == 13) {
+        self.filteredSearchResults()
+      }
+    })
   }
 
   // play mixtape original
@@ -52,8 +57,9 @@
   filteredSearchResults(){
     let self = this;
     let searchTerm = self.refs.searchText.value.replace(/\s/g, "%20")
+    self.refs.searchText.value = ""
     $.ajax({
-      url: "http://api.dar.fm/songartist.php?&q=" + searchTerm + "&callback=jsonp&web=1&partner_token=9388418650",
+      url: "http://api.dar.fm/songartist.php?&q=*" + searchTerm + "*&callback=jsonp&web=1&partner_token=9388418650",
       jsonp: 'callback',
       type: 'GET',
       dataType: 'jsonp',
@@ -65,7 +71,6 @@
       // }
       // });
       // this.setState({results: data});
-
       this.showFilteredResults(data)
     });
   }
@@ -161,8 +166,9 @@
             {this.showPlayer(<Player />)}
           
             <h5 className="salt">Search for an Artist or Song:</h5>
-            <input id='search' className='small-search' type='text' ref='searchText' autofocus='true' placeholder="Artist"/>
+              <input id='search' className='small-search' type='text' ref='searchText' autofocus='true' placeholder='Artist'/>
             <button onClick={this.filteredSearchResults} className='btn waves-effect waves-light black-text'>Search</button>
+
             <br />
             <br />
             <h4 className='subtit salt'>Songs Playing:</h4>
