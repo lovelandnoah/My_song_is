@@ -1,10 +1,11 @@
 class Artist extends React.Component{
   constructor(props){
     super(props)
-    this.state = {albumCoverUrl: "", songTitle: ""}
+    this.state = {albumCoverUrl: "", songTitle: "", key: ""}
     this.play = this.play.bind(this)
     this.add = this.add.bind(this)
     this.albumCover = this.albumCover.bind(this)
+    this.test = this.test.bind(this)
     // this.getSongs = this.getSongs.bind(this)
   }
 
@@ -14,6 +15,7 @@ class Artist extends React.Component{
   componentDidMount(){
     this.albumCover();
     this.state.songTitle = self.props.title;
+    this.state.key = this.props.key
   }
 
   play(title, artist){
@@ -68,6 +70,10 @@ class Artist extends React.Component{
     }
   }
 
+  test(){
+    console.log('wow');
+  }
+
   render(){
     return(<div>
             <div className="nav4 card-panel height mix-color col l4 m6 s12 z-depth-3">
@@ -78,8 +84,13 @@ class Artist extends React.Component{
                   {this.props.artist}
                 </p>
                 {this.newImage(this.props.title)}
+                <form action="#">
+                  <p>
+                    <input id={this.props.title} type='checkbox' defaultChecked={false} onClick={this.test} checked={this.state.isChecked} />
+                    <label htmlFor={this.props.title}>Add</label>
+                  </p>
+                </form>
                 <img src={this.state.albumCoverUrl} width="200" height="200" />
-
                 <div className="row">
                   <a className="btn waves-effect waves-light marg" onClick={() => this.play(this.props.title, this.props.artist)}>play</a>
                   <a className="btn bluezs waves-effect waves-light" onClick={() => this.add(this.props.title, this.props.artist)}>Add</a>
