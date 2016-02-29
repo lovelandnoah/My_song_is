@@ -1,4 +1,5 @@
 class MixtapesController < ApplicationController
+  skip_before_filter :authenticate_user!, only: [:find_single_mixtape]
 
 	def index
   end

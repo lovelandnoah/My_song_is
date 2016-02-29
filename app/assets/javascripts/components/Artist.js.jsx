@@ -1,7 +1,7 @@
 class Artist extends React.Component{
   constructor(props){
     super(props)
-    this.state = {albumCoverUrl: "", songTitle: "", key: ""}
+    this.state = {albumCoverUrl: "", songTitle: "", key: "", isMounted: false}
     this.play = this.play.bind(this)
     this.add = this.add.bind(this)
     this.albumCover = this.albumCover.bind(this)
@@ -13,9 +13,14 @@ class Artist extends React.Component{
   }
 
   componentDidMount(){
+    this.state.isMounted = true;
     this.albumCover();
     this.state.songTitle = self.props.title;
     this.state.key = this.props.key
+  }
+
+  componentWillUnmount(){
+    this.state.isMounted = false;
   }
 
   play(title, artist){
@@ -60,7 +65,9 @@ class Artist extends React.Component{
       type: 'GET',
       dataType: 'jsonp',
     }).success( data => {
-      this.setState({albumCoverUrl: data[0].arturl});
+      if(this.state.isMounted == true) {
+              this.setState({albumCoverUrl: data[0].arturl});
+      }
     });
   }
 
