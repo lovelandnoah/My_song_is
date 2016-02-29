@@ -5,17 +5,38 @@ class Artist extends React.Component{
     this.play = this.play.bind(this)
     this.add = this.add.bind(this)
     this.albumCover = this.albumCover.bind(this)
-    // debugger
     // this.getSongs = this.getSongs.bind(this)
   }
-  componentDidMount(){
-   this.albumCover();
-   this.state.songTitle = self.props.title;
+
+  componentWillMount(){
   }
 
-  play(station){
-    let player = document.getElementById("player")
-    player.src = "http://api.dar.fm/player_api.php?station_id=" + station + "&custom_style=radioslice&partner_token=9388418650"
+  componentDidMount(){
+    this.albumCover();
+    this.state.songTitle = self.props.title;
+  }
+
+  play(title, artist){
+    title = title.replace(/\s/g, '%20');
+    artist = artist.replace(/\s/g, '%20');
+
+    
+    $.ajax({
+      url: "http://api.dar.fm/playlist.php?&q=@artist%20" + artist + "%20@title%20" + title + "&callback=jsonp&web=1&partner_token=9388418650",
+      jsonp: 'callback',
+      type: 'GET',
+      dataType: 'jsonp',
+    }).success( data => {
+      let player = document.getElementById("player")
+      if(data.length){
+        player.src = "http://api.dar.fm/player_api.php?station_id=" + data[0].station_id + "&custom_style=radioslice&partner_token=9388418650"
+      } else {
+
+        //todo: message song is not playing
+      }
+    });
+
+
   }
 
   add(songName, artist){
@@ -59,10 +80,8 @@ class Artist extends React.Component{
                 {this.newImage(this.props.title)}
                 <img src={this.state.albumCoverUrl} width="200" height="200" />
 
-
-
                 <div className="row">
-                  <a className="btn waves-effect waves-light marg" onClick={() => this.play(this.props.station_id)}>play</a>
+                  <a className="btn waves-effect waves-light marg" onClick={() => this.play(this.props.title, this.props.artist)}>play</a>
                   <a className="btn bluezs waves-effect waves-light" onClick={() => this.add(this.props.title, this.props.artist)}>Add</a>
                 </div>
 

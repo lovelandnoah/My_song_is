@@ -1,9 +1,10 @@
   class PlayMixtape extends React.Component{
   constructor(props){
     super(props)
-    this.state = { searched: false, mixtape_id: this.props.mixtape_id, mixtapeName: '', mixTapeCategory: '', songs: [], songsSearchedFor: [], results: []};
+    this.state = { searched: false, mixtape_id: this.props.mixtape_id, mixtapeName: '', mixTapeCategory: '', songs: [], songsSearchedFor: [], songOrArtist: [], results: [], filteredResults: []};
     this.getSongs = this.getSongs.bind(this);
     this.getSearchResults = this.getSearchResults.bind(this);
+    this.filteredSearchResults = this.filteredSearchResults.bind(this);
     this.noArtists = this.noArtists.bind(this);
     this.pass = this.pass.bind(this);
     this.showSuggestions = this.showSuggestions.bind(this);
@@ -15,7 +16,6 @@
     self = this;
     self.showSuggestions();
   }
-
 
   // play mixtape original
   getSongs(){
@@ -47,6 +47,40 @@
       this.state.searched = true;
       this.setState({results: data});
     });
+  }
+
+  filteredSearchResults(){
+    let self = this;
+    let searchTerm = self.refs.searchText.value.replace(/\s/g, "%20")
+    $.ajax({
+      url: "http://api.dar.fm/songartist.php?&q=" + searchTerm + "&callback=jsonp&web=1&partner_token=9388418650",
+      jsonp: 'callback',
+      type: 'GET',
+      dataType: 'jsonp',
+    }).success( data => {
+      // songOrArtist = ""
+      // $.each(data, function (key, value) {
+      // if(key == parseInt(key)){
+      //   songOrArtist += value;
+      // }
+      // });
+      // this.setState({results: data});
+
+      this.showFilteredResults(data)
+    });
+  }
+
+  showFilteredResults(results){
+    let self = this;
+    $.ajax({
+      url: "http://api.dar.fm/allsongs.php?artist=*" + results[0] + "*&callback=jsonp&partner_token=9388418650",
+      jsonp: 'callback',
+      type: 'GET',
+      dataType: 'jsonp',
+    }).success( data => {
+      this.state.searched = true;
+      this.setState({results: data})
+    })
   }
 
   showSuggestions(){
@@ -87,16 +121,20 @@
     }
   }
 
+
   render(){
-
     self = this;
+    let searchResultCards = <Artist/>;
     let i = 0;
-    let artists = this.state.results.map( artist => {
-      let key = `artist-${i += 1}`
-      return(<Artist key={key} {...artist} rplay={self.playSong} mixtapeId={self.state.mixtape_id} getSongs={self.getSongs}/>);
-    });
+    // if(this.state.results.length){ 
+    //   searchResultCards = this.state.results[0].songmatch.map( artist => {
+    //   return(<Artist rplay={self.playSong} mixtapeId={self.state.mixtape_id} getSongs={self.getSongs}/>)})}
 
-    // let songArray = [];
+    searchResultCards = this.state.results.length ? (
+        this.state.results[0].songmatch.map( artist => {
+          return(<Artist key={`artist-${i += 1}`} {...artist} rplay={self.playSong} mixtapeId={self.state.mixtape_id} getSongs={self.getSongs}/>)
+        })):([])
+
     let songsSearchedFor = this.state.songsSearchedFor.map( song => {
       let key = `songsSearchedFor-${song.song_id}`
       songsSearchedFor.push(<MixTapeSong key={key} {...song}/>);
@@ -122,18 +160,17 @@
 
             {this.showPlayer(<Player />)}
           
-            <p className="salt">Search for an Artist or Song:</p>
-            <input id='search' type='text' ref='searchText' autofocus='true' placeholder="Artist"/>
-            <div className="center">
-              <button onClick={this.getSearchResults} className='btn waves-effect waves-light black-text'>Pick Your Song</button>
-            </div>
+            <h5 className="salt">Search for an Artist or Song:</h5>
+            <input id='search' className='small-search' type='text' ref='searchText' autofocus='true' placeholder="Artist"/>
+            <button onClick={this.filteredSearchResults} className='btn waves-effect waves-light black-text'>Search</button>
             <br />
             <br />
             <h4 className='subtit salt'>Songs Playing:</h4>
             <br />
             <div className='row'>
-              {this.noArtists(artists)}
-              {artists}
+              {this.noArtists(searchResultCards)}
+              {searchResultCards}
+
             </div>
           </div>
           )   
