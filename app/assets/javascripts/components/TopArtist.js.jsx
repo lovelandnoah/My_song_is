@@ -1,17 +1,24 @@
 class TopArtist extends React.Component{
   constructor(props){
     super(props)
+    this.state = {albumCoverUrl: "", isMounted: false}
     this.play = this.play.bind(this)
     this.add = this.add.bind(this)
+    this.albumCover = this.albumCover.bind(this)
   }
   componentDidMount(){
+    this.state.isMounted = true;
+    this.albumCover()
+  }
+
+  componentWillUnmount(){
+    this.state.isMounted = false;
   }
 
   play(station){
     let player = document.getElementById("player")
     player.src = "http://api.dar.fm/player_api.php?station_id=" + station + "&custom_style=radioslice&partner_token=9388418650"
   }
-
 
   mobilePlayButton(station){
     song = this.props.songtitle.replace(/\s/g, ".")
@@ -39,7 +46,21 @@ class TopArtist extends React.Component{
     });
   }
 
+  albumCover(){
+    title = this.props.name.replace(/\s/g, '%20');
+    artist = this.props.artist.replace(/\s/g, '%20');
 
+    $.ajax({
+      url: "http://api.dar.fm/songart.php?artist=" + artist + "&title=" + title + "&res=med&partner_token=9388418650",
+      jsonp: 'callback',
+      type: 'GET',
+      dataType: 'jsonp',
+    }).success( data => {
+      if(this.state.isMounted == true) {
+        this.setState({albumCoverUrl: data[0].arturl});
+      }
+    });
+  }
 
   render(){
     return(<div>
@@ -48,7 +69,8 @@ class TopArtist extends React.Component{
                 <p className="stylez  center">
                   <em className=""># {this.props.rank}:  {this.props.name} </em>
                   <br />
-                  By: {this.props.artist}  
+                  <img src={this.state.albumCoverUrl} width="80" height="80" />
+                  {this.props.artist}
                 </p>
                 <div className="row">
                   <a className="btn waves-effect waves-light marg paddin ply subtitlez" onClick={() => this.mobilePlayButton(this.props.station_id)}>play</a>

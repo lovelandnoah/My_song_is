@@ -1,15 +1,17 @@
 class Song extends React.Component{
   constructor(props){
     super(props);
-    this.state = {results: [], station_id: 0};
+    this.state = {results: [], station_id: 0, albumCoverUrl: ""};
     this.renderPlayButton = this.renderPlayButton.bind(this);
     this.play = this.play.bind(this); 
     this.deleteBtn = this.deleteBtn.bind(this); 
     this.deleteSong = this.deleteSong.bind(this);
+    this.albumCover = this.albumCover.bind(this);
   }
 
   componentDidMount(){
     this.renderPlayButton();
+    this.albumCover();
   }
 
   renderPlayButton(){
@@ -63,11 +65,6 @@ class Song extends React.Component{
    
   // }
 
-
-
-
-
-
   deleteSong(song_id){
     let self = this;
     $.ajax({
@@ -78,25 +75,31 @@ class Song extends React.Component{
     });
   }
 
-
   deleteBtn(song_id){
     return(<div onClick={() => this.deleteSong(song_id)} className="ply inner flo waves-effect waves-light btn black-text">
               delete
             </div>);
-   
   }
 
-
-
-
-
+  albumCover(){
+    song = this.props.song_name.replace(/\s/g, ".")
+    artist = this.props.artist_name.replace(/\s/g, ".")
+    $.ajax({
+      url: "http://api.dar.fm/songart.php?artist=" + artist + "&title=" + song + "&res=med&partner_token=9388418650",
+      jsonp: 'callback',
+      type: 'GET',
+      dataType: 'jsonp',
+    }).success( data => {
+      this.setState({albumCoverUrl: data[0].arturl});
+    });
+  }
 
   render(){
-
     return(
        <div>
         <div className="paddin">  
           <h5 className='inner'>
+          <img src={this.state.albumCoverUrl} width="80" height="80" />
           <span className='black-text song-name'>{this.props.song_name}</span>
           <span className="grey-text">  </span> 
           <span className='black-text artist-name'>{this.props.artist_name}</span>
