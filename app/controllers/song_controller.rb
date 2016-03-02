@@ -5,8 +5,7 @@ class SongController < ApplicationController
 
   def create
     if Song.where(artist: params[:artist]).where(name: params[:name]).where(mixtape_id: params[:mixtape_id]).any?
-      binding.pry
-      alert('meow')
+
     else
     	song_name = params[:name]
     	artist = params[:artist]
@@ -15,7 +14,7 @@ class SongController < ApplicationController
       @song.mixtape_id = mixtape_id
       @song.name = song_name
       @song.artist = artist
-      binding.pry
+
       @song.save
       #TODO: check if song is unique
 
