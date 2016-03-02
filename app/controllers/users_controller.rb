@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 	before_action :set_user, only: [:show, :edit, :update, :destroy]
 	before_filter :ensure_sign_complete, only: [:new, :create, :update, :destroy]
-	skip_before_filter :authenticate_user!, only: [:show]
+	skip_before_filter :authenticate_user!, only: [:show, :edit]
 
 	helper_method :resource_name, :resource, :devise_mapping
 
@@ -14,11 +14,16 @@ class UsersController < ApplicationController
 		# @user = current_user.id
 	end
 
+	def edit_username
+		@user = current_user
+	end
+
 	def update
 		@user = current_user
 	end
 
 	def show
+
 			# @img = nil
 	  #   if /\.twimg/.match(current_user.picture)
 	  #     @img = current_user.picture.gsub("_normal", "")
@@ -113,7 +118,6 @@ class UsersController < ApplicationController
 	end
 
 	def set_user
-		# binding.pry
 		@user = User.find_by(id: params[:id])
 		# @user = User.find_by(username: params[:username])
 	end

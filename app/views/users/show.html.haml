@@ -42,7 +42,7 @@
 		= react_component 'PlayMixtape', { current_user: current_user, mixtape_id: @mixtape_id }
 	.col.s4.backround.z-depth-3
 		.center.title-spacing
-			%img{:alt => "My QR code", :src => @qr}
+			%img{:alt => "My QR code", :src => @qr, height: 120, width: 120}
 		%h2.salt.center Top Songs
 		= react_component 'TopSongs', { current_user: current_user, mixtape_id: @mixtape_id }
 		-if params[:mixtape_id]

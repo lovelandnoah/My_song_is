@@ -31,7 +31,6 @@ class TopArtist extends React.Component{
       type: 'GET',
       dataType: 'jsonp',
     }).success( data => {
-      debugger
       let player = document.getElementById("player")
       if(data.length){
         player.src = "http://api.dar.fm/player_api.php?station_id=" + data[0].station_id + "&custom_style=radioslice&partner_token=9388418650"
@@ -42,6 +41,7 @@ class TopArtist extends React.Component{
   }
 
   mobilePlayButton(title, artist){
+    debugger
     mobileTitle = title.replace(/\s/g, ".")
     mobileArtist = artist.replace(/\s/g, ".")
 
@@ -85,12 +85,22 @@ class TopArtist extends React.Component{
 
   displayAdd(){
     if(self.props.current_user != null) {
-      return(<a className="btn bluezs waves-effect waves-light ply subtitlez" onClick={() => this.add(this.props.name, this.props.artist)}>Add</a>)
+      return(
+        <p>
+          <input id={this.props.title} type='checkbox'
+            defaultChecked={false}
+            onClick={() => this.add(this.props.title,
+              this.props.artist, this.checked)}
+            checked={this.state.isChecked}
+          ></input>
+          <label htmlFor={this.props.title}>Add</label>
+        </p>
+      );
     }
   }
 
   render(){
-    return(<div>
+    return(
             <div id="chartSong" className="nav4 hei card-panel height mix-color col l4 m6 s12 z-depth-3">
               <div className="card-content">
                 <p className="stylez  center">
@@ -103,7 +113,6 @@ class TopArtist extends React.Component{
                   {this.displayAdd()}
                 </div>
               </div>
-            </div>  
-          </div>);
+            </div>);
   }
 }
