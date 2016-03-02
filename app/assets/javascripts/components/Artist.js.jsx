@@ -49,6 +49,7 @@ class Artist extends React.Component{
   }
 
   add(songName, artist){
+    debugger
     let self = this;
     $.ajax({
       url: '/song',
@@ -58,7 +59,7 @@ class Artist extends React.Component{
        self.props.getSongs();
     });
   }
-  
+
   albumCover(){
     self = this;
     $.ajax({
@@ -84,16 +85,39 @@ class Artist extends React.Component{
   }
 
   render(){
-    return(
-          <div className='inner'>
-            <input id={this.props.title} type='checkbox' defaultChecked={false} onClick={this.test} checked={this.state.isChecked}/>
-            <label htmlFor={this.props.title}>Add</label>
-            <div className="nav4 row height mix-color z-depth-3" onClick={() => this.play(this.props.title, this.props.artist)}>
-            <p className='inner'>
-            <img src={this.state.albumCoverUrl} width="80" height="80" />
-            <span className='black-text song-name'>{this.props.title}</span>
-            <span className="grey-text"> {this.props.artist} </span>
-            </p>
+    // return(
+    //       <div className='inner'>
+    //         <input id={this.props.title} type='checkbox' defaultChecked={false} onClick={this.test} checked={this.state.isChecked}/>
+    //         <label htmlFor={this.props.title}>Add</label>
+    //         <div className="nav4 row height mix-color z-depth-3" onClick={() => this.play(this.props.title, this.props.artist)}>
+    //         <p className='inner'>
+    //         <img src={this.state.albumCoverUrl} width="80" height="80" />
+    //         <span className='black-text song-name'>{this.props.title}</span>
+    //         <span className="grey-text"> {this.props.artist} </span>
+    //         </p>
+    return(<div>
+            <div className="nav4 card-panel height mix-color col l4 m6 s12 z-depth-3"
+              onClick={() => this.play(this.props.title, this.props.artist)} >
+              <div className="card-content">
+                <p className="stylez truncate">
+                  <em>{this.props.title}</em>
+                  <br />
+                  {this.props.artist}
+                </p>
+                {this.newImage(this.props.title)}
+                <form action="#">
+                  <p>
+                    <input id={this.props.title} type='checkbox'
+                      defaultChecked={false}
+                      onClick={() => this.add(this.props.title,
+                        this.props.artist, this.checked)}
+                      checked={this.state.isChecked}
+                    />
+                    <label htmlFor={this.props.title}>Add</label>
+                  </p>
+                </form>
+                <img src={this.state.albumCoverUrl} width="200" height="200" />
+              </div>
             </div>
           </div>);
   }
