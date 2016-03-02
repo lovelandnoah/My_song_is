@@ -1,16 +1,13 @@
 class TopSongs extends React.Component{
   constructor(props){
     super(props);
-    
     this.state = {results: [], searched: false, mixtape_id: 0, mixtapeName: '', mixTapeCategory: '', songs: []};
     this.topCharts = this.topCharts.bind(this);
   }
 
-
   componentDidMount(){
     this.topCharts()
   }
-
 
   topCharts(){
     let self = this;
@@ -33,7 +30,6 @@ class TopSongs extends React.Component{
     
     return(
       <div className="" > 
-                
             <div className=''>
               {topartists}
           </div>        

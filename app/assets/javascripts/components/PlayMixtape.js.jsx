@@ -176,7 +176,6 @@
             <div className='row'>
               {this.noArtists(searchResultCards)}
               {searchResultCards}
-
             </div>
           </div>
           )   
