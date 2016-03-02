@@ -1,3 +1,4 @@
+
 .row
   = image_tag('real_b.png', :class =>"one image")
   %a#about-us.bigger.image.white-text.stroke.text-glow-hover{:href => "/"} Home
@@ -16,8 +17,6 @@
 
   = form_tag '/users' do
     = field_set_tag do
-      = label_tag :permalink, 'Title:'
-      = text_field_tag :permalink
-      = label_tag :email, 'Email:'
-      = text_field_tag :email
+      = text_field_tag :permalink, nil,  placeholder: 'Title'
+      = text_field_tag :email, nil, placeholder: 'Email'
       = submit_tag 'Save Changes'

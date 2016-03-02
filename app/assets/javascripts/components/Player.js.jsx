@@ -12,7 +12,7 @@ class Player extends React.Component{
         )
   } else {
     return(<div>
-              <iframe className="player" id="player" src={this.stationUrl}></iframe>
+              <iframe className="player zero" id="player" src={this.stationUrl}></iframe>
             </div>
       )
     }
@@ -26,5 +26,3 @@ class Player extends React.Component{
     )
   }
 }
-
-

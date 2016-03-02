@@ -16,6 +16,9 @@ $secondary-color: #00CED1 !default;
 #navigation, .navbar, .navbar-default{
   background-image: url("assets/Bckgrnd.jpg");
 }
+.zero{
+  border: 0px !important
+}
 
 .one{
   padding-right: 1px !important;
@@ -23,6 +26,14 @@ $secondary-color: #00CED1 !default;
 
 #titled{
   background-image: url("assets/titled.png");
+}
+
+.roight{
+  padding-right: 0px !important;
+}
+
+.override{
+  margin-right: 50px !important;
 }
 
 .subtitler {
@@ -42,7 +53,7 @@ $secondary-color: #00CED1 !default;
   margin-right: 7px;
 }
 
-.pooop{
+.card-prop{
   padding: 0.017px 10px 8px 5px;
   margin-bottom: 10px;
   background-color: white;
@@ -648,4 +659,8 @@ body {
 
 .rounded{
   border-radius: 10px;
+}
+
+.cardc{
+  background-color: #55C6C2;
 }
