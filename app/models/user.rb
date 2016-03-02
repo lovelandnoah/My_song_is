@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
 
   devise password_length: 4..72
 
+  attr_accessor :current_password
 
   def self.find_for_oauth(auth, signed_in_resource = nil)
     identity = Identity.find_for_oauth(auth)
@@ -55,7 +56,6 @@ class User < ActiveRecord::Base
   end
 
   def edit
-    binding.pry
   end
 
   def email_verified?

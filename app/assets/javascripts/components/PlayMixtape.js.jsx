@@ -137,7 +137,7 @@
 
     searchResultCards = this.state.results.length ? (
         this.state.results[0].songmatch.map( Sartist => {
-          return(<Artist title={Sartist.title} artist={Sartist.artist} key={`artist-${i += 1}`} rplay={self.playSong} mixtapeId={self.state.mixtape_id} getSongs={self.getSongs}/>)
+          return(<Artist title={Sartist.title} artist={Sartist.artist} key={`artist-${i += 1}`} rplay={self.playSong} mixtapeId={self.state.mixtape_id} getSongs={self.getSongs}  current_user={self.props.current_user}/>)
         })):([])
 
     let songsSearchedFor = this.state.songsSearchedFor.map( song => {
@@ -147,8 +147,7 @@
 
     let songs = this.state.songs.map( song => {
     let key = `song-${song.song_id}`;
-
-    return(<Song key={key} artist_name={this.props.artist_name} song_name={this.props.song_name} {...song} getSongs={this.getSongs} />);
+    return(<Song key={key} artist_name={this.props.artist_name} song_name={this.props.song_name} {...song} getSongs={this.getSongs}/>);
 
   });
 

@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   resources :mixtapes
 
   get 'users_edit', to: 'users#edit', via: [:patch]
+  get 'username_edit_path', to: 'users#edit_username', via: [:patch]
+
   get 'mixtapes_find_single_mixtape', to: 'mixtapes#find_single_mixtape'
   get 'mixtapes_users_mixtapes', to: 'mixtapes#users_mixtapes'
   get '/calculate_average_rating', to: 'mixtapes#calculate_average_rating'
