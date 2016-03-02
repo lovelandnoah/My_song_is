@@ -27,7 +27,7 @@ class Artist extends React.Component{
     title = title.replace(/\s/g, '%20');
     artist = artist.replace(/\s/g, '%20');
 
-    
+
     $.ajax({
       url: "http://api.dar.fm/playlist.php?&q=@artist%20" + artist + "%20@title%20" + title + "&callback=jsonp&web=1&partner_token=9388418650",
       jsonp: 'callback',
@@ -47,6 +47,7 @@ class Artist extends React.Component{
   }
 
   add(songName, artist){
+    debugger
     let self = this;
     $.ajax({
       url: '/song',
@@ -56,7 +57,7 @@ class Artist extends React.Component{
        self.props.getSongs();
     });
   }
-  
+
   albumCover(){
     self = this;
     $.ajax({
@@ -83,7 +84,8 @@ class Artist extends React.Component{
 
   render(){
     return(<div>
-            <div className="nav4 card-panel height mix-color col l4 m6 s12 z-depth-3">
+            <div className="nav4 card-panel height mix-color col l4 m6 s12 z-depth-3"
+              onClick={() => this.play(this.props.title, this.props.artist)} >
               <div className="card-content">
                 <p className="stylez truncate">
                   <em>{this.props.title}</em>
@@ -93,15 +95,17 @@ class Artist extends React.Component{
                 {this.newImage(this.props.title)}
                 <form action="#">
                   <p>
-                    <input id={this.props.title} type='checkbox' defaultChecked={false} onClick={this.test} checked={this.state.isChecked} />
+                    <input id={this.props.title} type='checkbox'
+                      defaultChecked={false}
+                      onClick={() => this.add(this.props.title,
+                        this.props.artist, this.checked)}
+                      checked={this.state.isChecked}
+                    />
                     <label htmlFor={this.props.title}>Add</label>
                   </p>
                 </form>
                 <img src={this.state.albumCoverUrl} width="200" height="200" />
-                <div className="row">
-                  <a className="btn waves-effect waves-light marg" onClick={() => this.play(this.props.title, this.props.artist)}>play</a>
-                  <a className="btn bluezs waves-effect waves-light" onClick={() => this.add(this.props.title, this.props.artist)}>Add</a>
-                </div>
+              
 
               </div>
             </div>
