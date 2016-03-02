@@ -76,9 +76,11 @@ class Song extends React.Component{
   }
 
   deleteBtn(song_id){
-    return(<div onClick={() => this.deleteSong(song_id)} className="ply inner flo waves-effect waves-light btn black-text">
-              delete
-            </div>);
+    if(self.props.current_user != null){
+      return(<div onClick={() => this.deleteSong(song_id)} className="ply inner flo waves-effect waves-light btn black-text">
+                delete
+              </div>);
+    }
   }
 
   albumCover(){
@@ -97,15 +99,14 @@ class Song extends React.Component{
   render(){
     return(
        <div>
-        <div className="paddin">  
+        { this.deleteBtn(this.props.song_id) }
+        <div className="paddin play-button button-grey black-text" onClick={() => this.play(this.props.title, this.props.artist)}>
           <h5 className='inner'>
           <img src={this.state.albumCoverUrl} width="80" height="80" />
           <span className='black-text song-name'>{this.props.song_name}</span>
           <span className="grey-text">  </span> 
           <span className='black-text artist-name'>{this.props.artist_name}</span>
           </h5>
-          <button className='ply btn inner flo play-button button-grey black-text'>Play</button>
-          { this.deleteBtn(this.props.song_id) }
         </div>
         <hr />
         </div>

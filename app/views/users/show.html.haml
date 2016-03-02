@@ -44,14 +44,12 @@
 		.center.title-spacing
 			%img{:alt => "My QR code", :src => @qr}
 		%h2.salt.center Top Songs
-		= react_component 'TopSongs'
+		= react_component 'TopSongs', { current_user: current_user, mixtape_id: @mixtape_id }
 		-if params[:mixtape_id]
-			= react_component 'PlayMixtape', { current_user: current_user, mixtape_id: params[:mixtape_id] }
+			= react_component 'PlayMixtape', { current_user: current_user, mixtape_id: params[:mixtape_id]}
 		-else
 %br
 	.col.s6
-
-
 	/ %button.btn= link_to "Edit Profile", users_edit_path, class: "white-text"
 	%br
 	.center

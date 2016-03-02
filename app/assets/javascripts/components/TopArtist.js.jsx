@@ -5,10 +5,12 @@ class TopArtist extends React.Component{
     this.play = this.play.bind(this)
     this.add = this.add.bind(this)
     this.albumCover = this.albumCover.bind(this)
+    this.displayAdd = this.displayAdd.bind(this)
   }
   componentDidMount(){
     this.state.isMounted = true;
     this.albumCover()
+    $("chartSong").click=(() => this.mobilePlayButton(this.props.name, this.props.artist));
   }
 
   componentWillUnmount(){
@@ -20,15 +22,34 @@ class TopArtist extends React.Component{
     player.src = "http://api.dar.fm/player_api.php?station_id=" + station + "&custom_style=radioslice&partner_token=9388418650"
   }
 
-  mobilePlayButton(station){
-    song = this.props.songtitle.replace(/\s/g, ".")
-    artist = this.props.songartist.replace(/\s/g, ".")
+  play(title, artist){
+    title = title.replace(/\s/g, '%20');
+    artist = artist.replace(/\s/g, '%20');
+    $.ajax({
+      url: "http://api.dar.fm/playlist.php?&q=@artist%20" + artist + "%20@title%20" + title + "&callback=jsonp&web=1&partner_token=9388418650",
+      jsonp: 'callback',
+      type: 'GET',
+      dataType: 'jsonp',
+    }).success( data => {
+      debugger
+      let player = document.getElementById("player")
+      if(data.length){
+        player.src = "http://api.dar.fm/player_api.php?station_id=" + data[0].station_id + "&custom_style=radioslice&partner_token=9388418650"
+      } else {
+        //todo: message song is not playing
+      }
+    });
+  }
+
+  mobilePlayButton(title, artist){
+    mobileTitle = title.replace(/\s/g, ".")
+    mobileArtist = artist.replace(/\s/g, ".")
 
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-      window.open("http://onrad.io/" + artist + "." + song)
+      window.open("http://onrad.io/" + mobileArtist + "." + mobileTitle)
     } else {
-      this.play(station);
-    } 
+      this.play(title, artist);
+    }
   }
 
   add(songName, artist){
@@ -62,9 +83,15 @@ class TopArtist extends React.Component{
     });
   }
 
+  displayAdd(){
+    if(self.props.current_user != null) {
+      return(<a className="btn bluezs waves-effect waves-light ply subtitlez" onClick={() => this.add(this.props.name, this.props.artist)}>Add</a>)
+    }
+  }
+
   render(){
     return(<div>
-            <div className="nav4 hei card-panel height mix-color col l4 m6 s12 z-depth-3">
+            <div id="chartSong" className="nav4 hei card-panel height mix-color col l4 m6 s12 z-depth-3">
               <div className="card-content">
                 <p className="stylez  center">
                   <em className=""># {this.props.rank}:  {this.props.name} </em>
@@ -73,8 +100,7 @@ class TopArtist extends React.Component{
                   {this.props.artist}
                 </p>
                 <div className="row">
-                  <a className="btn waves-effect waves-light marg paddin ply subtitlez" onClick={() => this.mobilePlayButton(this.props.station_id)}>play</a>
-                  <a className="btn bluezs waves-effect waves-light ply subtitlez" onClick={() => this.add(this.props.title, this.props.artist)}>Add</a>
+                  {this.displayAdd()}
                 </div>
               </div>
             </div>  
