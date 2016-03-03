@@ -101,7 +101,7 @@ class TopArtist extends React.Component{
 
   render(){
     return(
-            <div id="chartSong" className="nav4 hei card-panel height mix-color col l4 m6 s12 z-depth-3">
+            <div className="chartSong nav4 hei card-panel height mix-color col l4 m6 s12 z-depth-3">
               <div className="card-content">
                 <p className="stylez  center">
                   <em className=""># {this.props.rank}:  {this.props.name} </em>
