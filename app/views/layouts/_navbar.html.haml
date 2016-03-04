@@ -1,4 +1,3 @@
-
 / %nav
 /   .nav-wrapper.z-depth-3.bott
 /     %ul#nav-mobile.right
@@ -13,15 +12,52 @@
 
 
 
+#nav
+  .contents
+    .container
+      -if current_user == nil
+        .rightbot.home-link.bigger.image.white-text.stroke.text-glow-hover.log#not-logged-in-form
+          = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+            .row
+              .col.s4
+                = f.text_field :email,
+                  :value => "Email",
+                  :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
+                  :onfocus => "if(this.value=='Email'){this.value='';this.style.color = '#000000';}",
+                  :color => "white",
+                  :onblur => "if(this.value==''){this.value='Email';this.style.color = '#000000';}"
+              .col.s4
+                = f.text_field :password,
+                  :value => "Password",
+                  :autocomplete => "off",
+                  :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
+                  :onfocus => "if(this.value=='Password'){this.value='';this.style.color = '#000000';this.type='password'}",
+                  :onblur => "if(this.value==''){this.value='Password';this.style.color = '#000000';this.type='text'}"
+              .col.s4
+                = f.submit "Log in", :class => 'btn black-text teal lighten-4'
+      -else
+        .row
+          = image_tag('real_b.png', :class =>"one image")
+          .nav-button
+            =link_to "Log out", destroy_user_session_path, :method => :delete, :class => "home-link bigger image white-text stroke text-glow-hover log"
+          .nav-button
+            =link_to "Edit Profile", root_path, :class => "home-link bigger image white-text stroke text-glow-hover log"
 
-.row
-  = image_tag('real_b.png', :class =>"one image")
-  =link_to "Log out", destroy_user_session_path, :method => :delete, :class => "home-link bigger image white-text stroke text-glow-hover log"
-  =link_to "Edit Profile", users_edit_path, :class => "home-link bigger image white-text stroke text-glow-hover log"
-%h5.log.rel mysong.is/#{@user.username}
+    - if current_user != nil
+      - if current_user.picture == nil
+        / include picture
+      - else
+        %img.nav-profile-pic.borderr.z-depth-3#nav-profile-pic{alt: "profile_pic", src: @img, height: 200, width: 200}
+      
+    %h5#nav-name Place Holder
+    %h5.log.rel#nav-link mysong.is/#{@user.username}
 
-%h3.salt.rel.white-text.stroke.indented MySong.is
-/ .row
-/   = image_tag('real_b.png', :class =>"one image")
-/   %a#about-us.bigger.image.white-text.stroke{:href => "/static_pages/bio"} About Us
-/ %h3.salt.center.rel.white-text.stroke MySong.is
+    %img.nav-profile-pic.borderr.z-depth-3#logo{alt: "mysong.is Logo"}
+
+    %img#qr-code{:alt => "My QR code", :src => @qr}
+
+    %img#top-songs-header{alt: "Top Songs"}
+    / .row
+    /   = image_tag('real_b.png', :class =>"one image")
+    /   %a#about-us.bigger.image.white-text.stroke{:href => "/static_pages/bio"} About Us
+    / %h3.salt.center.rel.white-text.stroke MySong.is

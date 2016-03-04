@@ -1,0 +1,18 @@
+%div.card-panel.mix-color
+	%div.card-content.white-text
+		%h5.center
+			= @mixtape.name
+			- @songs.each do |song|
+				.tex
+					.paddin
+						%h5.inline 
+							%span 
+								= song.name
+							%span
+							%span
+								= song.artist
+							%button.btn.inner.flo Play
+%img{:alt => "My QR code", :src => @qr}
+
+
+

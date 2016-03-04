@@ -1,0 +1,17 @@
+.row
+  = image_tag('real_b.png', :class =>"one image")
+  %a#about-us.bigger.image.white-text.stroke.text-glow-hover{:href => "/"} Home
+%h3.salt.center.rel.white-text.stroke MySong.is
+%body.bck
+.container
+  %h2.center-align Edit your profile, #{@user.username}.
+  = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+    = devise_error_messages!
+    = field_set_tag do
+      = f.text_field :username,
+        :value => "Username",
+        :style => "color:#aaa;",
+        :onfocus => "if(this.value=='Username'){this.value='';this.style.color = '#000';}",
+        :onblur => "if(this.value==''){this.value='Username';this.style.color = '#aaa';}"
+    .actions.center
+      %button.btn.waves-effect.waves-light= f.submit "Finish Sign Up"

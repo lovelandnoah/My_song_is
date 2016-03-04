@@ -1,0 +1,59 @@
+= render 'layouts/navbar'
+%body.home-body
+%link{:href => "https://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}/
+%div.socialright#me
+	%h6.black-text.center.salt.foont.buttonvw #{current_user.name}
+	- if current_user.picture == nil
+	- else
+		%img.center{alt: "profile_pic", src: @img}
+	%br
+	- if /\.twimg/.match(current_user.picture)
+		%br
+		<a href="https://twitter.com/share" class="twitter-share-button"{count} data-text='Keeping it fresh @T-Mix Checkout my Mix - "Put Mix Name Here" ' data-size="large">Tweet
+		%br
+		%br
+	- elsif /graph/.match(current_user.picture)
+		.fb-share-button.iframe.push{"data-href" => "http://tmix.herokuapp.com/", "data-layout" => "button_count"}
+		%br
+	- else
+		.fb-share-button.iframe.push{"data-href" => "http://tmix.herokuapp.com/", "data-layout" => "button_count"}
+		%br
+		%br
+		%br
+		<a href="https://twitter.com/share" class="twitter-share-button"{count} data-text='' data-size="large">Tweet
+		%br
+		%br
+		%br
+	%br
+	= link_to '', destroy_user_session_path, method: 'delete', class: "stupid"
+	%br
+	.btn.logout.waves-effect.waves-light.center= link_to 'Logout', destroy_user_session_path, method: 'delete', class: "white-text"
+	%br
+%br
+%br
+%br
+%hr
+
+#fb-root
+:javascript
+	(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) return;
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1670876069868555";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+
+.sam= react_component 'Player'
+.row
+	.col.s8.offset-s2
+		- if params[:mixtape_id]
+			= react_component 'PlayMixtape', { current_user: current_user, mixtape_id: params[:mixtape_id] }
+		- else
+			= react_component 'PlayMixtape', { current_user: current_user, mixtape_id: @mixtape_id }
+
+%script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/1.2.3/jquery.min.js"}
+
+%br
+%br
+%br
