@@ -1,0 +1,44 @@
+0000000000000000000000000000000000000000 20621da94d4afb978c232676015ae2348f2aa721 Sam Hammer <sam@michaelrobertson.com> 1455905184 -0800	clone: from git@github.com:lovelandnoah/Real_My_song_is.git
+20621da94d4afb978c232676015ae2348f2aa721 2db1bca53b11f3e16c9c6776211e365127b5f181 Sam Hammer <sam@michaelrobertson.com> 1455907869 -0800	commit: compiling issue
+2db1bca53b11f3e16c9c6776211e365127b5f181 7ac9330e625b0aab365b296edab0008e1548d869 Sam Hammer <sam@michaelrobertson.com> 1455920182 -0800	commit: images
+7ac9330e625b0aab365b296edab0008e1548d869 9fddd6d36bb9f14f6a58746aa263745d5e31da62 Sam Hammer <sam@michaelrobertson.com> 1455921694 -0800	pull: Merge made by the 'recursive' strategy.
+9fddd6d36bb9f14f6a58746aa263745d5e31da62 7d377f518940af37938da3db64eeaa5f102e4536 Sam Hammer <sam@michaelrobertson.com> 1455922630 -0800	rebase -i (finish): refs/heads/master onto 7d377f518940af37938da3db64eeaa5f102e4536
+7d377f518940af37938da3db64eeaa5f102e4536 b23401528ae1221a03492e84c151f03abad94398 Sam Hammer <sam@michaelrobertson.com> 1455922671 -0800	pull: Fast-forward
+b23401528ae1221a03492e84c151f03abad94398 f0fee87030eb9d0ad5de6c39447ae5e7d4a63af5 Sam Hammer <sam@michaelrobertson.com> 1455923236 -0800	pull: Fast-forward
+f0fee87030eb9d0ad5de6c39447ae5e7d4a63af5 9473a12cedabdf317df1bf63a9ee7c1eec984b9f Sam Hammer <sam@michaelrobertson.com> 1455924229 -0800	commit: image adding
+9473a12cedabdf317df1bf63a9ee7c1eec984b9f 8f040ece9640947ad71d8405b21a2c90fa1d8acd Sam Hammer <sam@michaelrobertson.com> 1455924635 -0800	commit: imageadd
+8f040ece9640947ad71d8405b21a2c90fa1d8acd ba178a5ed96e9b4eba61ab9e53baa2ce008b10e4 Sam Hammer <sam@michaelrobertson.com> 1455925794 -0800	commit: compile
+ba178a5ed96e9b4eba61ab9e53baa2ce008b10e4 f510c34eb6cf3307e24e386de727f69d90e29cf0 Sam Hammer <sam@michaelrobertson.com> 1455927063 -0800	commit: image change
+f510c34eb6cf3307e24e386de727f69d90e29cf0 3705d2e6ca6449960b6db7945ffba86d2d7a75a2 Sam Hammer <sam@michaelrobertson.com> 1455927145 -0800	commit: image change again
+3705d2e6ca6449960b6db7945ffba86d2d7a75a2 7bbf37e3e9b98874aebd04ca6853b1212723e05a Sam Hammer <sam@michaelrobertson.com> 1455928770 -0800	commit: some visual changes
+7bbf37e3e9b98874aebd04ca6853b1212723e05a 1b8782127984b37447cca72ae1ff20018b26011b Sam Hammer <sam@michaelrobertson.com> 1455929221 -0800	commit: small change
+1b8782127984b37447cca72ae1ff20018b26011b 4037dc3dd107d05f4d7f2d9995b816d5fb06fb85 Sam Hammer <sam@michaelrobertson.com> 1455934414 -0800	commit (merge): merge style changes
+4037dc3dd107d05f4d7f2d9995b816d5fb06fb85 21e32ebec2eba8e932dd157a48c64cac6536c768 Sam Hammer <sam@michaelrobertson.com> 1456159482 -0800	pull: Fast-forward
+21e32ebec2eba8e932dd157a48c64cac6536c768 7d34bb21dbe17da28a0ec8c2f8c3ff3e8a215af9 Sam Hammer <sam@michaelrobertson.com> 1456163356 -0800	commit: bugfix
+7d34bb21dbe17da28a0ec8c2f8c3ff3e8a215af9 7547184479cc4e8ae477c815d93115a8ad42dc80 Sam Hammer <sam@michaelrobertson.com> 1456170378 -0800	commit: small changes
+7547184479cc4e8ae477c815d93115a8ad42dc80 29b1efbd99f0624316fb5c66c7e65a4f52efe9cb Sam Hammer <sam@michaelrobertson.com> 1456172168 -0800	commit: left justify search results
+29b1efbd99f0624316fb5c66c7e65a4f52efe9cb 5db1b4b2e9291c11b22fdb0c34bca0bcb112805a Sam Hammer <sam@michaelrobertson.com> 1456212650 -0800	commit: added profile pictures
+5db1b4b2e9291c11b22fdb0c34bca0bcb112805a 0a7032a7fae2217d71a0872df53b9c875bb125cd Sam Hammer <sam@michaelrobertson.com> 1456212658 -0800	pull: Merge made by the 'recursive' strategy.
+0a7032a7fae2217d71a0872df53b9c875bb125cd c21acb7fdf1b1f576c06837b78e4f3e56550bb9b Sam Hammer <sam@michaelrobertson.com> 1456274473 -0800	commit: edit page
+c21acb7fdf1b1f576c06837b78e4f3e56550bb9b 65fb20b53e1600a16cdba957647e9274903fa2e0 Sam Hammer <sam@michaelrobertson.com> 1456274789 -0800	commit (merge): merge
+65fb20b53e1600a16cdba957647e9274903fa2e0 507729d4a08b1f3877b39dd129a5580b45821a3c Sam Hammer <sam@michaelrobertson.com> 1456325770 -0800	pull: Fast-forward
+507729d4a08b1f3877b39dd129a5580b45821a3c d1171b6ac09bc82e5dda70bc6597a8061d732963 Sam Hammer <sam@michaelrobertson.com> 1456342723 -0800	commit: no autoplay
+d1171b6ac09bc82e5dda70bc6597a8061d732963 b865b957edd8e8c3fb0c98bedcc7df41a58f3c6b Sam Hammer <sam@michaelrobertson.com> 1456352142 -0800	commit: stylings
+b865b957edd8e8c3fb0c98bedcc7df41a58f3c6b 7e65a82d32b0a3ddb8edaa0901c55a07d8abfd9c Sam Hammer <sam@michaelrobertson.com> 1456352150 -0800	pull: Merge made by the 'recursive' strategy.
+7e65a82d32b0a3ddb8edaa0901c55a07d8abfd9c 9d25efc3d108c2ed8aa4dc6dc3e8d785973c0667 Sam Hammer <sam@michaelrobertson.com> 1456353687 -0800	commit: small styling stuff
+9d25efc3d108c2ed8aa4dc6dc3e8d785973c0667 a3ae4596a3327e50905fec3864c84d0d666c728d Sam Hammer <sam@michaelrobertson.com> 1456428824 -0800	commit: front page bad styling
+a3ae4596a3327e50905fec3864c84d0d666c728d db78dacfc6be01a9fed65ef2e311abac7e7d0910 Sam Hammer <sam@michaelrobertson.com> 1456767413 -0800	commit (merge): new search
+db78dacfc6be01a9fed65ef2e311abac7e7d0910 e4a399563f52f547d73b9c20c749c53fb1e0c0b9 Sam Hammer <sam@michaelrobertson.com> 1456772076 -0800	commit: checkboxes
+e4a399563f52f547d73b9c20c749c53fb1e0c0b9 5bdff7828f099895e14fe676ac7bd74d6b978327 Sam Hammer <sam@michaelrobertson.com> 1456787172 -0800	commit: bugfix
+5bdff7828f099895e14fe676ac7bd74d6b978327 5a752f64d82147a0bff7e287df0dcee1275d6f78 Sam Hammer <sam@michaelrobertson.com> 1456852703 -0800	commit: offline page login
+5a752f64d82147a0bff7e287df0dcee1275d6f78 eb65ff8f2f3edae22f595307e7904e72513dc014 Sam Hammer <sam@michaelrobertson.com> 1456853138 -0800	commit: compile
+eb65ff8f2f3edae22f595307e7904e72513dc014 f99f531df6e69f7f0b36c6178785590e2193cafa Sam Hammer <sam@michaelrobertson.com> 1456862400 -0800	commit: more images
+f99f531df6e69f7f0b36c6178785590e2193cafa cad442e53aa34873f79f26e63d09e2d9edaa91dc Sam Hammer <sam@michaelrobertson.com> 1456940662 -0800	commit: visual changes
+cad442e53aa34873f79f26e63d09e2d9edaa91dc 436eaa5e8483a3299c556bbab9c0193a4ddd91e6 Sam Hammer <sam@michaelrobertson.com> 1456941226 -0800	commit (merge): merging
+436eaa5e8483a3299c556bbab9c0193a4ddd91e6 a21a48ceebf9e8ec6e9df9ce86138e4a8bef4c78 Sam Hammer <sam@michaelrobertson.com> 1456958026 -0800	commit: styling work, dont download
+a21a48ceebf9e8ec6e9df9ce86138e4a8bef4c78 ee06c7501b338a0098c061bd001869367a0d1b68 Sam Hammer <sam@michaelrobertson.com> 1456962894 -0800	commit: small change 2
+ee06c7501b338a0098c061bd001869367a0d1b68 2e908904b3fd23950d755186f629ce8c96c5d7f4 Sam Hammer <sam@michaelrobertson.com> 1456963047 -0800	commit: small change 3
+2e908904b3fd23950d755186f629ce8c96c5d7f4 bc30e8fdfa846c004ee525d5bc4a8f2a4e3fb2e7 Sam Hammer <sam@michaelrobertson.com> 1456963172 -0800	commit: small change4
+bc30e8fdfa846c004ee525d5bc4a8f2a4e3fb2e7 24d11646fe6014298716ab343c63dd9c836638ab Sam Hammer <sam@michaelrobertson.com> 1456963334 -0800	commit: test
+24d11646fe6014298716ab343c63dd9c836638ab 0f84a6106f3fabd898b6e6509a454a70be14ce21 Sam Hammer <sam@michaelrobertson.com> 1456963509 -0800	commit: testing
+0f84a6106f3fabd898b6e6509a454a70be14ce21 0b29537d2d083f17a2476772f817ac4e4d323cda Sam Hammer <sam@michaelrobertson.com> 1456963542 -0800	commit: testin2

@@ -1,0 +1,60 @@
+= render 'layouts/navbar'
+%body.home-body
+
+.container
+	-if current_user == nil
+		.rightbot.home-link.bigger.image.white-text.stroke.text-glow-hover.log
+			= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+				.row
+					.col.s4
+						= f.text_field :email,
+							:value => "Email",
+							:style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
+							:onfocus => "if(this.value=='Email'){this.value='';this.style.color = '#000000';}",
+							:color => "white",
+							:onblur => "if(this.value==''){this.value='Email';this.style.color = '#000000';}"
+					.col.s4
+						= f.text_field :password,
+							:value => "Password",
+							:autocomplete => "off",
+							:style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
+							:onfocus => "if(this.value=='Password'){this.value='';this.style.color = '#000000';this.type='password'}",
+							:onblur => "if(this.value==''){this.value='Password';this.style.color = '#000000';this.type='text'}"
+					.col.s4
+						= f.submit "Log in", :class => 'btn black-text teal lighten-4'
+	-else
+
+.row
+	.col.s8
+		-if current_user == nil || current_user.id != @user.id
+			/ include picture
+		-else
+			%div
+				- if current_user.picture == nil
+					/ include picture
+				- else
+					%img.nav-profile-pic.borderr.z-depth-3{alt: "profile_pic", src: @img, height: 200, width: 200}
+				-if current_user.picture == nil
+					%h5.salt #{@user.username}'s Preferred music: #{@user.permalink}
+				-else
+					%h5.salt.center My songs: #{@user.permalink}
+			%br
+		= react_component 'PlayMixtape', { current_user: current_user, mixtape_id: @mixtape_id }
+	.col.s4.backround.z-depth-3
+		.center.title-spacing
+			%img{:alt => "My QR code", :src => @qr, height: 120, width: 120}
+		%h2.salt.center Top Songs
+		= react_component 'TopSongs', { current_user: current_user, mixtape_id: @mixtape_id }
+		-if params[:mixtape_id]
+			= react_component 'PlayMixtape', { current_user: current_user, mixtape_id: params[:mixtape_id]}
+		-else
+%br
+	.col.s6
+	/ %button.btn= link_to "Edit Profile", edit_user_registration_path, class: "white-text"
+	%br
+	.center
+		%br
+		%br
+
+	%link{:href => "https://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}/
+

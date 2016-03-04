@@ -1,0 +1,17 @@
+.row
+  = image_tag('real_b.png', :class =>"one image")
+  %a#about-us.bigger.image.white-text.stroke.text-glow-hover{:href => "/"} Home
+%h3.salt.center.rel.white-text.stroke MySong.is
+%body.bck
+.imageback
+  %br
+  %br
+  .z-depth-5
+  .center.container
+    = react_component 'TopSongs'
+    .sam= react_component 'Player'
+  %br
+%br
+%br
+%br
+%br

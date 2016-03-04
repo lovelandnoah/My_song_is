@@ -10,7 +10,7 @@ class TopArtist extends React.Component{
   componentDidMount(){
     this.state.isMounted = true;
     this.albumCover()
-    $("chartSong").click=(() => this.mobilePlayButton(this.props.name, this.props.artist));
+    $("div.chartSong").click=(() => this.mobilePlayButton(this.props.name, this.props.artist));
   }
 
   componentWillUnmount(){
@@ -101,13 +101,22 @@ class TopArtist extends React.Component{
 
   render(){
     return(
-            <div id="chartSong" className="nav4 hei card-panel height mix-color col l4 m6 s12 z-depth-3">
+            <div id={"rank" + this.props.rank} className="top-songs-list nav4 hei card-panel height mix-color col l4 m6 s12 z-depth-3">
               <div className="card-content">
                 <p className="stylez  center">
-                  <em className=""># {this.props.rank}:  {this.props.name} </em>
+
+                  <div className="list-rank">
+                    # {this.props.rank}
+                  </div>
+
+                  <div className="list-title">
+                    {this.props.name}
+                  </div>
                   <br />
-                  <img src={this.state.albumCoverUrl} width="80" height="80" />
-                  {this.props.artist}
+                  <img className="list-art" src={this.state.albumCoverUrl} width="80" height="80" />
+                  <div className="list-artist">
+                    {this.props.artist}
+                  </div>
                 </p>
                 <div className="row">
                   {this.displayAdd()}
