@@ -1,23 +1,29 @@
-.row
-  = image_tag('real_b.png', :class =>"one image")
-  %a#about-us.bigger.image.white-text.stroke.text-glow-hover{:href => "/"} Home
-%h3.salt.center.rel.white-text.stroke MySong.is
-%body.bck
 .container
   %h2.center-align Edit your profile, #{@user.username}.
-
-  -# %form{ :action => "/users", :method => "post" }
-  -#   %fieldset
-  -#     %label{:for => "permalink"} Music liked:
-  -#     %input{:name => "permalink", :type => "text", :value => ""}
-  -#     %label{:for => "email"} email
-  -#     %input{:name => "email", :type => "text", :value => @user.email}
-  -#   %a.finish{:href => "/users#update", :method => "post"} Finish!
-
-  = form_tag '/users' do
+  = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+    = devise_error_messages!
     = field_set_tag do
-      = label_tag :permalink, 'Title:'
-      = text_field_tag :permalink
-      = label_tag :email, 'Email:'
-      = text_field_tag :email
-      = submit_tag 'Save Changes'
+      = f.text_field :username,
+        :value => "Username",
+        :style => "color:#aaa;",
+        :onfocus => "if(this.value=='Username'){this.value='';this.style.color = '#000';}",  
+        :onblur => "if(this.value==''){this.value='Username';this.style.color = '#aaa';}"
+      = f.text_field :email, 
+        :value => "Email",
+        :style => "color:#aaa;",
+        :onfocus => "if(this.value=='Email'){this.value='';this.style.color = '#000';}",  
+        :onblur => "if(this.value==''){this.value='Email';this.style.color = '#aaa';}"
+      = f.text_field :current_password,
+        :value => "Current Password",
+        :autocomplete => "off",
+        :style => "color:#aaa;",
+        :onfocus => "if(this.value=='Current Password'){this.value='';this.style.color = '#000';this.type='password'}",  
+        :onblur => "if(this.value==''){this.value='Current Password';this.style.color = '#aaa';this.type='text'}"
+      = f.text_field :password,
+        :value => "New Password (4 characters minimum)",
+        :autocomplete => "off",
+        :style => "color:#aaa;",
+        :onfocus => "if(this.value=='New Password (4 characters minimum)'){this.value='';this.style.color = '#000';this.type='password'}",  
+        :onblur => "if(this.value==''){this.value='New Password (4 characters minimum)';this.style.color = '#aaa';this.type='text'}"
+      .actions.center
+        %button.btn.waves-effect.waves-light= f.submit "Sign Up"

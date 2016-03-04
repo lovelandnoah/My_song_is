@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
 	before_action :set_user, only: [:show, :edit, :update, :destroy]
-	before_filter :ensure_sign_complete, only: [:new, :create, :update, :destroy]
 	skip_before_filter :authenticate_user!, only: [:show, :edit]
 
 	helper_method :resource_name, :resource, :devise_mapping
@@ -20,10 +19,15 @@ class UsersController < ApplicationController
 
 	def update
 		@user = current_user
+		if @user.update(user_params)
+			sign_in @user, :bypass => true
+			redirect_to root_path
+		else
+			render "edit"
+		end
 	end
 
 	def show
-
 			# @img = nil
 	  #   if /\.twimg/.match(current_user.picture)
 	  #     @img = current_user.picture.gsub("_normal", "")
@@ -80,20 +84,6 @@ class UsersController < ApplicationController
     @qr = url_prefix + profile_url
 		# binding.pry
 	end
-	
-
-	def update
-		respond_to do |f|
-			if @user.update(user_params)
-				sign_in(@user == current_user ? @user : current_user, bypass: true)
-				f.html { redirect_to @user, notice: 'Your profile was successfully updated.' }
-				f.json { head :no_content }
-			else
-				f.html { render :edit }
-				f.json { render json: @user.errors, status: :unprocessable_entity }
-			end
-		end
-	end
 
 	def finish_signup
 		if request.patch? && params[:user]
@@ -110,6 +100,7 @@ class UsersController < ApplicationController
 
 
 	def destroy
+		@user = current_user
 		@user.destroy
 		respond_to do |f|
 			f.html { redirect_to root_url }
@@ -137,8 +128,6 @@ class UsersController < ApplicationController
 	  end
 
 		def user_params
-			accessible = [ :name, :email, :username ]
-			accessible << [ :password, :password_confirmation ] unless params[:user][:password].blank?
-			params.require(:user).permit(accessible)
+			params.require(:user).permit(:username, :email, :current_password, :password)
 		end
 end

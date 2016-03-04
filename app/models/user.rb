@@ -21,8 +21,6 @@ class User < ActiveRecord::Base
 
   devise password_length: 4..72
 
-  attr_accessor :current_password
-
   def self.find_for_oauth(auth, signed_in_resource = nil)
     identity = Identity.find_for_oauth(auth)
 
@@ -82,6 +80,7 @@ class User < ActiveRecord::Base
     mixtape.user_id = self.id
     mixtape.save
   end
+
     # vanity URL
     # def create_permalink
     #   self.permalink = username.downcase
