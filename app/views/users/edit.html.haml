@@ -8,7 +8,7 @@
         :style => "color:#aaa;",
         :onfocus => "if(this.value=='Username'){this.value='';this.style.color = '#000';}",  
         :onblur => "if(this.value==''){this.value='Username';this.style.color = '#aaa';}"
-      = f.text_field :email, 
+      = f.text_field :email,
         :value => "Email",
         :style => "color:#aaa;",
         :onfocus => "if(this.value=='Email'){this.value='';this.style.color = '#000';}",  
@@ -17,13 +17,13 @@
         :value => "Current Password",
         :autocomplete => "off",
         :style => "color:#aaa;",
-        :onfocus => "if(this.value=='Current Password'){this.value='';this.style.color = '#000';this.type='password'}",  
+        :onfocus => "if(this.value=='Current Password'){this.value='';this.style.color = '#000';this.type='password'}",
         :onblur => "if(this.value==''){this.value='Current Password';this.style.color = '#aaa';this.type='text'}"
       = f.text_field :password,
         :value => "New Password (4 characters minimum)",
         :autocomplete => "off",
         :style => "color:#aaa;",
-        :onfocus => "if(this.value=='New Password (4 characters minimum)'){this.value='';this.style.color = '#000';this.type='password'}",  
+        :onfocus => "if(this.value=='New Password (4 characters minimum)'){this.value='';this.style.color = '#000';this.type='password'}",
         :onblur => "if(this.value==''){this.value='New Password (4 characters minimum)';this.style.color = '#aaa';this.type='text'}"
       .actions.center
         %button.btn.waves-effect.waves-light= f.submit "Sign Up"

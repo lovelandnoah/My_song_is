@@ -43,6 +43,7 @@ class UsersController < ApplicationController
 			else
 				@user = current_user
 			end
+				binding.pry
 				@mixtape = Mixtape.where(user_id: @user.id)
 				@mixtape_id = @mixtape[0].id
 

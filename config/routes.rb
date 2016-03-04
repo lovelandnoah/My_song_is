@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   post 'home_play', to: 'home#play'
 
+  resources :users
   resources :song
   resources :home
   resources :mixtapes
