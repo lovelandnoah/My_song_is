@@ -103,7 +103,7 @@ class TopArtist extends React.Component{
     return(
             <div id={"rank" + this.props.rank} className="top-songs-list nav4 hei card-panel height mix-color col l4 m6 s12 z-depth-3">
               <div className="card-content">
-                <p className="stylez  center">
+                <div className="stylez  center">
 
                   <div className="list-rank">
                     # {this.props.rank}
@@ -117,7 +117,7 @@ class TopArtist extends React.Component{
                   <div className="list-artist">
                     {this.props.artist}
                   </div>
-                </p>
+                </div>
                 <div className="row">
                   {this.displayAdd()}
                 </div>

@@ -1,16 +1,15 @@
 = render 'layouts/navbar'
 .contents
 	#column-left
-			.row
-				.col.s8
-					= react_component 'PlayMixtape', { current_user: current_user, mixtape_id: @mixtape_id }
-				.col.s4.backround.z-depth-3
-					-if params[:mixtape_id]
-						= react_component 'PlayMixtape', { current_user: current_user, mixtape_id: params[:mixtape_id]}
-					-else
-				%link{:href => "https://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}/
+		.row
+			.col.s8
+				= react_component 'PlayMixtape', { current_user: current_user, mixtape_id: @mixtape_id }
+			.col.s4.backround.z-depth-3
+				-if params[:mixtape_id]
+					= react_component 'PlayMixtape', { current_user: current_user, mixtape_id: params[:mixtape_id]}
+				-else
+			%link{:href => "https://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}/
 		-if current_user == nil
 			= link_to "Create your own MySong.is profile", "localhost:3000", :id => "create-link"
-
 	#column-right
 		= react_component 'TopSongs', { current_user: current_user, mixtape_id: @mixtape_id }
