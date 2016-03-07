@@ -42,7 +42,6 @@
             =link_to "Log out", destroy_user_session_path, :method => :delete, :class => "home-link bigger image white-text stroke text-glow-hover log"
           .nav-button#edit-profile-button
             =link_to "Edit Profile", users_edit_path, :class => "home-link bigger image white-text stroke text-glow-hover log"
-
     - if current_user != nil
       - if current_user.picture == nil
         / include picture

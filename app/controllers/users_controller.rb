@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
 	before_action :set_user, only: [:show, :edit, :update, :destroy]
-	before_filter :ensure_sign_complete, only: [:new, :create, :update, :destroy]
 	skip_before_filter :authenticate_user!, only: [:show, :edit]
 
 	helper_method :resource_name, :resource, :devise_mapping
@@ -52,6 +51,7 @@ class UsersController < ApplicationController
 			else
 				@user = current_user
 			end
+				binding.pry
 				@mixtape = Mixtape.where(user_id: @user.id)
 				@mixtape_id = @mixtape[0].id
 
@@ -107,6 +107,7 @@ class UsersController < ApplicationController
 	end
 
 	def destroy
+		@user = current_user
 		@user.destroy
 		respond_to do |f|
 			f.html { redirect_to root_url }
@@ -134,9 +135,7 @@ class UsersController < ApplicationController
 	  end
 
 		def user_params
-			accessible = [ :name, :email, :username ]
-			accessible << [ :password, :password_confirmation ] unless params[:user][:password].blank?
-			params.require(:user).permit(accessible)
+			params.require(:user).permit(:username, :email, :current_password, :password)
 		end
 
 		def update_resource(resource, params)

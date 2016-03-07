@@ -28,15 +28,20 @@ class RegistrationsController < Devise::RegistrationsController
       end
     end
   end
-
   private
 
   def sign_up_params
     params.require(:user).permit(:username, :email, :password)
   end
 
-  def account_update_params
-    params.require(:user).permit(:username, :email, :password, :current_password)
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:username, :email, :password) }
+  end
+
+  protected
+
+  def update_resource(resource, params)
+    resource.update_without_password(params)
   end
 
   def after_sign_up_path_for(resource)
