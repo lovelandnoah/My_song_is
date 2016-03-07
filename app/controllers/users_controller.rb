@@ -18,9 +18,32 @@ class UsersController < ApplicationController
 		@user = current_user
 	end
 
-	def update
+  def update
 		@user = current_user
-	end
+    if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
+      params[:user].delete(:password)
+      params[:user].delete(:password_confirmation)
+    end
+
+    self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
+    prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
+
+    resource_updated = update_resource(resource, account_update_params)
+    yield resource if block_given?
+    if resource_updated
+      if is_flashing_format?
+        flash_key = update_needs_confirmation?(resource, prev_unconfirmed_email) ?
+          :update_needs_confirmation : :updated
+        set_flash_message :notice, flash_key
+      end
+      sign_in resource_name, resource, bypass: true
+      respond_with resource, location: root_path
+    else
+      clean_up_passwords resource
+      respond_with resource
+    end
+  end
+
 
 	def show
 
@@ -80,34 +103,19 @@ class UsersController < ApplicationController
     @qr = url_prefix + profile_url
 		# binding.pry
 	end
-	
-
-	def update
-		respond_to do |f|
-			if @user.update(user_params)
-				sign_in(@user == current_user ? @user : current_user, bypass: true)
-				f.html { redirect_to @user, notice: 'Your profile was successfully updated.' }
-				f.json { head :no_content }
-			else
-				f.html { render :edit }
-				f.json { render json: @user.errors, status: :unprocessable_entity }
-			end
-		end
-	end
 
 	def finish_signup
 		if request.patch? && params[:user]
 			if @user.update(user_params)
 				# @user.skip_reconfirmation!
 				sign_in(@user, :bypass => true)
-				redirect_to root_url, notice: 'Your profile was successfully updated'
+				redirect_to username_edit_path, notice: 'Your profile was successfully updated'
 			else
 				redirect_to root_url
 				@show_errors = true
 			end
 		end
 	end
-
 
 	def destroy
 		@user.destroy
@@ -141,4 +149,8 @@ class UsersController < ApplicationController
 			accessible << [ :password, :password_confirmation ] unless params[:user][:password].blank?
 			params.require(:user).permit(accessible)
 		end
+
+		def update_resource(resource, params)
+	    resource.update_without_password(params)
+    end
 end
