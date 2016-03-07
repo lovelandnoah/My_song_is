@@ -100,28 +100,23 @@ class TopArtist extends React.Component{
   }
 
   render(){
+    let rankStyle = {
+      backgroundPosition: (-40 * (this.props.rank - 1)) + "px"
+    };
     return(
-            <div id={"rank" + this.props.rank} className="top-songs-list nav4 hei card-panel height mix-color col l4 m6 s12 z-depth-3">
-              <div className="card-content">
-                <div className="stylez  center">
-
-                  <div className="list-rank">
-                    # {this.props.rank}
-                  </div>
-
-                  <div className="list-title">
-                    {this.props.name}
-                  </div>
-                  <br />
-                  <img className="list-art" src={this.state.albumCoverUrl} width="80" height="80" />
-                  <div className="list-artist">
-                    {this.props.artist}
-                  </div>
-                </div>
-                <div className="row">
-                  {this.displayAdd()}
-                </div>
-              </div>
-            </div>);
-  }
+      <div id={"rank" + this.props.rank} className="top-songs-list nav4 hei card-panel height mix-color col l4 m6 s12 z-depth-3" style={rankStyle}>
+      <div className="list-rank">
+      </div>
+      <div className="list-title">
+        {this.props.name}
+      </div>
+      <img className="list-art" src={this.state.albumCoverUrl}/>
+      <div className="list-artist">
+        {this.props.artist}
+      </div>
+      <div className="row">
+        {this.displayAdd()}
+      </div>
+    </div>
+    );
 }
