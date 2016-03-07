@@ -6,10 +6,8 @@ class UsersController < ApplicationController
 	helper_method :resource_name, :resource, :devise_mapping
 
 	def edit
-		# binding.pry
 		# id = current_user.id
 		# @user = User.where(id: current_user.id)
-		# binding.pry
 		@user = current_user
 		# @user = current_user.id
 	end
@@ -46,14 +44,6 @@ class UsersController < ApplicationController
 
 
 	def show
-
-			# @img = nil
-	  #   if /\.twimg/.match(current_user.picture)
-	  #     @img = current_user.picture.gsub("_normal", "")
-	  #   end
-	  #   if /\.graph\.facebook\.com/.match(current_user.picture)
-	  #     @img = current_user.picture + "?width=500&height=500"
-	  #   end
 		if current_user == nil && params[:id] == nil
 				redirect_to new_user_session_path
 				# @user = User.find_by_username(params[:id])
@@ -101,7 +91,6 @@ class UsersController < ApplicationController
     url_prefix = 'https://chart.googleapis.com/chart?chs=300x300&cht=qr&chld=H&chl='
     profile_url = request.original_url
     @qr = url_prefix + profile_url
-		# binding.pry
 	end
 
 	def finish_signup
