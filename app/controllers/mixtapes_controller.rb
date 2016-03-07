@@ -17,7 +17,6 @@ class MixtapesController < ApplicationController
 	end
 
   def find_single_mixtape
-  	 	# binding.pry
      	mixtape_id =  params[:mixtape_id]
       @mixtape = Mixtape.find(mixtape_id)
       # @mixtape = Mixtape.where(user_id: current_user.id)
@@ -27,7 +26,6 @@ class MixtapesController < ApplicationController
    #  	@songs = Song.where(mixtape_id: @mixtape[0].id)
 			# end
 
-      # binding.pry
      
 
 
