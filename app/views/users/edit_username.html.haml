@@ -7,7 +7,7 @@
     = devise_error_messages!
     = field_set_tag do
       = f.text_field :username, 
-        :value => "Username",
+        :value => "#{@username}",
         :style => "color:#aaa;",
         :onfocus => "if(this.value=='Username'){this.value='';this.style.color = '#000';}",  
         :onblur => "if(this.value==''){this.value='Username';this.style.color = '#aaa';}"

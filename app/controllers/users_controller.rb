@@ -6,6 +6,8 @@ class UsersController < ApplicationController
 	helper_method :resource_name, :resource, :devise_mapping
 
 	def edit
+    binding.pry
+
 		# id = current_user.id
 		# @user = User.where(id: current_user.id)
 		@user = current_user
@@ -14,10 +16,14 @@ class UsersController < ApplicationController
 
 	def edit_username
 		@user = current_user
+    @username = @user.username
+    if @username == nil
+      @username = "Username"
+    end
 	end
 
   def update
-		@user = current_user
+
     if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
       params[:user].delete(:password)
       params[:user].delete(:password_confirmation)
