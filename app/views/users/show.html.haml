@@ -2,11 +2,7 @@
 .contents
 	#column-left
 		.container
-			- if current_user != nil
-				- if current_user.picture == nil
-					/ include picture
-				- else
-					%img.nav-profile-pic.borderr.z-depth-3#nav-profile-pic{alt: "profile_pic", src: @img, height: 200, width: 200}
+			%img.nav-profile-pic.borderr.z-depth-3#nav-profile-pic{alt: "profile_pic", src: @img, height: 200, width: "auto"}
 			#player-container
 				#main-art
 				#player-bottom
