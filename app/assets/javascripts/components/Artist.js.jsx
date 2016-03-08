@@ -30,6 +30,7 @@ class Artist extends React.Component{
   }
 
   play(title, artist){
+    songNameInPlayer(title,artist);
     title = title.replace(/\s/g, '%20');
     artist = artist.replace(/\s/g, '%20');
     $.ajax({
@@ -45,6 +46,10 @@ class Artist extends React.Component{
         //todo: message song is not playing
       }
     });
+  }
+
+  songNameInPlayer(){
+    
   }
 
   add(songName, artist){
