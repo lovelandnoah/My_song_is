@@ -104,9 +104,9 @@ class TopArtist extends React.Component{
       backgroundPosition: (-40 * (this.props.rank - 1)) + "px"
     };
     return(
-            <div id={"rank" + this.props.rank} className="top-songs-list nav4 hei card-panel height mix-color col l4 m6 s12 z-depth-3" style={rankStyle}>
+            <div id={"rank" + this.props.rank} className="top-songs-list nav4 hei card-panel height mix-color col l4 m6 s12 z-depth-3">
 
-                  <div className="list-rank">
+                  <div className="list-rank" style={rankStyle}>
                     
                   </div>
 
