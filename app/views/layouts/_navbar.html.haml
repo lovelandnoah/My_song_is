@@ -43,11 +43,6 @@
           .nav-button#edit-profile-button
             =link_to "Edit Profile", edit_user_registration_path, :class => "home-link bigger image white-text stroke text-glow-hover log"
 
-    - if current_user != nil
-      - if current_user.picture == nil
-        / include picture
-      - else
-        %img.nav-profile-pic.borderr.z-depth-3#nav-profile-pic{alt: "profile_pic", src: @img, height: 200, width: 200}
       
     %h5#nav-name Place Holder
     %h5.log.rel#nav-link mysong.is/#{@user.username}
