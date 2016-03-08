@@ -13,10 +13,7 @@
         :style => "color:#aaa;",
         :onfocus => "if(this.value=='Username'){this.value='';this.style.color = '#000';}",  
         :onblur => "if(this.value==''){this.value='Username';this.style.color = '#aaa';}"
-      = f.hidden_field :password,
-        :value => @user.password
-      = f.hidden_field :current_password,
-        :value => @user.password
+
 
     .actions.center
       %button.btn.waves-effect.waves-light= f.submit "Finish Sign Up"
