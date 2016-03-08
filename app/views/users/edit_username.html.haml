@@ -16,6 +16,11 @@
         :style => "color:#aaa;",
         :onfocus => "if(this.value=='Full Name'){this.value='';this.style.color = '#000';}",
         :onblur => "if(this.value==''){this.value='Full Name';this.style.color = '#aaa';}"
+      = f.text_field :picture,
+        :value => "Profile Picture URL",
+        :style => "color:#aaa;",
+        :onfocus => "if(this.value=='Profile Picture URL'){this.value='';this.style.color = '#000';}",
+        :onblur => "if(this.value==''){this.value='Profile Picture URL';this.style.color = '#aaa';}"
 
     .actions.center
       %button.btn.waves-effect.waves-light= f.submit "Finish Sign Up"

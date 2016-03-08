@@ -5,6 +5,10 @@ class RegistrationsController < Devise::RegistrationsController
       params[:user][:full_name] = nil
       params[:user].delete(:full_name)
     end
+    if params[:user][:picture].blank? || params[:user][:picture] == "Profile Picture URL"
+      params[:user][:picture] = nil
+      params[:user].delete(:picture)
+    end
     if params[:user][:password].blank?
       params[:user].delete(:password)
       params[:user].delete(:current_password)
@@ -12,6 +16,9 @@ class RegistrationsController < Devise::RegistrationsController
         set_flash_message :notice, :updated
         if params[:user][:full_name]
           @user.update_attributes(:full_name => params[:user][:full_name])
+        end
+        if params[:user][:picture]
+          @user.update_attributes(:picture => params[:user][:picture])
         end
         # Sign in the user bypassing validation in case his password changed
         sign_in @user, :bypass => true
