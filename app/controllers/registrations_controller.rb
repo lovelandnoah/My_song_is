@@ -1,11 +1,18 @@
 class RegistrationsController < Devise::RegistrationsController
   def update
     @user = User.find(current_user.id)
+    if params[:user][:full_name].blank? || params[:user][:full_name] == "Full Name"
+      params[:user][:full_name] = nil
+      params[:user].delete(:full_name)
+    end
     if params[:user][:password].blank?
       params[:user].delete(:password)
       params[:user].delete(:current_password)
       if @user.update_attributes(:username => params[:user][:username])
         set_flash_message :notice, :updated
+        if params[:user][:full_name]
+          @user.update_attributes(:full_name => params[:user][:full_name])
+        end
         # Sign in the user bypassing validation in case his password changed
         sign_in @user, :bypass => true
         redirect_to after_update_path_for(@user)
@@ -36,7 +43,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def account_update_params
-    params.require(:user).permit(:username, :email, :password, :current_password)
+    params.require(:user).permit(:username, :email, :password, :current_password, :full_name)
   end
 
   def after_sign_up_path_for(resource)

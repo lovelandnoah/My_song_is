@@ -1,6 +1,4 @@
-.row
-  = image_tag('real_b.png', :class =>"one image")
-  %a#about-us.bigger.image.white-text.stroke.text-glow-hover{:href => "/"} Home
+%a#about-us.bigger.image.white-text.stroke.text-glow-hover{:href => "/"} Home
 %h3.salt.center.rel.white-text.stroke MySong.is
 %body.bck
 .container
@@ -13,7 +11,11 @@
         :style => "color:#aaa;",
         :onfocus => "if(this.value=='Username'){this.value='';this.style.color = '#000';}",  
         :onblur => "if(this.value==''){this.value='Username';this.style.color = '#aaa';}"
-
+      = f.text_field :full_name,
+        :value => "Full Name",
+        :style => "color:#aaa;",
+        :onfocus => "if(this.value=='Full Name'){this.value='';this.style.color = '#000';}",
+        :onblur => "if(this.value==''){this.value='Full Name';this.style.color = '#aaa';}"
 
     .actions.center
       %button.btn.waves-effect.waves-light= f.submit "Finish Sign Up"

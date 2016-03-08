@@ -19,23 +19,22 @@
       -if current_user == nil
         .rightbot.home-link.bigger.image.white-text.stroke.text-glow-hover.log#not-logged-in-form
           = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-            .row
-              .col.s4
-                = f.text_field :email,
-                  :value => "Email",
-                  :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
-                  :onfocus => "if(this.value=='Email'){this.value='';this.style.color = '#000000';}",
-                  :color => "white",
-                  :onblur => "if(this.value==''){this.value='Email';this.style.color = '#000000';}"
-              .col.s4
-                = f.text_field :password,
-                  :value => "Password",
-                  :autocomplete => "off",
-                  :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
-                  :onfocus => "if(this.value=='Password'){this.value='';this.style.color = '#000000';this.type='password'}",
-                  :onblur => "if(this.value==''){this.value='Password';this.style.color = '#000000';this.type='text'}"
-              .col.s4
-                = f.submit "Log in", :class => 'btn black-text teal lighten-4'
+            .col.s4
+              = f.text_field :email,
+                :value => "Email",
+                :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
+                :onfocus => "if(this.value=='Email'){this.value='';this.style.color = '#000000';}",
+                :color => "white",
+                :onblur => "if(this.value==''){this.value='Email';this.style.color = '#000000';}"
+            .col.s4
+              = f.text_field :password,
+                :value => "Password",
+                :autocomplete => "off",
+                :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
+                :onfocus => "if(this.value=='Password'){this.value='';this.style.color = '#000000';this.type='password'}",
+                :onblur => "if(this.value==''){this.value='Password';this.style.color = '#000000';this.type='text'}"
+            .col.s4
+              = f.submit "Log in", :class => 'btn black-text teal lighten-4'
       -else
         #login-container
           .nav-button#logout-button
@@ -43,9 +42,9 @@
           .nav-button#edit-profile-button
             =link_to "Edit Profile", edit_user_registration_path, :class => "home-link bigger image white-text stroke text-glow-hover log"
 
-      
-    %h5#nav-name Place Holder
-    %h5.log.rel#nav-link mysong.is/#{@user.username}
+    -if @user.full_name != nil
+      %p#nav-name #{@user.full_name}
+    %p.log.rel#nav-link mysong.is/#{@user.username}
 
     %img.nav-profile-pic.borderr.z-depth-3#logo{alt: "mysong.is Logo"}
 

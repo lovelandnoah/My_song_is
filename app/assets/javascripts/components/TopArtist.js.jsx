@@ -117,8 +117,6 @@ class TopArtist extends React.Component{
                   <div className="list-artist">
                     {this.props.artist}
                   </div>
-                <div className="row">
-                  {this.displayAdd()}
-                </div></div>);
+                  {this.displayAdd()}</div>);
   }
 }
