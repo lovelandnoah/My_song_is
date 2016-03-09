@@ -7,8 +7,10 @@
 				#main-art
 				#player-bottom
 					#player-title
-					#player-artist
-		#create-link
+					#player-artist	
+		- if current_user == nil
+			#create-link
+				= link_to 'Create your own MySong.is profile', '/users/sign_in'
 		-if params[:mixtape_id]
 			=# react_component 'PlayMixtape', { current_user: current_user, mixtape_id: params[:mixtape_id]
 	#column-right
