@@ -6,12 +6,12 @@ class UsersController < ApplicationController
 	helper_method :resource_name, :resource, :devise_mapping
 
 	def edit
-    binding.pry
 
 		# id = current_user.id
 		# @user = User.where(id: current_user.id)
 		@user = current_user
 		# @user = current_user.id
+
 	end
 
 	def edit_username

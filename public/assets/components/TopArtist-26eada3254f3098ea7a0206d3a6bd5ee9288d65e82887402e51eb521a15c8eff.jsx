@@ -115,7 +115,9 @@ class TopArtist extends React.Component{
             <div id={"rank" + this.props.rank} className="top-songs-list nav4 hei card-panel height mix-color col l4 m6 s12 z-depth-3" onClick={() => this.mobilePlayButton(this.state.title, this.state.artist)}>
 
                   <div className="list-rank" style={rankStyle}>
+                    
                   </div>
+
                   <div className="list-title">
                     {this.props.name}
                   </div>
@@ -123,6 +125,6 @@ class TopArtist extends React.Component{
                   <div className="list-artist">
                     {this.props.artist}
                   </div>
-                  </div>);
+                  {this.displayAdd()}</div>);
   }
 }
