@@ -3,6 +3,10 @@
 %body.bck
 .container
   %h2.center-align Edit your profile, #{@user.username}.
+  - flash.each do |name, msg|
+    - if msg.class == Array
+      - msg.each do |message|
+        = content_tag :div, message, :id => "flash_#{name}"
   = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
     = devise_error_messages!
     = field_set_tag do
@@ -11,7 +15,7 @@
         :style => "color:#aaa;",
         :onfocus => "if(this.value=='Username' || this.value=='#{@username}'){this.value='';this.style.color = '#000';}",  
         :onblur => "if(this.value==''){this.value='#{@username}';this.style.color = '#aaa';}"
-      = f.text_field :full_name,
+      = f.text_field :name,
         :value => "Full Name",
         :style => "color:#aaa;",
         :onfocus => "if(this.value=='Full Name'){this.value='';this.style.color = '#000';}",

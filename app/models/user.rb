@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   # before_save :create_permalink
 
   has_one :mixtape, dependent: :destroy
+  has_many :identities,  dependent: :destroy 
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,

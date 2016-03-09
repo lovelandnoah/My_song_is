@@ -1,13 +1,16 @@
 class TopArtist extends React.Component{
   constructor(props){
     super(props)
-    this.state = {albumCoverUrl: "", isMounted: false}
+    this.state = {albumCoverUrl: "", isMounted: false, title: "", artist: ""}
     this.play = this.play.bind(this)
     this.add = this.add.bind(this)
     this.albumCover = this.albumCover.bind(this)
     this.displayAdd = this.displayAdd.bind(this)
+    this.songNameInPlayer = this.songNameInPlayer.bind(this)
   }
   componentDidMount(){
+    this.state.title = this.props.name;
+    this.state.artist = this.props.artist;
     this.state.isMounted = true;
     this.albumCover()
     $("div.chartSong").click=(() => this.mobilePlayButton(this.props.name, this.props.artist));
@@ -23,6 +26,7 @@ class TopArtist extends React.Component{
   }
 
   play(title, artist){
+    this.songNameInPlayer(title, artist)
     title = title.replace(/\s/g, '%20');
     artist = artist.replace(/\s/g, '%20');
     $.ajax({
@@ -38,6 +42,11 @@ class TopArtist extends React.Component{
         //todo: message song is not playing
       }
     });
+  }
+
+  songNameInPlayer(title, artist){
+    let titleDisplay = document.getElementById("player-title").innerHTML = title;
+    let artistDisplay = document.getElementById("player-artist").innerHTML = artist;
   }
 
   mobilePlayButton(title, artist){
@@ -103,12 +112,10 @@ class TopArtist extends React.Component{
       backgroundPosition: (-40 * (this.props.rank - 1)) + "px"
     };
     return(
-            <div id={"rank" + this.props.rank} className="top-songs-list nav4 hei card-panel height mix-color col l4 m6 s12 z-depth-3">
+            <div id={"rank" + this.props.rank} className="top-songs-list nav4 hei card-panel height mix-color col l4 m6 s12 z-depth-3" onClick={() => this.mobilePlayButton(this.state.title, this.state.artist)}>
 
                   <div className="list-rank" style={rankStyle}>
-                    
                   </div>
-
                   <div className="list-title">
                     {this.props.name}
                   </div>
@@ -116,6 +123,6 @@ class TopArtist extends React.Component{
                   <div className="list-artist">
                     {this.props.artist}
                   </div>
-                  {this.displayAdd()}</div>);
+                  </div>);
   }
 }

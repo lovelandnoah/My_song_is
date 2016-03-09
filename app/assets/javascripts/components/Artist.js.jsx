@@ -6,6 +6,7 @@ class Artist extends React.Component{
     this.add = this.add.bind(this)
     this.albumCover = this.albumCover.bind(this)
     this.displayAdd = this.displayAdd.bind(this)
+    this.songNameInPlayer = this.songNameInPlayer.bind(this)
     // this.getSongs = this.getSongs.bind(this)
   }
 
@@ -30,7 +31,7 @@ class Artist extends React.Component{
   }
 
   play(title, artist){
-    songNameInPlayer(title,artist);
+    this.songNameInPlayer(title,artist);
     title = title.replace(/\s/g, '%20');
     artist = artist.replace(/\s/g, '%20');
     $.ajax({
@@ -48,8 +49,9 @@ class Artist extends React.Component{
     });
   }
 
-  songNameInPlayer(){
-    
+  songNameInPlayer(title, artist){
+    let titleDisplay = document.getElementById("player-title").innerHTML = title;
+    let artistDisplay = document.getElementById("player-artist").innerHTML = artist;
   }
 
   add(songName, artist){

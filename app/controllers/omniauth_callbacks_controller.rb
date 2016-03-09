@@ -20,10 +20,15 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 	end
 
 	def after_sign_in_path_for(resource)
+		session[:logged_in_using_omniauth] = true
+		if current_user.sign_in_count == 1
+			return edit_user_registration_path
+		end
 		if resource.email_verified?
 			super resource
 		else
-			root_path(resource)
+			return root_path(resource)
 		end
 	end
+
 end
