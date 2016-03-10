@@ -22,14 +22,14 @@ class TopArtist extends React.Component{
     this.state.isMounted = false;
   }
 
-  play(station){
-    let player = document.getElementById("player")
-    player.src = "http://api.dar.fm/player_api.php?station_id=" + station + "&custom_style=radioslice&partner_token=9388418650"
-  }
+  // play(station){
+  //   let player = document.getElementById("player")
+  //   player.src = "http://api.dar.fm/player_api.php?station_id=" + station + "&custom_style=radioslice&partner_token=9388418650"
+  // }
 
-  play(title, artist, picture){
-    this.songNameInPlayer(title, artist)
-    this.pictureInPlayer(picture)
+  play(title, artist){
+    this.songNameInPlayer(title, artist);
+    this.pictureInPlayer();
     title = title.replace(/\s/g, '%20');
     artist = artist.replace(/\s/g, '%20');
     $.ajax({
@@ -52,8 +52,8 @@ class TopArtist extends React.Component{
     let artistDisplay = document.getElementById("player-artist").innerHTML = artist;
   }
 
-  pictureInPlayer(picture){
-    let pictureDisplay = document.getElementById("main-art").style.backgroundImage = picture;
+  pictureInPlayer(){
+    let pictureDisplay = document.getElementById("player-art").src = this.state.albumCoverUrl;
   }
 
   mobilePlayButton(title, artist){
@@ -119,7 +119,7 @@ class TopArtist extends React.Component{
       backgroundPosition: (-40 * (this.props.rank - 1)) + "px"
     };
     return(
-            <div id={"rank" + this.props.rank} className="top-songs-list nav4 hei card-panel height mix-color col l4 m6 s12 z-depth-3" onClick={() => this.mobilePlayButton(this.state.title, this.state.artist, this.state.albumCoverUrl)}>
+            <div id={"rank" + this.props.rank} className="top-songs-list nav4 hei card-panel height mix-color col l4 m6 s12 z-depth-3" onClick={() => this.mobilePlayButton(this.state.title, this.state.artist)}>
 
                   <div className="list-rank" style={rankStyle}>
                   </div>

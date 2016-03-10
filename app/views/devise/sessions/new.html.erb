@@ -1,64 +1,29 @@
-<div>
-  <%= image_tag('real_b.png', :class =>"one image") %>
+<%= render 'layouts/simplenav' %>
 
-  <div class="rightbot home-link bigger image white-text stroke text-glow-hover log">
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <div class="row">
-        <div class="col s4">
-          <%= f.text_field :email,
-            :value => "Email",
-            :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
-            :onfocus => "if(this.value=='Email'){this.value='';this.style.color = '#000000';}",
-            :color => "white",
-            :onblur => "if(this.value==''){this.value='Email';this.style.color = '#000000';}"
-            %>
-        </div>
-        <div class="col s4">
-          <%= f.text_field :password,
-            :value => "Password",
-            :autocomplete => "off",
-            :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
-            :onfocus => "if(this.value=='Password'){this.value='';this.style.color = '#000000';this.type='password'}",
-            :onblur => "if(this.value==''){this.value='Password';this.style.color = '#000000';this.type='text'}"
-          %>
-        </div>
-        <div class="col s4">
-          <%= f.submit "Log in", :class => 'btn black-text teal lighten-4' %>
-        </div>
+<div class="contents">
+
+  <div class="column-left">
+      <div class="nav-title">
+        <h5 class="salt title-spacing">
+           Sign in:
+        </h1>
+
+        <%= link_to user_omniauth_authorize_path(:twitter) do %>
+          <i class="fa fa-twitter fa-5x"></i>
+        <% end %>
+
+        <%= link_to user_omniauth_authorize_path(:facebook) do %>
+          <i class="fa fa-facebook-official fa-5x"></i>
+        <% end %>
+        <h5 class="salt"> Or: </h5>
+
+          <%= link_to image_tag('add-user-128.png', :style =>"height:75px; margin-bottom: -20px;"), new_registration_path(resource_name) %>
       </div>
-    <%end%>
+  </div>
+
+
+  <div class="column-right">
+      <%= react_component 'TopSongs' %>
   </div>
 
 </div>
-
-<h3 class="salt rel white-text stroke nav-title">
-  <strong>
-    MySong.is
-  </strong>
-</h3>
-
-<body class="home-body">
-  <div class="nav-title">
-    <h5 class="salt title-spacing">
-       Sign in:
-    </h1>
-
-    <%= link_to user_omniauth_authorize_path(:twitter) do %>
-      <i class="fa fa-twitter fa-5x"></i>
-    <% end %>
-
-    <%= link_to user_omniauth_authorize_path(:facebook) do %>
-      <i class="fa fa-facebook-official fa-5x"></i>
-    <% end %>
-    <h5 class="salt"> Or: </h5>
-
-      <%= link_to image_tag('add-user-128.png', :style =>"height:75px; margin-bottom: -20px;"), new_registration_path(resource_name) %>
-  </div>
-
-  <div class="top-songs">
-    <h5 class="salt">Top Songs </h5>
-
-    <div class="container"><%= react_component 'TopSongs' %></div>
-  </div>
-
-</body>
