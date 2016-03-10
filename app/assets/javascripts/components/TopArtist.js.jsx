@@ -6,7 +6,9 @@ class TopArtist extends React.Component{
     this.add = this.add.bind(this)
     this.albumCover = this.albumCover.bind(this)
     this.displayAdd = this.displayAdd.bind(this)
+
     this.songNameInPlayer = this.songNameInPlayer.bind(this)
+    this.pictureInPlayer = this.pictureInPlayer.bind(this)
   }
   componentDidMount(){
     this.state.title = this.props.name;
@@ -25,8 +27,9 @@ class TopArtist extends React.Component{
     player.src = "http://api.dar.fm/player_api.php?station_id=" + station + "&custom_style=radioslice&partner_token=9388418650"
   }
 
-  play(title, artist){
+  play(title, artist, picture){
     this.songNameInPlayer(title, artist)
+    this.pictureInPlayer(picture)
     title = title.replace(/\s/g, '%20');
     artist = artist.replace(/\s/g, '%20');
     $.ajax({
@@ -47,6 +50,10 @@ class TopArtist extends React.Component{
   songNameInPlayer(title, artist){
     let titleDisplay = document.getElementById("player-title").innerHTML = title;
     let artistDisplay = document.getElementById("player-artist").innerHTML = artist;
+  }
+
+  pictureInPlayer(picture){
+    let pictureDisplay = document.getElementById("main-art").style.backgroundImage = picture;
   }
 
   mobilePlayButton(title, artist){
@@ -112,7 +119,7 @@ class TopArtist extends React.Component{
       backgroundPosition: (-40 * (this.props.rank - 1)) + "px"
     };
     return(
-            <div id={"rank" + this.props.rank} className="top-songs-list nav4 hei card-panel height mix-color col l4 m6 s12 z-depth-3" onClick={() => this.mobilePlayButton(this.state.title, this.state.artist)}>
+            <div id={"rank" + this.props.rank} className="top-songs-list nav4 hei card-panel height mix-color col l4 m6 s12 z-depth-3" onClick={() => this.mobilePlayButton(this.state.title, this.state.artist, this.state.albumCoverUrl)}>
 
                   <div className="list-rank" style={rankStyle}>
                   </div>
