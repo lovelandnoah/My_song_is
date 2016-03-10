@@ -7,12 +7,12 @@
         = f.text_field :username, 
           :value => "#{@username}",
           :style => "color:#aaa;",
-          :onfocus => "if(this.value=='Username' || this.value == '#{@username}''){this.value='';this.style.color = '#000';}",  
+          :onfocus => "if(this.value=='Username' || this.value == '#{@username}'){this.value='';this.style.color = '#000';}",  
           :onblur => "if(this.value==''){this.value='#{@username}';this.style.color = '#aaa';}"
         = f.text_field :email, 
           :value => "#{@user.email}",
           :style => "color:#aaa;",
-          :onfocus => "if(this.value=='Email' || this.value == '#{@email}''){this.value='';this.style.color = '#000';}",  
+          :onfocus => "if(this.value=='Email' || this.value == '#{@email}'){this.value='';this.style.color = '#000';}",  
           :onblur => "if(this.value==''){this.value='#{@email}';this.style.color = '#aaa';}"
         = f.text_field :current_password,
           :value => "Current Password",
@@ -38,6 +38,8 @@
           :style => "color:#aaa;",
           :onfocus => "if(this.value=='#{@picture}'){this.value='';this.style.color = '#000';}",  
           :onblur => "if(this.value==''){this.value='#{@picture}';this.style.color = '#aaa'}"
+      .actions.center
+        %button.btn.waves-effect.waves-light= f.submit "Update your profile"
     -else
       = field_set_tag do
         = f.text_field :username, 
@@ -63,4 +65,4 @@
           :onfocus => "if(this.value=='#{@picture}'){this.value='';this.style.color = '#000';}",  
           :onblur => "if(this.value=='' || this.value=='#{@picture}'){this.value='#{@picture}';this.style.color = '#aaa'}"
       .actions.center
-        %button.btn.waves-effect.waves-light= f.submit "Sign Up"
+        %button.btn.waves-effect.waves-light= f.submit "Update your profile"
