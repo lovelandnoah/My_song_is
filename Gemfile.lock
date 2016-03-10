@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/bernat/best_in_place.git
+  revision: 57b525e487cd6ba10467b47d8bf8907c645f6917
+  specs:
+    best_in_place (3.1.0)
+      actionpack (>= 3.2)
+      railties (>= 3.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -282,6 +290,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  best_in_place!
   better_errors
   byebug
   coffee-rails (~> 4.1.0)

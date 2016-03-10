@@ -3,10 +3,19 @@ class TopSongs extends React.Component{
     super(props);
     this.state = {results: [], searched: false, mixtape_id: 0, mixtapeName: '', mixTapeCategory: '', songs: []};
     this.topCharts = this.topCharts.bind(this);
+    this.editableBio = this.editableBio.bind(this);
   }
 
   componentDidMount(){
+    this.editableBio();
     this.topCharts()
+  }
+
+  editableBio(){
+    // make the bio on the user show page editable
+    $(function(){
+      return $('.best_in_place').best_in_place();
+    });
   }
 
   topCharts(){

@@ -5,6 +5,8 @@ class UsersController < ApplicationController
 
 	helper_method :resource_name, :resource, :devise_mapping
 
+  respond_to :html, :json
+
 	def edit
 
 		# id = current_user.id
@@ -22,8 +24,14 @@ class UsersController < ApplicationController
     end
 	end
 
-  def update
+  def update_bio
+    if params[:user][:bio]
+      current_user.update_attributes(:bio => params[:user][:bio])
+    end
+    respond_with resource
+  end
 
+  def update
     if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
       params[:user].delete(:password)
       params[:user].delete(:password_confirmation)

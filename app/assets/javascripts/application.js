@@ -16,5 +16,7 @@
 //= require materialize-sprockets
 //= require react
 //= require react_ujs
+//= require jquery.purr
+//= require best_in_place
 //= require components
 //= require FindStreamingSongs
