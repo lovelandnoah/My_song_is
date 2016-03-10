@@ -53,7 +53,7 @@ class TopArtist extends React.Component{
   }
 
   pictureInPlayer(){
-    let pictureDisplay = document.getElementById("player-art").src = this.state.albumCoverUrl;
+    let pictureDisplay = document.getElementById("main-art").style.backgroundImage = `url(${this.state.albumCoverUrl})`;
   }
 
   mobilePlayButton(title, artist){
