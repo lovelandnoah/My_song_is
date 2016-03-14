@@ -4,9 +4,9 @@ class SongController < ApplicationController
   end
 
   def create
-    if Song.where(artist: params[:artist]).where(name: params[:name]).where(mixtape_id: params[:mixtape_id]).any?
+    # if Song.where(artist: params[:artist]).where(name: params[:name]).where(mixtape_id: params[:mixtape_id]).any?
 
-    else
+    # else
     	song_name = params[:name]
     	artist = params[:artist]
     	mixtape_id = params[:mixtape_id]
@@ -22,7 +22,7 @@ class SongController < ApplicationController
       # 	#todo slidetoggle artist
       # end
       render json: @mixtape
-    end
+    # end
   end
 
   def destroy

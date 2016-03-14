@@ -7,6 +7,7 @@ class Artist extends React.Component{
     this.albumCover = this.albumCover.bind(this)
     this.displayAdd = this.displayAdd.bind(this)
     this.songNameInPlayer = this.songNameInPlayer.bind(this)
+    this.pictureInPlayer = this.pictureInPlayer.bind(this)
     // this.getSongs = this.getSongs.bind(this)
   }
 
@@ -32,6 +33,7 @@ class Artist extends React.Component{
 
   play(title, artist){
     this.songNameInPlayer(title,artist);
+    this.pictureInPlayer();
     title = title.replace(/\s/g, '%20');
     artist = artist.replace(/\s/g, '%20');
     $.ajax({
@@ -52,6 +54,10 @@ class Artist extends React.Component{
   songNameInPlayer(title, artist){
     let titleDisplay = document.getElementById("player-title").innerHTML = title;
     let artistDisplay = document.getElementById("player-artist").innerHTML = artist;
+  }
+
+  pictureInPlayer(){
+    let pictureDisplay = document.getElementById("main-art").style.backgroundImage = `url(${this.state.albumCoverUrl})`;
   }
 
   add(songName, artist){
@@ -86,22 +92,23 @@ class Artist extends React.Component{
   }
 
   displayAdd(){
-    if(this.props.current_user != null){
       return(
-      <p>
-        <input id={this.props.title} type='checkbox'
-          defaultChecked={false}
-          onClick={() => this.add(this.props.title,
-            this.props.artist, this.checked)}
-          checked={this.state.isChecked}
-        ></input>
-        <label htmlFor={this.props.title}>Add</label>
-      </p>
+        <div>
+          <input id={this.props.title} type='checkbox'
+            defaultChecked={false}
+            onClick={() => this.add(this.props.title,
+              this.props.artist, this.checked)}
+            checked={this.state.isChecked}
+          ></input>
+          <label htmlFor={this.props.title}>Add</label>
+        </div>
       );
-    }
   }
 
   render(){
+    if(self.props.current_user) {
+      checkBox = this.displayAdd()
+      }
     return(<div>
             <div className="nav4 card-panel height mix-color col l4 m6 s12 z-depth-3" onClick={() => this.play(this.props.title, this.props.artist)} >
               <div className="card-content">
@@ -112,7 +119,7 @@ class Artist extends React.Component{
                 </p>
                 {this.newImage(this.props.title)}
                 <form action="#">
-                  {this.displayAdd()}
+                  {checkBox}
                 </form>
                 <img src={this.state.albumCoverUrl} width="200" height="200" />
               </div>

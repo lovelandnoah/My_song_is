@@ -56,7 +56,6 @@ class Mixtape extends React.Component{
              </div> 
               <div className='card-content white-text boxreset' >
                 <p className="salt crd">{this.props.name}</p>
-                <br />
                  {songs}
               </div>
              <div>

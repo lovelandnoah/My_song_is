@@ -18,7 +18,7 @@
 	}
 
 	function getSongNames(){
-		songNames = [];
+		songNames = [];	
 		artistNames = [];
 		playButtons = [];
 		songsData = [];

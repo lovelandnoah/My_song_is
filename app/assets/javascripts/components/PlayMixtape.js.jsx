@@ -12,7 +12,6 @@
   }
 
   componentDidMount(){
-    this.getSongs();
     let self = this;
     self.showSuggestions();
     $(document).keypress(function(e) {
@@ -126,7 +125,6 @@
     }
   }
 
-
   render(){
     self = this;
     let searchResultCards = <Artist/>;
@@ -162,16 +160,10 @@
             <div id="mixtapeForm">
             </div>
 
-            {this.showPlayer(<Player />)}
-          
             <h5 className="salt">Search for an Artist or Song:</h5>
               <input id='search' className='small-search' type='text' ref='searchText' autofocus='true' placeholder='Artist'/>
             <button onClick={this.filteredSearchResults} className='btn waves-effect waves-light black-text'>Search</button>
-
-            <br />
-            <br />
             <h4 className='subtit salt'>Songs Playing:</h4>
-            <br />
             <div className='row'>
               {this.noArtists(searchResultCards)}
               {searchResultCards}

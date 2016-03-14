@@ -10,16 +10,9 @@ class Player extends React.Component{
         </div>
         )
   } else {
-    return(<div id="player-container">
-              <div id="main-art">
-              </div>
-
-              <div id="player-bottom">
-              </div>
-
-              <iframe className="player" id="player" src={this.stationUrl}></iframe>
-            </div>
-      )
+    return(
+      <iframe className="hidden" id="player" src={this.stationUrl}></iframe>
+    )
     }
   }
 

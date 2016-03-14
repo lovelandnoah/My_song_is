@@ -8,7 +8,7 @@ class TopSongs extends React.Component{
 
   componentDidMount(){
     this.editableBio();
-    this.topCharts()
+    this.topCharts();
   }
 
   editableBio(){

@@ -110,21 +110,12 @@
 
     return(
         <div>
-          <div id="mixtapeForm">
-          </div>
-          <br />
            <div id='cardHolder' className='row'>
-             <div className='card-panel mix-color'>
-                <div className='card-content'>
-                  <h3> {this.state.mixtapeName}</h3>
                 {songArray}
                 {this.displayDoneButton()}
-                <br />
-                </div>
-              </div>
             </div>
 
-          <p className="subtit salt">Search for an Artist or Song:</p>
+          <p>Search for an Artist or Song:</p>
           <input id='search' type='text' ref='searchText' autofocus='true' placeholder="Artist"/>
           <div className="center">
             <button onClick={this.getSearchResults} className='btn waves-effect waves-light'>Search</button>

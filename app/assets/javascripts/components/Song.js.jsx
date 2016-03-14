@@ -99,7 +99,6 @@ class Song extends React.Component{
   render(){
     return(
        <div>
-        { this.deleteBtn(this.props.song_id) }
         <div className="paddin play-button button-grey black-text" onClick={() => this.play(this.props.title, this.props.artist)}>
           <h5 className='inner'>
           <img src={this.state.albumCoverUrl} width="80" height="80" />
