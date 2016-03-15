@@ -32,14 +32,14 @@ class TopSongs extends React.Component{
   render(){
     self = this;
     let i = 0;
-    let topartists = this.state.results.map( topartist => {
+    let topartists = this.state.results.slice(0,5).map( topartist => {
       let key = `topartist-${i += 1}`
       return(<TopArtist key={key} rank={i} {...topartist} rplay={self.playSong} mixtapeId={self.state.mixtape_id} getSongs={this.getSongs}/>);
     });
     
     return(
-            <div id='top-songs-container' className='topCard'>
-              {topartists}
+          <div id='top-songs-container' className='topCard'>
+            {topartists}
           </div>        
     )
   }

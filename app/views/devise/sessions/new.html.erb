@@ -8,8 +8,8 @@
            Sign in:
         </h1>
 
-          <%= link_to image_tag('facebook-logo.png', :style =>"height:75px;", :id => "logo-login"), new_registration_path(resource_name) %>
-          <%= link_to image_tag('twitter-logo.png', :style =>"height:75px;", :id => "twitter-login"), new_registration_path(resource_name) %>
+          <%= link_to image_tag('facebook-logo.png', :style =>"height:75px;", :id => "logo-login"), user_omniauth_authorize_path(:facebook) %>
+          <%= link_to image_tag('twitter-logo.png', :style =>"height:71px;", :id => "twitter-login"), user_omniauth_authorize_path(:twitter) %>
 
         <h5 class="salt"> Or: </h5>
 
@@ -18,7 +18,6 @@
         </div>
       </div>
   </div>
-
 
   <div id="column-right">
       <%= react_component 'TopSongs' %>
