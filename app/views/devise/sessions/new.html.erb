@@ -8,16 +8,14 @@
            Sign in:
         </h1>
 
-        <%= link_to user_omniauth_authorize_path(:twitter) do %>
-          <i class="fa fa-twitter fa-5x"></i>
-        <% end %>
+          <%= link_to image_tag('facebook-logo.png', :style =>"height:75px;", :id => "logo-login"), new_registration_path(resource_name) %>
+          <%= link_to image_tag('twitter-logo.png', :style =>"height:75px;", :id => "twitter-login"), new_registration_path(resource_name) %>
 
-        <%= link_to user_omniauth_authorize_path(:facebook) do %>
-          <i class="fa fa-facebook-official fa-5x"></i>
-        <% end %>
         <h5 class="salt"> Or: </h5>
 
-          <%= link_to image_tag('add-user-128.png', :style =>"height:75px; margin-bottom: -20px;"), new_registration_path(resource_name) %>
+        <div id="email-login">
+          <%= link_to "Sign Up Using Email", new_registration_path(resource_name) %>
+        </div>
       </div>
   </div>
 

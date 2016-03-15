@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   has_one :mixtape, dependent: :destroy
   has_many :identities,  dependent: :destroy 
 
+  accepts_nested_attributes_for :mixtape
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable

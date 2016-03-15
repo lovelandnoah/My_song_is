@@ -8,6 +8,8 @@
     this.noArtists = this.noArtists.bind(this);
     this.pass = this.pass.bind(this);
     this.showSuggestions = this.showSuggestions.bind(this);
+    this.displayUsersMixTapes = this.displayUsersMixTapes.bind(this);
+
     // this.doSearch = this.doSearch.bind(this);
   }
 
@@ -19,7 +21,22 @@
         self.filteredSearchResults()
       }
     })
+    self.getSongs();
   }
+
+  // sortmixtapes
+  displayUsersMixTapes(search_terms){
+    $.ajax({
+      url: '/mixtapes_users_mixtapes',
+      type: 'GET',
+      data: { search_term: search_terms}
+    }).success( data => {
+      this.setState({mixtapes: data.mixtapes});
+    }).error( data => {
+      console.log(data);
+    });
+  }
+
 
   // play mixtape original
   getSongs(){
@@ -28,7 +45,6 @@
       type: 'GET',
       data: {mixtape_id: this.props.mixtape_id}
     }).success( data => {
-
       this.setState({mixtapeName: data.name});
       this.setState({songs: data.songs});
     })
@@ -125,6 +141,11 @@
     }
   }
 
+    // 
+    //   let songs = this.state.songs.map( song => {
+    // let key = `song-${song.song_id}`;
+    // return(<Song key={key} artist_name={this.props.artist_name} song_name={this.props.song_name} {...song} getSongs={this.getSongs}/>);
+
   render(){
     self = this;
     let searchResultCards = <Artist/>;
@@ -132,6 +153,7 @@
     // if(this.state.results.length){ 
     //   searchResultCards = this.state.results[0].songmatch.map( artist => {
     //   return(<Artist rplay={self.playSong} mixtapeId={self.state.mixtape_id} getSongs={self.getSongs}/>)})}
+    //}
 
     searchResultCards = this.state.results.length ? (
         this.state.results[0].songmatch.map( Sartist => {
@@ -143,18 +165,10 @@
       songsSearchedFor.push(<MixTapeSong key={key} {...song}/>);
     });
 
-    let songs = this.state.songs.map( song => {
-    let key = `song-${song.song_id}`;
-    return(<Song key={key} artist_name={this.props.artist_name} song_name={this.props.song_name} {...song} getSongs={this.getSongs}/>);
-
-  });
 
     return(<div>
             <div className= 'card-panel mix-color' id="playing-mixtape">
-              <div className='card-content white-text'>
-                <h5 className="center">{this.state.mixtapeName} </h5>
-                {songs}
-              </div>
+              <Mixtape mixtape={this.state.songs} current_user={this.props.current_user} author_id={this.props.author_id} current_user_id={this.props.current_user.id} id={this.props.mixtape_id} displayPlayMixtape={this.props.DisplayPlayMixtape}/>
             </div>
 
             <div id="mixtapeForm">

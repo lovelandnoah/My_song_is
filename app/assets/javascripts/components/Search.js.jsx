@@ -15,6 +15,7 @@
   componentDidMount(){
     self = this;
     self.showSuggestions();
+    this.getSongs();
   }
 
   getSearchResults(){
@@ -41,7 +42,7 @@
           dataType: "jsonp",
         }).success( data => {
             response(data)
-        });
+        }); 
       }
     });
   }
@@ -112,7 +113,6 @@
         <div>
            <div id='cardHolder' className='row'>
                 {songArray}
-                {this.displayDoneButton()}
             </div>
 
           <p>Search for an Artist or Song:</p>

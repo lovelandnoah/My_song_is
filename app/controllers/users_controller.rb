@@ -68,10 +68,10 @@ class UsersController < ApplicationController
 			end
       @img = @user.picture
 			@mixtape = Mixtape.where(user_id: @user.id)
-			@mixtape_id = @mixtape[0].id
+			@mixtape_id = @user.id
 
 			if @mixtape.any?
-				if Song.where(mixtape_id: @mixtape[0].id)
+				if Song.where(mixtape_id: @user.id)
 		  		@songs = Song.where(mixtape_id: @mixtape[0].id)
 		  	end
 			end
@@ -79,16 +79,16 @@ class UsersController < ApplicationController
 		  profile_url = request.original_url
 		  @qr = url_prefix + profile_url
 		end
-			if current_user == nil
-				@offline = true
-			else
-				if /\.twimg/.match(current_user.picture)
-		      @img = current_user.picture.gsub("_normal", "")
-		    end
-		    if /\.graph\.facebook\.com/.match(current_user.picture)
-		      @img = current_user.picture + "?width=500&height=500"
-		    end
-		  end
+		if current_user == nil
+			@offline = true
+		else
+			if /\.twimg/.match(current_user.picture)
+	      @img = current_user.picture.gsub("_normal", "")
+	    end
+	    if /\.graph\.facebook\.com/.match(current_user.picture)
+	      @img = current_user.picture + "?width=500&height=500"
+	    end
+	  end
 	end
 	
 	def show_user
@@ -109,6 +109,7 @@ class UsersController < ApplicationController
 	end
 
 	def finish_signup
+    @user.mixtape_attributes = {id: @user.id}
 		if request.patch? && params[:user]
 			if @user.update(user_params)
 				# @user.skip_reconfirmation!

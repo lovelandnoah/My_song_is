@@ -13,8 +13,6 @@ class HomeController < ApplicationController
     # if /\.graph\.facebook\.com/.match(current_user.picture)
       # @img = current_user.picture + "?width=500&height=500"
     # end
-
-
   end
 
   def show

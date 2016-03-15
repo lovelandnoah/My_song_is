@@ -23,6 +23,7 @@ class Mixtape extends React.Component{
 
 
   deleteMixtape(){
+
     let self = this;
     $.ajax({
       url: '/mixtapes/' + this.props.id,
@@ -60,8 +61,6 @@ class Mixtape extends React.Component{
               </div>
              <div>
               </div>
-             <br />
-             <br />
             </div>
           </div>);
   }
