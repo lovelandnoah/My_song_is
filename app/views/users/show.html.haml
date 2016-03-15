@@ -2,6 +2,7 @@
 .contents
 	#column-left
 		.container
+			=image_tag current_user.image.url(:medium)
 			%img.nav-profile-pic.borderr.z-depth-3#nav-profile-pic{alt: "profile_pic", src: @img, height: 200, width: "auto"}
 			- if @user == current_user
 				=best_in_place @user, :bio, as: :textarea, url: 'users/bio/'
@@ -11,7 +12,7 @@
 				#main-art
 				#player-bottom
 					#player-title
-					#player-artist	
+					#player-artist
 		- if current_user == nil
 			#create-link
 				= link_to 'Create your own MySong.is profile', '/users/sign_in'

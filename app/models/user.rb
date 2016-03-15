@@ -6,9 +6,14 @@ class User < ActiveRecord::Base
   TEMP_EMAIL_REGEX = /\Atemporary@email/
 
   # before_save :create_permalink
+  validates :image, presence: true
+
+  has_attached_file :image, styles: { :medium => "320x" }
+  # might have to add a path to store the pics they upload in the above line
+  validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
 
   has_one :mixtape, dependent: :destroy
-  has_many :identities,  dependent: :destroy 
+  has_many :identities,  dependent: :destroy
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,

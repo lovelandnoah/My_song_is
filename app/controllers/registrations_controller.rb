@@ -7,9 +7,9 @@ class RegistrationsController < Devise::RegistrationsController
     if @username == nil
       @username = "Username"
     end
-    @picture = @user.picture
-    if @picture == nil
-      @picture = "Picture"
+    @image = @user.image||@user.image
+    if @image == nil
+      @image = "image"
     end
     @name = @user.name
     if @name == nil
@@ -27,9 +27,9 @@ class RegistrationsController < Devise::RegistrationsController
       params[:user][:name] = nil
       params[:user].delete(:name)
     end
-    if params[:user][:picture].blank? || params[:user][:picture] == "Profile Picture URL"
-      params[:user][:picture] = nil
-      params[:user].delete(:picture)
+    if params[:user][:image].blank? || params[:user][:image] == "Profile image URL"
+      params[:user][:image] = nil
+      params[:user].delete(:image)
     end
     if params[:user][:password].blank? || params[:user][:password] == "New Password (4 characters minimum)"
       params[:user].delete(:password)
@@ -40,8 +40,8 @@ class RegistrationsController < Devise::RegistrationsController
       if params[:user][:name]
         @user.update_attributes(:name => params[:user][:name])
       end
-      if params[:user][:picture]
-        @user.update_attributes(:picture => params[:user][:picture])
+      if params[:user][:image]
+        @user.update_attributes(:image => params[:user][:image])
       end
       if params[:user][:email]
         @user.update_attributes(:email => params[:user][:email])
@@ -79,7 +79,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def account_update_params
-    params.require(:user).permit(:username, :email, :password, :current_password, :name)
+    params.require(:user).permit(:username, :email, :password, :current_password, :name, :image)
   end
 
   def after_sign_up_path_for(resource)

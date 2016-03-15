@@ -1,68 +1,68 @@
 .container
   %h2.center-align Edit your profile, #{@user.username}.
   = devise_error_messages!
-  = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+  = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }) do |f|
     - if !@omni
       = field_set_tag do
-        = f.text_field :username, 
+        = f.text_field :username,
           :value => "#{@username}",
           :style => "color:#aaa;",
-          :onfocus => "if(this.value=='Username' || this.value == '#{@username}'){this.value='';this.style.color = '#000';}",  
+          :onfocus => "if(this.value=='Username' || this.value == '#{@username}'){this.value='';this.style.color = '#000';}",
           :onblur => "if(this.value==''){this.value='#{@username}';this.style.color = '#aaa';}"
-        = f.text_field :email, 
+        = f.text_field :email,
           :value => "#{@user.email}",
           :style => "color:#aaa;",
-          :onfocus => "if(this.value=='Email' || this.value == '#{@email}'){this.value='';this.style.color = '#000';}",  
+          :onfocus => "if(this.value=='Email' || this.value == '#{@email}'){this.value='';this.style.color = '#000';}",
           :onblur => "if(this.value==''){this.value='#{@email}';this.style.color = '#aaa';}"
         = f.text_field :current_password,
           :value => "Current Password",
           :autocomplete => "off",
           :style => "color:#aaa;",
-          :onfocus => "if(this.value=='Current Password'){this.value='';this.style.color = '#000';this.type='password'}",  
+          :onfocus => "if(this.value=='Current Password'){this.value='';this.style.color = '#000';this.type='password'}",
           :onblur => "if(this.value==''){this.value='Current Password';this.style.color = '#aaa';this.type='text'}"
         = f.text_field :password,
           :value => "New Password (4 characters minimum)",
           :autocomplete => "off",
           :style => "color:#aaa;",
-          :onfocus => "if(this.value=='New Password (4 characters minimum)'){this.value='';this.style.color = '#000';this.type='password'}",  
+          :onfocus => "if(this.value=='New Password (4 characters minimum)'){this.value='';this.style.color = '#000';this.type='password'}",
           :onblur => "if(this.value==''){this.value='New Password (4 characters minimum)';this.style.color = '#aaa';this.type='text'}"
         = f.text_field :name,
           :value => "#{@name}",
           :autocomplete => "off",
           :style => "color:#aaa;",
-          :onfocus => "if(this.value=='#{@name}'){this.value='';this.style.color = '#000';}",  
+          :onfocus => "if(this.value=='#{@name}'){this.value='';this.style.color = '#000';}",
           :onblur => "if(this.value==''){this.value='#{@name}';this.style.color = '#aaa'}"
-        = f.text_field :picture,
-          :value => "#{@picture}",
+        = f.file_field :image,
+          :value => "#{@user.image}",
           :autocomplete => "off",
           :style => "color:#aaa;",
-          :onfocus => "if(this.value=='#{@picture}'){this.value='';this.style.color = '#000';}",  
+          :onfocus => "if(this.value=='#{@picture}'){this.value='';this.style.color = '#000';}",
           :onblur => "if(this.value==''){this.value='#{@picture}';this.style.color = '#aaa'}"
       .actions.center
         %button.btn.waves-effect.waves-light= f.submit "Update your profile"
     -else
       = field_set_tag do
-        = f.text_field :username, 
+        = f.text_field :username,
           :value => "#{@username}",
           :style => "color:#aaa;",
-          :onfocus => "if(this.value=='Username' || this.value == '#{@username}'){this.value='';this.style.color = '#000';}",  
+          :onfocus => "if(this.value=='Username' || this.value == '#{@username}'){this.value='';this.style.color = '#000';}",
           :onblur => "if(this.value=='' || this.value=='#{@username}'){this.value='#{@username}';this.style.color = '#aaa';}"
-        = f.text_field :email, 
+        = f.text_field :email,
           :value => "#{@email}",
           :style => "color:#aaa;",
-          :onfocus => "if(this.value=='Email' || this.value == '#{@email}'){this.value='';this.style.color = '#000';}",  
+          :onfocus => "if(this.value=='Email' || this.value == '#{@email}'){this.value='';this.style.color = '#000';}",
           :onblur => "if(this.value=='' || this.value=='#{@email}'){this.value='#{@email}';this.style.color = '#aaa';}"
         = f.text_field :name,
           :value => "#{@name}",
           :autocomplete => "off",
           :style => "color:#aaa;",
-          :onfocus => "if(this.value=='#{@name}'){this.value='';this.style.color = '#000';}",  
+          :onfocus => "if(this.value=='#{@name}'){this.value='';this.style.color = '#000';}",
           :onblur => "if(this.value=='' || this.value=='#{@name}'){this.value='#{@name}';this.style.color = '#aaa'}"
         = f.text_field :picture,
           :value => "#{@picture}",
           :autocomplete => "off",
           :style => "color:#aaa;",
-          :onfocus => "if(this.value=='#{@picture}'){this.value='';this.style.color = '#000';}",  
+          :onfocus => "if(this.value=='#{@picture}'){this.value='';this.style.color = '#000';}",
           :onblur => "if(this.value=='' || this.value=='#{@picture}'){this.value='#{@picture}';this.style.color = '#aaa'}"
       .actions.center
         %button.btn.waves-effect.waves-light= f.submit "Update your profile"

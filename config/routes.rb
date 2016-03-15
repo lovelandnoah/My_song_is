@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :song
   resources :home
   resources :mixtapes
+  resources :user
 
   get 'users_edit', to: 'users#edit', via: [:patch]
   get 'username_edit', to: 'users#edit_username', via: [:patch]
