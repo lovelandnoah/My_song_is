@@ -1,26 +1,31 @@
+<%= stylesheet_link_tag "registrations.css" %>
 <%= render 'layouts/simplenav' %>
 
-<div class="contents">
-
-  <div id="column-left">
-      <div class="nav-title">
-        <h5 class="salt title-spacing">
-           Sign in:
-        </h1>
-
-          <%= link_to image_tag('facebook-logo.png', :style =>"height:75px;", :id => "logo-login"), user_omniauth_authorize_path(:facebook) %>
-          <%= link_to image_tag('twitter-logo.png', :style =>"height:71px;", :id => "twitter-login"), user_omniauth_authorize_path(:twitter) %>
-
-        <h5 class="salt"> Or: </h5>
-
-        <div id="email-login">
-          <%= link_to "Sign Up Using Email", new_registration_path(resource_name) %>
-        </div>
-      </div>
+<div class="row">
+  <div class="section">   
+    <div class="center">  
+      <h1>
+        Sign In:
+      </h1>
+    </div>
   </div>
 
-  <div id="column-right">
-      <%= react_component 'TopSongs' %>
+  <div class="section">     
+    <div class="center">
+      <h1>
+        To Select Your Song
+      </h1>
+    </div>
   </div>
 
+  <div class="col l2 offset-l3 m2 offset-m3 s2 offset-s3">
+    <%= link_to image_tag('facebook-logo.png', :id => "logo-login"), user_omniauth_authorize_path(:facebook) %>
+  </div>
+  <div class="col l2 m2 s2">
+  <%= link_to image_tag('twitter-logo.png', :id => "twitter-login"), user_omniauth_authorize_path(:twitter) %>
+  </div>
+  <div class="col l2 m2 s2" id="email-login">
+    <%= link_to "Use Email", new_registration_path(resource_name) %>
+  </div>
+  </div>
 </div>

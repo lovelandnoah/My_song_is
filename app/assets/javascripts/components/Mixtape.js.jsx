@@ -20,8 +20,7 @@ class Mixtape extends React.Component{
   show_mixtape(){
 
   }
-
-
+  
   deleteMixtape(){
 
     let self = this;

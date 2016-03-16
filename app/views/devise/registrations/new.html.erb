@@ -1,33 +1,28 @@
 <%= render 'layouts/nolognav' %>
-<h3 class="salt center rel white-text stroke">
+<h1 class="centered">
   <strong>
     MySong.is
   </strong>
 </h3>
-<br>
-  
 <body class="home-body">
 <div class="container">
-  <h2 class="center salt">Sign up</h2>
-  <br />
-
+  <h1 class="centered">Sign up</h1>
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= devise_error_messages! %>
-      <div class="row">
-        <div class="field col s8 offset-s2">
-          <%= f.text_field :username, autofocus: true, placeholder: 'Username' %>
+      <div class="centered">
+        <div class="margin">
+          <%= f.text_field :username, autofocus: true, placeholder: 'Username', size: 35 %>
         </div>
-        <div class="field col s8 offset-s2">
-          <%= f.email_field :email, placeholder: 'Email' %>
+        <div class="margin">
+          <%= f.email_field :email, placeholder: 'Email', size: 35 %>
         </div>
-
-        <div class="field col s8 offset-s2">
-          <%= f.password_field :password, autocomplete: "off", placeholder: 'Password' %>
+        <div class="margin">
+          <%= f.password_field :password, autocomplete: "off", placeholder: 'Password', size: 35 %>
         </div>
       </div>
 
-    <div class="actions center">
-      <button class="btn waves-effect waves-light black-text"><%= f.submit "Sign Up" %></button>
+    <div class="centered">
+      <span id="signup-button"><%= f.submit "Sign Up", class: "finish-signup" %></span>
       <!-- <button class="btn mix-color waves-effect waves-light">Back</button> -->
     </div>
   <% end %>

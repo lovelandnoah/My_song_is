@@ -1,5 +1,6 @@
+= render 'layouts/nolognav'
 .container
-  %h2.center-align Edit your profile, #{@user.username}.
+  %h2.center-align Complete Registration.
   = devise_error_messages!
   = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
     - if !@omni

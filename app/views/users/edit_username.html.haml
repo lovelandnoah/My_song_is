@@ -26,6 +26,8 @@
         :style => "color:#aaa;",
         :onfocus => "if(this.value=='Profile Picture URL'){this.value='';this.style.color = '#000';}",
         :onblur => "if(this.value==''){this.value='Profile Picture URL';this.style.color = '#aaa';}"
-
     .actions.center
       %button.btn.waves-effect.waves-light= f.submit "Finish Sign Up"
+:javascript
+  $sample = document.getElementById("user_picture").value
+= react_component 'UpdatingImage', {picture: $sample}
