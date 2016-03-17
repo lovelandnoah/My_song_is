@@ -35,10 +35,24 @@ img {
   height: 50px;
 }
 
+.form-box {
+  width: 300px;
+  margin-left: 60px;  
+}
+
 .centered {
   text-align: center;
 }
 
 .margin {
   margin: 5px;
+}
+
+.new-account-form {
+  color: black;
+  background-color:white;
+  border:solid;
+  border-width:2px;
+  height:20px;
+  text-indent:5px;
 }

@@ -9,7 +9,6 @@
     this.pass = this.pass.bind(this);
     this.showSuggestions = this.showSuggestions.bind(this);
     this.displayUsersMixTapes = this.displayUsersMixTapes.bind(this);
-
     // this.doSearch = this.doSearch.bind(this);
   }
 
