@@ -1,33 +1,41 @@
+= stylesheet_link_tag "registrations.css" 
 = render 'layouts/nolognav'
-%a#about-us.bigger.image.white-text.stroke.text-glow-hover{:href => "/"} Home
-%h3.salt.center.rel.white-text.stroke MySong.is
-%body.bck
-.container
-  %h2.center-align Edit your profile, #{@user.username}.
+.row
+  %h1.center Customize Profile
   - flash.each do |name, msg|
     - if msg.class == Array
       - msg.each do |message|
         = content_tag :div, message, :id => "flash_#{name}"
-  = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-    = devise_error_messages!
-    = field_set_tag do
+  %div.form-box.col.m4.offset-m4.l4.offset-l4.s4.offset-s4
+    = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+      = devise_error_messages!
       = f.text_field :username, 
-        :value => "#{@username}",
-        :style => "color:#aaa;",
-        :onfocus => "if(this.value=='Username' || this.value=='#{@username}'){this.value='';this.style.color = '#000';}",  
-        :onblur => "if(this.value==''){this.value='#{@username}';this.style.color = '#aaa';}"
+        :id => "new-user",
+        autofocus: true,
+        :value => "Username",
+        :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;width:220px",
+        :onfocus => "if(this.value=='Username'){this.value='';this.style.color = '#000000';}",
+        :color => "white",
+        :onblur => "if(this.value==''){this.value='Username';this.style.color = '#000000';}"
       = f.text_field :name,
         :value => "Full Name",
-        :style => "color:#aaa;",
-        :onfocus => "if(this.value=='Full Name'){this.value='';this.style.color = '#000';}",
-        :onblur => "if(this.value==''){this.value='Full Name';this.style.color = '#aaa';}"
+        :id => "new-user",
+        :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;width:320px",
+        :color => "white",
+        :onfocus => "if(this.value=='Full Name'){this.value='';this.style.color = '#000000';}",
+        :onblur => "if(this.value==''){this.value='Full Name';this.style.color = '#aaaaaa';}"
       = f.text_field :picture,
         :value => "Profile Picture URL",
-        :style => "color:#aaa;",
-        :onfocus => "if(this.value=='Profile Picture URL'){this.value='';this.style.color = '#000';}",
+        :id => "new-user",
+        :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;width:320px",
+        :color => "white",
+        :onfocus => "if(this.value=='Profile Picture URL'){this.value='';this.style.color = '#000000';}",
         :onblur => "if(this.value==''){this.value='Profile Picture URL';this.style.color = '#aaa';}"
-    .actions.center
-      %button.btn.waves-effect.waves-light= f.submit "Finish Sign Up"
+      .section#separator
+      .centered.nav-button
+        %span#signup-button= f.submit "Save", class: "finish-signup transparent", style: "border: 0px !important;"
 :javascript
-  $sample = document.getElementById("user_picture").value
+$sample = document.getElementById("user_picture").value
 = react_component 'UpdatingImage', {picture: $sample}
+
+
