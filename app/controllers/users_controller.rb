@@ -7,6 +7,7 @@ class UsersController < ApplicationController
 
   respond_to :html, :json
 
+
 	def edit
 
 		# id = current_user.id
@@ -41,6 +42,9 @@ class UsersController < ApplicationController
     prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
 
     resource_updated = update_resource(resource, account_update_params)
+    if params[:user][:image]
+      @user.update_attributes(:image => params[:user][:image])
+    end
     yield resource if block_given?
     if resource_updated
       if is_flashing_format?
@@ -56,7 +60,6 @@ class UsersController < ApplicationController
     end
   end
 
-
 	def show
 		if current_user == nil && params[:id] == nil
 				redirect_to new_user_session_path
@@ -66,7 +69,10 @@ class UsersController < ApplicationController
 			else
 				@user = current_user
 			end
-      @img = @user.picture
+      @img = @user.image.url(:medium)
+      if @img == ""
+        @img = @user.picture
+      end
 			@mixtape = Mixtape.where(user_id: @user.id)
 			@mixtape_id = @user.id
 
@@ -82,14 +88,16 @@ class UsersController < ApplicationController
 		if current_user == nil
 			@offline = true
 		else
-			if /\.twimg/.match(current_user.picture)
-	      @img = current_user.picture.gsub("_normal", "")
-	    end
-	    if /\.graph\.facebook\.com/.match(current_user.picture)
-	      @img = current_user.picture + "?width=500&height=500"
-	    end
+      if @img == ""
+  			if /\.twimg/.match(current_user.picture)
+  	      @img = current_user.picture.gsub("_normal", "")
+  	    end
+  	    if /\.graph\.facebook\.com/.match(current_user.picture)
+  	      @img = current_user.picture + "?width=500&height=500"
+  	    end
+      end
 	  end
-	end
+  	end
 	
 	def show_user
 		if
@@ -150,7 +158,7 @@ class UsersController < ApplicationController
 	  end
 
 		def user_params
-			accessible = [ :name, :email, :username ]
+			accessible = [ :name, :email, :username, :image]
 			accessible << [ :password, :password_confirmation ] unless params[:user][:password].blank?
 			params.require(:user).permit(accessible)
 		end

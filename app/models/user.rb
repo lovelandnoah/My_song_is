@@ -5,10 +5,14 @@ class User < ActiveRecord::Base
   TEMP_EMAIL_PREFIX = "temporary@email"
   TEMP_EMAIL_REGEX = /\Atemporary@email/
 
+  has_attached_file :image, styles: { :medium => "320x" }, url: "/system/:hash.:extension", hash_secret: "devgitpoint"
+  # might have to add a path to store the pics they upload in the above line
+  validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
+
   # before_save :create_permalink
 
   has_one :mixtape, dependent: :destroy
-  has_many :identities,  dependent: :destroy 
+  has_many :identities,  dependent: :destroy
 
   accepts_nested_attributes_for :mixtape
 
@@ -23,6 +27,7 @@ class User < ActiveRecord::Base
   after_create :build_mixtape
 
   devise password_length: 4..72
+  
 
   # attr_accessor :current_password
 

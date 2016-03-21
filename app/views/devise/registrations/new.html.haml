@@ -3,11 +3,10 @@
 .row
   %h1.center Sign up
   %div.form-box.col.m4.offset-m4.l4.offset-l4.s4.offset-s4
-    = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-      = devise_error_messages!
+    = form_for(resource, as: resource_name, url: registration_path(resource_name), validate: true) do |f|
       = f.text_field :username, 
-      :id => "new-user",
       autofocus: true,
+      :class => "new-user",
       :value => "Username",
       :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;width:220px",
       :onfocus => "if(this.value=='Username'){this.value='';this.style.color = '#000000';}",
@@ -15,6 +14,7 @@
       :onblur => "if(this.value==''){this.value='Username';this.style.color = '#000000';}"
       = f.text_field :email,
       :value => "Email",
+      :class => "new-user",
       :id => "new-user",
       :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
       :onfocus => "if(this.value=='Email'){this.value='';this.style.color = '#000000';}",
@@ -22,11 +22,11 @@
       :onblur => "if(this.value==''){this.value='Email';this.style.color = '#000000';}"
       = f.text_field :password, autocomplete: "off", :class => 'new-account-form',
       :value => "New Password (4 characters minimum)",
-      :id => "new-user",
-      :class => "password-margin",
+      :id => "wat",
+      :class => "password-margin new-user",
       :autocomplete => "off",
       :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
       :onfocus => "if(this.value=='New Password (4 characters minimum)'){this.value='';this.style.color = '#000000';this.type='password'}",  
       :onblur => "if(this.value==''){this.value='New Password (4 characters minimum)';this.style.color = '#000000';this.type='text'}"
       .centered.nav-button
-        %span#signup-button= f.submit "Sign Up", class: "finish-signup transparent", style: "border: 0px !important;"
+        %span#signup-button= f.submit "Sign Up", class: "finish-signup transparent", style: "border: 0px !important;" 

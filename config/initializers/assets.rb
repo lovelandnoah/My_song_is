@@ -4,7 +4,8 @@
 Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w( registrations.css )
 Rails.application.config.assets.precompile += %w( images.css )
-
+Rails.application.config.assets.precompile += %w( rails.validations.js )
+Rails.application.config.assets.precompile += %w( components.js )
 # Add additional assets to the asset load path
 # Rails.application.config.assets.paths << Emoji.images_path
 

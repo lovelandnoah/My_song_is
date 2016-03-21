@@ -4,6 +4,10 @@ class RegistrationsController < Devise::RegistrationsController
     @user = current_user
     @username = @user.username
     @omni = logged_in_using_omniauth?
+    @image = @user.image
+    if @image == nil
+      @image = "Image"
+    end
     if @username == nil
       @username = "Username"
     end
@@ -31,6 +35,10 @@ class RegistrationsController < Devise::RegistrationsController
       params[:user][:picture] = nil
       params[:user].delete(:picture)
     end
+    if params[:user][:image].blank? || params[:user][:image] == "Profile image Upload"
+      params[:user][:image] = nil
+      params[:user].delete(:image)
+    end
     if params[:user][:password].blank? || params[:user][:password] == "New Password (4 characters minimum)"
       params[:user].delete(:password)
       params[:user].delete(:current_password)
@@ -42,6 +50,9 @@ class RegistrationsController < Devise::RegistrationsController
       end
       if params[:user][:picture]
         @user.update_attributes(:picture => params[:user][:picture])
+      end
+      if params[:user][:image]
+        @user.update_attributes(:image => params[:user][:image])
       end
       if params[:user][:email]
         @user.update_attributes(:email => params[:user][:email])
@@ -58,16 +69,16 @@ class RegistrationsController < Devise::RegistrationsController
       #     end
       #   end
     else
-        if @user.update_with_password(account_update_params)
-        set_flash_message :notice, :updated
-        # Sign in the user bypassing validation in case his password changed
-        sign_in @user, :bypass => true
-        redirect_to after_update_path_for(@user)
-      else
-        clean_up_passwords(resource)
-        respond_with_navigational(resource) do
-          render :username_edit_path
-        end
+      if @user.update_with_password(account_update_params)
+      set_flash_message :notice, :updated
+      # Sign in the user bypassing validation in case his password changed
+      sign_in @user, :bypass => true
+      redirect_to after_update_path_for(@user)
+    else
+      clean_up_passwords(resource)
+      respond_with_navigational(resource) do
+        render :username_edit_path
+      end
       end
     end
   end
@@ -79,7 +90,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def account_update_params
-    params.require(:user).permit(:username, :email, :password, :current_password, :name)
+    params.require(:user).permit(:username, :email, :password, :current_password, :name, :image)
   end
 
   def after_sign_up_path_for(resource)

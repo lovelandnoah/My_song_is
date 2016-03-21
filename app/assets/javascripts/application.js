@@ -9,10 +9,10 @@
 //
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
-//
+
 //= require jquery
-//= require jquery_ujs
 //= require jquery-ui
+//= require jquery_ujs
 //= require materialize-sprockets
 //= require react
 //= require react_ujs
@@ -20,3 +20,5 @@
 //= require best_in_place
 //= require components
 //= require FindStreamingSongs
+//= require rails.validations
+

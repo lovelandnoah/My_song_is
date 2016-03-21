@@ -10,7 +10,7 @@
     = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
       = devise_error_messages!
       = f.text_field :username, 
-        :id => "new-user",
+        :class => "new-user",
         autofocus: true,
         :value => "Username",
         :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;width:220px",
@@ -19,23 +19,44 @@
         :onblur => "if(this.value==''){this.value='Username';this.style.color = '#000000';}"
       = f.text_field :name,
         :value => "Full Name",
-        :id => "new-user",
+        :class => "new-user",
         :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;width:320px",
         :color => "white",
         :onfocus => "if(this.value=='Full Name'){this.value='';this.style.color = '#000000';}",
-        :onblur => "if(this.value==''){this.value='Full Name';this.style.color = '#aaaaaa';}"
+        :onblur => "if(this.value==''){this.value='Full Name';this.style.color = '#000000';}"
       = f.text_field :picture,
         :value => "Profile Picture URL",
-        :id => "new-user",
+        :class => "new-user pic-url",
         :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;width:320px",
         :color => "white",
         :onfocus => "if(this.value=='Profile Picture URL'){this.value='';this.style.color = '#000000';}",
-        :onblur => "if(this.value==''){this.value='Profile Picture URL';this.style.color = '#aaa';}"
+        :onblur => "if(this.value==''){this.value='Profile Picture URL';this.style.color = '#000000';}"
+      = f.file_field :image,
+        :id => "pictureInput"
+      #target
       .section#separator
       .centered.nav-button
         %span#signup-button= f.submit "Save", class: "finish-signup transparent", style: "border: 0px !important;"
 :javascript
-$sample = document.getElementById("user_picture").value
-= react_component 'UpdatingImage', {picture: $sample}
+  $(function() {
+    $('#pictureInput').on('change', function(event) {
+      var files = event.target.files;
+      var image = files[0]
+      var reader = new FileReader();
+      reader.onload = function(file) {
+        var img = new Image();
+        img.src = file.target.result;
+        // $('#target').html(img);
+        $('#target').css("background-image", "url(" + img.src + ")");
+      }
+      reader.readAsDataURL(image);
+    });
+  });
+
+  $(function() {
+    $('.pic-url').on('change', function(event) {
+      $('#target').css("background-image", "url(" + $('.pic-url').val() + ")");
+    });
+  });
 
 

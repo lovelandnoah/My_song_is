@@ -4,9 +4,14 @@ class UpdatingImage extends React.Component{
     
   }
 
+  componentDidMount(){
+
+  }
+
   render(){
     return(
-        <img src={this.props.picture}/>
+      <div id="target">
+      </div>
       )
   }
 }

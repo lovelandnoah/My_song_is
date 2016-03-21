@@ -5,7 +5,7 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.default_url_options = { host: config.app_domain }
   config.action_mailer.smtp_settings = {
-    address: 'mysongis325@gmail.com', 
+    address: 'mysongis325@gmail.com',
     port: '587',
     enable_starttls_auto: true,
     user_name: 'mysongis325@gmail.com',
@@ -14,7 +14,7 @@ Rails.application.configure do
     domain: 'http://tmix.herokuapp.com/'
   }
 
-
+  Paperclip.options[:command_path] = "/usr/local/bin/"
 
 
 

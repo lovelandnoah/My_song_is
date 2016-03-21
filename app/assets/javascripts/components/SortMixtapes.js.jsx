@@ -8,7 +8,7 @@ class SortMixtapes extends React.Component{
 	}
 
   componentDidMount(){
-     this.displayUsersMixTapes('users')    
+     this.displayUsersMixTapes('users')
   }
  
 	displayUsersMixTapes(search_terms){
@@ -38,14 +38,12 @@ class SortMixtapes extends React.Component{
   }
 
   renderFastForward(){
-    
     if(this.state.rangeStart < this.state.mixtapes.length - 4) {
       return(<i className="medium material-icons" onClick={this.upRange}>fast_forward</i>)
     }
   }
 
   renderFastRewind(){
-    
     if(this.state.rangeStart > 0) {
       return(<i className="medium material-icons" onClick={this.downRange}>fast_rewind</i>)
     }
