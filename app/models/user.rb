@@ -25,9 +25,10 @@ class User < ActiveRecord::Base
 
   validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
 
-  after_create :build_mixtape
-
   devise password_length: 4..72
+
+  before_create :build_mixtape
+
   
 
   # attr_accessor :current_password
@@ -87,9 +88,9 @@ class User < ActiveRecord::Base
 
   def build_mixtape
     mixtape = Mixtape.create()
-    # binding.pry
-    mixtape.user_id = self.id
+    mixtape.user_id = mixtape.id
     mixtape.save
+    binding.pry
   end
     # vanity URL
     # def create_permalink

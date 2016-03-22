@@ -41,14 +41,11 @@ class Mixtape extends React.Component{
   }
 
   render(){
-    
     let songs = this.props.mixtape.map( song => {
       let key = `mixtapeSong-${song.song_id}`;
       return(<SongDetails key={key} songName={song.song_name} artistName={song.artist_name} songId={song.song_id} />);
     });
-
     return(<div className="pagination">
-
             <div className='card small cyan z-depth-3 col s6 over playing-mixtape'>
              { this.deleteBtn() }
              <div className="toop">

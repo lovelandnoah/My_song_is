@@ -42,7 +42,7 @@
           :onblur => "if(this.value==''){this.value='#{@name}';this.style.color = '#aaa'}"
         = f.file_field :image,
           :value => "#{@image}",
-          :id => "new-user",
+          :id => "pictureInput",
           :class => "new-user",
           :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
           :onfocus => "if(this.value=='#{@image}'){this.value='';this.style.color = '#000000';}",
@@ -50,7 +50,7 @@
           :onblur => "if(this.value==''){this.value='#{@image}';this.style.color = '#000000';}"
         = f.text_field :picture,
           :value => "#{@picture}",
-          :class => "password-margin new-user",
+          :class => "password-margin new-user pic-url",
           :autocomplete => "off",
           :style => "color:#aaa;",
           :onfocus => "if(this.value=='#{@picture}'){this.value='';this.style.color = '#000';}",  
@@ -79,12 +79,35 @@
         :onfocus => "if(this.value=='#{@name}'){this.value='';this.style.color = '#000000';}",
         :color => "white",
         :onblur => "if(this.value==''){this.value='#{@name}';this.style.color = '#000000';}"
-        = f.file_field :image
+        = f.file_field :image,
+        :id => "pictureInput"
         = f.text_field :picture,
         :value => "#{@picture}",
-        :class => "password-margin new-user",
+        :class => "password-margin new-user pic-url",
         :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
         :onfocus => "if(this.value=='#{@picture}'){this.value='';this.style.color = '#000000';}",
         :color => "white",
         :onblur => "if(this.value==''){this.value='#{@picture}';this.style.color = '#000000';}"
-        %span#signup-button= f.submit "Save", class: "finish-signup transparent", style: "border: 0px !important;"
+        .centered.nav-button
+          %span#signup-button= f.submit "Save", class: "finish-signup transparent", style: "border: 0px !important;"
+:javascript
+  $(function() {
+    $('#pictureInput').on('change', function(event) {
+      var files = event.target.files;
+      var image = files[0]
+      var reader = new FileReader();
+      reader.onload = function(file) {
+        var img = new Image();
+        img.src = file.target.result;
+        // $('#target').html(img);
+        $('#target').css("background-image", "url(" + img.src + ")");
+      }
+      reader.readAsDataURL(image);
+    });
+  });
+
+  $(function() {
+    $('.pic-url').on('change', function(event) {
+      $('#target').css("background-image", "url(" + $('.pic-url').val() + ")");
+    });
+  });

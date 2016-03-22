@@ -163,11 +163,9 @@
       let key = `songsSearchedFor-${song.song_id}`
       songsSearchedFor.push(<MixTapeSong key={key} {...song}/>);
     });
-
-
     return(<div>
             <div className= 'card-panel mix-color' id="playing-mixtape">
-              <Mixtape mixtape={this.state.songs} current_user={this.props.current_user} author_id={this.props.author_id} current_user_id={this.props.current_user.id} id={this.props.mixtape_id} displayPlayMixtape={this.props.DisplayPlayMixtape}/>
+              <Mixtape mixtape={self.state.songs} current_user={this.props.current_user} author_id={this.props.author_id} current_user_id={this.props.current_user.id} id={this.props.mixtape_id} displayPlayMixtape={this.props.DisplayPlayMixtape}/>
             </div>
 
             <div id="mixtapeForm">
