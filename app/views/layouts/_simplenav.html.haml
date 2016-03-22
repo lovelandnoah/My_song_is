@@ -15,7 +15,7 @@
             :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
             :onfocus => "if(this.value=='Password'){this.value='';this.style.color = '#000000';this.type='password'}",
             :onblur => "if(this.value==''){this.value='Password';this.style.color = '#000000';this.type='text'}"
-          .nav-button
+          .nav-button.smallnav
             = f.submit "Log in", :class => 'transparent', :id => 'logout-button', :style => 'border: 0px !important;'
     -else
       #login-container

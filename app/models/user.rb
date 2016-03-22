@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   TEMP_EMAIL_PREFIX = "temporary@email"
   TEMP_EMAIL_REGEX = /\Atemporary@email/
 
+
   has_attached_file :image, styles: { :medium => "320x" }, url: "/system/:hash.:extension", hash_secret: "devgitpoint"
   # might have to add a path to store the pics they upload in the above line
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/

@@ -70,8 +70,10 @@ class UsersController < ApplicationController
 				@user = current_user
 			end
       @img = @user.image.url(:medium)
-      if @img == ""
-        @img = @user.picture
+      if @img == "/images/missing.png"
+        if @user.picture != nil
+          @img = @user.picture
+        end
       end
 			@mixtape = Mixtape.where(user_id: @user.id)
 			@mixtape_id = @user.id

@@ -1,5 +1,5 @@
-= stylesheet_link_tag "registrations.css"
 = render 'layouts/nolognav'
+= stylesheet_link_tag "registrations.css"
 .row
   %h1.center Sign up
   %div.form-box.col.m4.offset-m4.l4.offset-l4.s4.offset-s4
@@ -15,7 +15,6 @@
       = f.text_field :email,
       :value => "Email",
       :class => "new-user",
-      :id => "new-user",
       :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
       :onfocus => "if(this.value=='Email'){this.value='';this.style.color = '#000000';}",
       :color => "white",

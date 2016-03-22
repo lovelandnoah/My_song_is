@@ -8,18 +8,20 @@
       - if !@omni
         = f.text_field :username,
         :value => "#{@username}",
+        :class => "new-user",
         :style => "color:#aaa;",
         :onfocus => "if(this.value=='Username' || this.value == '#{@username}'){this.value='';this.style.color = '#000';}",
         :onblur => "if(this.value==''){this.value='#{@username}';this.style.color = '#aaa';}"
         = f.text_field :email,
         :value => "Email",
-        :id => "new-user",
+        :class => "new-user",
         :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
         :onfocus => "if(this.value=='Email'){this.value='';this.style.color = '#000000';}",
         :color => "white",
         :onblur => "if(this.value==''){this.value='Email';this.style.color = '#000000';}"
         = f.text_field :current_password,
           :value => "Current Password",
+          :class => "new-user",
           :autocomplete => "off",
           :style => "color:#aaa;",
           :onfocus => "if(this.value=='Current Password'){this.value='';this.style.color = '#000';this.type='password'}",
@@ -27,11 +29,13 @@
         = f.text_field :password,
           :value => "New Password (4 characters minimum)",
           :autocomplete => "off",
+          :class => "new-user",
           :style => "color:#aaa;",
           :onfocus => "if(this.value=='New Password (4 characters minimum)'){this.value='';this.style.color = '#000';this.type='password'}",
           :onblur => "if(this.value==''){this.value='New Password (4 characters minimum)';this.style.color = '#aaa';this.type='text'}"
         = f.text_field :name,
           :value => "#{@name}",
+          :class => "new-user",
           :autocomplete => "off",
           :style => "color:#aaa;",
           :onfocus => "if(this.value=='#{@name}'){this.value='';this.style.color = '#000';}",  
@@ -39,13 +43,14 @@
         = f.file_field :image,
           :value => "#{@image}",
           :id => "new-user",
+          :class => "new-user",
           :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
           :onfocus => "if(this.value=='#{@image}'){this.value='';this.style.color = '#000000';}",
           :color => "white",
           :onblur => "if(this.value==''){this.value='#{@image}';this.style.color = '#000000';}"
         = f.text_field :picture,
           :value => "#{@picture}",
-          :class => "password-margin",
+          :class => "password-margin new-user",
           :autocomplete => "off",
           :style => "color:#aaa;",
           :onfocus => "if(this.value=='#{@picture}'){this.value='';this.style.color = '#000';}",  
@@ -54,7 +59,7 @@
           %span#signup-button= f.submit "Sign Up", class: "finish-signup transparent", style: "border: 0px !important;"
       -else
         = f.text_field :username, 
-        :id => "new-user",
+        :class => "new-user",
         :value => "#{@username}",
         :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;width:220px",
         :onfocus => "if(this.value=='#{@username}'){this.value='';this.style.color = '#000000';}",
@@ -62,14 +67,14 @@
         :onblur => "if(this.value==''){this.value='#{@username}';this.style.color = '#000000';}"
         = f.text_field :email,
         :value => "#{@email}",
-        :id => "new-user",
+        :class => "new-user",
         :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
         :onfocus => "if(this.value=='#{@email}'){this.value='';this.style.color = '#000000';}",
         :color => "white",
         :onblur => "if(this.value==''){this.value='#{@email}';this.style.color = '#000000';}"
         = f.text_field :name,
         :value => "#{@name}",
-        :id => "new-user",
+        :class => "new-user",
         :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
         :onfocus => "if(this.value=='#{@name}'){this.value='';this.style.color = '#000000';}",
         :color => "white",
@@ -77,11 +82,9 @@
         = f.file_field :image
         = f.text_field :picture,
         :value => "#{@picture}",
-        :id => "new-user",
-        :class => "password-margin",
+        :class => "password-margin new-user",
         :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
         :onfocus => "if(this.value=='#{@picture}'){this.value='';this.style.color = '#000000';}",
         :color => "white",
         :onblur => "if(this.value==''){this.value='#{@picture}';this.style.color = '#000000';}"
-        .centered.nav-button
-          %span#signup-button= f.submit "Save", class: "finish-signup transparent", style: "border: 0px !important;"
+        %span#signup-button= f.submit "Save", class: "finish-signup transparent", style: "border: 0px !important;"

@@ -3,11 +3,6 @@ img {
   border: 0px;
 }
 
-.transparent {
-  border: 0px !important;
-  background-color: transparent; 
-}
-
 .hidden {
   display: none;
   height: 0px;
@@ -65,4 +60,8 @@ img {
   border-width:2px;
   height:20px;
   text-indent:5px;
+}
+
+.smallnav {
+  padding: 0px 0px 0px 0px !important;
 }
