@@ -1,9 +1,14 @@
 class SongDetails extends React.Component{
   constructor(props){
-    super(props)
+    super(props);
   }
 
   render() {
-    return(<li className="crd"> {this.props.songName} by {this.props.artistName} </li>)
-  }
+    return(
+      <div>
+        <p className=""> {this.props.songName} by {this.props.artistName} </p>
+        <button className="btn black-text" onClick={() => this.props.remove(this.props.songIndex)}>Delete</button>
+
+        </div>
+  )}
 }

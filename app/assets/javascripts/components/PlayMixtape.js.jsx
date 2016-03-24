@@ -8,7 +8,7 @@
     this.noArtists = this.noArtists.bind(this);
     this.pass = this.pass.bind(this);
     this.showSuggestions = this.showSuggestions.bind(this);
-    this.displayUsersMixTapes = this.displayUsersMixTapes.bind(this);
+    // this.displayUsersMixTapes = this.displayUsersMixTapes.bind(this);
     // this.doSearch = this.doSearch.bind(this);
   }
 
@@ -24,31 +24,30 @@
   }
 
   // sortmixtapes
-  displayUsersMixTapes(search_terms){
-    $.ajax({
-      url: '/mixtapes_users_mixtapes',
-      type: 'GET',
-      data: { search_term: search_terms}
-    }).success( data => {
-      this.setState({mixtapes: data.mixtapes});
-    }).error( data => {
-      console.log(data);
-    });
-  }
+  // displayUsersMixTapes(search_terms){
+  //   $.ajax({
+  //     url: '/mixtapes_users_mixtapes',
+  //     type: 'GET',
+  //     data: { search_term: search_terms}
+  //   }).success( data => {
+  //     this.setState({mixtapes: data.mixtapes});
+  //   }).error( data => {
+  //     console.log(data);
+  //   });
+  // }
 
 
-  // play mixtape original
   getSongs(){
     $.ajax({
       url: '/mixtapes_find_single_mixtape',
       type: 'GET',
       data: {mixtape_id: this.props.mixtape_id}
     }).success( data => {
-      this.setState({mixtapeName: data.name});
+      // this.setState({mixtapeName: data.name});
       this.setState({songs: data.songs});
+
     })
   }
-
   // doSearch(){
   //   this.getSearchResults();
   //   this.getImages();
@@ -147,25 +146,27 @@
 
   render(){
     self = this;
-    let searchResultCards = <Artist/>;
+    // let searchResultCards = <Artist/>;
     let i = 0;
+
     // if(this.state.results.length){ 
     //   searchResultCards = this.state.results[0].songmatch.map( artist => {
     //   return(<Artist rplay={self.playSong} mixtapeId={self.state.mixtape_id} getSongs={self.getSongs}/>)})}
     //}
 
+    // let songsSearchedFor = this.state.songsSearchedFor.map( song => {
+    //   let key = `songsSearchedFor-${song.song_id}`
+    //   songsSearchedFor.push(<MixTapeSong key={key} {...song}/>);
+    // });
+
     searchResultCards = this.state.results.length ? (
         this.state.results[0].songmatch.map( Sartist => {
-          return(<Artist title={Sartist.title} artist={Sartist.artist} key={`artist-${i += 1}`} rplay={self.playSong} mixtapeId={self.state.mixtape_id} getSongs={self.getSongs}  current_user={self.props.current_user}/>)
+          return(<Artist title={Sartist.title} artist={Sartist.artist} key={`artist-${i += 1}`} rplay={self.playSong} mixtapeId={self.state.mixtape_id} current_user={self.props.current_user}/>)
         })):([])
 
-    let songsSearchedFor = this.state.songsSearchedFor.map( song => {
-      let key = `songsSearchedFor-${song.song_id}`
-      songsSearchedFor.push(<MixTapeSong key={key} {...song}/>);
-    });
     return(<div>
             <div className= 'card-panel mix-color' id="playing-mixtape">
-              <Mixtape mixtape={self.state.songs} current_user={this.props.current_user} author_id={this.props.author_id} current_user_id={this.props.current_user.id} id={this.props.mixtape_id} displayPlayMixtape={this.props.DisplayPlayMixtape}/>
+              <Mixtape mixtape={self.state.songs} onChange={this.changeHandler} current_user={this.props.current_user} author_id={this.props.author_id} current_user_id={this.props.current_user.id} id={this.props.mixtape_id} displayPlayMixtape={this.props.DisplayPlayMixtape} />
             </div>
 
             <div id="mixtapeForm">

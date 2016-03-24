@@ -109,21 +109,18 @@ class Artist extends React.Component{
     if(self.props.current_user) {
       checkBox = this.displayAdd()
       }
-    return(<div>
-            <div className="nav4 card-panel height mix-color col l4 m6 s12 z-depth-3" onClick={() => this.play(this.props.title, this.props.artist)} >
-              <div className="card-content">
-                <p className="stylez truncate">
-                  <em>{this.props.title}</em>
-                  <br />
-                  {this.props.artist}
-                </p>
-                {this.newImage(this.props.title)}
-                <form action="#">
-                  {checkBox}
-                </form>
-                <img src={this.state.albumCoverUrl} width="200" height="200" />
+    return(<div className="search-result-container">
+              <div className="nav4 card-panel height mix-color col l4 m6 s12 z-depth-3" onClick={() => this.play(this.props.title, this.props.artist)} >
+                <div className="card-content">
+                    <span className="searchTitle">{this.props.title}</span>
+                    <span className="searchTitle">{this.props.artist}</span>
+                  {this.newImage(this.props.title)}
+                  <form action="#">
+                    {checkBox}
+                  </form>
+                  <img src={this.state.albumCoverUrl} />
+                </div>
               </div>
-            </div>
           </div>
           );
   }

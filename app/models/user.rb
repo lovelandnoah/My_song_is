@@ -90,7 +90,6 @@ class User < ActiveRecord::Base
     mixtape = Mixtape.create()
     mixtape.user_id = mixtape.id
     mixtape.save
-    binding.pry
   end
     # vanity URL
     # def create_permalink
