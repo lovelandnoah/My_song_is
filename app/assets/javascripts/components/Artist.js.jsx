@@ -113,7 +113,7 @@ class Artist extends React.Component{
               <div className="nav4 card-panel height mix-color col l4 m6 s12 z-depth-3" onClick={() => this.play(this.props.title, this.props.artist)} >
                 <div className="card-content">
                     <span className="searchTitle">{this.props.title}</span>
-                    <span className="searchTitle">{this.props.artist}</span>
+                    <span className="searchArtist">{this.props.artist}</span>
                   {this.newImage(this.props.title)}
                   <form action="#">
                     {checkBox}
