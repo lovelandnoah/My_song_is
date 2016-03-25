@@ -11,6 +11,7 @@ class Mixtape extends React.Component{
     // this.shuffle = this.shuffle.bind(this);
     this.playMultipleSongs = this.playMultipleSongs.bind(this);
     this.remove = this.remove.bind(this);
+    this.changeHandler = this.changeHandler.bind(this);
   }
 
   componentWillMount(){
@@ -69,6 +70,18 @@ class Mixtape extends React.Component{
   //   })
   // }
 
+  changeHandler(songIndex) {
+    $.ajax({
+      url: '/song/' + self.state.songs[songIndex].song_id,
+      type: 'DELETE',
+    }).success( data => {
+      //       data: {name: self.state.songs[songIndex].song_name, artist: self.state.songs[songIndex].artist_name, mixtape_id: self.props.mixtapeId}
+    });
+    if (typeof this.props.onChange === 'function') {
+        this.props.onChange(e.target.value);
+    }
+  }
+
   playMultipleSongs(){
     let queries = [];
     let that = this;
@@ -76,7 +89,7 @@ class Mixtape extends React.Component{
     // number queries starting with 0 which is blank
     let queryNo = [""]
     for(i=0;i<this.props.mixtape.length;i++){
-      queryNo.push(i + 1);
+      queryNo.push(i + 2);
     }
     queryNo.pop();
 
@@ -126,14 +139,14 @@ class Mixtape extends React.Component{
 
   }
 
-  remove(songIndex, that){
+  remove(songIndex){
     $.ajax({
       url: '/song/' + self.state.songs[songIndex].song_id,
       type: 'DELETE',
     }).success( data => {
       //       data: {name: self.state.songs[songIndex].song_name, artist: self.state.songs[songIndex].artist_name, mixtape_id: self.props.mixtapeId}
     });
-    
+    // this.props.changeHandler();
   }
 
   
@@ -156,10 +169,9 @@ class Mixtape extends React.Component{
   // }
 
   render(){
-
     let songs = this.props.mixtape.map( song => {
       let key = `mixtapeSong-${song.song_id}`;
-      return(<SongDetails key={key} songIndex={this.props.mixtape.indexOf(song)} songName={song.song_name} artistName={song.artist_name} songId={song.song_id} remove={this.remove} />);
+      return(<SongDetails key={key} songIndex={this.props.mixtape.indexOf(song)} songName={song.song_name} artistName={song.artist_name} songId={song.song_id} onChange={this.props.changeHandler} mixtape={this}/>);
 
     });
     return(<div className="pagination">
