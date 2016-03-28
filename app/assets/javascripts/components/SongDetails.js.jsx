@@ -14,7 +14,8 @@ class SongDetails extends React.Component{
   render() {
     return(
       <div>
-        <p className=""> {this.props.songName} by {this.props.artistName} </p>
+        <p className=""> {this.props.songName}</p>
+        <p> {this.props.artistName} </p>
         <button className="btn black-text" onClick={() => this.props.onChange(this.props.songIndex, this.props.songName, this.props.artistName)}>Delete</button>
       </div>
   )}

@@ -1,7 +1,7 @@
 class Artist extends React.Component{
   constructor(props){
     super(props)
-    this.state = {albumCoverUrl: "", songTitle: "", key: "", isMounted: false, isChecked: null}
+    this.state = {albumCoverUrl: "", key: "", title: this.props.title, artist: this.props.artist, isMounted: false, isChecked: null}
     this.play = this.play.bind(this)
     this.add = this.add.bind(this)
     this.albumCover = this.albumCover.bind(this)
@@ -18,15 +18,13 @@ class Artist extends React.Component{
       alert("Create an account to add your own songs!")
     }
     });
-
-
   }
 
   componentDidMount(){
     this.state.isMounted = true;
     this.albumCover();
     this.state.songTitle = self.props.title;
-    this.state.key = this.props.key
+    this.state.key = this.props.key;
     // this.state.isChecked = false;
     for(i=0;i<this.props.songs.length;i++){
       if(this.props.songs[i].song_name == this.props.title && this.props.songs[i].artist_name == this.props.artist){
@@ -83,15 +81,20 @@ class Artist extends React.Component{
   add(songName, artist){
     let self = this;
     if(!this.state.isChecked){
-      $.ajax({
-        url: '/song',
-        type: 'POST',
-        data: {name: songName, artist: artist, mixtape_id: this.props.mixtapeId}
-      }).success( data => {
-        this.state.isChecked = true;
-        self.props.getSongs();
-        $(self.props.title+self.props.artist).attr('checked', true);
-      });
+      if(this.props.songs.length<4){
+        $.ajax({
+          url: '/song',
+          type: 'POST',
+          data: {name: songName, artist: artist, mixtape_id: this.props.mixtapeId}
+        }).success( data => {
+          this.state.isChecked = true;
+          self.props.getSongs();
+        document.getElementById(self.props.title+self.props.artist).checked = true;
+        });
+      }
+      if(this.props.songs.length>=4){
+        document.getElementById(self.props.title+self.props.artist).checked = false;
+      }
     } else {
       let song_id;
       for(i=0;i<this.props.songs.length;i++){
@@ -132,6 +135,7 @@ class Artist extends React.Component{
   newImage(currentTitle){
     if(this.state.songTitle != currentTitle){
       this.albumCover();
+      this.state.songTitle = currentTitle;
     }
   }
 
@@ -150,6 +154,20 @@ class Artist extends React.Component{
     if(self.props.current_user) {
       checkBox = this.displayAdd()
       }
+
+    if(this.state.title != this.props.title || this.state.artist != this.props.artist){
+        this.state.isChecked = false;
+        document.getElementById(this.state.title+this.state.artist).checked = false;
+        document.getElementById(this.state.title+this.state.artist).id = this.props.title + this.props.artist;
+        this.state.title = this.props.title;
+        this.state.artist = this.props.artist;
+        for(i=0;i<this.props.songs.length;i++){
+        if(this.props.songs[i].song_name == this.props.title && this.props.songs[i].artist_name == this.props.artist){
+          document.getElementById(this.props.title+this.props.artist).checked = true;
+        }
+    }
+
+    }
     return(<div className="search-result-container">
               <div className="nav4 card-panel height mix-color col l4 m6 s12 z-depth-3" onClick={() => this.play(this.props.title, this.props.artist)} >
                 <div className="card-content">

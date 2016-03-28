@@ -170,6 +170,7 @@
       // });
       // this.setState({results: data});
       this.showFilteredResults(data)
+      
     });
   }
 
