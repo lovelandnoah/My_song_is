@@ -11,7 +11,22 @@
     this.changeHandler = this.changeHandler.bind(this);
     // this.displayUsersMixTapes = this.displayUsersMixTapes.bind(this);
     // this.doSearch = this.doSearch.bind(this);
+
+    //mixtape
+    this.songNameInPlayer = this.songNameInPlayer.bind(this);
+    this.pictureInPlayer = this.pictureInPlayer.bind(this);
+    this.albumCover = this.albumCover.bind(this);
+    // this.findPlay = this.findPlay.bind(this);
+    // this.shuffle = this.shuffle.bind(this);
+    this.playMultipleSongs = this.playMultipleSongs.bind(this);
+    this.remove = this.remove.bind(this);
+    this.changeHandler = this.changeHandler.bind(this);
   }
+
+  componentWillMount(){
+    this.setState({mixtapeUrl: "/mixtapes/" + this.props.mixtape_id});
+  }
+
 
   componentDidMount(){
     let self = this;
@@ -21,26 +36,91 @@
         self.filteredSearchResults()
       }
     })
-    self.getSongs();
+    this.getSongs();
   }
 
-  // sortmixtapes
-  // displayUsersMixTapes(search_terms){
-  //   $.ajax({
-  //     url: '/mixtapes_users_mixtapes',
-  //     type: 'GET',
-  //     data: { search_term: search_terms}
-  //   }).success( data => {
-  //     this.setState({mixtapes: data.mixtapes});
-  //   }).error( data => {
-  //     console.log(data);
-  //   });
-  // }
+  //mixtape methods
+  changeHandler(songIndex, title, artist) {
+    $.ajax({
+      url: '/song/' + this.state.songs[songIndex].song_id,
+      type: 'DELETE',
+    }).success( data => {
+      //       data: {name: self.state.songs[songIndex].song_name, artist: self.state.songs[songIndex].artist_name, mixtape_id: self.props.mixtapeId}
+      // this.setState({songs: data.songs});
+      this.getSongs();
+      if(document.getElementById(title+artist)){
+        document.getElementById(title+artist).checked = false;
+      } 
 
-  changeHandler(){
-      this.setState({songs: data.songs});
+    });
   }
 
+  playMultipleSongs(){
+    let queries = [];
+    let that = this;
+
+    // number queries starting with 0 which is blank
+    let queryNo = [""]
+    for(i=0;i<this.state.songs.length;i++){
+      queryNo.push(i + 2);
+    }
+    queryNo.pop();
+
+
+    for(i=0;i<this.state.songs.length;i++){
+      queries[i] = `&q${queryNo[i]}=(@artist%20${this.state.songs[i].artist_name.replace(/\s/g, '%20')}%20@title%20${this.state.songs[i].song_name.replace(/\s/g, '%20')})`
+    }
+    $.ajax({
+      url: "http://api.dar.fm/msi.php?" + queries.join(separator = [""]) + "&callback=jsonp&partner_token=9388418650",
+      jsonp: 'callback',
+      type: 'GET',
+      dataType: 'jsonp',
+    }).success( data => {      
+      if(data[0].success){
+        let player = document.getElementById("player")
+        player.src = "http://api.dar.fm/player_api.php?station_id=" + data[0].result[0].station_id + "&custom_style=radioslice&partner_token=9388418650"
+        that.albumCover(data[0].songmatch[0].title, data[0].songmatch[0].artist);
+        that.songNameInPlayer(data[0].songmatch[0].title, data[0].songmatch[0].artist);
+      }else{
+        alert("song not playing");
+      }
+    })
+  }
+
+  songNameInPlayer(title, artist){
+    let titleDisplay = document.getElementById("player-title").innerHTML = title;
+    let artistDisplay = document.getElementById("player-artist").innerHTML = artist;
+  }
+
+  pictureInPlayer(){
+    let pictureDisplay = document.getElementById("main-art").style.backgroundImage = `url(${this.state.albumCoverUrl})`;
+  }
+
+  albumCover(title, artist){
+    self = this;
+    $.ajax({
+      url: "http://api.dar.fm/songart.php?artist=" + artist + "&title=" + title + "&res=med&partner_token=9388418650",
+      jsonp: 'callback',
+      type: 'GET',
+      dataType: 'jsonp',
+    }).success( data => {
+      document.getElementById("main-art").style.backgroundImage = `url(${data[0].arturl})`;
+    });
+  }
+
+  show_mixtape(){
+
+  }
+
+  remove(songIndex){
+    $.ajax({
+      url: '/song/' + self.state.songs[songIndex].song_id,
+      type: 'DELETE',
+    }).success( data => {
+      //       data: {name: self.state.songs[songIndex].song_name, artist: self.state.songs[songIndex].artist_name, mixtape_id: self.props.mixtapeId}
+    });
+    this.changeHandler();
+  }
 
   getSongs(){
     $.ajax({
@@ -165,13 +245,27 @@
     // });
 
     searchResultCards = this.state.results.length ? (
-        this.state.results[0].songmatch.map( Sartist => {
-          return(<Artist title={Sartist.title} artist={Sartist.artist} key={`artist-${i += 1}`} rplay={self.playSong} mixtapeId={self.state.mixtape_id} current_user={self.props.current_user}/>)
-        })):([])
+    this.state.results[0].songmatch.map( Sartist => {
+      return(<Artist title={Sartist.title} songs={this.state.songs} getSongs={this.getSongs} artist={Sartist.artist} key={`artist-${i += 1}`} rplay={self.playSong} mixtapeId={self.state.mixtape_id} current_user={self.props.current_user}/>)
+    })):([])
+
+    let songs = self.state.songs.map( song => {
+    let key = `mixtapeSong-${song.song_id}`;
+      return(<SongDetails key={key} songIndex={self.state.songs.indexOf(song)} songName={song.song_name} artistName={song.artist_name} songId={song.song_id} onChange={this.changeHandler}/>);
+    });
 
     return(<div>
             <div className= 'card-panel mix-color' id="playing-mixtape">
-              <Mixtape mixtape={self.state.songs} onChange={this.changeHandler} current_user={this.props.current_user} author_id={this.props.author_id} current_user_id={this.props.current_user.id} id={this.props.mixtape_id} displayPlayMixtape={this.props.DisplayPlayMixtape} />
+              <div className="pagination">
+                <div className='card small cyan z-depth-3 col s6 over playing-mixtape'>
+                 <div className="toop">
+                  <button className="btn black-text" onClick={this.playMultipleSongs}>Play</button>
+                 </div>
+                  <div className='card-content white-text boxreset'>
+                     {songs}
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div id="mixtapeForm">
@@ -185,7 +279,6 @@
               {this.noArtists(searchResultCards)}
               {searchResultCards}
             </div>
-          </div>
-          )   
+        </div>)
   }
 }

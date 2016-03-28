@@ -1,7 +1,7 @@
 class Artist extends React.Component{
   constructor(props){
     super(props)
-    this.state = {albumCoverUrl: "", songTitle: "", key: "", isMounted: false}
+    this.state = {albumCoverUrl: "", songTitle: "", key: "", isMounted: false, isChecked: null}
     this.play = this.play.bind(this)
     this.add = this.add.bind(this)
     this.albumCover = this.albumCover.bind(this)
@@ -18,6 +18,8 @@ class Artist extends React.Component{
       alert("Create an account to add your own songs!")
     }
     });
+
+
   }
 
   componentDidMount(){
@@ -25,10 +27,28 @@ class Artist extends React.Component{
     this.albumCover();
     this.state.songTitle = self.props.title;
     this.state.key = this.props.key
+    // this.state.isChecked = false;
+    for(i=0;i<this.props.songs.length;i++){
+      if(this.props.songs[i].song_name == this.props.title && this.props.songs[i].artist_name == this.props.artist){
+        this.state.isChecked = true;
+      }
+    }
+    document.getElementById(this.props.title + this.props.artist).checked = this.state.isChecked;
   }
 
   componentWillUnmount(){
     this.state.isMounted = false;
+  }
+
+  componentWillUpdate(){
+    // this.state.isChecked = false;
+
+    // for(i=0;i<this.props.songs.length;i++){
+    //   if(this.props.songs[i].song_name == this.props.title && this.props.songs[i].artist_name == this.props.artist){
+    //     this.state.isChecked = true;
+    //   }
+    // }
+    // document.getElementById(this.props.title).checked = this.state.isChecked;
   }
 
   play(title, artist){
@@ -62,13 +82,37 @@ class Artist extends React.Component{
 
   add(songName, artist){
     let self = this;
-    $.ajax({
-      url: '/song',
-      type: 'POST',
-      data: {name: songName, artist: artist, mixtape_id: this.props.mixtapeId}
-    }).success( data => {
-       self.props.getSongs();
-    });
+    if(!this.state.isChecked){
+      $.ajax({
+        url: '/song',
+        type: 'POST',
+        data: {name: songName, artist: artist, mixtape_id: this.props.mixtapeId}
+      }).success( data => {
+        this.state.isChecked = true;
+        self.props.getSongs();
+        $(self.props.title+self.props.artist).attr('checked', true);
+      });
+    } else {
+      let song_id;
+      for(i=0;i<this.props.songs.length;i++){
+        if(this.props.songs[i].song_name == songName && this.props.songs[i].artist_name == artist){
+          song_id = this.props.songs[i].song_id;
+        }
+      }
+      if(song_id){
+        // delete song if unchecked
+        $.ajax({
+        url: '/song/' + song_id,
+        type: 'DELETE',
+        }).success( data => {
+          //       data: {name: self.state.songs[songIndex].song_name, artist: self.state.songs[songIndex].artist_name, mixtape_id: self.props.mixtapeId}
+          // this.setState({songs: data.songs});
+          this.state.isChecked = false;
+          self.props.getSongs();
+          $(self.props.title+self.props.artist).attr('checked', false);
+        });
+      }
+    }
   }
 
   albumCover(){
@@ -92,17 +136,14 @@ class Artist extends React.Component{
   }
 
   displayAdd(){
-      return(
-        <div>
-          <input id={this.props.title} type='checkbox'
-            defaultChecked={false}
-            onClick={() => this.add(this.props.title,
-              this.props.artist, this.checked)}
-            checked={this.state.isChecked}
-          ></input>
-          <label htmlFor={this.props.title}>Add</label>
-        </div>
-      );
+    return(
+      <div>
+        <input id={this.props.title+this.props.artist} type='checkbox'
+          onClick={() => this.add(this.props.title, this.props.artist, this.state.isChecked)}
+        ></input>
+        <label htmlFor={this.props.title}>Add</label>
+      </div>
+    );
   }
 
   render(){
