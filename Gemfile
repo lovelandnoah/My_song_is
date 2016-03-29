@@ -44,7 +44,6 @@ gem 'haml-rails'
 gem 'react-rails'
 gem 'puma'
 gem 'rails_12factor'
-gem 'font-awesome-sass'
 gem 'jquery-ui-rails'
 gem 'best_in_place', github: 'bernat/best_in_place'
 
