@@ -4,7 +4,7 @@
   %h1.center Customize Profile
   %div.form-box.col.m4.offset-m4.l4.offset-l4.s4.offset-s4
     = devise_error_messages!
-    = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { multipart: true }  ) do |f|
+    = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { multipart: true }, validate: true) do |f|
       - if !@omni
         = f.text_field :username,
         :value => "#{@username}",
