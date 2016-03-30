@@ -18,11 +18,18 @@ class UsersController < ApplicationController
 	end
 
 	def edit_username
-		@user = current_user
-    @username = @user.username
-    if @username == nil
-      @username = "Username"
-    end
+    # current_user.update_attributes(user_params)
+    current_user.save
+    # current_user.update_attributes(:username => params[:user][:username])
+    # if params[:user][:name]
+    #   current_user.update_attributes(:name => params[:user][:name])
+    # end
+    # if params[:user][:picture]
+    #   current_user.update_attributes(:picture => params[:user][:picture])
+    # end
+    # if params[:user][:image]
+    #   current_user.update_attributes(:image => params[:user][:image])
+    # end
 	end
 
   def update_bio
@@ -61,14 +68,16 @@ class UsersController < ApplicationController
   end
 
 	def show
+    if params[:id] != nil
+      @user = User.find_by_username(params[:id])
+    end
 		if current_user == nil && params[:id] == nil
-				redirect_to new_user_session_path
-				# @user = User.find_by_username(params[:id])
+			redirect_to new_user_session_path
 		else
-			if @user = User.find_by_username(params[:id])
-			else
-				@user = current_user
-			end
+      # if @user = User.find_by_username(params[:id])
+      if @user == nil
+			 @user = current_user
+      end
       @img = @user.image.url(:medium)
       if @img == "/images/missing.png"
         if @user.picture != nil
@@ -87,6 +96,7 @@ class UsersController < ApplicationController
 		  profile_url = request.original_url
 		  @qr = url_prefix + profile_url
 		end
+
 		if current_user == nil
 			@offline = true
 		else
@@ -99,7 +109,7 @@ class UsersController < ApplicationController
   	    end
       end
 	  end
-  	end
+  end
 	
 	def show_user
 		if
@@ -147,25 +157,24 @@ class UsersController < ApplicationController
 
 	private
 
-		def resource_name
-	    :user
-	  end
-	 
-	  def resource
-	    @resource ||= User.new
-	  end
-	 
-	  def devise_mapping
-	    @devise_mapping ||= Devise.mappings[:user]
-	  end
+	def resource_name
+    :user
+  end
+ 
+  def resource
+    @resource ||= User.new
+  end
+ 
+  def devise_mapping
+    @devise_mapping ||= Devise.mappings[:user]
+  end
 
-		def user_params
-			accessible = [ :name, :email, :username, :image]
-			accessible << [ :password, :password_confirmation ] unless params[:user][:password].blank?
-			params.require(:user).permit(accessible)
-		end
+	def user_params
+		accessible = [ :name, :email, :image, :username]
+		params.require(:user).permit(accessible)
+	end
 
-		def update_resource(resource, params)
-	    resource.update_without_password(params)
-    end
+	def update_resource(resource, params)
+    resource.update_without_password(params)
+  end
 end

@@ -19,9 +19,9 @@ class User < ActiveRecord::Base
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable
-  validates_uniqueness_of :username
-  validates_presence_of :username
+         :omniauthable, :authentication_keys => {email: true, username: false}
+  validates_uniqueness_of :username, unless: :skip_username_validation
+  # validates_presence_of :username
 
   validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
 
@@ -29,7 +29,10 @@ class User < ActiveRecord::Base
 
   before_create :build_mixtape
 
-  
+  attr_accessor :skip_username_validation
+
+
+
 
   # attr_accessor :current_password
 

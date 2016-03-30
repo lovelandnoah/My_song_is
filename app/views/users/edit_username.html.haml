@@ -1,17 +1,16 @@
 = stylesheet_link_tag "registrations.css" 
 = render 'layouts/nolognav'
 .row
-  %h1.center Customize Profile
+  %h1.away-from-edge Choose Username
   - flash.each do |name, msg|
     - if msg.class == Array
       - msg.each do |message|
         = content_tag :div, message, :id => "flash_#{name}"
-  %div.form-box.col.m4.offset-m4.l4.offset-l4.s4.offset-s4
+  %div.form-box.col.m4.l4.s4
     = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
       = devise_error_messages!
       = f.text_field :username, 
-        :class => "new-user",
-        autofocus: true,
+        :class => "new-user big-form",
         :value => "Username",
         :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;width:220px",
         :onfocus => "if(this.value=='Username'){this.value='';this.style.color = '#000000';}",
@@ -19,20 +18,21 @@
         :onblur => "if(this.value==''){this.value='Username';this.style.color = '#000000';}"
       = f.text_field :name,
         :value => "Full Name",
-        :class => "new-user",
+        :class => "new-user big-form",
         :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;width:320px",
         :color => "white",
         :onfocus => "if(this.value=='Full Name'){this.value='';this.style.color = '#000000';}",
         :onblur => "if(this.value==''){this.value='Full Name';this.style.color = '#000000';}"
       = f.text_field :picture,
         :value => "Profile Picture URL",
-        :class => "new-user pic-url",
+        :class => "new-user pic-url big-form",
         :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;width:320px",
         :color => "white",
         :onfocus => "if(this.value=='Profile Picture URL'){this.value='';this.style.color = '#000000';}",
         :onblur => "if(this.value==''){this.value='Profile Picture URL';this.style.color = '#000000';}"
       = f.file_field :image,
-        :id => "pictureInput"
+        :id => "pictureInput",
+        :class => "big-form img-upload"
       #target
       .section#separator
       .centered.nav-button

@@ -22,7 +22,7 @@ img {
 
 #email-login {
   font-size: 25px;
-  padding: 30px;
+  padding: 21px;
 }
 
 #signup-button {
@@ -41,7 +41,7 @@ img {
 }
 
 .form-box {
-  width: 300px;
+  width: 520px !important;
   margin-left: 60px;  
 }
 
@@ -68,4 +68,19 @@ img {
 
 .message {
   color: red;
+}
+
+.away-from-edge {
+  margin-left: 10px;
+}
+
+@media all {
+ .big-form {
+  font-size: 2rem !important;
+  width: 500px !important;
+ }
+ .img-upload {
+  height: 40px;
+  padding-top: 10px;
+ }
 }

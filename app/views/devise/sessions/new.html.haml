@@ -1,0 +1,17 @@
+= render 'layouts/simplenav'
+= stylesheet_link_tag "registrations.css"
+.row
+  .section
+    .center
+      %h1 
+        To Select Your Song
+  .section
+    .center
+      %h1
+        Sign In:
+  .col.l2.offset-l3.m2.offset-m3.s2.offset-s3
+    = link_to image_tag('facebook-logo.png', :id => "logo-login"), user_omniauth_authorize_path(:facebook)
+  .col.l2.m2.s2
+    = link_to image_tag('twitter-logo.png', :id => "twitter-login"), user_omniauth_authorize_path(:twitter)
+  #email-login.col.l2.m2.s2
+    = link_to "Use Email", new_registration_path(resource_name)
