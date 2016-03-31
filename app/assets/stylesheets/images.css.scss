@@ -9,6 +9,13 @@ img {
   width: 0px;
 }
 
+.invisible {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  opacity: 0;
+}
+
 #logo-login {
   margin: 20px;
 }
@@ -38,6 +45,7 @@ img {
   height: 200;
   background-size: 200px;
   background-repeat: no-repeat;
+  margin-top: 20px;
 }
 
 .form-box {
@@ -74,6 +82,11 @@ img {
   margin-left: 10px;
 }
 
+.upload-picture {
+  position: relative;
+  width: 500px;
+}
+
 @media all {
  .big-form {
   font-size: 2rem !important;
@@ -83,4 +96,5 @@ img {
   height: 40px;
   padding-top: 10px;
  }
+
 }
