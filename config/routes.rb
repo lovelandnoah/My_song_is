@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   resources :mixtapes
 
   get 'users_edit', to: 'users#edit', via: [:patch]
+
+
   get 'username_edit', to: 'users#edit_username', via: [:patch]
 
   put 'users/bio', to: 'users#update_bio'
@@ -25,7 +27,7 @@ Rails.application.routes.draw do
   get 'mixtapes_users_mixtapes', to: 'mixtapes#users_mixtapes'
   get '/calculate_average_rating', to: 'mixtapes#calculate_average_rating'
 
-  devise_for :users, :controllers => {registrations: 'registrations', :omniauth_callbacks => "omniauth_callbacks" }
+  devise_for :users, :controllers => { users: 'users', registrations: 'registrations', :omniauth_callbacks => "omniauth_callbacks" }
   # devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
   get ':id', to: 'users#show', as: 'show'

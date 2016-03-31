@@ -19,7 +19,6 @@ class UsersController < ApplicationController
 
 	def edit_username
     # current_user.update_attributes(user_params)
-    current_user.save
     # current_user.update_attributes(:username => params[:user][:username])
     # if params[:user][:name]
     #   current_user.update_attributes(:name => params[:user][:name])
@@ -30,6 +29,7 @@ class UsersController < ApplicationController
     # if params[:user][:image]
     #   current_user.update_attributes(:image => params[:user][:image])
     # end
+    @resource = current_user
 	end
 
   def update_bio
@@ -40,15 +40,15 @@ class UsersController < ApplicationController
   end
 
   def update
-    if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
-      params[:user].delete(:password)
-      params[:user].delete(:password_confirmation)
-    end
+    # if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
+    #   params[:user].delete(:password)
+    #   params[:user].delete(:password_confirmation)
+    # end
 
-    self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
-    prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
+    # self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
+    # prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
 
-    resource_updated = update_resource(resource, account_update_params)
+    resource_updated = update_resource(resource, user_params)
     if params[:user][:image]
       @user.update_attributes(:image => params[:user][:image])
     end
@@ -164,13 +164,13 @@ class UsersController < ApplicationController
   def resource
     @resource ||= User.new
   end
- 
+
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:user]
   end
 
 	def user_params
-		accessible = [ :name, :email, :image, :username]
+		accessible = [ :name, :picture, :image, :username]
 		params.require(:user).permit(accessible)
 	end
 

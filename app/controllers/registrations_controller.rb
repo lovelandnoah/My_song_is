@@ -1,5 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
 
+
   def new
     build_resource({})
     set_minimum_password_length
@@ -52,6 +53,7 @@ class RegistrationsController < Devise::RegistrationsController
       @email = "Email"
     end
   end
+
 
   def update
     @user = User.find(current_user.id)
