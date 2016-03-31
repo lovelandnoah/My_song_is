@@ -30,8 +30,8 @@
         :color => "white",
         :onfocus => "if(this.value=='Profile Picture URL'){this.value='';this.style.color = '#000000';}",
         :onblur => "if(this.value==''){this.value='Profile Picture URL';this.style.color = '#000000';}"
-      .btn.upload-picture
-        upload Profile Picture
+      .nav-button.upload-picture
+        Upload Profile Picture
         .invisible
           = f.file_field :image,
             :id => "pictureInput",
