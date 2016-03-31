@@ -9,6 +9,7 @@
     this.pass = this.pass.bind(this);
     this.showSuggestions = this.showSuggestions.bind(this);
     this.changeHandler = this.changeHandler.bind(this);
+    this.showMySongs = this.showMySongs.bind(this);
     // this.displayUsersMixTapes = this.displayUsersMixTapes.bind(this);
     // this.doSearch = this.doSearch.bind(this);
 
@@ -224,6 +225,12 @@
     }
   }
 
+  showMySongs(songs) {
+    if(this.props.current_user.id == this.props.author_id){
+      return(songs);
+    }
+  }
+
     // 
     //   let songs = this.state.songs.map( song => {
     // let key = `song-${song.song_id}`;
@@ -262,7 +269,7 @@
                   <button className="btn black-text" onClick={this.playMultipleSongs}>Play</button>
                  </div>
                   <div className='card-content white-text boxreset'>
-                     {songs}
+                     {this.showMySongs(songs)}
                   </div>
                 </div>
               </div>

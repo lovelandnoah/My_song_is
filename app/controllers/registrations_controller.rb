@@ -42,7 +42,7 @@ class RegistrationsController < Devise::RegistrationsController
     end
     @picture = @user.picture
     if @picture == nil
-      @picture = "Picture"
+      @picture = "Profile Picture URL"
     end
     @name = @user.name
     if @name == nil

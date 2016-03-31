@@ -40,13 +40,6 @@
           :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
           :onfocus => "if(this.value=='#{@name}'){this.value='';this.style.color = '#000000';}",  
           :onblur => "if(this.value==''){this.value='#{@name}'}"
-        = f.file_field :image,
-          :value => "#{@image}",
-          :id => "pictureInput",
-          :class => "new-user",
-          :style => "margin-bottom: 10px;",
-          :color => "white",
-          :onblur => "if(this.value==''){this.value='#{@image}';this.style.color = '#000000';}"
         = f.text_field :picture,
           :value => "#{@picture}",
           :class => "password-margin new-user pic-url",
@@ -54,6 +47,13 @@
           :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
           :onfocus => "if(this.value=='#{@picture}'){this.value='';this.style.color = '#000000';}",  
           :onblur => "if(this.value==''){this.value='#{@picture}';}"
+        .nav-button.upload-picture
+          Upload Profile Picture
+          .invisible
+            = f.file_field :image,
+              :id => "pictureInput",
+              :class => "big-form img-upload"
+        #target
         .centered.nav-button
           %span#signup-button= f.submit "Sign Up", class: "finish-signup transparent", style: "border: 0px !important;"
       -else
@@ -78,8 +78,6 @@
         :onfocus => "if(this.value=='#{@name}'){this.value='';this.style.color = '#000000';}",
         :color => "white",
         :onblur => "if(this.value==''){this.value='#{@name}';this.style.color = '#000000';}"
-        = f.file_field :image,
-        :id => "pictureInput"
         = f.text_field :picture,
         :value => "#{@picture}",
         :class => "password-margin new-user pic-url",
@@ -87,10 +85,17 @@
         :onfocus => "if(this.value=='#{@picture}'){this.value='';this.style.color = '#000000';}",
         :color => "white",
         :onblur => "if(this.value==''){this.value='#{@picture}';this.style.color = '#000000';}"
+        .nav-button.upload-picture
+          Upload Profile Picture
+          .invisible
+            = f.file_field :image,
+              :id => "pictureInput",
+              :class => "big-form img-upload"
+        #target
         .centered.nav-button
           %span#signup-button= f.submit "Save", class: "finish-signup transparent", style: "border: 0px !important;"
 :javascript
-  $(function() {
+  $(function showImage() {
     $('#pictureInput').on('change', function(event) {
       var files = event.target.files;
       var image = files[0]
@@ -105,8 +110,8 @@
     });
   });
 
-  $(function() {
+  $(function showPicture() {
     $('.pic-url').on('change', function(event) {
       $('#target').css("background-image", "url(" + $('.pic-url').val() + ")");
-    });
+    }).change();
   });
