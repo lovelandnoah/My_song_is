@@ -1,7 +1,7 @@
   class PlayMixtape extends React.Component{
   constructor(props){
     super(props)
-    this.state = { searched: false, mixtape_id: this.props.mixtape_id, mixtapeName: '', mixTapeCategory: '', songs: [], songsSearchedFor: [], songOrArtist: [], results: [], filteredResults: []};
+    this.state = { searched: false, mixtape_id: this.props.mixtape_id, mixtapeName: '', mixTapeCategory: '', songs: [], songsSearchedFor: [], songOrArtist: [], results: [], filteredResults: [], stationId: "", eventTriggered: false};
     this.getSongs = this.getSongs.bind(this);
     this.getSearchResults = this.getSearchResults.bind(this);
     this.filteredSearchResults = this.filteredSearchResults.bind(this);
@@ -9,6 +9,7 @@
     this.pass = this.pass.bind(this);
     this.showSuggestions = this.showSuggestions.bind(this);
     this.changeHandler = this.changeHandler.bind(this);
+    this.showMySongs = this.showMySongs.bind(this);
     // this.displayUsersMixTapes = this.displayUsersMixTapes.bind(this);
     // this.doSearch = this.doSearch.bind(this);
 
@@ -21,6 +22,11 @@
     this.playMultipleSongs = this.playMultipleSongs.bind(this);
     this.remove = this.remove.bind(this);
     this.changeHandler = this.changeHandler.bind(this);
+
+    this.checkNewSong = this.checkNewSong.bind(this);
+    this.attemptUpdate = this.attemptUpdate.bind(this);
+
+    this.changeStationId = this.changeStationId.bind(this);
   }
 
   componentWillMount(){
@@ -37,6 +43,7 @@
       }
     })
     this.getSongs();
+    this.checkNewSong();
   }
 
   //mixtape methods
@@ -58,7 +65,6 @@
   playMultipleSongs(){
     let queries = [];
     let that = this;
-
     // number queries starting with 0 which is blank
     let queryNo = [""]
     for(i=0;i<this.state.songs.length;i++){
@@ -75,16 +81,48 @@
       jsonp: 'callback',
       type: 'GET',
       dataType: 'jsonp',
-    }).success( data => {      
+    }).success( data => {
       if(data[0].success){
-        let player = document.getElementById("player")
+        let player = document.getElementById("player");
         player.src = "http://api.dar.fm/player_api.php?station_id=" + data[0].result[0].station_id + "&custom_style=radioslice&partner_token=9388418650"
         that.albumCover(data[0].songmatch[0].title, data[0].songmatch[0].artist);
         that.songNameInPlayer(data[0].songmatch[0].title, data[0].songmatch[0].artist);
+        that.changeStationId(data[0].result[0].station_id);
       }else{
         alert("song not playing");
       }
     })
+  }
+
+  checkNewSong(){
+    document.addEventListener('DOMContentLoaded', function(){
+    setInterval(self.attemptUpdate, 5000);
+    }, true);
+    let event = new CustomEvent('DOMContentLoaded', { "detail": "Example of an event" });
+    document.dispatchEvent(event);
+  }
+  
+  attemptUpdate(){
+    if(this.state.station_id != "") {
+      let that = this;
+      $.ajax({
+        url: "http://api.dar.fm/playlist.php?station_id=" + that.state.station_id + "&partner_token=9388418650",
+        jsonp: 'callback',
+        type: 'GET',
+        dataType: 'jsonp',
+      }).success( data => {
+        if(data[0] != undefined){
+          if(data[0].title != document.getElementById("player-title").innerHTML || data[0].artist != document.getElementById("player-artist").innerHTML) {
+          that.albumCover(data[0].title, data[0].artist);
+          that.songNameInPlayer(data[0].title, data[0].artist);
+        };
+      }
+      });
+    };
+  }
+
+  changeStationId(newId){
+    this.state.stationId = newId;
   }
 
   songNameInPlayer(title, artist){
@@ -108,8 +146,16 @@
     });
   }
 
-  show_mixtape(){
-
+  getSongs(){
+    let that = this;
+    $.ajax({
+      url: '/mixtapes_find_single_mixtape',
+      type: 'GET',
+      data: {mixtape_id: this.props.mixtape_id}
+    }).success( data => {
+      // this.setState({mixtapeName: data.name});
+      that.setState({songs: data.songs});
+    })
   }
 
   remove(songIndex){
@@ -122,17 +168,7 @@
     this.changeHandler();
   }
 
-  getSongs(){
-    $.ajax({
-      url: '/mixtapes_find_single_mixtape',
-      type: 'GET',
-      data: {mixtape_id: this.props.mixtape_id}
-    }).success( data => {
-      // this.setState({mixtapeName: data.name});
-      this.setState({songs: data.songs});
 
-    })
-  }
   // doSearch(){
   //   this.getSearchResults();
   //   this.getImages();
@@ -171,6 +207,7 @@
       // this.setState({results: data});
       this.showFilteredResults(data);
     });
+    $(".ui-helper-hidden-accessible").hide();
   }
 
   showFilteredResults(results){
@@ -199,6 +236,12 @@
         });
       }
     });
+    $("#search").autocomplete({
+    messages: {
+        noResults: '',
+        results: function() {}
+    }
+});
   }
 
    pass(){
@@ -207,11 +250,12 @@
   }
 
   noArtists(artists){
-    if(artists.length == 0 && this.state.searched) {
+    if(artists && this.state.searched) {
       if(self.refs.searchText.value == "") {
-        return(<h5>Please search for an artist! </h5>);
+        // return(<h5>Please search for an artist! </h5>);
+        // todo: only show when no search value
       }else {
-        return(<h5>Could not find {self.refs.searchText.value} playing on a station.</h5>);
+        // return(<h5>Add a song!.</h5>);
       }
     }
   }
@@ -221,6 +265,12 @@
       return;
     }else{
       return player;
+    }
+  }
+
+  showMySongs(songs) {
+    if(this.props.current_user.id == this.props.author_id){
+      return(songs);
     }
   }
 
@@ -243,15 +293,18 @@
     //   let key = `songsSearchedFor-${song.song_id}`
     //   songsSearchedFor.push(<MixTapeSong key={key} {...song}/>);
     // });
-
-    searchResultCards = this.state.results.length ? (
-    this.state.results[0].songmatch.map( Sartist => {
-      return(<Artist title={Sartist.title} songs={this.state.songs} getSongs={this.getSongs} artist={Sartist.artist} key={`artist-${i += 1}`} rplay={self.playSong} mixtapeId={self.state.mixtape_id} current_user={self.props.current_user}/>)
-    })):([])
+    let searchResultCards = null;
+    if(this.state.results[0] != undefined) {
+      searchResultCards = this.state.results.length ? (
+      this.state.results[0].songmatch.map( Sartist => {
+        return(<Artist title={Sartist.title} songs={this.state.songs} getSongs={this.getSongs} artist={Sartist.artist} key={`artist-${i += 1}`} rplay={self.playSong} mixtapeId={self.state.mixtape_id} current_user={self.props.current_user} changeStationId={this.changeStationId} songId={Sartist.artist+Sartist.title}/>)
+      })):([])
+    }
 
     let songs = self.state.songs.map( song => {
-    let key = `mixtapeSong-${song.song_id}`;
-      return(<SongDetails key={key} songIndex={self.state.songs.indexOf(song)} songName={song.song_name} artistName={song.artist_name} songId={song.song_id} onChange={this.changeHandler}/>);
+    // let key = `mixtapeSong-${song.song_id}`;
+      return(<Artist songs={this.state.songs} key={`mixtapeSong-${song.song_id}`} songIndex={self.state.songs.indexOf(song)} title={song.song_name} artist={song.artist_name} songId={"selected" + song.song_id} onChange={this.changeHandler} getSongs={this.getSongs} changeStationId={this.changeStationId}/>);
+      // return(<SongDetails key={key} songIndex={self.state.songs.indexOf(song)} songName={song.song_name} artistName={song.artist_name} songId={song.song_id} onChange={this.changeHandler}/>);
     });
 
     return(<div>
@@ -262,7 +315,7 @@
                   <button className="btn black-text" onClick={this.playMultipleSongs}>Play</button>
                  </div>
                   <div className='card-content white-text boxreset'>
-                     {songs}
+                     {this.showMySongs(songs)}
                   </div>
                 </div>
               </div>
@@ -272,9 +325,8 @@
             </div>
 
             <h5 className="salt">Search for an Artist or Song:</h5>
-              <input id='search' className='small-search' type='text' ref='searchText' autofocus='true' placeholder='Artist'/>
+              <input id='search' className='small-search' type='text' ref='searchText' autofocus='true' placeholder='Song or Artist'/>
             <button onClick={this.filteredSearchResults} className='btn waves-effect waves-light black-text'>Search</button>
-            <h4 className='subtit salt'>Songs Playing:</h4>
             <div className='row'>
               {this.noArtists(searchResultCards)}
               {searchResultCards}

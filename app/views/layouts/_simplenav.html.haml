@@ -16,11 +16,11 @@
             :onfocus => "if(this.value=='Password'){this.value='';this.style.color = '#000000';this.type='password'}",
             :onblur => "if(this.value==''){this.value='Password';this.style.color = '#000000';this.type='text'}"
           .nav-button.smallnav
-            = f.submit "Log in", :class => 'transparent', :id => 'logout-button', :style => 'border: 0px !important;'
+            = f.submit "Login", :class => 'transparent', :id => 'logout-button', :style => 'border: 0px !important;'
     -else
       #login-container
         .nav-button#logout-button
-          =link_to "Log out", destroy_user_session_path, :method => :delete, :class => "home-link bigger image white-text stroke text-glow-hover log"
+          =link_to "Logout", destroy_user_session_path, :method => :delete, :class => "home-link bigger image white-text stroke text-glow-hover log"
         .nav-button#edit-profile-button
           =link_to "Edit Profile", edit_user_registration_path, :class => "home-link bigger image white-text stroke text-glow-hover log"
     %img#logo

@@ -8,7 +8,7 @@
 			- else
 				=@user.bio
 			#player-container
-				#main-art
+				#main-art.pick-song-image
 				#player-bottom
 					#player-title
 					#player-artist
@@ -16,7 +16,7 @@
 		- if current_user == nil
 			#create-link
 				= link_to 'Create your own MySong.is profile', '/users/sign_in'
-	#column-right
-		= react_component 'TopSongs', { current_user: current_user, mixtape_id: @mixtape_id }
 = react_component 'PlayMixtape', { current_user: current_user, mixtape_id: @mixtape_id, author_id: @user.id }
 = react_component 'Player'
+#column-right
+	= react_component 'TopSongs', { current_user: current_user, mixtape_id: @mixtape_id }

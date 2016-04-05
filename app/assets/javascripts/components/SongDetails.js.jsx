@@ -5,7 +5,6 @@ class SongDetails extends React.Component{
   }
 
   changeHandler(){
-    debugger
     if (typeof this.props.onChange === 'function') {
         this.props.onChange(e.target.value);
     }

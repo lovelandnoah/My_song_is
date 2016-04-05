@@ -48,6 +48,44 @@ img {
   margin-top: 60px;
 }
 
+.big-box {
+  position: relative;
+  top: 18px !important;
+  left: 20px !important;
+  transform: scale(2, 2) !important;
+}
+
+.ui-autocomplete {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  float: left;
+  display: none;
+  min-width: 160px;
+  _width: 160px;
+  padding: 4px 0;
+  margin: 2px 0 0 0;
+  list-style: none;
+  background-color: #ffffff;
+  border-color: #ccc;
+  border-color: rgba(0, 0, 0, 0.2);
+  border-style: solid;
+  border-width: 1px;
+  /*-webkit-border-radius: 5px;*/
+  /*-moz-border-radius: 5px;*/
+  border-radius: 5px;
+  /*-webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);*/
+  /*-moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);*/
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  /*-webkit-background-clip: padding-box;*/
+  /*-moz-background-clip: padding;*/
+  background-clip: padding-box;
+  *border-right-width: 2px;
+  *border-bottom-width: 2px;
+
+}
+
 .form-box {
   width: 520px !important;
   margin-left: 60px;  
@@ -86,6 +124,18 @@ img {
   position: relative;
   width: 500px;
   left: 23px;
+}
+
+.left-justify {
+  left: 20px !important;
+}
+
+.nocolor {
+  background-color: transparent !important;
+}
+
+.pick-song-image {
+  background-image: url('/pick-song-image.png') !important;
 }
 
 @media all {

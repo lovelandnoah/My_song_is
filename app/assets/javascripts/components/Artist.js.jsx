@@ -18,20 +18,22 @@ class Artist extends React.Component{
       alert("Create an account to add your own songs!")
     }
     });
+    this.state.songId = this.props.songId;
   }
 
   componentDidMount(){
     this.state.isMounted = true;
     this.albumCover();
     this.state.songTitle = self.props.title;
-    this.state.key = this.props.key;
+    ////
+    this.state.songId = this.props.songId;
     // this.state.isChecked = false;
     for(i=0;i<this.props.songs.length;i++){
       if(this.props.songs[i].song_name == this.props.title && this.props.songs[i].artist_name == this.props.artist){
         this.state.isChecked = true;
       }
     }
-    document.getElementById(this.props.title + this.props.artist).checked = this.state.isChecked;
+    // document.getElementById(self.props.songId).checked = this.state.isChecked;
   }
 
   componentWillUnmount(){
@@ -63,6 +65,7 @@ class Artist extends React.Component{
       let player = document.getElementById("player")
       if(data.length){
         player.src = "http://api.dar.fm/player_api.php?station_id=" + data[0].station_id + "&custom_style=radioslice&partner_token=9388418650"
+        this.props.changeStationId(data[0].station_id);
       } else {
         //todo: message song is not playing
       }
@@ -89,11 +92,11 @@ class Artist extends React.Component{
         }).success( data => {
           this.state.isChecked = true;
           self.props.getSongs();
-        document.getElementById(self.props.title+self.props.artist).checked = true;
+        document.getElementById(self.props.songId).checked = true;
         });
       }
       if(this.props.songs.length>=4){
-        document.getElementById(self.props.title+self.props.artist).checked = false;
+        document.getElementById(self.props.songId).checked = false;
       }
     } else {
       let song_id;
@@ -112,7 +115,7 @@ class Artist extends React.Component{
           // this.setState({songs: data.songs});
           this.state.isChecked = false;
           self.props.getSongs();
-          $(self.props.title+self.props.artist).attr('checked', false);
+          $(this.props.songId).attr('checked', false);
         });
       }
     }
@@ -142,28 +145,27 @@ class Artist extends React.Component{
   displayAdd(){
     return(
       <div>
-        <input id={this.props.title+this.props.artist} type='checkbox'
+        <input id={this.props.songId} type='checkbox' className='big-box'
           onClick={() => this.add(this.props.title, this.props.artist, this.state.isChecked)}
         ></input>
-        <label htmlFor={this.props.title}>Add</label>
       </div>
     );
   }
 
   render(){
-    if(self.props.current_user) {
-      checkBox = this.displayAdd()
-      }
+    // if(self.props.current_user) {
+    checkBox = this.displayAdd()
+      // }
 
     if(this.state.title != this.props.title || this.state.artist != this.props.artist){
         this.state.isChecked = false;
-        document.getElementById(this.state.title+this.state.artist).checked = false;
-        document.getElementById(this.state.title+this.state.artist).id = this.props.title + this.props.artist;
-        this.state.title = this.props.title;
-        this.state.artist = this.props.artist;
+        // set perm id?
+        document.getElementById(this.state.songId).checked = false;
+        document.getElementById(this.state.songId).id = this.props.songId;
+        this.state.songId = this.props.songId;
         for(i=0;i<this.props.songs.length;i++){
         if(this.props.songs[i].song_name == this.props.title && this.props.songs[i].artist_name == this.props.artist){
-          document.getElementById(this.props.title+this.props.artist).checked = true;
+          document.getElementById(this.props.songId).checked = true;
         }
     }
 
@@ -174,7 +176,7 @@ class Artist extends React.Component{
                     <span className="searchTitle">{this.props.title}</span>
                     <span className="searchArtist">{this.props.artist}</span>
                   {this.newImage(this.props.title)}
-                  <form action="#">
+                  <form action="#" className="nocolor">
                     {checkBox}
                   </form>
                   <img src={this.state.albumCoverUrl} />
