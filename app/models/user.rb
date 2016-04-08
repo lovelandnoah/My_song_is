@@ -20,7 +20,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :authentication_keys => {email: true, username: false}
-  validates_uniqueness_of :username, unless: :skip_username_validation
+  validates_uniqueness_of :username, unless: :skip_username_validation, client_validations: { class:
+  'User' }
   # validates_presence_of :username
 
   validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update

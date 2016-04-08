@@ -63,7 +63,6 @@ class Artist extends React.Component{
       dataType: 'jsonp',
     }).success( data => {
       let player = document.getElementById("player")
-      debugger
       if(data.length){
         player.src = "http://api.dar.fm/player_api.php?station_id=" + data[0].station_id + "&custom_style=radioslice&partner_token=9388418650"
         this.props.changeStationId(data[0].station_id);
@@ -158,6 +157,8 @@ class Artist extends React.Component{
     checkBox = this.displayAdd()
       // }
     if(this.state.title != this.props.title || this.state.artist != this.props.artist){
+      this.state.title = this.props.title;
+      this.state.artist = this.props.artist;
       this.state.isChecked = false;
       // set perm id?
       document.getElementById(this.state.songId).checked = false;

@@ -138,6 +138,16 @@ img {
   background-image: url('/pick-song-image.png') !important;
 }
 
+.hidden-desktop {
+  display: none;
+}
+
+.large-search {
+  height: 40px;
+  width: 400px;
+  font-size: 28px;
+}
+
 @media all {
  .big-form {
   font-size: 2rem !important;

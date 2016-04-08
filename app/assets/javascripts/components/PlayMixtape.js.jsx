@@ -31,6 +31,9 @@
 
   componentWillMount(){
     this.setState({mixtapeUrl: "/mixtapes/" + this.props.mixtape_id});
+    
+    // $("#main-art").addClass("hidden-desktop");
+    // $("#player-bottom").addClass("hidden-desktop");
   }
 
 
@@ -132,6 +135,8 @@
 
   pictureInPlayer(){
     let pictureDisplay = document.getElementById("main-art").style.backgroundImage = `url(${this.state.albumCoverUrl})`;
+    $("main-art").removeClass("hidden-desktop");
+    $("player-bottom").removeClass("hidden-desktop");
   }
 
   albumCover(title, artist){
@@ -143,6 +148,8 @@
       dataType: 'jsonp',
     }).success( data => {
       document.getElementById("main-art").style.backgroundImage = `url(${data[0].arturl})`;
+      $("main-art").removeClass("hidden-desktop");
+      $("player-bottom").removeClass("hidden-desktop");
     });
   }
 
@@ -284,6 +291,7 @@
     // let searchResultCards = <Artist/>;
     let i = 0;
 
+
     // if(this.state.results.length){ 
     //   searchResultCards = this.state.results[0].songmatch.map( artist => {
     //   return(<Artist rplay={self.playSong} mixtapeId={self.state.mixtape_id} getSongs={self.getSongs}/>)})}
@@ -312,11 +320,11 @@
               <div className="pagination">
                 <div className='card small cyan z-depth-3 col s6 over playing-mixtape'>
                  <div className="toop">
+                  <div className='card-content white-text boxreset'>
+                    {this.showMySongs(songs)}
+                  </div>
                   <button className="btn black-text" onClick={this.playMultipleSongs}>Play</button>
                  </div>
-                  <div className='card-content white-text boxreset'>
-                     {this.showMySongs(songs)}
-                  </div>
                 </div>
               </div>
             </div>
@@ -325,7 +333,7 @@
             </div>
 
             <h5 className="salt">Search for an Artist or Song:</h5>
-              <input id='search' className='small-search' type='text' ref='searchText' autofocus='true' placeholder='Song or Artist'/>
+              <input id='search' className='large-search' type='text' ref='searchText' autofocus='true' placeholder='Song or Artist'/>
             <button onClick={this.filteredSearchResults} className='btn waves-effect waves-light black-text'>Search</button>
             <div className='row'>
               {this.noArtists(searchResultCards)}

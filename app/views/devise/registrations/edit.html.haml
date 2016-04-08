@@ -54,8 +54,7 @@
               :id => "pictureInput",
               :class => "big-form img-upload"
         #target
-        .centered.nav-button
-          %span#signup-button= f.submit "Sign Up", class: "finish-signup transparent", style: "border: 0px !important;"
+        .centered.nav-button.btn.waves-effect= f.submit "Save", class: "finish-signup transparent btn waves-effect", style: "border: 0px !important;"
       -else
         = f.text_field :username, 
         :class => "new-user",
