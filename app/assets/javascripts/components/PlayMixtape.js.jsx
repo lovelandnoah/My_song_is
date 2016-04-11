@@ -332,7 +332,7 @@
             <div id="mixtapeForm">
             </div>
 
-            <h5 className="salt">Search for an Artist or Song:</h5>
+            <h5 className="salt searchLabel">Search for an Artist or Song:</h5>
               <input id='search' className='large-search' type='text' ref='searchText' autofocus='true' placeholder='Song or Artist'/>
             <button onClick={this.filteredSearchResults} className='btn waves-effect waves-light black-text'>Search</button>
             <div className='row'>

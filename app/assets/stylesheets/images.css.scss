@@ -16,6 +16,10 @@ img {
   opacity: 0;
 }
 
+#biography {
+  position: absolute;
+}
+
 #logo-login {
   margin: 20px;
 }
@@ -146,6 +150,10 @@ img {
   height: 40px;
   width: 400px;
   font-size: 28px;
+}
+
+.searchLabel {
+  margin-top: 140px;
 }
 
 @media all {
