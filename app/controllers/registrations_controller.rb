@@ -1,6 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
 
-
   def new
     build_resource({})
     set_minimum_password_length

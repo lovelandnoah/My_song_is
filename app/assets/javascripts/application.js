@@ -21,4 +21,5 @@
 //= require components
 //= require FindStreamingSongs
 //= require rails.validations
-
+//= require jquery.validate
+//= require jquery.validate.additional-methods

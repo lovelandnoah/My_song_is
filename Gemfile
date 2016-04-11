@@ -32,6 +32,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'paperclip', '~> 4.1'
 gem 'client_side_validations', '~> 4.2.3'
+gem 'jquery-validation-rails'
 
 
 gem 'devise'

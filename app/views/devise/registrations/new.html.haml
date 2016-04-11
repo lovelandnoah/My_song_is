@@ -1,11 +1,18 @@
+
+
 = render 'layouts/navNotLoggedIn'
 = stylesheet_link_tag "registrations.css"
 .row
   %h1.away-from-edge Sign up
+  - if @user == current_user
+    =best_in_place @user, :bio, as: :textarea, url: 'users/bio/'
+  - else
+    =@user.bio
   %div.form-box.col.m4.l4.s4
-    = form_for(resource, as: resource_name, url: registration_path(resource_name), validate: true) do |f|
+    = form_for(resource, as: resource_name, url: registration_path(resource_name), validate: true, id: 'new-user') do |f|
       = f.text_field :email,
       :value => "Email",
+      :id => "user-email",
       :class => "new-user big-form",
       :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
       :onfocus => "if(this.value=='Email'){this.value='';this.style.color = '#000000';}",
@@ -17,7 +24,18 @@
       :class => "password-margin new-user big-form",
       :autocomplete => "off",
       :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
-      :onfocus => "if(this.value=='New Password (4 characters minimum)'){this.value='';this.style.color = '#000000';this.type='password'}",  
+      :onfocus => "if(this.value=='New Password (4 characters minimum)'){this.value='';this.style.color = '#000000';this.type='password'}",
       :onblur => "if(this.value==''){this.value='New Password (4 characters minimum)';this.style.color = '#000000';this.type='text'}"
       .nav-button
-        %span#signup-button= f.submit "Sign Up", class: "finish-signup transparent", style: "border: 0px !important;" 
+        %span#signup-button= f.submit "Sign Up", class: "finish-signup transparent", style: "border: 0px !important;"
+:javascript
+  $(document).ready(function () {
+  $(“#new_user”).validate({
+  debug: true,
+  rules: {
+  “user[email]“: {required: true, email: true},
+  “user[password]“: {required: true, minlength: 6},
+  “user[password_confirmation]“: {required: true, equalTo: “#user_password”}
+  }
+  });
+  });
