@@ -75,25 +75,28 @@
     }
     queryNo.pop();
 
-
-    for(i=0;i<this.state.songs.length;i++){
-      queries[i] = `&q${queryNo[i]}=(@artist%20${this.state.songs[i].artist_name.replace(/\s/g, '%20')}%20@title%20${this.state.songs[i].song_name.replace(/\s/g, '%20')})`
-    }
-    $.ajax({
-      url: "http://api.dar.fm/msi.php?" + queries.join(separator = [""]) + "&callback=jsonp&partner_token=9388418650",
-      jsonp: 'callback',
-      type: 'GET',
-      dataType: 'jsonp',
-    }).success( data => {
-      if(data[0].success){
-        let player = document.getElementById("player");
-        player.src = "http://api.dar.fm/player_api.php?station_id=" + data[0].result[0].station_id + "&custom_style=radioslice&partner_token=9388418650"
-        that.albumCover(data[0].songmatch[0].title, data[0].songmatch[0].artist);
-        that.songNameInPlayer(data[0].songmatch[0].title, data[0].songmatch[0].artist);
-        that.changeStationId(data[0].result[0].station_id);
-      }else{
-        alert("song not playing");
+      for(i=0;i<this.state.songs.length;i++){
+        queries[i] = `&q${queryNo[i]}=(@artist%20${this.state.songs[i].artist_name.replace(/\s/g, '%20')}%20@title%20${this.state.songs[i].song_name.replace(/\s/g, '%20')})`
       }
+      $.ajax({
+        url: "http://api.dar.fm/msi.php?" + queries.join(separator = [""]) + "&callback=jsonp&partner_token=9388418650",
+        jsonp: 'callback',
+        type: 'GET',
+        dataType: 'jsonp',
+      }).success( data => {
+        if(data[0].success){
+          if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+            window.open("http://onrad.io/" + data[0].result[0].artist + "." + data[0].result[0].title);
+          } else {
+            let player = document.getElementById("player");
+            player.src = "http://api.dar.fm/player_api.php?station_id=" + data[0].result[0].station_id + "&custom_style=radioslice&partner_token=9388418650"
+            that.albumCover(data[0].songmatch[0].title, data[0].songmatch[0].artist);
+            that.songNameInPlayer(data[0].songmatch[0].title, data[0].songmatch[0].artist);
+            that.changeStationId(data[0].result[0].station_id);
+          }
+        }else{
+          alert("song not playing");
+        }
     })
   }
 
@@ -231,6 +234,7 @@
   }
 
   showSuggestions(){
+    that = this;
     $("#search").autocomplete( {
       source(request, response){ 
         $.ajax({
@@ -239,16 +243,14 @@
           type: "GET",
           dataType: "jsonp",
         }).success( data => {
-            response(data)
+          response(data)
+
         });
-      }
-    });
-    $("#search").autocomplete({
-    messages: {
-        noResults: '',
-        results: function() {}
+      },
+    select(event, ui){
+      that.filteredSearchResults();
     }
-});
+    });
   }
 
    pass(){

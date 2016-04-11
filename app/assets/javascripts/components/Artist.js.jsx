@@ -72,6 +72,17 @@ class Artist extends React.Component{
     });
   }
 
+  mobilePlayButton(title, artist){
+    mobileTitle = title.replace(/\s/g, ".")
+    mobileArtist = artist.replace(/\s/g, ".")
+
+    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+      window.open("http://onrad.io/" + mobileArtist + "." + mobileTitle)
+    } else {
+      this.play(title, artist);
+    }
+  }
+
   songNameInPlayer(title, artist){
     let titleDisplay = document.getElementById("player-title").innerHTML = title;
     let artistDisplay = document.getElementById("player-artist").innerHTML = artist;
@@ -174,7 +185,7 @@ class Artist extends React.Component{
     }
 
     return(<div className="search-result-container" id={this.props.songIndex}>
-                <div className="nav4 card-panel height mix-color col l4 m6 s12 z-depth-3" onClick={() => this.play(this.props.title, this.props.artist)} >
+                <div className="nav4 card-panel height mix-color col l4 m6 s12 z-depth-3" onClick={() => this.mobilePlayButton(this.props.title, this.props.artist)} >
                 <div className="card-content">
                     <span className="searchTitle">{this.props.title}</span>
                     <span className="searchArtist">{this.props.artist}</span>
