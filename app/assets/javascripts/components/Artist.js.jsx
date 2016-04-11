@@ -172,8 +172,9 @@ class Artist extends React.Component{
     }
 
     }
-    return(<div className="search-result-container">
-              <div className="nav4 card-panel height mix-color col l4 m6 s12 z-depth-3" onClick={() => this.play(this.props.title, this.props.artist)} >
+
+    return(<div className="search-result-container" id={this.props.songIndex}>
+                <div className="nav4 card-panel height mix-color col l4 m6 s12 z-depth-3" onClick={() => this.play(this.props.title, this.props.artist)} >
                 <div className="card-content">
                     <span className="searchTitle">{this.props.title}</span>
                     <span className="searchArtist">{this.props.artist}</span>
