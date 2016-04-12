@@ -311,24 +311,15 @@
       })):([])
     }
     let songs = self.state.songs.map( song => {
-
     // let key = `mixtapeSong-${song.song_id}`;
       return(<Artist songs={this.state.songs} key={`mixtapeSong-${song.song_id}`} songIndex={"favorite" + self.state.songs.indexOf(song)} title={song.song_name} artist={song.artist_name} songId={"selected" + song.song_id} onChange={this.changeHandler} getSongs={this.getSongs} changeStationId={this.changeStationId}/>);
       // return(<SongDetails key={key} songIndex={self.state.songs.indexOf(song)} songName={song.song_name} artistName={song.artist_name} songId={song.song_id} onChange={this.changeHandler}/>);
     });
 
     return(<div id="search-box">
-            <div className= 'card-panel mix-color' id="playing-mixtape">
-              <div className="pagination">
-                <div className='card small cyan z-depth-3 col s6 over playing-mixtape'>
-                 <div className="toop">
-                  <div className='card-content white-text boxreset'>
+            <div className='' id="">
                     {this.showMySongs(songs)}
-                  </div>
                   <button className="btn black-text" onClick={this.playMultipleSongs}>Play</button>
-                 </div>
-                </div>
-              </div>
             </div>
 
             <div id="mixtapeForm">
