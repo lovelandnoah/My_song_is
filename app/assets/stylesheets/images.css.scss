@@ -45,6 +45,12 @@ img {
   padding: 5px;
 }
 
+#selected-songs-placeholder {
+  margin-top: 75px;
+  margin-bottom: 75px;
+  margin-left: 10px;
+}
+
 #target {
   height: 200;
   background-size: 200px;
@@ -56,7 +62,8 @@ img {
   position: relative;
   top: 18px !important;
   left: 20px !important;
-  transform: scale(2, 2) !important;
+  transform: scale(2, 2);
+  /*!important*/
 }
 
 .ui-autocomplete {
@@ -113,7 +120,7 @@ img {
 }
 
 .smallnav {
-  padding: 0px 0px 0px 0px !important;
+  padding: 0px 0px 0px 0px /!*important*/;
 }
 
 .message {
@@ -131,15 +138,15 @@ img {
 }
 
 .left-justify {
-  left: 20px !important;
+  left: 20px /*!important*/;
 }
 
 .nocolor {
-  background-color: transparent !important;
+  background-color: transparent /*!important*/;
 }
 
 .pick-song-image {
-  background-image: url('/pick-song-image.png') !important;
+  background-image: url('/pick-song-image.png') /*!important*/;
 }
 
 .hidden-desktop {
@@ -158,8 +165,8 @@ img {
 
 @media all {
  .big-form {
-  font-size: 2rem !important;
-  width: 500px !important;
+  font-size: 2rem /*!important*/;
+  width: 500px /*!important*/;
  }
  .img-upload {
   height: 40px;

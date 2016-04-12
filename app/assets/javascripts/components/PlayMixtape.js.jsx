@@ -27,6 +27,8 @@
     this.attemptUpdate = this.attemptUpdate.bind(this);
 
     this.changeStationId = this.changeStationId.bind(this);
+
+    this.playMode = this.playMode.bind(this);
   }
 
   componentWillMount(){
@@ -63,6 +65,15 @@
       } 
 
     });
+  }
+
+  playMode(){
+    random = document.getElementById("random");
+    if(random.checked){
+      this.playMultipleSongs();
+    } else {
+      this.
+    }
   }
 
   playMultipleSongs(){
@@ -279,10 +290,10 @@
 
   showMySongs(songs) {
     if(this.props.current_user.id == this.props.author_id){
-      if(songs != []){
+      if(songs.length != 0){
         return(songs);
       } else{
-        return(<div>No songs selected</div>);
+        return(<div id="selected-songs-placeholder">No songs selected</div>);
       }
 
     }
@@ -324,7 +335,11 @@
     return(<div id="search-box">
             <div className='' id="">
               {this.showMySongs(songs)}
-              <button className="play-button" onClick={this.playMultipleSongs}>Play</button>
+              <form action="">
+                <input id="random" type="radio" name="play-type" value="random" defaultChecked="checked">Random</input>
+                <input id="first" type="radio" name="play-type" value="first">First</input>
+              </form>
+              <button className="play-button" onClick={this.playMode}>Play</button>
             </div>
 
             <div id="mixtapeForm">
