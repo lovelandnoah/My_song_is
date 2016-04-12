@@ -20,6 +20,8 @@
 //= require best_in_place
 //= require components
 //= require FindStreamingSongs
-//= require rails.validations
 //= require jquery.validate
 //= require jquery.validate.additional-methods
+//= require underscore
+//= require json2
+//= require judge

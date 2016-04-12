@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   resources :home
   resources :mixtapes
 
+  mount Judge::Engine => '/judge'
+
   get 'users_edit', to: 'users#edit', via: [:patch]
 
 
