@@ -23,6 +23,10 @@ Rails.application.routes.draw do
 
   get 'username_edit', to: 'users#edit_username', via: [:patch]
 
+  devise_scope :user do
+    get '/login', to: 'registrations#login', via: [:post]
+  end
+
   put 'users/bio', to: 'users#update_bio'
 
   get 'mixtapes_find_single_mixtape', to: 'mixtapes#find_single_mixtape'

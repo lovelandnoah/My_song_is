@@ -2,8 +2,27 @@
 
 = render 'layouts/navNotLoggedIn'
 = stylesheet_link_tag "registrations.css"
+%h1.away-from-edge Login
+= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+  .col.s4
+    = f.text_field :email,
+      :value => "Email",
+      :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
+      :onfocus => "if(this.value=='Email'){this.value='';this.style.color = '#000000';}",
+      :color => "white",
+      :onblur => "if(this.value==''){this.value='Email';this.style.color = '#000000';}"
+  .col.s4
+    = f.text_field :password,
+      :value => "Password",
+      :autocomplete => "off",
+      :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
+      :onfocus => "if(this.value=='Password'){this.value='';this.style.color = '#000000';this.type='password'}",
+      :onblur => "if(this.value==''){this.value='Password';this.style.color = '#000000';this.type='text'}"
+  .col.s4
+    = f.submit "Login", :class => 'btn black-text teal lighten-4'
+
 .row
-  %h1.away-from-edge Sign up
+  %h1.away-from-edge Or Sign up
   - if @user == current_user
     =best_in_place @user, :bio, as: :textarea, url: 'users/bio/'
   - else
@@ -29,13 +48,13 @@
       .nav-button
         %span#signup-button= f.submit "Sign Up", class: "finish-signup transparent", style: "border: 0px !important;"
 :javascript
-  $(document).ready(function () {
-  $(“#new_user”).validate({
-  debug: true,
-  rules: {
-  “user[email]“: {required: true, email: true},
-  “user[password]“: {required: true, minlength: 6},
-  “user[password_confirmation]“: {required: true, equalTo: “#user_password”}
-  }
-  });
-  });
+  // $(document).ready(function () {
+  // $(“#new_user”).validate({
+  // debug: true,
+  // rules: {
+  // “user[email]“: {required: true, email: true},
+  // “user[password]“: {required: true, minlength: 6},
+  // “user[password_confirmation]“: {required: true, equalTo: “#user_password”}
+  // }
+  // });
+  // });

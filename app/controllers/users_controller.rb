@@ -67,6 +67,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def login
+    binding.pry
+  end
+
 	def show
     if params[:id] != nil
       @user = User.find_by_username(params[:id])
