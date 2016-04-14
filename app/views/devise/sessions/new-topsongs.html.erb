@@ -10,8 +10,8 @@
         <h3>
           To Select Your Song
         </h3>
-          <%= link_to image_tag('facebook-logo.png', :style =>"height:75px;", :id => "logo-login"), user_omniauth_authorize_path(:facebook) %>
-          <%= link_to image_tag('twitter-logo.png', :style =>"height:71px;", :id => "twitter-login"), user_omniauth_authorize_path(:twitter) %>
+          <%= link_to image_tag('facebook-logo.png', :id => "logo-login"), user_omniauth_authorize_path(:facebook) %>
+          <%= link_to image_tag('twitter-logo.png', :id => "twitter-login"), user_omniauth_authorize_path(:twitter) %>
         <div id="email-login">
           <%= link_to "Sign Up Using Email", new_registration_path(resource_name) %>
         </div>

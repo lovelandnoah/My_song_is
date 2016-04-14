@@ -6,14 +6,14 @@
 = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
   = f.text_field :email,
     :value => "Email",
-    :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
+    :style => "color:#000000;background-color:white;",
     :onfocus => "if(this.value=='Email'){this.value='';this.style.color = '#000000';}",
     :color => "white",
     :onblur => "if(this.value==''){this.value='Email';this.style.color = '#000000';}"
   = f.text_field :password,
     :value => "Password",
     :autocomplete => "off",
-    :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
+    :style => "color:#000000;background-color:white;",
     :onfocus => "if(this.value=='Password'){this.value='';this.style.color = '#000000';this.type='password'}",
     :onblur => "if(this.value==''){this.value='Password';this.style.color = '#000000';this.type='text'}"
   = f.submit "Login"
@@ -29,7 +29,7 @@
     :value => "Email",
     :id => "user-email",
     :class => "new-user big-form",
-    :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
+    :style => "color:#000000;background-color:white;",
     :onfocus => "if(this.value=='Email'){this.value='';this.style.color = '#000000';}",
     :color => "white",
     :onblur => "if(this.value==''){this.value='Email';this.style.color = '#000000';}"
@@ -38,7 +38,7 @@
     :id => "wat",
     :class => "password-margin new-user big-form",
     :autocomplete => "off",
-    :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
+    :style => "color:#000000;background-color:white;",
     :onfocus => "if(this.value=='New Password (4 characters minimum)'){this.value='';this.style.color = '#000000';this.type='password'}",
     :onblur => "if(this.value==''){this.value='New Password (4 characters minimum)';this.style.color = '#000000';this.type='text'}"
     = f.submit "Sign Up"
