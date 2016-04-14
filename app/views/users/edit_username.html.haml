@@ -64,13 +64,28 @@
     }).change();
   });
 
-  judge.validate(document.getElementById('username-field'), {
-    valid: function(element) {
-      element.style.display = 'none !important';
-    },
-    invalid: function(element, messages) {
-      element.style.border = '1px solid red !important';
-      alert(messages.join(','));
-    }
-  });
+  // judge.validate(document.getElementById('username-field'), {
+  //   valid: function(element) {
+  //     debugger
+  //     element.style.display = 'none !important';
+  //   },
+  //   invalid: function(element, messages) {
+  //     debugger
+  //     element.style.border = '1px solid red !important';
+  //     alert(messages.join(','));
+  //   }
+  // });
+
+  // $('#username-field').click( function() {
+  //   judge.validate(document.getElementById('username-field'), {
+  //     valid: function(element) {
+  //       debugger
+  //       element.style.display = 'none !important';
+  //     },
+  //     invalid: function(element, messages) {
+  //       debugger
+  //       element.style.border = '1px solid red !important';
+  //       alert(messages.join(','));
+  //     }
+  // });
 

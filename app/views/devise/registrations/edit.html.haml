@@ -40,6 +40,11 @@
           :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
           :onfocus => "if(this.value=='#{@name}'){this.value='';this.style.color = '#000000';}",  
           :onblur => "if(this.value==''){this.value='#{@name}'}"
+        #explanation What to do when your profile is visited:
+        = f.radio_button :playMethod, "Random", :checked => true, :id => "pm1"
+        %label{:for => "pm1"} Random
+        = f.radio_button :playMethod, "First", :id => "pm2"
+        %label{:for => "pm2"} First
         = f.text_field :picture,
           :value => "#{@picture}",
           :class => "password-margin new-user pic-url",
@@ -54,7 +59,7 @@
               :id => "pictureInput",
               :class => "big-form img-upload"
         #target
-        .centered.nav-button.btn.waves-effect= f.submit "Save", class: "finish-signup transparent btn waves-effect", style: "border: 0px !important;"
+        .centered.waves-effect= f.submit "Save", class: "finish-signup transparent btn waves-effect", style: "border: 0px !important;"
       -else
         = f.text_field :username, 
         :class => "new-user",

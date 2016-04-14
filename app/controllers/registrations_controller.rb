@@ -51,6 +51,7 @@ class RegistrationsController < Devise::RegistrationsController
     if /temporary@email/.match(@email)
       @email = "Email"
     end
+
   end
 
 
@@ -86,6 +87,13 @@ class RegistrationsController < Devise::RegistrationsController
       if params[:user][:email]
         @user.update_attributes(:email => params[:user][:email])
       end
+
+      if params[:user][:playMethod] == "First"
+        @user.update_attributes(:playMethod => params[:user][:playMethod])
+      else
+        @user.update_attributes(:playMethod => params[:user][:playMethod])
+      end
+
       # Sign in the user bypassing validation in case his password changed
       sign_in @user, :bypass => true
       redirect_to after_update_path_for(@user)
@@ -112,6 +120,12 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  # def new_play_method 
+  #   binding.pry
+  #   current_user.update_column('playMethod', params[:playMethod].to_i == 0 ? 0 : 1)
+  #   redirect_to :back
+  # end
+
   private
 
   # def resource_name
@@ -127,7 +141,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def account_update_params
-    params.require(:user).permit(:username, :email, :password, :current_password, :name, :image)
+    params.require(:user).permit(:username, :email, :password, :current_password, :name, :image, :playMethod)
   end
 
   def after_sign_up_path_for(resource)

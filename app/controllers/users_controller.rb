@@ -15,6 +15,7 @@ class UsersController < ApplicationController
 		@user = current_user
 		# @user = current_user.id
 
+
 	end
 
 	def edit_username
@@ -67,11 +68,8 @@ class UsersController < ApplicationController
     end
   end
 
-  def login
-    binding.pry
-  end
-
 	def show
+    binding.pry
     if params[:id] != nil
       @user = User.find_by_username(params[:id])
     end
@@ -174,7 +172,7 @@ class UsersController < ApplicationController
   end
 
 	def user_params
-		accessible = [ :name, :picture, :image, :username]
+		accessible = [ :name, :picture, :image, :username, :playMethod]
 		params.require(:user).permit(accessible)
 	end
 

@@ -368,11 +368,6 @@
     return(<div id="search-box">
             <div className='' id="">
               {this.showMySongs(songs)}
-              What to do when your profile is visited:
-              <form action="">
-                <input id="random" type="radio" name="play-type" value="random" defaultChecked="checked">Play Random</input>
-                <input id="first" type="radio" name="play-type" value="first">Play First</input>
-              </form>
               <button className="play-button" onClick={this.playMode}>Play</button>
             </div>
 
