@@ -2,5 +2,4 @@
   .contents
     %img#logo.left-justify
       #login-container
-        .nav-button#logout-button
-          =link_to "Logout", destroy_user_session_path, :method => :delete, :class => "home-link bigger image white-text stroke text-glow-hover log"
+        =link_to "Logout", destroy_user_session_path, :method => :delete, :class => "logout-button"

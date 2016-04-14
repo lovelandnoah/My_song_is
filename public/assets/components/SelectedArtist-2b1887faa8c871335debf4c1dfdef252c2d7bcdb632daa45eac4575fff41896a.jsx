@@ -154,11 +154,14 @@ class Artist extends React.Component{
   }
 
   displayAdd(){
+    var styles = {backgroundImage: 'url(http://i.imgur.com/BJr1kmn.jpg)'}
+
     return(
       <div>
-        <input id={this.props.songId} type='checkbox' className='big-box' checked={this.state.isChecked}
+        <input id={this.props.songId} type='checkbox' className='check-box' name={this.props.songId} checked={this.state.isChecked}
           onClick={() => this.add(this.props.title, this.props.artist, this.state.isChecked)}
         ></input>
+        <label htmlFor={this.props.songId} style={styles}></label>
       </div>
     );
   }
@@ -184,7 +187,7 @@ class Artist extends React.Component{
   }
 
     return(<div className="search-result-container" id={this.props.songIndex}>
-            <div className="nav4 card-panel height mix-color col l4 m6 s12 z-depth-3" onClick={() => this.mobilePlayButton(this.props.title, this.props.artist)} >
+            <div className="nav4 card-panel height mix-color" onClick={() => this.mobilePlayButton(this.props.title, this.props.artist)} >
               <div className="card-content">
                   <span className="searchTitle">{this.props.title}</span>
                   <span className="searchArtist">{this.props.artist}</span>
@@ -192,7 +195,6 @@ class Artist extends React.Component{
                 <form action="#" className="nocolor">
                   {checkBox}
                 </form>
-                <img src={this.state.albumCoverUrl} />
                 <a className="btn individual-play-button" onClick={()=> this.mobilePlayButton(this.props.title, this.props.artist)}> Play </a>
               </div>
             </div>

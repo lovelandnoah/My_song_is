@@ -2,7 +2,7 @@
 .contents
 	#column-left
 		.container
-			%img.nav-profile-pic.borderr.z-depth-3#nav-profile-pic{alt: "profile_pic", src: @img, height: 200, width: "auto"}
+			%img.nav-profile-pic.borderr.z-depth-3#nav-profile-pic{alt: "profile_pic", src: @img}
 			- if @user == current_user
 				=best_in_place @user, :bio, as: :textarea, url: 'users/bio/', id: 'biography'
 			- else

@@ -58,12 +58,24 @@ img {
   margin-top: 60px;
 }
 
-.big-box {
-  position: relative;
-  top: 18px; /*!important*/
-  left: 20px; /*!important*/
-  transform: scale(2, 2);
-  /*!important*/
+.check-box {
+  display:none;
+}
+
+.check-box + label {
+    background: #999;
+    height: 16px;
+    width: 16px;
+    display:inline-block;
+    padding: 0 0 0 0px;
+}
+
+.check-box:checked + label {
+    background: #0080FF;
+    height: 16px;
+    width: 16px;
+    display:inline-block;
+    padding: 0 0 0 0px;
 }
 
 .search-placeholder{

@@ -1,103 +1,100 @@
-= stylesheet_link_tag "registrations.css"
 = render 'layouts/nolognav'
-.row
   %h1.away-from-edge Edit Profile
-  %div.form-box.col.m4.l4.s4
-    = devise_error_messages!
-    = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { multipart: true }, validate: true) do |f|
-      - if !@omni
-        = f.text_field :username,
-          :value => "#{@username}",
-          :class => "new-user",
-          :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
-          :onfocus => "if(this.value=='Username' || this.value == '#{@username}'){this.value='';this.style.color = '#000';}",
-          :onblur => "if(this.value==''){this.value='#{@username}';}"
-        = f.text_field :email,
-          :value => "#{@email}",
-          :class => "new-user",
-          :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
-          :onfocus => "if(this.value=='#{@email}'){this.value='';this.style.color = '#000000';}",
-          :color => "white",
-          :onblur => "if(this.value==''){this.value='#{@email}';this.style.color = '#000000';}"
-        = f.text_field :current_password,
-          :value => "Current Password",
-          :class => "new-user",
-          :autocomplete => "off",
-          :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
-          :onfocus => "if(this.value=='Current Password'){this.value='';this.style.color = '#000000';this.type='password'}",
-          :onblur => "if(this.value==''){this.value='Current Password';this.type='text'}"
-        = f.text_field :password,
-          :value => "New Password (4 characters minimum)",
-          :autocomplete => "off",
-          :class => "new-user",
-          :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
-          :onfocus => "if(this.value=='New Password (4 characters minimum)'){this.value='';this.style.color = '#000000';this.type='password'}",
-          :onblur => "if(this.value==''){this.value='New Password (4 characters minimum)';this.style.color = '#000000';this.type='text'}"
-        = f.text_field :name,
-          :value => "#{@name}",
-          :class => "new-user",
-          :autocomplete => "off",
-          :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
-          :onfocus => "if(this.value=='#{@name}'){this.value='';this.style.color = '#000000';}",  
-          :onblur => "if(this.value==''){this.value='#{@name}'}"
-        #explanation What to do when your profile is visited:
-        = f.radio_button :playMethod, "Random", :checked => true, :id => "pm1"
-        %label{:for => "pm1"} Random
-        = f.radio_button :playMethod, "First", :id => "pm2"
-        %label{:for => "pm2"} First
-        = f.text_field :picture,
-          :value => "#{@picture}",
-          :class => "password-margin new-user pic-url",
-          :autocomplete => "off",
-          :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
-          :onfocus => "if(this.value=='#{@picture}'){this.value='';this.style.color = '#000000';}",  
-          :onblur => "if(this.value==''){this.value='#{@picture}';}"
-        .nav-button.upload-picture
-          Upload Profile Picture
-          .invisible
-            = f.file_field :image,
-              :id => "pictureInput",
-              :class => "big-form img-upload"
-        #target
-        .centered.waves-effect= f.submit "Save", class: "finish-signup transparent btn waves-effect", style: "border: 0px !important;"
-      -else
-        = f.text_field :username, 
-        :class => "new-user",
+  %div.form-box
+  = devise_error_messages!
+  = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { multipart: true }, validate: true) do |f|
+    - if !@omni
+      = f.text_field :username,
         :value => "#{@username}",
-        :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;width:220px",
-        :onfocus => "if(this.value=='#{@username}'){this.value='';this.style.color = '#000000';}",
-        :color => "white",
-        :onblur => "if(this.value==''){this.value='#{@username}';this.style.color = '#000000';}"
-        = f.text_field :email,
+        :class => "new-user",
+        :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
+        :onfocus => "if(this.value=='Username' || this.value == '#{@username}'){this.value='';this.style.color = '#000';}",
+        :onblur => "if(this.value==''){this.value='#{@username}';}"
+      = f.text_field :email,
         :value => "#{@email}",
         :class => "new-user",
         :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
         :onfocus => "if(this.value=='#{@email}'){this.value='';this.style.color = '#000000';}",
         :color => "white",
         :onblur => "if(this.value==''){this.value='#{@email}';this.style.color = '#000000';}"
-        = f.text_field :name,
-        :value => "#{@name}",
+      = f.text_field :current_password,
+        :value => "Current Password",
+        :class => "new-user",
+        :autocomplete => "off",
+        :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
+        :onfocus => "if(this.value=='Current Password'){this.value='';this.style.color = '#000000';this.type='password'}",
+        :onblur => "if(this.value==''){this.value='Current Password';this.type='text'}"
+      = f.text_field :password,
+        :value => "New Password (4 characters minimum)",
+        :autocomplete => "off",
         :class => "new-user",
         :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
-        :onfocus => "if(this.value=='#{@name}'){this.value='';this.style.color = '#000000';}",
-        :color => "white",
-        :onblur => "if(this.value==''){this.value='#{@name}';this.style.color = '#000000';}"
-        = f.text_field :picture,
+        :onfocus => "if(this.value=='New Password (4 characters minimum)'){this.value='';this.style.color = '#000000';this.type='password'}",
+        :onblur => "if(this.value==''){this.value='New Password (4 characters minimum)';this.style.color = '#000000';this.type='text'}"
+      = f.text_field :name,
+        :value => "#{@name}",
+        :class => "new-user",
+        :autocomplete => "off",
+        :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
+        :onfocus => "if(this.value=='#{@name}'){this.value='';this.style.color = '#000000';}",  
+        :onblur => "if(this.value==''){this.value='#{@name}'}"
+      #explanation What to do when your profile is visited:
+      = f.radio_button :playMethod, "Random", :checked => true, :id => "pm1"
+      %label{:for => "pm1"} Random
+      = f.radio_button :playMethod, "First", :id => "pm2"
+      %label{:for => "pm2"} First
+      = f.text_field :picture,
         :value => "#{@picture}",
         :class => "password-margin new-user pic-url",
+        :autocomplete => "off",
         :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
-        :onfocus => "if(this.value=='#{@picture}'){this.value='';this.style.color = '#000000';}",
-        :color => "white",
-        :onblur => "if(this.value==''){this.value='#{@picture}';this.style.color = '#000000';}"
-        .nav-button.upload-picture
-          Upload Profile Picture
-          .invisible
-            = f.file_field :image,
-              :id => "pictureInput",
-              :class => "big-form img-upload"
-        #target
-        .centered.nav-button
-          %span#signup-button= f.submit "Save", class: "finish-signup transparent", style: "border: 0px !important;"
+        :onfocus => "if(this.value=='#{@picture}'){this.value='';this.style.color = '#000000';}",  
+        :onblur => "if(this.value==''){this.value='#{@picture}';}"
+      .nav-button.upload-picture
+        Upload Profile Picture
+        .invisible
+          = f.file_field :image,
+            :id => "pictureInput",
+            :class => "big-form img-upload"
+      #target
+      = f.submit "Save", class: "finish-signup"
+    -else
+      = f.text_field :username, 
+      :class => "new-user",
+      :value => "#{@username}",
+      :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;width:220px",
+      :onfocus => "if(this.value=='#{@username}'){this.value='';this.style.color = '#000000';}",
+      :color => "white",
+      :onblur => "if(this.value==''){this.value='#{@username}';this.style.color = '#000000';}"
+      = f.text_field :email,
+      :value => "#{@email}",
+      :class => "new-user",
+      :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
+      :onfocus => "if(this.value=='#{@email}'){this.value='';this.style.color = '#000000';}",
+      :color => "white",
+      :onblur => "if(this.value==''){this.value='#{@email}';this.style.color = '#000000';}"
+      = f.text_field :name,
+      :value => "#{@name}",
+      :class => "new-user",
+      :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
+      :onfocus => "if(this.value=='#{@name}'){this.value='';this.style.color = '#000000';}",
+      :color => "white",
+      :onblur => "if(this.value==''){this.value='#{@name}';this.style.color = '#000000';}"
+      = f.text_field :picture,
+      :value => "#{@picture}",
+      :class => "password-margin new-user pic-url",
+      :style => "color:#000000;background-color:white;border:solid;border-width:2px;height:33px;text-indent:5px;",
+      :onfocus => "if(this.value=='#{@picture}'){this.value='';this.style.color = '#000000';}",
+      :color => "white",
+      :onblur => "if(this.value==''){this.value='#{@picture}';this.style.color = '#000000';}"
+      .nav-button.upload-picture
+        Upload Profile Picture
+        .invisible
+          = f.file_field :image,
+            :id => "pictureInput",
+            :class => "big-form img-upload"
+      #target
+        = f.submit "Save", class: "finish-signup"
 :javascript
   $(function showImage() {
     $('#pictureInput').on('change', function(event) {

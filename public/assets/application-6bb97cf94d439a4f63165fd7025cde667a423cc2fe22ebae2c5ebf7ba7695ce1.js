@@ -56763,11 +56763,12 @@ var Artist = (function (_React$Component) {
       return React.createElement(
         "div",
         null,
-        React.createElement("input", { id: this.props.songId, type: "checkbox", className: "big-box", checked: this.state.isChecked,
+        React.createElement("input", { id: this.props.songId, type: "checkbox", className: "check-box", name: this.props.songId, checked: this.state.isChecked,
           onClick: function () {
             return _this4.add(_this4.props.title, _this4.props.artist, _this4.state.isChecked);
           }
-        })
+        }),
+        React.createElement("label", { htmlFor: this.props.songId })
       );
     }
   }, {
@@ -56799,7 +56800,7 @@ var Artist = (function (_React$Component) {
         { className: "search-result-container", id: this.props.songIndex },
         React.createElement(
           "div",
-          { className: "nav4 card-panel height mix-color col l4 m6 s12 z-depth-3", onClick: function () {
+          { className: "nav4 card-panel height mix-color", onClick: function () {
               return _this5.mobilePlayButton(_this5.props.title, _this5.props.artist);
             } },
           React.createElement(
@@ -57688,6 +57689,274 @@ var Search = (function (_React$Component) {
   }]);
 
   return Search;
+})(React.Component);
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Artist = (function (_React$Component) {
+  _inherits(Artist, _React$Component);
+
+  function Artist(props) {
+    _classCallCheck(this, Artist);
+
+    _get(Object.getPrototypeOf(Artist.prototype), "constructor", this).call(this, props);
+    this.state = { albumCoverUrl: "", key: "", title: this.props.title, artist: this.props.artist, isMounted: false, isChecked: null };
+    this.play = this.play.bind(this);
+    this.add = this.add.bind(this);
+    this.albumCover = this.albumCover.bind(this);
+    this.displayAdd = this.displayAdd.bind(this);
+    this.songNameInPlayer = this.songNameInPlayer.bind(this);
+    this.pictureInPlayer = this.pictureInPlayer.bind(this);
+    // this.getSongs = this.getSongs.bind(this)
+  }
+
+  _createClass(Artist, [{
+    key: "componentWillMount",
+    value: function componentWillMount() {
+      $(document).ajaxError(function (e, xhr, settings) {
+        if (xhr.status == 401) {
+          // $('.selector').html(xhr.responseText);
+          alert("Create an account to add your own songs!");
+        }
+      });
+      this.state.songId = this.props.songId;
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.state.isMounted = true;
+      this.albumCover();
+      this.state.songTitle = self.props.title;
+      ////
+      this.state.songId = this.props.songId;
+      // this.state.isChecked = false;
+      for (i = 0; i < this.props.songs.length; i++) {
+        if (this.props.songs[i].song_name == this.props.title && this.props.songs[i].artist_name == this.props.artist) {
+          this.state.isChecked = true;
+        }
+      }
+      // document.getElementById(self.props.songId).checked = this.state.isChecked;
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this.state.isMounted = false;
+    }
+  }, {
+    key: "componentWillUpdate",
+    value: function componentWillUpdate() {
+      // this.state.isChecked = false;
+
+      // for(i=0;i<this.props.songs.length;i++){
+      //   if(this.props.songs[i].song_name == this.props.title && this.props.songs[i].artist_name == this.props.artist){
+      //     this.state.isChecked = true;
+      //   }
+      // }
+      // document.getElementById(this.props.title).checked = this.state.isChecked;
+    }
+  }, {
+    key: "play",
+    value: function play(title, artist) {
+      var _this = this;
+
+      this.songNameInPlayer(title, artist);
+      this.pictureInPlayer();
+      title = title.replace(/\s/g, '%20');
+      artist = artist.replace(/\s/g, '%20');
+      $.ajax({
+        url: "http://api.dar.fm/playlist.php?&q=@artist%20" + artist + "%20@title%20" + title + "&callback=jsonp&web=1&partner_token=9388418650",
+        jsonp: 'callback',
+        type: 'GET',
+        dataType: 'jsonp'
+      }).success(function (data) {
+        var player = document.getElementById("player");
+        if (data.length) {
+          player.src = "http://api.dar.fm/player_api.php?station_id=" + data[0].station_id + "&custom_style=radioslice&partner_token=9388418650";
+          _this.props.changeStationId(data[0].station_id);
+        } else {
+          //todo: message song is not playing
+        }
+      });
+    }
+  }, {
+    key: "mobilePlayButton",
+    value: function mobilePlayButton(title, artist) {
+      mobileTitle = title.replace(/\s/g, ".");
+      mobileArtist = artist.replace(/\s/g, ".");
+
+      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        window.open("http://onrad.io/" + mobileArtist + "." + mobileTitle);
+      } else {
+        this.play(title, artist);
+      }
+    }
+  }, {
+    key: "songNameInPlayer",
+    value: function songNameInPlayer(title, artist) {
+      var titleDisplay = document.getElementById("player-title").innerHTML = title;
+      var artistDisplay = document.getElementById("player-artist").innerHTML = artist;
+    }
+  }, {
+    key: "pictureInPlayer",
+    value: function pictureInPlayer() {
+      var pictureDisplay = document.getElementById("main-art").style.backgroundImage = "url(" + this.state.albumCoverUrl + ")";
+    }
+  }, {
+    key: "add",
+    value: function add(songName, artist) {
+      var _this2 = this;
+
+      var self = this;
+      if (!this.state.isChecked) {
+        if (this.props.songs.length < 4) {
+          $.ajax({
+            url: '/song',
+            type: 'POST',
+            data: { name: songName, artist: artist, mixtape_id: this.props.mixtapeId }
+          }).success(function (data) {
+            _this2.state.isChecked = true;
+            self.props.getSongs();
+            document.getElementById(self.props.songId).checked = true;
+          });
+        }
+        if (this.props.songs.length >= 4) {
+          document.getElementById(self.props.songId).checked = false;
+        }
+      } else {
+        var song_id = undefined;
+        for (i = 0; i < this.props.songs.length; i++) {
+          if (this.props.songs[i].song_name == songName && this.props.songs[i].artist_name == artist) {
+            song_id = this.props.songs[i].song_id;
+          }
+        }
+        if (song_id) {
+          // delete song if unchecked
+          $.ajax({
+            url: '/song/' + song_id,
+            type: 'DELETE'
+          }).success(function (data) {
+            //       data: {name: self.state.songs[songIndex].song_name, artist: self.state.songs[songIndex].artist_name, mixtape_id: self.props.mixtapeId}
+            // this.setState({songs: data.songs});
+            _this2.state.isChecked = false;
+            self.props.getSongs();
+            $(_this2.props.songId).attr('checked', false);
+          });
+        }
+      }
+    }
+  }, {
+    key: "albumCover",
+    value: function albumCover() {
+      var _this3 = this;
+
+      self = this;
+      $.ajax({
+        url: "http://api.dar.fm/songart.php?artist=" + self.props.artist + "&title=" + self.props.title + "&res=med&partner_token=9388418650",
+        jsonp: 'callback',
+        type: 'GET',
+        dataType: 'jsonp'
+      }).success(function (data) {
+        if (_this3.state.isMounted == true) {
+          _this3.setState({ albumCoverUrl: data[0].arturl });
+        }
+      });
+    }
+  }, {
+    key: "newImage",
+    value: function newImage(currentTitle) {
+      if (this.state.songTitle != currentTitle) {
+        this.albumCover();
+        this.state.songTitle = currentTitle;
+      }
+    }
+  }, {
+    key: "displayAdd",
+    value: function displayAdd() {
+      var _this4 = this;
+
+      var styles = { backgroundImage: 'url(http://i.imgur.com/BJr1kmn.jpg)' };
+
+      return React.createElement(
+        "div",
+        null,
+        React.createElement("input", { id: this.props.songId, type: "checkbox", className: "check-box", name: this.props.songId, checked: this.state.isChecked,
+          onClick: function () {
+            return _this4.add(_this4.props.title, _this4.props.artist, _this4.state.isChecked);
+          }
+        }),
+        React.createElement("label", { htmlFor: this.props.songId, style: styles })
+      );
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this5 = this;
+
+      // if(self.props.current_user) {
+      checkBox = this.displayAdd();
+      // }
+      if (this.state.title != this.props.title || this.state.artist != this.props.artist) {
+        this.state.title = this.props.title;
+        this.state.artist = this.props.artist;
+        this.state.isChecked = false;
+        // set perm id?
+        document.getElementById(this.state.songId).checked = false;
+        document.getElementById(this.state.songId).id = this.props.songId;
+        this.state.songId = this.props.songId;
+        for (i = 0; i < this.props.songs.length; i++) {
+          if (this.props.songs[i].song_name == this.props.title && this.props.songs[i].artist_name == this.props.artist) {
+            document.getElementById(this.props.songId).checked = true;
+            this.state.isChecked = true;
+          }
+        }
+      }
+
+      return React.createElement(
+        "div",
+        { className: "search-result-container", id: this.props.songIndex },
+        React.createElement(
+          "div",
+          { className: "nav4 card-panel height mix-color", onClick: function () {
+              return _this5.mobilePlayButton(_this5.props.title, _this5.props.artist);
+            } },
+          React.createElement(
+            "div",
+            { className: "card-content" },
+            React.createElement(
+              "span",
+              { className: "searchTitle" },
+              this.props.title
+            ),
+            React.createElement(
+              "span",
+              { className: "searchArtist" },
+              this.props.artist
+            ),
+            this.newImage(this.props.title),
+            React.createElement(
+              "form",
+              { action: "#", className: "nocolor" },
+              checkBox
+            ),
+            React.createElement(
+              "a",
+              { className: "btn individual-play-button", onClick: function () {
+                  return _this5.mobilePlayButton(_this5.props.title, _this5.props.artist);
+                } },
+              " Play "
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return Artist;
 })(React.Component);
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
