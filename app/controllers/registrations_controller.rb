@@ -121,7 +121,6 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   # def new_play_method 
-  #   binding.pry
   #   current_user.update_column('playMethod', params[:playMethod].to_i == 0 ? 0 : 1)
   #   redirect_to :back
   # end
