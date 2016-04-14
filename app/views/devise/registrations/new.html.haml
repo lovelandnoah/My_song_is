@@ -16,7 +16,7 @@
     :style => "color:#000000;background-color:white;",
     :onfocus => "if(this.value=='Password'){this.value='';this.style.color = '#000000';this.type='password'}",
     :onblur => "if(this.value==''){this.value='Password';this.style.color = '#000000';this.type='text'}"
-  = f.submit "Login"
+  = f.submit "Login", :class => "submit-button"
 
 %h1.away-from-edge Or Sign up
 - if @user == current_user

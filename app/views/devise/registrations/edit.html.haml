@@ -57,7 +57,7 @@
             :id => "pictureInput",
             :class => "big-form img-upload"
       #target
-      = f.submit "Save", class: "finish-signup"
+      = f.submit "Save", class: "submit-button"
     -else
       = f.text_field :username, 
       :class => "new-user",
@@ -94,7 +94,7 @@
             :id => "pictureInput",
             :class => "big-form img-upload"
       #target
-        = f.submit "Save", class: "finish-signup"
+        = f.submit "Save", class: "submit-button"
 :javascript
   $(function showImage() {
     $('#pictureInput').on('change', function(event) {

@@ -16,7 +16,7 @@
             :onfocus => "if(this.value=='Password'){this.value='';this.style.color = '#000000';this.type='password'}",
             :onblur => "if(this.value==''){this.value='Password';this.style.color = '#000000';this.type='text'}"
           .nav-button.smallnav
-            = f.submit "Login", :class => 'login-button'
+            = f.submit "Login", :class => 'submit-button'
     -else
       #login-container
         =link_to "Logout", destroy_user_session_path, :method => :delete, :class => "logout-button"
