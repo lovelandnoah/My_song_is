@@ -154,14 +154,14 @@ class Artist extends React.Component{
   }
 
   displayAdd(){
-    var styles = {backgroundImage: 'url(http://i.imgur.com/BJr1kmn.jpg)'}
+    var styles = {backgroundImage: 'url(' + this.state.albumCoverUrl + ')'}
 
     return(
       <div>
         <input id={this.props.songId} type='checkbox' className='checkbox' name={this.props.songId} checked={this.state.isChecked}
           onClick={() => this.add(this.props.title, this.props.artist, this.state.isChecked)}
         ></input>
-        <label htmlFor={this.props.songId} style={styles}></label>
+        <label htmlFor={this.props.songId} style={styles} className="checkbox-label"></label>
       </div>
     );
   }
