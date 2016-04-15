@@ -1,8 +1,3 @@
-
-img {
-  border: 0px;
-}
-
 .hidden {
   display: none;
   height: 0px;
@@ -14,6 +9,18 @@ img {
   top: 0px;
   left: 0px;
   opacity: 0;
+}
+
+.check-box-hidden {
+  position: absolute;
+  width: 70px;
+  height: 70px
+}
+
+.image-label {
+  position: relative;
+  width: 70px;
+  height: 70px;
 }
 
 #biography {
@@ -190,7 +197,6 @@ img {
   height: 40px;
   padding-top: 10px;
  }
-
 }
 
 .hidden-mobile { 

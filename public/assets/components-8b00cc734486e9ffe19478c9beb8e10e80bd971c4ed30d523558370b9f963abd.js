@@ -187,15 +187,17 @@ var Artist = (function (_React$Component) {
     value: function displayAdd() {
       var _this4 = this;
 
+      var styles = { backgroundImage: 'url(http://i.imgur.com/BJr1kmn.jpg)' };
+
       return React.createElement(
         "div",
         null,
-        React.createElement("input", { id: this.props.songId, type: "checkbox", className: "check-box", name: this.props.songId, checked: this.state.isChecked,
+        React.createElement("input", { id: this.props.songId, type: "checkbox", className: "checkbox", name: this.props.songId, checked: this.state.isChecked,
           onClick: function () {
             return _this4.add(_this4.props.title, _this4.props.artist, _this4.state.isChecked);
           }
         }),
-        React.createElement("label", { htmlFor: this.props.songId })
+        React.createElement("label", { htmlFor: this.props.songId, style: styles })
       );
     }
   }, {
@@ -246,10 +248,9 @@ var Artist = (function (_React$Component) {
             this.newImage(this.props.title),
             React.createElement(
               "form",
-              { action: "#", className: "nocolor" },
+              { action: "#", className: "checkbox-form" },
               checkBox
             ),
-            React.createElement("img", { src: this.state.albumCoverUrl }),
             React.createElement(
               "a",
               { className: "btn individual-play-button", onClick: function () {
@@ -1125,13 +1126,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Artist = (function (_React$Component) {
-  _inherits(Artist, _React$Component);
+var SelectedArtist = (function (_React$Component) {
+  _inherits(SelectedArtist, _React$Component);
 
-  function Artist(props) {
-    _classCallCheck(this, Artist);
+  function SelectedArtist(props) {
+    _classCallCheck(this, SelectedArtist);
 
-    _get(Object.getPrototypeOf(Artist.prototype), "constructor", this).call(this, props);
+    _get(Object.getPrototypeOf(SelectedArtist.prototype), "constructor", this).call(this, props);
     this.state = { albumCoverUrl: "", key: "", title: this.props.title, artist: this.props.artist, isMounted: false, isChecked: null };
     this.play = this.play.bind(this);
     this.add = this.add.bind(this);
@@ -1142,7 +1143,7 @@ var Artist = (function (_React$Component) {
     // this.getSongs = this.getSongs.bind(this)
   }
 
-  _createClass(Artist, [{
+  _createClass(SelectedArtist, [{
     key: "componentWillMount",
     value: function componentWillMount() {
       $(document).ajaxError(function (e, xhr, settings) {
@@ -1311,7 +1312,7 @@ var Artist = (function (_React$Component) {
       return React.createElement(
         "div",
         null,
-        React.createElement("input", { id: this.props.songId, type: "checkbox", className: "check-box", name: this.props.songId, checked: this.state.isChecked,
+        React.createElement("input", { id: this.props.songId, type: "checkbox", className: "checkbox", name: this.props.songId, checked: this.state.isChecked,
           onClick: function () {
             return _this4.add(_this4.props.title, _this4.props.artist, _this4.state.isChecked);
           }
@@ -1348,7 +1349,7 @@ var Artist = (function (_React$Component) {
         { className: "search-result-container", id: this.props.songIndex },
         React.createElement(
           "div",
-          { className: "nav4 card-panel height mix-color", onClick: function () {
+          { className: "", onClick: function () {
               return _this5.mobilePlayButton(_this5.props.title, _this5.props.artist);
             } },
           React.createElement(
@@ -1383,7 +1384,7 @@ var Artist = (function (_React$Component) {
     }
   }]);
 
-  return Artist;
+  return SelectedArtist;
 })(React.Component);
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
@@ -1528,7 +1529,7 @@ var Song = (function (_React$Component) {
           React.createElement(
             'h5',
             { className: 'inner' },
-            React.createElement('img', { src: this.state.albumCoverUrl, width: '80', height: '80' }),
+            React.createElement('img', { src: this.state.albumCoverUrl, border: '0' }),
             React.createElement(
               'span',
               { className: 'black-text song-name' },

@@ -1,6 +1,6 @@
 = render 'layouts/nolognav'
-  %h1.away-from-edge Edit Profile
-  %div.form-box
+%h1.away-from-edge Edit Profile
+%div.form-box
   = devise_error_messages!
   = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { multipart: true }, validate: true) do |f|
     - if !@omni
@@ -13,6 +13,7 @@
       = f.text_field :email,
         :value => "#{@email}",
         :class => "new-user",
+        :type => "email",
         :style => "color:#000000;background-color:white;",
         :onfocus => "if(this.value=='#{@email}'){this.value='';this.style.color = '#000000';}",
         :color => "white",
@@ -20,17 +21,19 @@
       = f.text_field :current_password,
         :value => "Current Password",
         :class => "new-user",
+        :type => "password",
         :autocomplete => "off",
         :style => "color:#000000;background-color:white;",
         :onfocus => "if(this.value=='Current Password'){this.value='';this.style.color = '#000000';this.type='password'}",
-        :onblur => "if(this.value==''){this.value='Current Password';this.type='text'}"
+        :onblur => "if(this.value==''){this.value='Current Password';this.type='password'}"
       = f.text_field :password,
-        :value => "New Password (4 characters minimum)",
+        :value => "New Password",
         :autocomplete => "off",
+        :type => "password",
         :class => "new-user",
         :style => "color:#000000;background-color:white;",
         :onfocus => "if(this.value=='New Password (4 characters minimum)'){this.value='';this.style.color = '#000000';this.type='password'}",
-        :onblur => "if(this.value==''){this.value='New Password (4 characters minimum)';this.style.color = '#000000';this.type='text'}"
+        :onblur => "if(this.value==''){this.value='New Password (4 characters minimum)';this.style.color = '#000000';this.type='password'}"
       = f.text_field :name,
         :value => "#{@name}",
         :class => "new-user",
@@ -38,7 +41,8 @@
         :style => "color:#000000;background-color:white;",
         :onfocus => "if(this.value=='#{@name}'){this.value='';this.style.color = '#000000';}",  
         :onblur => "if(this.value==''){this.value='#{@name}'}"
-      #explanation What to do when your profile is visited:
+      #explanation 
+        What to do when your profile is visited:
       = f.radio_button :playMethod, "Random", :checked => true, :id => "pm1"
       %label{:for => "pm1"} Random
       = f.radio_button :playMethod, "First", :id => "pm2"
@@ -57,36 +61,37 @@
             :id => "pictureInput",
             :class => "big-form img-upload"
       #target
-      = f.submit "Save", class: "submit-button"
+        = f.submit "Save", class: "submit-button"
     -else
       = f.text_field :username, 
-      :class => "new-user",
-      :value => "#{@username}",
-      :style => "color:#000000;background-color:white;",
-      :onfocus => "if(this.value=='#{@username}'){this.value='';this.style.color = '#000000';}",
-      :color => "white",
-      :onblur => "if(this.value==''){this.value='#{@username}';this.style.color = '#000000';}"
+        :class => "new-user",
+        :value => "#{@username}",
+        :style => "color:#000000;background-color:white;",
+        :onfocus => "if(this.value=='#{@username}'){this.value='';this.style.color = '#000000';}",
+        :color => "white",
+        :onblur => "if(this.value==''){this.value='#{@username}';this.style.color = '#000000';}"
       = f.text_field :email,
-      :value => "#{@email}",
-      :class => "new-user",
-      :style => "color:#000000;background-color:white;",
-      :onfocus => "if(this.value=='#{@email}'){this.value='';this.style.color = '#000000';}",
-      :color => "white",
-      :onblur => "if(this.value==''){this.value='#{@email}';this.style.color = '#000000';}"
+        :value => "#{@email}",
+        :class => "new-user",
+        :type => "email",
+        :style => "color:#000000;background-color:white;",
+        :onfocus => "if(this.value=='#{@email}'){this.value='';this.style.color = '#000000';}",
+        :color => "white",
+        :onblur => "if(this.value==''){this.value='#{@email}';this.style.color = '#000000';}"
       = f.text_field :name,
-      :value => "#{@name}",
-      :class => "new-user",
-      :style => "color:#000000;background-color:white;",
-      :onfocus => "if(this.value=='#{@name}'){this.value='';this.style.color = '#000000';}",
-      :color => "white",
-      :onblur => "if(this.value==''){this.value='#{@name}';this.style.color = '#000000';}"
+        :value => "#{@name}",
+        :class => "new-user",
+        :style => "color:#000000;background-color:white;",
+        :onfocus => "if(this.value=='#{@name}'){this.value='';this.style.color = '#000000';}",
+        :color => "white",
+        :onblur => "if(this.value==''){this.value='#{@name}';this.style.color = '#000000';}"
       = f.text_field :picture,
-      :value => "#{@picture}",
-      :class => "password-margin new-user pic-url",
-      :style => "color:#000000;background-color:white;",
-      :onfocus => "if(this.value=='#{@picture}'){this.value='';this.style.color = '#000000';}",
-      :color => "white",
-      :onblur => "if(this.value==''){this.value='#{@picture}';this.style.color = '#000000';}"
+        :value => "#{@picture}",
+        :class => "password-margin new-user pic-url",
+        :style => "color:#000000;background-color:white;",
+        :onfocus => "if(this.value=='#{@picture}'){this.value='';this.style.color = '#000000';}",
+        :color => "white",
+        :onblur => "if(this.value==''){this.value='#{@picture}';this.style.color = '#000000';}"
       .nav-button.upload-picture
         Upload Profile Picture
         .invisible
@@ -94,12 +99,12 @@
             :id => "pictureInput",
             :class => "big-form img-upload"
       #target
-        = f.submit "Save", class: "submit-button"
+        = f.submit "Save", :class => "submit-button"
 :javascript
   $(function showImage() {
     $('#pictureInput').on('change', function(event) {
       var files = event.target.files;
-      var image = files[0]
+      var image = files[0];
       var reader = new FileReader();
       reader.onload = function(file) {
         var img = new Image();

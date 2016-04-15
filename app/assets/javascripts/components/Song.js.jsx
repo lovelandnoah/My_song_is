@@ -101,7 +101,7 @@ class Song extends React.Component{
        <div>
         <div className="paddin play-button button-grey black-text" onClick={() => this.play(this.props.title, this.props.artist)}>
           <h5 className='inner'>
-          <img src={this.state.albumCoverUrl} width="80" height="80" />
+          <img src={this.state.albumCoverUrl} border="0" />
           <span className='black-text song-name'>{this.props.song_name}</span>
           <span className="grey-text">  </span> 
           <span className='black-text artist-name'>{this.props.artist_name}</span>

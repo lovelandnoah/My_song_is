@@ -37,7 +37,7 @@
       %p#nav-name #{@user.name}
     %p.log.rel#nav-link mysong.is/#{@user.username}
 
-    %img#logo
+    %img#logo{:border => "none"}
 
     %img#qr-code{:alt => "My QR code", :src => @qr}
     / .row

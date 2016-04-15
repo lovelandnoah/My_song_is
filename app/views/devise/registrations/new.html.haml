@@ -6,16 +6,18 @@
 = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
   = f.text_field :email,
     :value => "Email",
+    :type => "email",
     :style => "color:#000000;background-color:white;",
     :onfocus => "if(this.value=='Email'){this.value='';this.style.color = '#000000';}",
     :color => "white",
     :onblur => "if(this.value==''){this.value='Email';this.style.color = '#000000';}"
   = f.text_field :password,
     :value => "Password",
+    :type => "password",
     :autocomplete => "off",
     :style => "color:#000000;background-color:white;",
     :onfocus => "if(this.value=='Password'){this.value='';this.style.color = '#000000';this.type='password'}",
-    :onblur => "if(this.value==''){this.value='Password';this.style.color = '#000000';this.type='text'}"
+    :onblur => "if(this.value==''){this.value='Password';this.style.color = '#000000';this.type='password'}"
   = f.submit "Login", :class => "submit-button"
 
 %h1.away-from-edge Or Sign up
@@ -28,6 +30,7 @@
     = f.text_field :email,
     :value => "Email",
     :id => "user-email",
+    :type => "email",
     :class => "new-user big-form",
     :style => "color:#000000;background-color:white;",
     :onfocus => "if(this.value=='Email'){this.value='';this.style.color = '#000000';}",
@@ -35,13 +38,13 @@
     :onblur => "if(this.value==''){this.value='Email';this.style.color = '#000000';}"
     = f.text_field :password, autocomplete: "off", :class => 'new-account-form',
     :value => "New Password",
-    :id => "wat",
+    :type => "password",
     :class => "password-margin new-user big-form",
     :autocomplete => "off",
     :style => "color:#000000;background-color:white;",
     :onfocus => "if(this.value=='New Password (4 characters minimum)'){this.value='';this.style.color = '#000000';this.type='password'}",
-    :onblur => "if(this.value==''){this.value='New Password (4 characters minimum)';this.style.color = '#000000';this.type='text'}"
-    = f.submit "Sign Up"
+    :onblur => "if(this.value==''){this.value='New Password (4 characters minimum)';this.style.color = '#000000';this.type='password'}"
+    = f.submit "Sign Up", :class => "submit-button"
 :javascript
   // $(document).ready(function () {
   // $(“#new_user”).validate({
