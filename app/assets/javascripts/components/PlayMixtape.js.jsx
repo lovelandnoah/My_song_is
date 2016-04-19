@@ -362,14 +362,13 @@
     let songs = self.state.songs.map( song => {
     // let key = `mixtapeSong-${song.song_id}`;
       return(<div className="inline-container"><SelectedArtist songs={this.state.songs} key={`mixtapeSong-${song.song_id}`} songIndex={"favorite" + self.state.songs.indexOf(song)} title={song.song_name} artist={song.artist_name} songId={"selected" + song.song_id} onChange={this.changeHandler} getSongs={this.getSongs} changeStationId={this.changeStationId}/>
-      <p>{song.song_name}</p>
-      <p>{song.artist_name}</p>
+      <p className="my-song-title">{song.song_name}</p>
+      <p className="my-song-artist">{song.artist_name}</p>
       </div>);
       // return(<SongDetails key={key} songIndex={self.state.songs.indexOf(song)} songName={song.song_name} artistName={song.artist_name} songId={song.song_id} onChange={this.changeHandler}/>);
     });
 
     return(<div id="search-box">
-            <button className="play-button" onClick={this.playMode}>Play</button>
             <div className='selected-songs-container' id="">
               {this.showMySongs(songs)}
             </div>
@@ -384,6 +383,7 @@
               {this.noArtists(searchResultCards)}
               {searchResultCards}
             </div>
+            <button className="mysong-play-button" onClick={this.playMode}>Play</button>
         </div>)
   }
 }
