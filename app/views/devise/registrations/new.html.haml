@@ -45,9 +45,9 @@
     :style => "color:#525252;background-color:white;",
     :onfocus => "if(this.value=='New Password'){this.value='';this.style.color = '#000000';this.type='password'}",
     :onblur => "if(this.value==''){this.value='New Password';this.style.color = '#525252';this.type='text'}"
-    = f.submit "Sign Up", :class => "submit-button"
+    = f.submit "Create Account", :class => "submit-button"
 
-%a.logout-button.left-justify#view-signup{:href => "javascript:;"} Or Sign In
+%a.logout-button.left-justify#view-signup{:href => "javascript:;"} Or Create Account
 :javascript
   // $(document).ready(function () {
   // $(“#new_user”).validate({
