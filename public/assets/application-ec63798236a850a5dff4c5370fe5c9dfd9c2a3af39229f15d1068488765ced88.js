@@ -57426,7 +57426,21 @@ var PlayMixtape = (function (_React$Component) {
       }
       var songs = self.state.songs.map(function (song) {
         // let key = `mixtapeSong-${song.song_id}`;
-        return React.createElement(SelectedArtist, { songs: _this6.state.songs, key: 'mixtapeSong-' + song.song_id, songIndex: "favorite" + self.state.songs.indexOf(song), title: song.song_name, artist: song.artist_name, songId: "selected" + song.song_id, onChange: _this6.changeHandler, getSongs: _this6.getSongs, changeStationId: _this6.changeStationId });
+        return React.createElement(
+          'div',
+          { className: 'inline-container' },
+          React.createElement(SelectedArtist, { songs: _this6.state.songs, key: 'mixtapeSong-' + song.song_id, songIndex: "favorite" + self.state.songs.indexOf(song), title: song.song_name, artist: song.artist_name, songId: "selected" + song.song_id, onChange: _this6.changeHandler, getSongs: _this6.getSongs, changeStationId: _this6.changeStationId }),
+          React.createElement(
+            'p',
+            { className: 'my-song-title' },
+            song.song_name
+          ),
+          React.createElement(
+            'p',
+            { className: 'my-song-artist' },
+            song.artist_name
+          )
+        );
         // return(<SongDetails key={key} songIndex={self.state.songs.indexOf(song)} songName={song.song_name} artistName={song.artist_name} songId={song.song_id} onChange={this.changeHandler}/>);
       });
 
@@ -57435,13 +57449,8 @@ var PlayMixtape = (function (_React$Component) {
         { id: 'search-box' },
         React.createElement(
           'div',
-          { className: '', id: '' },
-          this.showMySongs(songs),
-          React.createElement(
-            'button',
-            { className: 'play-button', onClick: this.playMode },
-            'Play'
-          )
+          { className: 'selected-songs-container', id: '' },
+          this.showMySongs(songs)
         ),
         React.createElement('div', { id: 'mixtapeForm' }),
         React.createElement(
@@ -57460,6 +57469,11 @@ var PlayMixtape = (function (_React$Component) {
           { id: 'search-list' },
           this.noArtists(searchResultCards),
           searchResultCards
+        ),
+        React.createElement(
+          'button',
+          { className: 'mysong-play-button', onClick: this.playMode },
+          'Play'
         )
       );
     }
@@ -57908,13 +57922,13 @@ var SelectedArtist = (function (_React$Component) {
       }
 
       return React.createElement(
-        "div",
+        "span",
         null,
         React.createElement("input", { id: this.props.songId.replace(/\s/g, ""), type: "checkbox", className: "checkbox", name: this.props.songId.replace(/\s/g, ""), checked: this.state.isChecked,
           onClick: function () {
             return _this4.add(_this4.props.title, _this4.props.artist, _this4.state.isChecked);
           } }),
-        React.createElement("label", { id: this.props.songId.replace(/\s/g, "") + "Image", htmlFor: this.props.songId, style: styles, className: "checkbox-label image-checked" })
+        React.createElement("label", { id: this.props.songId.replace(/\s/g, "") + "Image", htmlFor: this.props.songId, style: styles, className: "mysong-label image-checked" })
       );
     }
   }, {
@@ -57942,40 +57956,20 @@ var SelectedArtist = (function (_React$Component) {
       }
 
       return React.createElement(
-        "div",
-        { className: "search-result-container", id: this.props.songIndex },
+        "span",
+        { className: "selected-result-container", id: this.props.songIndex },
         React.createElement(
-          "div",
-          { className: "nav4 card-panel height mix-color", onClick: function () {
+          "form",
+          { action: "#", className: "checkbox-form" },
+          this.newImage(this.props.title),
+          checkBox
+        ),
+        React.createElement(
+          "a",
+          { className: "btn individual-play-button", onClick: function () {
               return _this5.mobilePlayButton(_this5.props.title, _this5.props.artist);
             } },
-          React.createElement(
-            "div",
-            { className: "card-content" },
-            React.createElement(
-              "span",
-              { className: "searchTitle" },
-              this.props.title
-            ),
-            React.createElement(
-              "span",
-              { className: "searchArtist" },
-              this.props.artist
-            ),
-            this.newImage(this.props.title),
-            React.createElement(
-              "form",
-              { action: "#", className: "checkbox-form" },
-              checkBox
-            ),
-            React.createElement(
-              "a",
-              { className: "btn individual-play-button", onClick: function () {
-                  return _this5.mobilePlayButton(_this5.props.title, _this5.props.artist);
-                } },
-              " Play "
-            )
-          )
+          " Play "
         )
       );
     }

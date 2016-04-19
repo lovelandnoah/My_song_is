@@ -1,4 +1,4 @@
-class Artist extends React.Component{
+class SelectedArtist extends React.Component{
   constructor(props){
     super(props)
     this.state = {albumCoverUrl: "", key: "", title: this.props.title, artist: this.props.artist, isMounted: false, isChecked: null}
@@ -130,6 +130,7 @@ class Artist extends React.Component{
         });
       }
     }
+    $("#" + self.props.songId.replace(/\s/g, "") + "Image").toggleClass("image-checked");
   }
 
   albumCover(){
@@ -154,17 +155,23 @@ class Artist extends React.Component{
   }
 
   displayAdd(){
-    var styles = {backgroundImage: 'url(http://i.imgur.com/BJr1kmn.jpg)'}
+    var styles = {backgroundImage: 'url(' + this.state.albumCoverUrl + ')'}
+    var isChecked = false;
+    for(i=0;i<this.props.songs.length;i++){
+      if(this.props.songs[i].artist_name.replace(/\s/g, "") + this.props.songs[i].song_name.replace(/\s/g, "") == this.props.songId){
+        isChecked = true;
+      }
+    }
 
     return(
-      <div>
-        <input id={this.props.songId} type='checkbox' className='checkbox' name={this.props.songId} checked={this.state.isChecked}
-          onClick={() => this.add(this.props.title, this.props.artist, this.state.isChecked)}
-        ></input>
-        <label htmlFor={this.props.songId} style={styles}></label>
-      </div>
+    <span>
+      <input id={this.props.songId.replace(/\s/g, "")} type='checkbox' className='checkbox' name={this.props.songId.replace(/\s/g, "")} checked={this.state.isChecked}
+        onClick={() => this.add(this.props.title, this.props.artist, this.state.isChecked)}></input>
+      <label id={this.props.songId.replace(/\s/g, "") + "Image"}htmlFor={this.props.songId} style={styles} className="mysong-label image-checked"></label>
+    </span>
     );
   }
+  
 
   render(){
     // if(self.props.current_user) {
@@ -180,25 +187,19 @@ class Artist extends React.Component{
       this.state.songId = this.props.songId;
       for(i=0;i<this.props.songs.length;i++){
       if(this.props.songs[i].song_name == this.props.title && this.props.songs[i].artist_name == this.props.artist){
-        document.getElementById(this.props.songId).checked = true;
+        document.getElementById(this.props.songId.replace(/\s/g, "")).checked = true;
         this.state.isChecked = true;
       }
     }
   }
 
-    return(<div className="search-result-container" id={this.props.songIndex}>
-            <div className="nav4 card-panel height mix-color" onClick={() => this.mobilePlayButton(this.props.title, this.props.artist)} >
-              <div className="card-content">
-                  <span className="searchTitle">{this.props.title}</span>
-                  <span className="searchArtist">{this.props.artist}</span>
-                {this.newImage(this.props.title)}
-                <form action="#" className="checkbox-form">
-                  {checkBox}
-                </form>
-                <a className="btn individual-play-button" onClick={()=> this.mobilePlayButton(this.props.title, this.props.artist)}> Play </a>
-              </div>
-            </div>
-          </div>
-          );
+  return(<span className="selected-result-container" id={this.props.songIndex}>
+          <form action="#" className="checkbox-form">
+            {this.newImage(this.props.title)}
+            {checkBox}
+          </form>
+          <a className="btn individual-play-button" onClick={()=> this.mobilePlayButton(this.props.title, this.props.artist)}> Play </a>
+        </span>
+        );
   }
 }

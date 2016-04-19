@@ -167,7 +167,7 @@ class SelectedArtist extends React.Component{
     <span>
       <input id={this.props.songId.replace(/\s/g, "")} type='checkbox' className='checkbox' name={this.props.songId.replace(/\s/g, "")} checked={this.state.isChecked}
         onClick={() => this.add(this.props.title, this.props.artist, this.state.isChecked)}></input>
-      <label id={this.props.songId.replace(/\s/g, "") + "Image"}htmlFor={this.props.songId} style={styles} className="checkbox-label image-checked"></label>
+      <label id={this.props.songId.replace(/\s/g, "") + "Image"}htmlFor={this.props.songId} style={styles} className="mysong-label image-checked"></label>
     </span>
     );
   }
