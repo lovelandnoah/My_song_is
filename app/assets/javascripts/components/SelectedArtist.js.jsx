@@ -164,11 +164,11 @@ class SelectedArtist extends React.Component{
     }
 
     return(
-    <div>
+    <span>
       <input id={this.props.songId.replace(/\s/g, "")} type='checkbox' className='checkbox' name={this.props.songId.replace(/\s/g, "")} checked={this.state.isChecked}
         onClick={() => this.add(this.props.title, this.props.artist, this.state.isChecked)}></input>
       <label id={this.props.songId.replace(/\s/g, "") + "Image"}htmlFor={this.props.songId} style={styles} className="checkbox-label image-checked"></label>
-    </div>
+    </span>
     );
   }
   
@@ -193,19 +193,15 @@ class SelectedArtist extends React.Component{
     }
   }
 
-    return(<div className="search-result-container" id={this.props.songIndex}>
-            <div className="nav4 card-panel height mix-color" onClick={() => this.mobilePlayButton(this.props.title, this.props.artist)} >
-              <div className="card-content">
-                  <span className="searchTitle">{this.props.title}</span>
-                  <span className="searchArtist">{this.props.artist}</span>
-                {this.newImage(this.props.title)}
-                <form action="#" className="checkbox-form">
-                  {checkBox}
-                </form>
-                <a className="btn individual-play-button" onClick={()=> this.mobilePlayButton(this.props.title, this.props.artist)}> Play </a>
-              </div>
-            </div>
-          </div>
-          );
+  return(<span className="selected-result-container" id={this.props.songIndex}>
+          <form action="#" className="checkbox-form">
+            <span className="searchTitle">{this.props.title}</span>
+            <span className="searchArtist">{this.props.artist}</span>
+            {this.newImage(this.props.title)}
+            {checkBox}
+          </form>
+          <a className="btn individual-play-button" onClick={()=> this.mobilePlayButton(this.props.title, this.props.artist)}> Play </a>
+        </span>
+        );
   }
 }

@@ -65,6 +65,13 @@
   margin-top: 60px;
 }
 
+#view-signup{
+  float: none;
+}
+
+#display-sign-in{
+}
+
 .checkbox {
   display: none;
   position: relative;
@@ -195,6 +202,18 @@
 
 .searchLabel {
   margin-top: 140px;
+}
+
+.selected-result-container {
+  display: inline;
+}
+
+.selected-songs.container {
+  float: left;
+}
+
+.clearBoth {
+  clear: both;
 }
 
 @media all {

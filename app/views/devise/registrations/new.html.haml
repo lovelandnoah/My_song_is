@@ -2,49 +2,51 @@
 
 = render 'layouts/navNotLoggedIn'
 = stylesheet_link_tag "registrations.css"
-%h1.away-from-edge Login
-= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  = f.text_field :email,
-    :value => "Email",
-    :type => "email",
-    :style => "color:#000000;background-color:white;",
-    :onfocus => "if(this.value=='Email'){this.value='';this.style.color = '#000000';}",
-    :color => "white",
-    :onblur => "if(this.value==''){this.value='Email';this.style.color = '#000000';}"
-  = f.text_field :password,
-    :value => "Password",
-    :type => "password",
-    :autocomplete => "off",
-    :style => "color:#000000;background-color:white;",
-    :onfocus => "if(this.value=='Password'){this.value='';this.style.color = '#000000';this.type='password'}",
-    :onblur => "if(this.value==''){this.value='Password';this.style.color = '#000000';this.type='password'}"
-  = f.submit "Login", :class => "submit-button"
+%h1.away-from-edge#title-card Login
+#display-log-in 
+  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+    = f.text_field :email,
+      :value => "Email",
+      :type => "email",
+      :style => "color:#525252;background-color:white;",
+      :onfocus => "if(this.value=='Email'){this.value='';this.style.color = '#000000';}",
+      :color => "white",
+      :onblur => "if(this.value==''){this.value='Email';this.style.color = '#525252';}"
+    = f.text_field :password,
+      :value => "Password",
+      :type => "text",
+      :autocomplete => "off",
+      :style => "color:#525252;background-color:white;",
+      :onfocus => "if(this.value=='Password'){this.value='';this.style.color = '#000000';this.type='password'}",
+      :onblur => "if(this.value==''){this.value='Password';this.style.color = '#525252';this.type='text'}"
+    = f.submit "Login", :class => "submit-button"
 
-%h1.away-from-edge Or Sign up
-- if @user == current_user
-  =best_in_place @user, :bio, as: :textarea, url: 'users/bio/'
-- else
-  =@user.bio
-%div.form-box
+/ - if @user == current_user
+/   =best_in_place @user, :bio, as: :textarea, url: 'users/bio/'
+/ - else
+/   =@user.bio
+%div.form-box#display-sign-in
   = form_for(resource, as: resource_name, url: registration_path(resource_name), validate: true, id: 'new-user') do |f|
     = f.text_field :email,
     :value => "Email",
     :id => "user-email",
     :type => "email",
     :class => "new-user big-form",
-    :style => "color:#000000;background-color:white;",
+    :style => "color:#525252;background-color:white;",
     :onfocus => "if(this.value=='Email'){this.value='';this.style.color = '#000000';}",
     :color => "white",
-    :onblur => "if(this.value==''){this.value='Email';this.style.color = '#000000';}"
+    :onblur => "if(this.value==''){this.value='Email';this.style.color = '#525252';}"
     = f.text_field :password, autocomplete: "off", :class => 'new-account-form',
     :value => "New Password",
-    :type => "password",
+    :type => "text",
     :class => "password-margin new-user big-form",
     :autocomplete => "off",
-    :style => "color:#000000;background-color:white;",
-    :onfocus => "if(this.value=='New Password (4 characters minimum)'){this.value='';this.style.color = '#000000';this.type='password'}",
-    :onblur => "if(this.value==''){this.value='New Password (4 characters minimum)';this.style.color = '#000000';this.type='password'}"
+    :style => "color:#525252;background-color:white;",
+    :onfocus => "if(this.value=='New Password'){this.value='';this.style.color = '#000000';this.type='password'}",
+    :onblur => "if(this.value==''){this.value='New Password';this.style.color = '#525252';this.type='text'}"
     = f.submit "Sign Up", :class => "submit-button"
+
+%a.logout-button#view-signup{:href => "javascript:;"} Or Sign In
 :javascript
   // $(document).ready(function () {
   // $(“#new_user”).validate({
@@ -56,3 +58,20 @@
   // }
   // });
   // });
+  $("#display-sign-in").hide();
+  $("#view-signup").click( function() {
+    $("#display-sign-in").toggle();
+    $("#display-log-in").toggle();
+    if ($("#view-signup").text() == "Or Sign In"){
+      $("#view-signup").text("Change to Login");
+    }else{
+      $("#view-signup").text("Or Sign In");
+    }
+    if ($("#title-card").text() == "Login"){
+      $("#title-card").text("Sign In");
+    }else{
+      $("#title-card").text("Login");
+    }
+
+    });
+

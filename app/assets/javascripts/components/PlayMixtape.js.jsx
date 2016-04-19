@@ -366,9 +366,10 @@
     });
 
     return(<div id="search-box">
-            <div className='' id="">
+            <button className="play-button" onClick={this.playMode}>Play</button>
+            <div className='selected-songs-container' id="">
+              <div className="ClearBoth"></div>
               {this.showMySongs(songs)}
-              <button className="play-button" onClick={this.playMode}>Play</button>
             </div>
 
             <div id="mixtapeForm">
