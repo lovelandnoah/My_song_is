@@ -1,0 +1,83 @@
+/* line 1, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.hidden {
+  display: none;
+  height: 0px;
+  width: 0px;
+}
+
+/* line 7, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.invisible {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  opacity: 0;
+}
+
+/* line 14, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.check-box-hidden {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+}
+
+/* line 20, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.mysong-label {
+  position: absolute;
+  background-size: 70px 70px;
+  height: 70px;
+  width: 70px;
+  background-repeat: no-repeat;
+  margin-top: -70px;
+}
+
+/* line 30, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.search-placeholder {
+  margin-top: 75px;
+  margin-bottom: 75px;
+  margin-left: 10px;
+}
+
+/* line 36, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.ui-autocomplete {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  float: left;
+  display: none;
+  min-width: 160px;
+  _width: 160px;
+  padding: 4px 0;
+  margin: 2px 0 0 0;
+  list-style: none;
+  background-color: #ffffff;
+  border-color: #ccc;
+  border-color: rgba(0, 0, 0, 0.2);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  background-clip: padding-box;
+  *border-right-width: 2px;
+  *border-bottom-width: 2px;
+}
+
+@media all {
+  /* line 62, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+  .big-form {
+    font-size: 2rem;
+    /*!important*/
+    width: 500px;
+    /*!important*/
+  }
+
+  /* line 66, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+  .img-upload {
+    height: 40px;
+    padding-top: 10px;
+  }
+}
+/* line 72, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.hidden-mobile {
+  display: none;
+}
