@@ -9,7 +9,7 @@
 /       %li
 /         %a#FAQ.bigger{:href => "/static_pages/faq"} FAQ
 /       %li
-        
+
 #nav
   .contents
     -if current_user == nil
@@ -37,7 +37,7 @@
       %p#nav-name #{@user.name}
     %p.log.rel#nav-link mysong.is/#{@user.username}
 
-    %img#logo{:border => "0"}
+    %img#logo{:src => "http://cheshirepus.com/mysongis_logo.png"}
 
     %img#qr-code{:alt => "My QR code", :src => @qr}
     / .row

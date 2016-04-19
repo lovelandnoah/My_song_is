@@ -17,6 +17,16 @@
   height: 70px
 }
 
+.inline-container {
+  float: left;
+  width: 19%;
+  margin-left: 6%;
+}
+
+.artist-label {
+  margin-left: 200px;
+}
+
 .image-label {
   position: relative;
   width: 70px;
@@ -83,6 +93,8 @@
   height: 70px;
   width: 70px;
   background-repeat: no-repeat;
+
+  margin-left: -6%;
 }
 
 /*.check-box + label {
@@ -208,8 +220,8 @@
   display: inline;
 }
 
-.selected-songs.container {
-  float: left;
+.selected-songs-container {
+  margin-top: 100px;
 }
 
 .clearBoth {
