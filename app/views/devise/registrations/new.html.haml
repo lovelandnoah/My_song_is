@@ -3,11 +3,12 @@
 = render 'layouts/navNotLoggedIn'
 = stylesheet_link_tag "registrations.css"
 %h1.away-from-edge#title-card Login
-#display-log-in 
+.left-justify#display-log-in
   = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
     = f.text_field :email,
       :value => "Email",
       :type => "email",
+      :class => "left-justify",
       :style => "color:#525252;background-color:white;",
       :onfocus => "if(this.value=='Email'){this.value='';this.style.color = '#000000';}",
       :color => "white",
@@ -25,13 +26,13 @@
 /   =best_in_place @user, :bio, as: :textarea, url: 'users/bio/'
 / - else
 /   =@user.bio
-%div.form-box#display-sign-in
+%div.form-box.left-justify#display-sign-in
   = form_for(resource, as: resource_name, url: registration_path(resource_name), validate: true, id: 'new-user') do |f|
     = f.text_field :email,
     :value => "Email",
     :id => "user-email",
     :type => "email",
-    :class => "new-user big-form",
+    :class => "new-user big-form left-justify",
     :style => "color:#525252;background-color:white;",
     :onfocus => "if(this.value=='Email'){this.value='';this.style.color = '#000000';}",
     :color => "white",
@@ -39,14 +40,14 @@
     = f.text_field :password, autocomplete: "off", :class => 'new-account-form',
     :value => "New Password",
     :type => "text",
-    :class => "password-margin new-user big-form",
+    :class => "password-margin new-user big-form left-justify",
     :autocomplete => "off",
     :style => "color:#525252;background-color:white;",
     :onfocus => "if(this.value=='New Password'){this.value='';this.style.color = '#000000';this.type='password'}",
     :onblur => "if(this.value==''){this.value='New Password';this.style.color = '#525252';this.type='text'}"
     = f.submit "Sign Up", :class => "submit-button"
 
-%a.logout-button#view-signup{:href => "javascript:;"} Or Sign In
+%a.logout-button.left-justify#view-signup{:href => "javascript:;"} Or Sign In
 :javascript
   // $(document).ready(function () {
   // $(“#new_user”).validate({

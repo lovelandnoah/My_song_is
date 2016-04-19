@@ -33,7 +33,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'paperclip', '~> 4.1'
 gem 'jquery-validation-rails'
 gem 'judge'
-
+gem 'aws-sdk', '~> 2'
 
 gem 'devise'
 gem 'omniauth'
