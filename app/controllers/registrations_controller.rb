@@ -51,6 +51,9 @@ class RegistrationsController < Devise::RegistrationsController
     if /temporary@email/.match(@email)
       @email = "Email"
     end
+    if @email == nil
+      @email = "Email"
+    end
 
   end
 
@@ -69,7 +72,7 @@ class RegistrationsController < Devise::RegistrationsController
       params[:user][:image] = nil
       params[:user].delete(:image)
     end
-    if params[:user][:password].blank? || params[:user][:password] == "New Password (4 characters minimum)"
+    if params[:user][:password].blank? || params[:user][:password] == "New Password"
       params[:user].delete(:password)
       params[:user].delete(:current_password)
       if params[:user][:username]
@@ -112,9 +115,38 @@ class RegistrationsController < Devise::RegistrationsController
       sign_in @user, :bypass => true
       redirect_to after_update_path_for(@user)
     else
+
+      # todo: put in model
+      @user = current_user
+      @username = @user.username
+      @omni = logged_in_using_omniauth?
+      @image = @user.image
+
+      if @image == nil
+        @image = "Image"
+      end
+      if @username == nil
+        @username = "Username"
+      end
+      @picture = @user.picture
+      if @picture == nil
+        @picture = "Profile Picture URL"
+      end
+      @name = @user.name
+      if @name == nil
+        @name = "Full Name"
+      end
+      @email = @user.email
+      if /temporary@email/.match(@email)
+        @email = "Email"
+      end
+      if @email == nil
+        @email = "Email"
+      end
+
       clean_up_passwords(resource)
       respond_with_navigational(resource) do
-        render :username_edit_path
+        render "edit"
       end
       end
     end
