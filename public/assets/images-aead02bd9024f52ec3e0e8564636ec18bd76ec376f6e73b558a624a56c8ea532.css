@@ -212,7 +212,7 @@
 
 /* line 192, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
 .away-from-edge {
-  margin-left: 10px;
+  margin-left: 10px !important;
 }
 
 /* line 196, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
@@ -224,8 +224,7 @@
 
 /* line 202, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
 .left-justify {
-  left: 20px;
-  /*!important*/
+  margin-left: 10px;
 }
 
 /* line 206, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
@@ -272,8 +271,13 @@
   clear: both;
 }
 
+/* line 240, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.listen-to-song-button {
+  margin-top: 165px;
+}
+
 @media all {
-  /* line 241, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+  /* line 245, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
   .big-form {
     font-size: 2rem;
     /*!important*/
@@ -281,13 +285,13 @@
     /*!important*/
   }
 
-  /* line 245, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+  /* line 249, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
   .img-upload {
     height: 40px;
     padding-top: 10px;
   }
 }
-/* line 251, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+/* line 255, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
 .hidden-mobile {
   display: none;
 }

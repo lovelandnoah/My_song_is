@@ -517,14 +517,13 @@ var PlayMixtape = (function (_React$Component) {
     key: 'playMode',
     value: function playMode() {
       if (this.state.songs.length > 0) {
-        random = document.getElementById("random");
-        if (random.checked) {
-          this.playMultipleSongs();
-        } else {
+        if (this.props.play_method == "First") {
           this.playSingleSong(this.state.songs[0]);
+        } else {
+          this.playMultipleSongs();
         }
       } else {
-        // todo message to select song
+        //todo: message to add songs if implemented.
       }
     }
   }, {
@@ -783,9 +782,9 @@ var PlayMixtape = (function (_React$Component) {
       if (artists) {
         if (this.state.results[0].songmatch.length == 0) {
           return React.createElement(
-            'h5',
+            'p',
             { className: 'search-placeholder' },
-            'Please search for an artist or song! '
+            'No artist or song found with that name. Please enter a search above. '
           );
           // todo: only show when no search value
         }
@@ -905,6 +904,462 @@ var PlayMixtape = (function (_React$Component) {
   }]);
 
   return PlayMixtape;
+})(React.Component);
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var PlayMySongs = (function (_React$Component) {
+  _inherits(PlayMySongs, _React$Component);
+
+  function PlayMySongs(props) {
+    _classCallCheck(this, PlayMySongs);
+
+    _get(Object.getPrototypeOf(PlayMySongs.prototype), 'constructor', this).call(this, props);
+    this.state = { searched: false, mixtape_id: this.props.mixtape_id, mixtapeName: '', mixTapeCategory: '', songs: [], songsSearchedFor: [], songOrArtist: [], results: [], filteredResults: [], stationId: "", eventTriggered: false };
+    this.getSongs = this.getSongs.bind(this);
+    this.getSearchResults = this.getSearchResults.bind(this);
+    this.filteredSearchResults = this.filteredSearchResults.bind(this);
+    this.noArtists = this.noArtists.bind(this);
+    this.pass = this.pass.bind(this);
+    this.showSuggestions = this.showSuggestions.bind(this);
+    this.changeHandler = this.changeHandler.bind(this);
+    this.showMySongs = this.showMySongs.bind(this);
+    // this.displayUsersMixTapes = this.displayUsersMixTapes.bind(this);
+    // this.doSearch = this.doSearch.bind(this);
+
+    //mixtape
+    this.songNameInPlayer = this.songNameInPlayer.bind(this);
+    this.pictureInPlayer = this.pictureInPlayer.bind(this);
+    this.albumCover = this.albumCover.bind(this);
+    // this.findPlay = this.findPlay.bind(this);
+    // this.shuffle = this.shuffle.bind(this);
+    this.playMultipleSongs = this.playMultipleSongs.bind(this);
+    this.remove = this.remove.bind(this);
+    this.changeHandler = this.changeHandler.bind(this);
+
+    this.checkNewSong = this.checkNewSong.bind(this);
+    this.attemptUpdate = this.attemptUpdate.bind(this);
+
+    this.changeStationId = this.changeStationId.bind(this);
+
+    this.playMode = this.playMode.bind(this);
+    this.playSingleSong = this.playSingleSong.bind(this);
+    this.play = this.play.bind(this);
+  }
+
+  _createClass(PlayMySongs, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      this.setState({ mixtapeUrl: "/mixtapes/" + this.props.mixtape_id });
+
+      // $("#main-art").addClass("hidden-desktop");
+      // $("#player-bottom").addClass("hidden-desktop");
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var self = this;
+      self.showSuggestions();
+      $(document).keypress(function (e) {
+        if (e.which == 13) {
+          self.filteredSearchResults();
+        }
+      });
+      this.getSongs();
+      this.checkNewSong();
+    }
+
+    //mixtape methods
+  }, {
+    key: 'changeHandler',
+    value: function changeHandler(songIndex, title, artist) {
+      var _this = this;
+
+      $.ajax({
+        url: '/song/' + this.state.songs[songIndex].song_id,
+        type: 'DELETE'
+      }).success(function (data) {
+        //       data: {name: self.state.songs[songIndex].song_name, artist: self.state.songs[songIndex].artist_name, mixtape_id: self.props.mixtapeId}
+        // this.setState({songs: data.songs});
+        _this.getSongs();
+        if (document.getElementById(title + artist)) {
+          document.getElementById(title + artist).checked = false;
+        }
+      });
+    }
+  }, {
+    key: 'playMode',
+    value: function playMode() {
+      if (this.state.songs.length > 0) {
+        if (this.props.play_method == "First") {
+          this.playSingleSong(this.state.songs[0]);
+        } else {
+          this.playMultipleSongs();
+        }
+      } else {
+        //todo: message to add songs if implemented.
+      }
+    }
+  }, {
+    key: 'playSingleSong',
+    value: function playSingleSong(song) {
+      title = song.song_name.replace(/\s/g, ".");
+      artist = song.artist_name.replace(/\s/g, ".");
+
+      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        window.open("http://onrad.io/" + artist + "." + title);
+      } else {
+        this.play(title, artist);
+      }
+    }
+  }, {
+    key: 'play',
+    value: function play(title, artist) {
+      this.songNameInPlayer(title, artist);
+      this.pictureInPlayer();
+      title = title.replace(/\s/g, '%20');
+      artist = artist.replace(/\s/g, '%20');
+      $.ajax({
+        url: "http://api.dar.fm/playlist.php?&q=@artist%20" + artist + "%20@title%20" + title + "&callback=jsonp&web=1&partner_token=9388418650",
+        jsonp: 'callback',
+        type: 'GET',
+        dataType: 'jsonp'
+      }).success(function (data) {
+        var player = document.getElementById("player");
+        if (data.length) {
+          player.src = "http://api.dar.fm/player_api.php?station_id=" + data[0].station_id + "&custom_style=radioslice&partner_token=9388418650";
+          // this.state.changeStationId(data[0].station_id);
+        } else {
+            //todo: message song is not playing
+          }
+      });
+    }
+  }, {
+    key: 'playMultipleSongs',
+    value: function playMultipleSongs() {
+      var queries = [];
+      var that = this;
+      // number queries starting with 0 which is blank
+      var queryNo = [""];
+      for (i = 0; i < this.state.songs.length; i++) {
+        queryNo.push(i + 2);
+      }
+      queryNo.pop();
+
+      for (i = 0; i < this.state.songs.length; i++) {
+        queries[i] = '&q' + queryNo[i] + '=(@artist%20' + this.state.songs[i].artist_name.replace(/\s/g, '%20') + '%20@title%20' + this.state.songs[i].song_name.replace(/\s/g, '%20') + ')';
+      }
+      $.ajax({
+        url: "http://api.dar.fm/msi.php?" + queries.join(separator = [""]) + "&callback=jsonp&partner_token=9388418650",
+        jsonp: 'callback',
+        type: 'GET',
+        dataType: 'jsonp'
+      }).success(function (data) {
+        if (data[0].success) {
+          if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            window.open("http://onrad.io/" + data[0].result[0].artist + "." + data[0].result[0].title);
+          } else {
+            var player = document.getElementById("player");
+            player.src = "http://api.dar.fm/player_api.php?station_id=" + data[0].result[0].station_id + "&custom_style=radioslice&partner_token=9388418650";
+            that.albumCover(data[0].songmatch[0].title, data[0].songmatch[0].artist);
+            that.songNameInPlayer(data[0].songmatch[0].title, data[0].songmatch[0].artist);
+            that.changeStationId(data[0].result[0].station_id);
+          }
+        } else {
+          alert("song not playing");
+        }
+      });
+    }
+  }, {
+    key: 'checkNewSong',
+    value: function checkNewSong() {
+      document.addEventListener('DOMContentLoaded', function () {
+        setInterval(self.attemptUpdate, 5000);
+      }, true);
+      var event = new CustomEvent('DOMContentLoaded', { "detail": "Example of an event" });
+      document.dispatchEvent(event);
+    }
+  }, {
+    key: 'attemptUpdate',
+    value: function attemptUpdate() {
+      var _this2 = this;
+
+      if (this.state.station_id != "") {
+        (function () {
+          var that = _this2;
+          $.ajax({
+            url: "http://api.dar.fm/playlist.php?station_id=" + that.state.station_id + "&partner_token=9388418650",
+            jsonp: 'callback',
+            type: 'GET',
+            dataType: 'jsonp'
+          }).success(function (data) {
+            if (data[0] != undefined) {
+              if (data[0].title != document.getElementById("player-title").innerHTML || data[0].artist != document.getElementById("player-artist").innerHTML) {
+                that.albumCover(data[0].title, data[0].artist);
+                that.songNameInPlayer(data[0].title, data[0].artist);
+              };
+            }
+          });
+        })();
+      };
+    }
+  }, {
+    key: 'changeStationId',
+    value: function changeStationId(newId) {
+      this.state.stationId = newId;
+    }
+  }, {
+    key: 'songNameInPlayer',
+    value: function songNameInPlayer(title, artist) {
+      var titleDisplay = document.getElementById("player-title").innerHTML = title;
+      var artistDisplay = document.getElementById("player-artist").innerHTML = artist;
+    }
+  }, {
+    key: 'pictureInPlayer',
+    value: function pictureInPlayer() {
+      var pictureDisplay = document.getElementById("main-art").style.backgroundImage = 'url(' + this.state.albumCoverUrl + ')';
+      $("main-art").removeClass("hidden-desktop");
+      $("player-bottom").removeClass("hidden-desktop");
+    }
+  }, {
+    key: 'albumCover',
+    value: function albumCover(title, artist) {
+      self = this;
+      $.ajax({
+        url: "http://api.dar.fm/songart.php?artist=" + artist + "&title=" + title + "&res=med&partner_token=9388418650",
+        jsonp: 'callback',
+        type: 'GET',
+        dataType: 'jsonp'
+      }).success(function (data) {
+        document.getElementById("main-art").style.backgroundImage = 'url(' + data[0].arturl + ')';
+        $("main-art").removeClass("hidden-desktop");
+        $("player-bottom").removeClass("hidden-desktop");
+      });
+    }
+  }, {
+    key: 'getSongs',
+    value: function getSongs() {
+      var that = this;
+      $.ajax({
+        url: '/mixtapes_find_single_mixtape',
+        type: 'GET',
+        data: { mixtape_id: this.props.mixtape_id }
+      }).success(function (data) {
+        // this.setState({mixtapeName: data.name});
+        that.setState({ songs: data.songs });
+      });
+    }
+  }, {
+    key: 'remove',
+    value: function remove(songIndex) {
+      $.ajax({
+        url: '/song/' + self.state.songs[songIndex].song_id,
+        type: 'DELETE'
+      }).success(function (data) {
+        //       data: {name: self.state.songs[songIndex].song_name, artist: self.state.songs[songIndex].artist_name, mixtape_id: self.props.mixtapeId}
+      });
+      this.changeHandler();
+    }
+
+    // doSearch(){
+    //   this.getSearchResults();
+    //   this.getImages();
+    // }
+
+  }, {
+    key: 'getSearchResults',
+    value: function getSearchResults() {
+      var _this3 = this;
+
+      var self = this;
+      var searchTerm = self.refs.searchText.value.replace(/\s/g, "%20");
+      $.ajax({
+        url: "http://api.dar.fm/playlist.php?&q=" + searchTerm + "&callback=jsonp&web=1&partner_token=9388418650",
+        jsonp: 'callback',
+        type: 'GET',
+        dataType: 'jsonp'
+      }).success(function (data) {
+        _this3.state.searched = true;
+        _this3.setState({ results: data });
+      });
+    }
+  }, {
+    key: 'filteredSearchResults',
+    value: function filteredSearchResults() {
+      var _this4 = this;
+
+      var self = this;
+      var searchTerm = self.refs.searchText.value.replace(/\s/g, "%20");
+      self.refs.searchText.value = "";
+      $.ajax({
+        url: "http://api.dar.fm/songartist.php?&q=*" + searchTerm + "*&callback=jsonp&web=1&partner_token=9388418650",
+        jsonp: 'callback',
+        type: 'GET',
+        dataType: 'jsonp'
+      }).success(function (data) {
+        // songOrArtist = ""
+        // $.each(data, function (key, value) {
+        // if(key == parseInt(key)){
+        //   songOrArtist += value;
+        // }
+        // });
+        // this.setState({results: data});
+        _this4.showFilteredResults(data);
+      });
+      $(".ui-helper-hidden-accessible").hide();
+    }
+  }, {
+    key: 'showFilteredResults',
+    value: function showFilteredResults(results) {
+      var _this5 = this;
+
+      var self = this;
+      $.ajax({
+        url: "http://api.dar.fm/allsongs.php?artist=*" + results[0] + "*&callback=jsonp&partner_token=9388418650",
+        jsonp: 'callback',
+        type: 'GET',
+        dataType: 'jsonp'
+      }).success(function (data) {
+        _this5.state.searched = true;
+        _this5.setState({ results: data });
+      });
+    }
+  }, {
+    key: 'showSuggestions',
+    value: function showSuggestions() {
+      that = this;
+      $("#search").autocomplete({
+        source: function (request, response) {
+          $.ajax({
+            url: "http://api.dar.fm/songartist.php?q=*" + request.term + "*&callback=jsonp&web=1&partner_token=9388418650",
+            jsonp: "callback",
+            type: "GET",
+            dataType: "jsonp"
+          }).success(function (data) {
+            response(data);
+          });
+        },
+        select: function (event, ui) {
+          that.filteredSearchResults();
+        }
+      });
+    }
+  }, {
+    key: 'pass',
+    value: function pass() {
+      $("#mixtapeForm").slideToggle("slow");
+      $("#cardHolder").slideToggle("slow");
+    }
+  }, {
+    key: 'noArtists',
+    value: function noArtists(artists) {
+      if (artists) {
+        if (this.state.results[0].songmatch.length == 0) {
+          return React.createElement(
+            'p',
+            { className: 'search-placeholder' },
+            'No artist or song found with that name. Please enter a search above. '
+          );
+          // todo: only show when no search value
+        }
+      } else {
+          return React.createElement(
+            'h5',
+            { className: 'search-placeholder' },
+            'Search to find a song!'
+          );
+        }
+    }
+  }, {
+    key: 'showPlayer',
+    value: function showPlayer(player) {
+      if (player.src == "") {
+        return;
+      } else {
+        return player;
+      }
+    }
+  }, {
+    key: 'showMySongs',
+    value: function showMySongs(songs) {
+      if (this.props.current_user.id == this.props.author_id) {
+        if (songs.length != 0) {
+          return songs;
+        } else {
+          return React.createElement(
+            'div',
+            { id: 'selected-songs-placeholder' },
+            'No songs selected'
+          );
+        }
+      }
+    }
+
+    //   let songs = this.state.songs.map( song => {
+    // let key = `song-${song.song_id}`;
+    // return(<Song key={key} artist_name={this.props.artist_name} song_name={this.props.song_name} {...song} getSongs={this.getSongs}/>);
+
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this6 = this;
+
+      self = this;
+      // let searchResultCards = <Artist/>;
+      var i = 0;
+
+      // if(this.state.results.length){
+      //   searchResultCards = this.state.results[0].songmatch.map( artist => {
+      //   return(<Artist rplay={self.playSong} mixtapeId={self.state.mixtape_id} getSongs={self.getSongs}/>)})}
+      //}
+
+      // let songsSearchedFor = this.state.songsSearchedFor.map( song => {
+      //   let key = `songsSearchedFor-${song.song_id}`
+      //   songsSearchedFor.push(<MixTapeSong key={key} {...song}/>);
+      // });
+      var searchResultCards = null;
+      if (this.state.results[0] != undefined) {
+        searchResultCards = this.state.results.length ? this.state.results[0].songmatch.map(function (Sartist) {
+          return React.createElement(Artist, { title: Sartist.title, songIndex: "result" + self.state.results[0].songmatch.indexOf(Sartist), songs: _this6.state.songs, getSongs: _this6.getSongs, artist: Sartist.artist, key: 'artist-' + (i += 1), rplay: self.playSong, mixtapeId: self.state.mixtape_id, current_user: self.props.current_user, changeStationId: _this6.changeStationId, songId: Sartist.artist.replace(/\s/g, "") + Sartist.title.replace(/\s/g, "") });
+        }) : [];
+      }
+      var songs = self.state.songs.map(function (song) {
+        // let key = `mixtapeSong-${song.song_id}`;
+        return React.createElement(
+          'div',
+          { className: 'inline-container' },
+          React.createElement(SelectedArtist, { songs: _this6.state.songs, key: 'mixtapeSong-' + song.song_id, songIndex: "favorite" + self.state.songs.indexOf(song), title: song.song_name, artist: song.artist_name, songId: "selected" + song.song_id, onChange: _this6.changeHandler, getSongs: _this6.getSongs, changeStationId: _this6.changeStationId }),
+          React.createElement(
+            'p',
+            { className: 'my-song-title' },
+            song.song_name
+          ),
+          React.createElement(
+            'p',
+            { className: 'my-song-artist' },
+            song.artist_name
+          )
+        );
+      });
+
+      return React.createElement(
+        'div',
+        { id: 'play-container-not-logged' },
+        React.createElement(
+          'button',
+          { className: 'listen-to-song-button', onClick: this.playMode },
+          'Play'
+        )
+      );
+    }
+  }]);
+
+  return PlayMySongs;
 })(React.Component);
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 

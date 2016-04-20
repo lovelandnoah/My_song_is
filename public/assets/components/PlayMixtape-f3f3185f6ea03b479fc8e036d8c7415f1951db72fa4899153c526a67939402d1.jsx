@@ -69,14 +69,13 @@
 
   playMode(){
     if(this.state.songs.length > 0){
-      random = document.getElementById("random");
-      if(random.checked){
-        this.playMultipleSongs();
-      } else {
+      if(this.props.play_method == "First"){
         this.playSingleSong(this.state.songs[0]);
+      } else {
+        this.playMultipleSongs();
       }
     } else {
-      // todo message to select song
+      //todo: message to add songs if implemented.
     }
   }
 
@@ -202,7 +201,6 @@
       $("player-bottom").removeClass("hidden-desktop");
     });
   }
-
   getSongs(){
     let that = this;
     $.ajax({
@@ -213,8 +211,7 @@
       // this.setState({mixtapeName: data.name});
       that.setState({songs: data.songs});
     })
-  }
-
+  } 
   remove(songIndex){
     $.ajax({
       url: '/song/' + self.state.songs[songIndex].song_id,
@@ -307,7 +304,7 @@
   noArtists(artists){
     if(artists) {
       if(this.state.results[0].songmatch.length == 0) {
-        return(<h5 className='search-placeholder'>Please search for an artist or song! </h5>);
+        return(<p className='search-placeholder'>No artist or song found with that name. Please enter a search above. </p>);
         // todo: only show when no search value
       }
     }else {
@@ -365,7 +362,6 @@
       <p className="my-song-title">{song.song_name}</p>
       <p className="my-song-artist">{song.artist_name}</p>
       </div>);
-      // return(<SongDetails key={key} songIndex={self.state.songs.indexOf(song)} songName={song.song_name} artistName={song.artist_name} songId={song.song_id} onChange={this.changeHandler}/>);
     });
 
     return(<div id="search-box">
