@@ -19,8 +19,11 @@
 		- if current_user == nil
 			#create-link
 				= link_to 'Create your own MySong.is profile', '/users/sign_in'
-= react_component 'Player'
-= react_component 'PlayMixtape', { current_user: current_user, mixtape_id: @mixtape_id, author_id: @user.id }
+			= react_component 'PlayMySongs', { mixtape_id: @mixtape_id, author_id: @user.id, play_method: @user.playMethod}
+
+- if current_user != nil
+	= react_component 'Player'
+	= react_component 'PlayMixtape', { current_user: current_user, mixtape_id: @mixtape_id, author_id: @user.id, play_method: @user.playMethod }
 
 #column-right
 	= react_component 'TopSongs', { current_user: current_user, mixtape_id: @mixtape_id }

@@ -1,4 +1,4 @@
-  class PlayMixtape extends React.Component{
+  class PlayMySongs extends React.Component{
   constructor(props){
     super(props)
     this.state = { searched: false, mixtape_id: this.props.mixtape_id, mixtapeName: '', mixTapeCategory: '', songs: [], songsSearchedFor: [], songOrArtist: [], results: [], filteredResults: [], stationId: "", eventTriggered: false};
@@ -364,22 +364,8 @@
       </div>);
     });
 
-    return(<div id="search-box">
-            <div className='selected-songs-container' id="">
-              {this.showMySongs(songs)}
-            </div>
-
-            <div id="mixtapeForm">
-            </div>
-
-            <h5 className="salt searchLabel">Search for an Artist or Song:</h5>
-              <input id='search' className='large-search' type='text' ref='searchText' autofocus='true' placeholder='Song or Artist'/>
-            <button onClick={this.filteredSearchResults} className='btn waves-effect waves-light black-text'>Search</button>
-            <div id="search-list"> 
-              {this.noArtists(searchResultCards)}
-              {searchResultCards}
-            </div>
-            <button className="mysong-play-button" onClick={this.playMode}>Play</button>
+    return(<div id="play-container-not-logged">
+            <button className="listen-to-song-button" onClick={this.playMode}>Play</button>
         </div>)
   }
 }
