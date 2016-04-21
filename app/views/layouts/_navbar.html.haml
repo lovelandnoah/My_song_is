@@ -33,13 +33,15 @@
       =link_to "Logout", destroy_user_session_path, :method => :delete, :class => "logout-button"
       =link_to "Edit Profile", edit_user_registration_path, :class => "edit-profile-button"
 
-    -if @user.name != nil
-      %p#nav-name #{@user.name}
-    %p.log.rel#nav-link mysong.is/#{@user.username}
+    -if @user
+      -if @user.name != nil
+        %p#nav-name #{@user.name}
+      %p.log.rel#nav-link mysong.is/#{@user.username}
 
     %img#logo{:src => "http://cheshirepus.com/mysongis_logo.png"}
 
-    %img#qr-code{:alt => "My QR code", :src => @qr}
+    -if @user
+      %img#qr-code{:alt => "My QR code", :src => @qr}
     / .row
     /   = image_tag('real_b.png', :class =>"one image")
     /   %a#about-us.bigger.image.white-text.stroke{:href => "/static_pages/bio"} About Us

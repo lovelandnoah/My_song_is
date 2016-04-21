@@ -1,25 +1,26 @@
 = render 'layouts/navbar'
 .contents
 	#column-left
-		.container
-			- if @user == current_user
-				%img.nav-profile-pic.logged-in-profile-pic.borderr.z-depth-3#nav-profile-pic{alt: "profile_pic", src: @img}
-			- else
-				%img.nav-profile-pic.logged-out-profile-pic.borderr.z-depth-3#nav-profile-pic{alt: "profile_pic", src: @img}
-			- if @user == current_user
-				=best_in_place @user, :bio, as: :textarea, url: 'users/bio/', id: 'biography'
-			- else
-				=@user.bio
-			#player-container
-				#main-art.pick-song-image.hidden-mobile
-				#player-bottom.hidden-mobile
-					#player-title
-					#player-artist
-					#player-button play
-		- if current_user == nil
-			#create-link
-				= link_to 'Create your own MySong.is profile', '/users/sign_in'
-			= react_component 'PlayMySongs', { mixtape_id: @mixtape_id, author_id: @user.id, play_method: @user.playMethod}
+		- if @user
+			.container
+				- if @user == current_user
+					%img.nav-profile-pic.logged-in-profile-pic.borderr.z-depth-3#nav-profile-pic{alt: "profile_pic", src: @img}
+				- else
+					%img.nav-profile-pic.logged-out-profile-pic.borderr.z-depth-3#nav-profile-pic{alt: "profile_pic", src: @img}
+				- if @user == current_user
+					=best_in_place @user, :bio, as: :textarea, url: 'users/bio/', id: 'biography'
+				- else
+					=@user.bio
+				#player-container
+					#main-art.pick-song-image.hidden-mobile
+					#player-bottom.hidden-mobile
+						#player-title
+						#player-artist
+						#player-button play
+			- if current_user == nil
+				#create-link
+					= link_to 'Create your own MySong.is profile', '/users/sign_in'
+				= react_component 'PlayMySongs', { mixtape_id: @mixtape_id, author_id: @user.id, play_method: @user.playMethod}
 
 - if current_user != nil
 	= react_component 'Player'
@@ -27,3 +28,8 @@
 
 #column-right
 	= react_component 'TopSongs', { current_user: current_user, mixtape_id: @mixtape_id }
+
+- if !@user
+	.search-placeholder No user with that Username found!
+	#create-link
+		= link_to 'Create your own MySong.is profile', '/users/sign_in'

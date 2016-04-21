@@ -325,7 +325,7 @@
       if(songs.length != 0){
         return(songs);
       } else{
-        return(<div id="selected-songs-placeholder">No songs selected</div>);
+        return(<div className="search-placeholder">No songs selected</div>);
       }
 
     }

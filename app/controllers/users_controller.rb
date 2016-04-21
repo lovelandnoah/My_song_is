@@ -79,24 +79,29 @@ class UsersController < ApplicationController
       if @user == nil
 			 @user = current_user
       end
-      @img = @user.image.url(:medium)
-      if @img == "/images/missing.png"
-        if @user.picture != nil
-          @img = @user.picture
-        end
-      end
-			@mixtape = Mixtape.where(user_id: @user.id)
-			@mixtape_id = @user.id
 
-			if @mixtape.any?
-				if Song.where(mixtape_id: @user.id)
-		  		@songs = Song.where(mixtape_id: @mixtape[0].id)
-		  	end
-			end
-		  url_prefix = 'https://chart.googleapis.com/chart?chs=300x300&cht=qr&chld=H&chl='
-		  profile_url = request.original_url
-		  @qr = url_prefix + profile_url
-		end
+      if @user != nil
+        @img = @user.image.url(:medium)
+
+        if @img == "/images/missing.png"
+          if @user.picture != nil
+            @img = @user.picture
+          end
+        end
+
+  			@mixtape = Mixtape.where(user_id: @user.id)
+  			@mixtape_id = @user.id
+
+  			if @mixtape.any?
+  				if Song.where(mixtape_id: @user.id)
+  		  		@songs = Song.where(mixtape_id: @mixtape[0].id)
+  		  	end
+  			end
+  		  url_prefix = 'https://chart.googleapis.com/chart?chs=300x300&cht=qr&chld=H&chl='
+  		  profile_url = request.original_url
+  		  @qr = url_prefix + profile_url
+      end
+  	end
 
 		if current_user == nil
 			@offline = true
