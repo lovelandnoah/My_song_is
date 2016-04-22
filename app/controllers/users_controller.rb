@@ -33,6 +33,10 @@ class UsersController < ApplicationController
     @resource = current_user
 	end
 
+  def pick_a_song
+
+  end
+
   def update_bio
     if params[:user][:bio]
       current_user.update_attributes(:bio => params[:user][:bio])
@@ -69,6 +73,15 @@ class UsersController < ApplicationController
   end
 
 	def show
+    if current_user
+      if Song.where(mixtape_id: current_user).length > 0
+        current_user.demo = true
+      end
+      if !current_user.demo
+        redirect_to pick_a_song_path
+      end
+    end
+
     if params[:id] != nil
       @user = User.find_by_username(params[:id])
     end

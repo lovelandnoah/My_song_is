@@ -22,6 +22,7 @@ Rails.application.routes.draw do
 
 
   get 'username_edit', to: 'users#edit_username', via: [:patch]
+  get 'pick_a_song', to: 'users#pick_a_song', via: [:patch]
 
   devise_scope :user do
     get '/login', to: 'registrations#login', via: [:post]

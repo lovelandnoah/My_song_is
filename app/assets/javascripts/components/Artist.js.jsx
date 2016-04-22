@@ -73,7 +73,6 @@ class Artist extends React.Component{
   }
 
   mobilePlayButton(title, artist){
-    debugger
     mobileTitle = title.replace(/\s/g, ".")
     mobileArtist = artist.replace(/\s/g, ".")
 

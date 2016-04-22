@@ -120,7 +120,6 @@
       queryNo.push(i + 2);
     }
     queryNo.pop();
-
       for(i=0;i<this.state.songs.length;i++){
         queries[i] = `&q${queryNo[i]}=(@artist%20${this.state.songs[i].artist_name.replace(/\s/g, '%20')}%20@title%20${this.state.songs[i].song_name.replace(/\s/g, '%20')})`
       }
@@ -325,7 +324,7 @@
       if(songs.length != 0){
         return(songs);
       } else{
-        return(<div id="selected-songs-placeholder">No songs selected</div>);
+        return(<div className="search-placeholder">No songs selected</div>);
       }
 
     }

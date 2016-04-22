@@ -1,4 +1,4 @@
-  class PlayMySongs extends React.Component{
+  class PickASong extends React.Component{
   constructor(props){
     super(props)
     this.state = { searched: false, mixtape_id: this.props.mixtape_id, mixtapeName: '', mixTapeCategory: '', songs: [], songsSearchedFor: [], songOrArtist: [], results: [], filteredResults: [], stationId: "", eventTriggered: false};
@@ -31,6 +31,8 @@
     this.playMode = this.playMode.bind(this);
     this.playSingleSong = this.playSingleSong.bind(this);
     this.play = this.play.bind(this);
+
+    this.doneButton = this.doneButton.bind(this);
   }
 
   componentWillMount(){
@@ -325,9 +327,15 @@
       if(songs.length != 0){
         return(songs);
       } else{
-        return(<div id="selected-songs-placeholder">No songs selected</div>);
+        return(<div className="search-placeholder">No songs selected</div>);
       }
 
+    }
+  }
+
+  doneButton() {
+    if($("label.mysong-label").length){
+      $("#done-button").show();
     }
   }
 
@@ -358,14 +366,29 @@
     }
     let songs = self.state.songs.map( song => {
     // let key = `mixtapeSong-${song.song_id}`;
-      return(<div className="inline-container"><SelectedArtist songs={this.state.songs} key={`mixtapeSong-${song.song_id}`} songIndex={"favorite" + self.state.songs.indexOf(song)} title={song.song_name} artist={song.artist_name} songId={"selected" + song.song_id} onChange={this.changeHandler} getSongs={this.getSongs} changeStationId={this.changeStationId}/>
+      return(<div className="inline-container"><SelectedArtist songs={this.state.songs} key={`mixtapeSong-${song.song_id}`} songIndex={"favorite" + self.state.songs.indexOf(song)} title={song.song_name} artist={song.artist_name} songId={"selected" + song.song_id} onChange={this.changeHandler} getSongs={this.getSongs} changeStationId={this.changeStationId} doneButton={this.doneButton}/>
       <p className="my-song-title">{song.song_name}</p>
       <p className="my-song-artist">{song.artist_name}</p>
       </div>);
     });
 
-    return(<div id="play-container-not-logged">
-            <button className="listen-to-song-button" onClick={this.playMode}>Play</button>
+    return(<div id="search-box">
+            <div className='selected-songs-container' id="">
+              {this.showMySongs(songs)}
+            </div>
+
+            {<a href='/' id="done-button" className='edit-profile-button hidden-mobile'>Done</a>}
+
+            <div id="mixtapeForm">
+            </div>
+
+            <h5 className="salt searchLabel">Search for an Artist or Song:</h5>
+              <input id='search' className='large-search' type='text' ref='searchText' autofocus='true' placeholder='Song or Artist'/>
+            <button onClick={this.filteredSearchResults} className='btn waves-effect waves-light black-text'>Search</button>
+            <div id="search-list"> 
+              {this.noArtists(searchResultCards)}
+              {searchResultCards}
+            </div>
         </div>)
   }
 }

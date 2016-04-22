@@ -1,4 +1,4 @@
-  class PlayMixtape extends React.Component{
+  class PickASong extends React.Component{
   constructor(props){
     super(props)
     this.state = { searched: false, mixtape_id: this.props.mixtape_id, mixtapeName: '', mixTapeCategory: '', songs: [], songsSearchedFor: [], songOrArtist: [], results: [], filteredResults: [], stationId: "", eventTriggered: false};
@@ -31,6 +31,8 @@
     this.playMode = this.playMode.bind(this);
     this.playSingleSong = this.playSingleSong.bind(this);
     this.play = this.play.bind(this);
+
+    this.doneButton = this.doneButton.bind(this);
   }
 
   componentWillMount(){
@@ -120,6 +122,7 @@
       queryNo.push(i + 2);
     }
     queryNo.pop();
+
       for(i=0;i<this.state.songs.length;i++){
         queries[i] = `&q${queryNo[i]}=(@artist%20${this.state.songs[i].artist_name.replace(/\s/g, '%20')}%20@title%20${this.state.songs[i].song_name.replace(/\s/g, '%20')})`
       }
@@ -330,6 +333,12 @@
     }
   }
 
+  doneButton() {
+    if($("label.mysong-label").length){
+      $("#done-button").show();
+    }
+  }
+
     //   let songs = this.state.songs.map( song => {
     // let key = `song-${song.song_id}`;
     // return(<Song key={key} artist_name={this.props.artist_name} song_name={this.props.song_name} {...song} getSongs={this.getSongs}/>);
@@ -357,7 +366,7 @@
     }
     let songs = self.state.songs.map( song => {
     // let key = `mixtapeSong-${song.song_id}`;
-      return(<div className="inline-container"><SelectedArtist songs={this.state.songs} key={`mixtapeSong-${song.song_id}`} songIndex={"favorite" + self.state.songs.indexOf(song)} title={song.song_name} artist={song.artist_name} songId={"selected" + song.song_id} onChange={this.changeHandler} getSongs={this.getSongs} changeStationId={this.changeStationId}/>
+      return(<div className="inline-container"><SelectedArtist songs={this.state.songs} key={`mixtapeSong-${song.song_id}`} songIndex={"favorite" + self.state.songs.indexOf(song)} title={song.song_name} artist={song.artist_name} songId={"selected" + song.song_id} onChange={this.changeHandler} getSongs={this.getSongs} changeStationId={this.changeStationId} doneButton={this.doneButton}/>
       <p className="my-song-title">{song.song_name}</p>
       <p className="my-song-artist">{song.artist_name}</p>
       </div>);
@@ -367,6 +376,8 @@
             <div className='selected-songs-container' id="">
               {this.showMySongs(songs)}
             </div>
+
+            {<a href='/' id="done-button" className='edit-profile-button hidden-mobile'>Done</a>}
 
             <div id="mixtapeForm">
             </div>
@@ -378,7 +389,6 @@
               {this.noArtists(searchResultCards)}
               {searchResultCards}
             </div>
-            <button className="mysong-play-button" onClick={this.playMode}>Play</button>
         </div>)
   }
 }

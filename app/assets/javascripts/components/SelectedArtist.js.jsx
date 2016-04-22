@@ -173,9 +173,10 @@ class SelectedArtist extends React.Component{
   }
   
   render(){
-    // if(self.props.current_user) {
-    checkBox = this.displayAdd()
-      // }
+    checkBox = this.displayAdd();
+    if(this.props.doneButton){
+      this.props.doneButton();
+    }
     if(this.state.title != this.props.title || this.state.artist != this.props.artist){
       this.state.title = this.props.title;
       this.state.artist = this.props.artist;
