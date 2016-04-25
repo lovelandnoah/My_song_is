@@ -1,0 +1,59 @@
+= stylesheet_link_tag "registrations.css" 
+= render 'layouts/nolognav'
+
+%h1.away-from-edge Confirm Profile Picture
+
+.nav-button#new-profile-pic
+  Choose Profile Picture
+
+- flash.each do |name, msg|
+  - if msg.class == Array
+    - msg.each do |message|
+      = content_tag :div, message, :id => "flash_#{name}"
+%div.form-box
+  = form_for(resource, as: resource_name, url: registration_path(resource_name), id: "register-form", builder: Judge::FormBuilder) do |f|
+    = devise_error_messages!
+    = f.text_field :picture,
+      :value => "Profile Picture URL",
+      :class => "new-user pic-url big-form choose-picture hidden-button",
+      :style => "color:#000000;background-color:white;",
+      :color => "white",
+      :onfocus => "if(this.value=='Profile Picture URL'){this.value='';this.style.color = '#000000';}",
+      :onblur => "if(this.value==''){this.value='Profile Picture URL';this.style.color = '#000000';}"
+    %h1.away-from-edge.hidden-button.choose-picture Or
+    #take-pic.hidden-button.upload-picture.choose-picture
+      Take Picture
+      .invisible
+        = f.file_field :image,
+          :id => "pictureInput",
+          :class => "big-form img-upload choose-picture hidden-button"
+    #target
+    = link_to "Done", {:controller => "users", :action => "accept_confirm_picture", :id => current_user.id}, class: "edit-profile-button"
+
+:javascript
+ 
+  $('#new-profile-pic').on('click', function(event) {
+    $('.choose-picture').toggleClass('hidden-button');
+    $('#take-pic').toggleClass('nav-button');
+  });
+
+  $(function() {
+    $('#pictureInput').on('change', function(event) {
+      var files = event.target.files;
+      var image = files[0]
+      var reader = new FileReader();
+      reader.onload = function(file) {
+        var img = new Image();
+        img.src = file.target.result;
+        // $('#target').html(img);
+        $('#target').css("background-image", "url(" + img.src + ")");
+      }
+      reader.readAsDataURL(image);
+    });
+  });
+
+  $(function() {
+    $('.pic-url').on('change', function(event) {
+      $('#target').css("background-image", "url(" + $('.pic-url').val() + ")");
+    }).change();
+  });

@@ -14,8 +14,6 @@ class UsersController < ApplicationController
 		# @user = User.where(id: current_user.id)
 		@user = current_user
 		# @user = current_user.id
-
-
 	end
 
 	def edit_username
@@ -35,6 +33,15 @@ class UsersController < ApplicationController
 
   def pick_a_song
 
+  end
+
+  def confirm_picture
+
+  end
+
+  def accept_confirm_picture
+    current_user.update_attributes(:confirmed_picture => true)
+    redirect_to :controller => 'users', :action => 'show'
   end
 
   def update_bio
@@ -78,7 +85,10 @@ class UsersController < ApplicationController
         current_user.demo = true
       end
       if !current_user.demo
-        redirect_to pick_a_song_path
+        redirect_to pick_a_song_path and return
+      end
+      if !current_user.confirmed_picture
+        redirect_to confirm_picture_path and return
       end
     end
 
@@ -129,16 +139,16 @@ class UsersController < ApplicationController
       end
 	  end
   end
-	
+
 	def show_user
 		if
 			@user = User.find_by_username(params[:id])
 		elsif
 			@user = current_user
-		end
-		
+    end
+
 		@mixtape = Mixtape.where(user_id: @user.id)
-		
+
 		if @mixtape.any?
     	@songs = Song.where(mixtape_id: @mixtape[0].id)
 		end
@@ -179,7 +189,7 @@ class UsersController < ApplicationController
 	def resource_name
     :user
   end
- 
+
   def resource
     @resource ||= User.new
   end
@@ -189,7 +199,7 @@ class UsersController < ApplicationController
   end
 
 	def user_params
-		accessible = [ :name, :picture, :image, :username, :playMethod]
+		accessible = [ :name, :picture, :image, :username, :playMethod, :demo, :confirmed_picture]
 		params.require(:user).permit(accessible)
 	end
 

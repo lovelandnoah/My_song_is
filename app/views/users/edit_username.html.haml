@@ -24,43 +24,10 @@
       :color => "white",
       :onfocus => "if(this.value=='Full Name'){this.value='';this.style.color = '#000000';}",
       :onblur => "if(this.value==''){this.value='Full Name';this.style.color = '#000000';}"
-    = f.text_field :picture,
-      :value => "Profile Picture URL",
-      :class => "new-user pic-url big-form",
-      :style => "color:#000000;background-color:white;",
-      :color => "white",
-      :onfocus => "if(this.value=='Profile Picture URL'){this.value='';this.style.color = '#000000';}",
-      :onblur => "if(this.value==''){this.value='Profile Picture URL';this.style.color = '#000000';}"
-    .nav-button.upload-picture
-      Take Picture
-      .invisible
-        = f.file_field :image,
-          :id => "pictureInput",
-          :class => "big-form img-upload"
-    #target
     .section#separator
       = f.submit "Save", :class => "submit-button"
 :javascript
-  $(function() {
-    $('#pictureInput').on('change', function(event) {
-      var files = event.target.files;
-      var image = files[0]
-      var reader = new FileReader();
-      reader.onload = function(file) {
-        var img = new Image();
-        img.src = file.target.result;
-        // $('#target').html(img);
-        $('#target').css("background-image", "url(" + img.src + ")");
-      }
-      reader.readAsDataURL(image);
-    });
-  });
 
-  $(function() {
-    $('.pic-url').on('change', function(event) {
-      $('#target').css("background-image", "url(" + $('.pic-url').val() + ")");
-    }).change();
-  });
 
   // judge.validate(document.getElementById('username-field'), {
   //   valid: function(element) {
