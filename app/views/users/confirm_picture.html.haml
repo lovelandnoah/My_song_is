@@ -14,7 +14,7 @@
   = form_for(resource, as: resource_name, url: registration_path(resource_name), id: "register-form", builder: Judge::FormBuilder) do |f|
     = devise_error_messages!
     = f.text_field :picture,
-      :value => "Profile Picture URL",
+      :value => "#{@picture}",
       :class => "new-user pic-url big-form choose-picture hidden-button",
       :style => "color:#000000;background-color:white;",
       :color => "white",

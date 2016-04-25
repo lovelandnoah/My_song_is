@@ -10,8 +10,7 @@
         :class => "new-user",
         :style => "color:#000000;background-color:white;",
         :onfocus => "if(this.value=='Username' || this.value == '#{@username}'){this.value='';this.style.color = '#000';}",
-        :onblur => "if(this.value==''){this.value='#{@username}';}",
-        :autocapitalize => "none"
+        :onblur => "if(this.value==''){this.value='#{@username}';}"
       = f.text_field :email,
         :value => "#{@email}",
         :class => "new-user",
@@ -19,8 +18,7 @@
         :style => "color:#000000;background-color:white;",
         :onfocus => "if(this.value=='#{@email}'){this.value='';this.style.color = '#000000';}",
         :color => "white",
-        :onblur => "if(this.value==''){this.value='#{@email}';this.style.color = '#000000';}",
-        :autocapitalize => "none"
+        :onblur => "if(this.value==''){this.value='#{@email}';this.style.color = '#000000';}"
       = f.text_field :current_password,
         :value => "Current Password",
         :class => "new-user",
@@ -28,8 +26,7 @@
         :autocomplete => "off",
         :style => "color:#000000;background-color:white;",
         :onfocus => "if(this.value=='Current Password'){this.value='';this.style.color = '#000000';this.type='password'}",
-        :onblur => "if(this.value==''){this.value='Current Password';this.type='text'}",
-        :autocapitalize => "none"
+        :onblur => "if(this.value==''){this.value='Current Password';this.type='text'}"
       = f.text_field :password,
         :value => "New Password",
         :autocomplete => "off",
@@ -37,8 +34,7 @@
         :class => "new-user",
         :style => "color:#000000;background-color:white;",
         :onfocus => "if(this.value=='New Password'){this.value='';this.style.color = '#000000';this.type='password'}",
-        :onblur => "if(this.value==''){this.value='New Password';this.style.color = '#000000';this.type='text'}",
-        :autocapitalize => "none"
+        :onblur => "if(this.value==''){this.value='New Password';this.style.color = '#000000';this.type='text'}"
       = f.text_field :name,
         :value => "#{@name}",
         :class => "new-user",
@@ -75,7 +71,7 @@
         :onfocus => "if(this.value=='#{@username}'){this.value='';this.style.color = '#000000';}",
         :color => "white",
         :onblur => "if(this.value==''){this.value='#{@username}';this.style.color = '#000000';}",
-        :autocapitalize => "none"
+        :autocomplete => "off"
       = f.text_field :email,
         :value => "#{@email}",
         :class => "new-user",
@@ -84,7 +80,7 @@
         :onfocus => "if(this.value=='#{@email}'){this.value='';this.style.color = '#000000';}",
         :color => "white",
         :onblur => "if(this.value==''){this.value='#{@email}';this.style.color = '#000000';}",
-        :autocapitalize => "none"
+        :autocomplete => "off"
       = f.text_field :name,
         :value => "#{@name}",
         :class => "new-user",

@@ -12,8 +12,8 @@ class UsersController < ApplicationController
 
 		# id = current_user.id
 		# @user = User.where(id: current_user.id)
-		@user = current_user
 		# @user = current_user.id
+
 	end
 
 	def edit_username
@@ -29,6 +29,24 @@ class UsersController < ApplicationController
     #   current_user.update_attributes(:image => params[:user][:image])
     # end
     @resource = current_user
+    @user = current_user
+    @username = @user.username
+    @omni = logged_in_using_omniauth?
+
+    if @username == nil
+      @username = "Username"
+    end
+    @name = @user.name
+    if @name == nil
+      @name = "Full Name"
+    end
+    @email = @user.email
+    if /temporary@email/.match(@email)
+      @email = "Email"
+    end
+    if @email == nil
+      @email = "Email"
+    end
 	end
 
   def pick_a_song
@@ -36,7 +54,10 @@ class UsersController < ApplicationController
   end
 
   def confirm_picture
-
+    @picture = current_user.picture
+    if @picture == nil
+      @picture = "Profile Picture URL"
+    end
   end
 
   def accept_confirm_picture
@@ -205,5 +226,9 @@ class UsersController < ApplicationController
 
 	def update_resource(resource, params)
     resource.update_without_password(params)
+  end
+
+  def logged_in_using_omniauth?
+    session[:logged_in_using_omniauth].present?
   end
 end
