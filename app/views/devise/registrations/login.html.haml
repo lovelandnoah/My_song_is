@@ -5,14 +5,16 @@
       :style => "color:#000000;background-color:white;",
       :onfocus => "if(this.value=='Email'){this.value='';this.style.color = '#000000';}",
       :color => "white",
-      :onblur => "if(this.value==''){this.value='Email';this.style.color = '#000000';}"
+      :onblur => "if(this.value==''){this.value='Email';this.style.color = '#000000';}",
+      :autocapitalize => "none"
   .col.s4
     = f.text_field :password,
       :value => "Password",
       :autocomplete => "off",
       :style => "color:#000000;background-color:white;",
       :onfocus => "if(this.value=='Password'){this.value='';this.style.color = '#000000';this.type='password'}",
-      :onblur => "if(this.value==''){this.value='Password';this.style.color = '#000000';this.type='text'}"
+      :onblur => "if(this.value==''){this.value='Password';this.style.color = '#000000';this.type='text'}",
+      :autocapitalize => "none"
   .col.s4
     = f.submit "Login", :class => "submit-button"
 

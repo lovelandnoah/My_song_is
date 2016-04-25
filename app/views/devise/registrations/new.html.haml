@@ -12,14 +12,16 @@
       :style => "color:#525252;background-color:white;",
       :onfocus => "if(this.value=='Email'){this.value='';this.style.color = '#000000';}",
       :color => "white",
-      :onblur => "if(this.value==''){this.value='Email';this.style.color = '#525252';}"
+      :onblur => "if(this.value==''){this.value='Email';this.style.color = '#525252';}",
+      :autocapitalize => "none"
     = f.text_field :password,
       :value => "Password",
       :type => "text",
       :autocomplete => "off",
       :style => "color:#525252;background-color:white;",
       :onfocus => "if(this.value=='Password'){this.value='';this.style.color = '#000000';this.type='password'}",
-      :onblur => "if(this.value==''){this.value='Password';this.style.color = '#525252';this.type='text'}"
+      :onblur => "if(this.value==''){this.value='Password';this.style.color = '#525252';this.type='text'}",
+      :autocapitalize => "none"
     = f.submit "Login", :class => "submit-button"
 
 / - if @user == current_user
@@ -36,7 +38,8 @@
     :style => "color:#525252;background-color:white;",
     :onfocus => "if(this.value=='Email'){this.value='';this.style.color = '#000000';}",
     :color => "white",
-    :onblur => "if(this.value==''){this.value='Email';this.style.color = '#525252';}"
+    :onblur => "if(this.value==''){this.value='Email';this.style.color = '#525252';}",
+    :autocapitalize => "none"
     = f.text_field :password, autocomplete: "off", :class => 'new-account-form',
     :value => "New Password",
     :type => "text",
@@ -44,7 +47,8 @@
     :autocomplete => "off",
     :style => "color:#525252;background-color:white;",
     :onfocus => "if(this.value=='New Password'){this.value='';this.style.color = '#000000';this.type='password'}",
-    :onblur => "if(this.value==''){this.value='New Password';this.style.color = '#525252';this.type='text'}"
+    :onblur => "if(this.value==''){this.value='New Password';this.style.color = '#525252';this.type='text'}",
+    :autocapitalize => "none"
     = f.submit "Create Account", :class => "submit-button"
 
 %a.logout-button.left-justify#view-signup{:href => "javascript:;"} Or Create Account
