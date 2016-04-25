@@ -28,7 +28,7 @@
           :id => "pictureInput",
           :class => "big-form img-upload choose-picture hidden-button"
     #target
-    = link_to "Done", {:controller => "users", :action => "accept_confirm_picture", :id => current_user.id}, class: "edit-profile-button"
+    = link_to "Done", {:controller => "users", :action => "accept_confirm_picture", :id => current_user.id}, class: "edit-profile-button", id: "confirm-picture-done"
 
 :javascript
  
