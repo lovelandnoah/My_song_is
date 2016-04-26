@@ -17,7 +17,7 @@
         :style => "color:#000000;background-color:white;",
         :onfocus => "if(this.value=='Username'){this.value='';this.style.color = '#000000';}",
         :color => "white",
-        :onblur => "if(this.value==''){this.value='';this.style.color = '#000000';}",
+        :onblur => "if(this.value==''){this.value='Username';this.style.color = '#000000';}",
         :autocapitalize => "none"
       = f.text_field :name,
         :value => "Full Name",
