@@ -88,6 +88,12 @@
         :onfocus => "if(this.value=='#{@name}'){this.value='';this.style.color = '#000000';}",
         :color => "white",
         :onblur => "if(this.value==''){this.value='#{@name}';this.style.color = '#000000';}"
+      #explanation
+        What to do when your profile is visited:
+      = f.radio_button :playMethod, "Random", :checked => true, :id => "pm1"
+      %label{:for => "pm1"} Random
+      = f.radio_button :playMethod, "First", :id => "pm2"
+      %label{:for => "pm2"} First
       = f.text_field :picture,
         :value => "#{@picture}",
         :class => "password-margin new-user pic-url",

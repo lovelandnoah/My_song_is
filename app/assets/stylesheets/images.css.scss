@@ -101,6 +101,21 @@
   margin-top: -70px;
 }
 
+.mysong-main {
+  position: absolute;
+  background-size: 170px 170px;
+  height: 170px;
+  width: 710px;
+  background-repeat: no-repeat;
+
+  margin-top: 170px;
+  margin-left: 20px;
+}
+
+.notification-spacing {
+  margin-top: 170px;
+}
+
 /*.check-box + label {
     background: #999;
     height: 16px;
@@ -118,9 +133,14 @@
 }*/
 
 .search-placeholder{
-  margin-top: 75px;
-  margin-bottom: 75px;
+  margin-top: 25px;
+  margin-bottom: 25px;
   margin-left: 10px;
+}
+
+.stick-bottom{
+  position: fixed;
+  bottom: 0;
 }
 
 .ui-autocomplete {
