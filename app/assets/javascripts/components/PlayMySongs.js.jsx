@@ -142,7 +142,8 @@
       }).success( data => {
         if(data[0].success){
           if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-            window.open("http://onrad.io/" + data[0].result[0].artist + "." + data[0].result[0].title);
+            //window.open("http://onrad.io/" + data[0].result[0].artist + "." + data[0].result[0].title);
+            window.open('http://onrad.io/?msi={"artist":"' + data[0].result[0].artist + '","title":"' + data[0].result[0].title + '","profileurl":"' + this.props.profile_image_url + '","profilename":"' + this.props.username + '"}' )
             that.albumCover(data[0].songmatch[0].title, data[0].songmatch[0].artist);
           } else {
             let player = document.getElementById("player");
