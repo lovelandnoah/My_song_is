@@ -14,18 +14,18 @@
         :validate => true,
         :id => "username-field",
         :value => "Username",
-        :style => "color:#000000;background-color:white;",
+        :style => "color:#525252;background-color:white;",
         :onfocus => "if(this.value=='Username'){this.value='';this.style.color = '#000000';}",
         :color => "white",
-        :onblur => "if(this.value==''){this.value='Username';this.style.color = '#000000';}",
+        :onblur => "if(this.value==''){this.value='Username';this.style.color = '#525252';}",
         :autocapitalize => "none"
       = f.text_field :name,
         :value => "Full Name",
         :class => "new-user big-form",
-        :style => "color:#000000;background-color:white;",
+        :style => "color:#525252;background-color:white;",
         :color => "white",
         :onfocus => "if(this.value=='Full Name'){this.value='';this.style.color = '#000000';}",
-        :onblur => "if(this.value==''){this.value='Full Name';this.style.color = '#000000';}"
+        :onblur => "if(this.value==''){this.value='Full Name';this.style.color = '#525252';}"
       .section#separator
         = f.submit "Save", :class => "submit-button"
     -else
@@ -33,25 +33,25 @@
         :value => "#{@email}",
         :class => "new-user",
         :type => "email",
-        :style => "color:#000000;background-color:white;",
+        :style => "color:#525252;background-color:white;",
         :onfocus => "if(this.value=='#{@email}'){this.value='';this.style.color = '#000000';}",
         :color => "white",
-        :onblur => "if(this.value==''){this.value='#{@email}';this.style.color = '#000000';}"
+        :onblur => "if(this.value==''){this.value='#{@email}';this.style.color = '#525252';}"
       = f.text_field :username,
         :class => "new-user",
         :value => "#{@username}",
-        :style => "color:#000000;background-color:white;",
+        :style => "color:#525252;background-color:white;",
         :onfocus => "if(this.value=='#{@username}'){this.value='';this.style.color = '#000000';}",
         :color => "white",
-        :onblur => "if(this.value==''){this.value='#{@username}';this.style.color = '#000000';}",
+        :onblur => "if(this.value==''){this.value='#{@username}';this.style.color = '#525252';}",
         :autocomplete => "off"
       = f.text_field :name,
         :value => "#{@name}",
         :class => "new-user",
-        :style => "color:#000000;background-color:white;",
+        :style => "color:#525252;background-color:white;",
         :onfocus => "if(this.value=='#{@name}'){this.value='';this.style.color = '#000000';}",
         :color => "white",
-        :onblur => "if(this.value==''){this.value='#{@name}';this.style.color = '#000000';}",
+        :onblur => "if(this.value==''){this.value='#{@name}';this.style.color = '#525252';}",
         :autcomplete => "off"
       .section#separator
         = f.submit "Save", :class => "submit-button"

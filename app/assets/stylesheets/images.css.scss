@@ -260,6 +260,18 @@
   font-weight: normal;
 }
 
+.change-profile-pic {
+  background-image: url('/twitter-change-profile-picture-3.png');
+}
+
+.add-bio-pic {
+  background-image: url('/add-bio.png');
+}
+
+.cursor-pic {
+  background-image: url('/cursor.gif');
+}
+
 @media all {
  .big-form {
   font-size: 2rem; /*!important*/

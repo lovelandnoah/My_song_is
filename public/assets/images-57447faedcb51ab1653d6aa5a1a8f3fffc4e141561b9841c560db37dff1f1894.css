@@ -1,0 +1,349 @@
+/* line 2, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.invisible {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  opacity: 0;
+}
+
+/* line 9, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.check-box-hidden {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+}
+
+/* line 15, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.inline-container {
+  float: left;
+  width: 19%;
+  margin-left: 6%;
+}
+
+/* line 21, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.artist-label {
+  margin-left: 200px;
+}
+
+/* line 25, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.image-label {
+  position: relative;
+  width: 70px;
+  height: 70px;
+}
+
+/* line 31, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+#biography {
+  position: absolute;
+}
+
+/* line 35, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+#logo-login {
+  margin: 20px;
+}
+
+/* line 39, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+#twitter-login {
+  color: black;
+  margin: 20px;
+  border-style: solid;
+  border-width: 2px;
+}
+
+/* line 46, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+#email-login {
+  font-size: 25px;
+  padding: 21px;
+}
+
+/* line 51, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+#signup-button {
+  width: 222px;
+  height: 50px;
+}
+
+/* line 56, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+#separator {
+  padding: 5px;
+}
+
+/* line 60, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+#selected-songs-placeholder {
+  margin-top: 75px;
+  margin-bottom: 75px;
+  margin-left: 10px;
+}
+
+/* line 66, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+#target {
+  height: 200;
+  background-size: 200px;
+  background-repeat: no-repeat;
+  margin-top: 60px;
+}
+
+/* line 73, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+#view-signup {
+  float: none;
+}
+
+/* line 80, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.checkbox {
+  display: none;
+  position: relative;
+}
+
+/* line 85, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.checkbox-label {
+  position: absolute;
+  background-size: 70px 70px;
+  height: 70px;
+  width: 70px;
+  background-repeat: no-repeat;
+}
+
+/* line 94, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.mysong-label {
+  position: absolute;
+  background-size: 70px 70px;
+  height: 70px;
+  width: 70px;
+  background-repeat: no-repeat;
+  margin-top: -70px;
+}
+
+/* line 104, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.mysong-main {
+  position: absolute;
+  background-size: 170px 170px;
+  height: 170px;
+  width: 710px;
+  background-repeat: no-repeat;
+  margin-top: 170px;
+  margin-left: 20px;
+}
+
+/* line 115, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.notification-spacing {
+  margin-top: 170px;
+}
+
+/*.check-box + label {
+    background: #999;
+    height: 16px;
+    width: 16px;
+    display:inline-block;
+    padding: 0 0 0 0px;
+}
+
+.check-box:checked + label {
+    background: #0080FF;
+    height: 16px;
+    width: 16px;
+    display:inline-block;
+    padding: 0 0 0 0px;
+}*/
+/* line 135, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.search-placeholder {
+  margin-top: 25px;
+  margin-bottom: 25px;
+  margin-left: 10px;
+}
+
+/* line 141, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.stick-bottom {
+  position: fixed;
+  bottom: 0;
+}
+
+/* line 146, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.ui-autocomplete {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  float: left;
+  display: none;
+  min-width: 160px;
+  _width: 160px;
+  padding: 4px 0;
+  margin: 2px 0 0 0;
+  list-style: none;
+  background-color: #ffffff;
+  border-color: #ccc;
+  border-color: rgba(0, 0, 0, 0.2);
+  border-style: solid;
+  border-width: 1px;
+  /*-webkit-border-radius: 5px;*/
+  /*-moz-border-radius: 5px;*/
+  border-radius: 5px;
+  /*-webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);*/
+  /*-moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);*/
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  /*-webkit-background-clip: padding-box;*/
+  /*-moz-background-clip: padding;*/
+  background-clip: padding-box;
+  *border-right-width: 2px;
+  *border-bottom-width: 2px;
+}
+
+/* line 177, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.form-box {
+  width: 520px;
+  /*!important;*/
+  margin-left: 60px;
+}
+
+/* line 182, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.centered {
+  text-align: center;
+}
+
+/* line 186, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.margin {
+  margin: 5px;
+}
+
+/* line 190, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.new-account-form {
+  color: black;
+  background-color: white;
+  border: solid;
+  border-width: 2px;
+  height: 20px;
+  text-indent: 5px;
+}
+
+/* line 199, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.smallnav {
+  padding: 0px 0px 0px 0px;
+  /*!important*/
+}
+
+/* line 203, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.message {
+  color: red;
+}
+
+/* line 207, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.away-from-edge {
+  margin-left: 10px !important;
+}
+
+/* line 211, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.upload-picture {
+  position: relative;
+  width: 500px;
+  left: 23px;
+}
+
+/* line 217, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.left-justify {
+  margin-left: 10px;
+}
+
+/* line 221, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.nocolor {
+  background-color: transparent;
+  /*!important*/
+}
+
+/* line 225, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.pick-song-image {
+  background-image: url("/pick-song-image.png");
+  /*!important*/
+}
+
+/* line 229, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.hidden-desktop {
+  display: none;
+}
+
+/* line 233, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.large-search {
+  height: 40px;
+  width: 400px;
+  font-size: 28px;
+}
+
+/* line 239, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.searchLabel {
+  margin-top: 140px;
+}
+
+/* line 243, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.selected-result-container {
+  display: inline;
+}
+
+/* line 247, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.selected-songs-container {
+  margin-top: 150px;
+}
+
+/* line 251, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.clearBoth {
+  clear: both;
+}
+
+/* line 255, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.listen-to-song-button {
+  margin-top: 165px;
+}
+
+/* line 259, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.not-bold {
+  font-weight: normal;
+}
+
+/* line 263, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.change-profile-pic {
+  background-image: url("/twitter-change-profile-picture-3.png");
+}
+
+/* line 267, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.add-bio-pic {
+  background-image: url("/add-bio.png");
+}
+
+/* line 271, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.cursor-pic {
+  background-image: url("/cursor.gif");
+}
+
+@media all {
+  /* line 276, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+  .big-form {
+    font-size: 2rem;
+    /*!important*/
+    width: 500px;
+    /*!important*/
+  }
+
+  /* line 280, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+  .img-upload {
+    height: 34px;
+    padding-top: 10px;
+  }
+}
+/* line 286, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.hidden-mobile {
+  display: none;
+}
+
+/*@media (max-width: 990px) {
+  .hidden-mobile { 
+    display: none;
+  }
+}*/
+/* line 295, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.hidden {
+  display: none;
+  height: 0px;
+  width: 0px;
+}
+
+/* line 301, /Users/Sam/Desktop/Real_My_song_is/app/assets/stylesheets/images.css.scss */
+.hidden-button {
+  display: none;
+}

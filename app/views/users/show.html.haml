@@ -22,7 +22,7 @@
 					= link_to 'Create your own MySong.is profile', '/users/sign_in'
 			- if current_user == nil || @user != current_user
 				= react_component 'Player'
-				= react_component 'PlayMySongs', { mixtape_id: @mixtape_id, author_id: @user.id, play_method: @user.playMethod}
+				= react_component 'PlayMySongs', { mixtape_id: @mixtape_id, author_id: @user.id, play_method: @user.playMethod, profile_image_url: @user.picture, username: @user.username}
 				#song-display.mysong-main
 
 - if @user == current_user
