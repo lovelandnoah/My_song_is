@@ -25,7 +25,8 @@ Rails.application.routes.draw do
   get 'pick_a_song', to: 'users#pick_a_song', via: [:patch]
   get 'confirm_picture', to: 'users#confirm_picture', via: [:patch]
   get 'accept_confirm_picture', to: 'users#accept_confirm_picture', via: [:patch]
-  get 'call_to_action', to: 'users#call_to_action', via: [:get]
+  get 'finished', to: 'users#call_to_action', via: [:get]
+  get 'accept_finished', to: 'users#accept_finished', via: [:get]
 
   devise_scope :user do
     get '/login', to: 'registrations#login', via: [:post]

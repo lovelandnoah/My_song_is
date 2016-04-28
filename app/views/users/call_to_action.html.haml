@@ -1,22 +1,16 @@
 = stylesheet_link_tag "registrations.css" 
 = render 'layouts/simplenav.html.haml'
 
-%h1.away-from-edge Congratulations! You just created your account.
+#target
+= link_to "Done", {:controller => "users", :action => "accept_finished", :id => current_user.id}, class: "edit-profile-button", id: "confirm-finished-done"
 
+%h1.away-from-edge Congratulations! You just created your account.
 %h5.away-from-edge Let people know your favorite song
 
-
-%h5.away-from-edge Here is your custom page: 
-
-%h5.away-from-edge
-  =link_to "#{@url}", "#{@username}"
-
-
-%h5.away-from-edge Place in the bio page of your favorite apps
-
 .change-profile-pic
-=#image_tag("twitter-change-profile-picture-3.png")
+%h5.away-from-edge Here is your custom page: 
+%h5.away-from-edge 
+  =link_to "#{@url}", "#{@username}"
+%h5.away-from-edge Place in the bio page of your favorite apps
 .add-bio-pic
-=#image_tag("add-bio.png")
-
-.cursor-pic
+  .cursor-pic

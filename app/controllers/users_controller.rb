@@ -65,6 +65,11 @@ class UsersController < ApplicationController
     redirect_to :controller => 'users', :action => 'show'
   end
 
+  def accept_finished
+    current_user.update_attributes(:cta => true)
+    redirect_to :controller => 'users', :action => 'show'
+  end
+
   def call_to_action
     @url = "mysongis.herokuapp.com/" + current_user.username
     @username = current_user.username
@@ -116,9 +121,9 @@ class UsersController < ApplicationController
       if !current_user.confirmed_picture
         redirect_to confirm_picture_path and return
       end
-      # if !current_user.cta
-      #   redirect_to call_to_action_path and return
-      # end
+      if !current_user.cta
+        redirect_to finished_path and return
+      end
     end
 
     if params[:id] != nil

@@ -37,7 +37,8 @@
     -if @user
       -if @user.name != nil
         %p#nav-name #{@user.name}
-      %p.log.rel#nav-link mysong.is/#{@user.username}
+      -if @user == current_user
+        %p.log.rel#nav-link mysong.is/#{@user.username}
 
     %img#logo{:src => "http://cheshirepus.com/mysongis_logo.png"}
 

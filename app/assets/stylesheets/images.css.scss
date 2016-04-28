@@ -77,6 +77,15 @@
 #display-sign-in{
 }
 
+.noscroll{
+  overflow: hidden;
+}
+
+#player {
+  height: 120px;
+  width: 440px;
+}
+
 .checkbox {
   display: none;
   position: relative;
@@ -261,15 +270,31 @@
 }
 
 .change-profile-pic {
-  background-image: url('/twitter-change-profile-picture-3.png');
+  width: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: image-url('twitter-change-profile-picture-3.png');
+  padding-top: 20%;
+  margin-left: 35%;
 }
 
 .add-bio-pic {
-  background-image: url('/add-bio.png');
+  width: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: image-url('add-bio.png');
+  padding-top: 50%;
+  margin-left: 10%;
+  margin-top: 5%;
 }
 
 .cursor-pic {
-  background-image: url('/cursor.gif');
+  width: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: image-url('cursor.gif');
+  padding-top: 20%;
+  margin-left: 35%;
 }
 
 @media all {
