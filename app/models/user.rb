@@ -54,6 +54,7 @@ class User < ActiveRecord::Base
           username: auth.info.nickname || auth.uid,
           email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
           password: Devise.friendly_token[0,20],
+          twitter_user: auth.info["urls"]["Twitter"],
           # username: auth.extra.raw_info.username
         )
         # user.skip_confirmation! #if user.respond_to?(:skip_confirmation)
@@ -87,7 +88,7 @@ class User < ActiveRecord::Base
   #    user.password = Devise.friendly_token[0,20]
   #  end
   # end
-  # vanity URL
+
   private
 
   def build_mixtape

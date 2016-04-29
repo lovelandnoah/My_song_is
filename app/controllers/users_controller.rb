@@ -28,10 +28,12 @@ class UsersController < ApplicationController
     # if params[:user][:image]
     #   current_user.update_attributes(:image => params[:user][:image])
     # end
+
+    @omni = logged_in_using_omniauth?
+
     @resource = current_user
     @user = current_user
     @username = @user.username
-    @omni = logged_in_using_omniauth?
 
     if @username == nil
       @username = "Username"
@@ -83,6 +85,10 @@ class UsersController < ApplicationController
   end
 
   def update
+
+
+    @user.twitter_user = current_user.username
+    @user.update_attributes(twitter_user_params)
     # if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
     #   params[:user].delete(:password)
     #   params[:user].delete(:password_confirmation)
@@ -92,6 +98,7 @@ class UsersController < ApplicationController
     # prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
 
     resource_updated = update_resource(resource, user_params)
+
     if params[:user][:image]
       @user.update_attributes(:image => params[:user][:image])
     end
@@ -111,6 +118,8 @@ class UsersController < ApplicationController
   end
 
 	def show
+    # todo: tell if logged in with twitter
+    @omni = logged_in_using_omniauth?
     if current_user
       if Song.where(mixtape_id: current_user).length > 0
         current_user.demo = true
@@ -192,6 +201,12 @@ class UsersController < ApplicationController
 	end
 
 	def finish_signup
+
+    @omni = logged_in_using_omniauth?
+    if @omni
+      current_user.update_attributes(:twitter_user => current_user.username)
+    end
+
     @user.mixtape_attributes = {id: @user.id}
 		if request.patch? && params[:user]
 			if @user.update(user_params)
@@ -233,7 +248,7 @@ class UsersController < ApplicationController
   end
 
 	def user_params
-		accessible = [ :name, :picture, :image, :username, :playMethod, :demo, :confirmed_picture]
+		accessible = [ :name, :picture, :image, :username, :playMethod, :demo, :confirmed_picture, :twitter_user]
 		params.require(:user).permit(accessible)
 	end
 

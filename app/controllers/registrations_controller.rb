@@ -59,6 +59,7 @@ class RegistrationsController < Devise::RegistrationsController
 
 
   def update
+    binding.pry
     @user = User.find(current_user.id)
     if params[:user][:name].blank? || params[:user][:name] == "Full Name"
       params[:user][:name] = nil
@@ -172,7 +173,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def account_update_params
-    params.require(:user).permit(:username, :email, :password, :current_password, :name, :image, :playMethod)
+    params.require(:user).permit(:username, :email, :password, :current_password, :name, :image, :playMethod, :twitter_user)
   end
 
   def after_sign_up_path_for(resource)

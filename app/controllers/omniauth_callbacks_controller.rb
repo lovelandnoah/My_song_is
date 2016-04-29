@@ -31,4 +31,10 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 		end
 	end
 
+	private
+
+	def twitter_user_params
+		params.require().permit(:twitter_user)
+	end
+
 end

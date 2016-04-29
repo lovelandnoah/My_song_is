@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160426193151) do
+ActiveRecord::Schema.define(version: 20160428222556) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,23 +32,11 @@ ActiveRecord::Schema.define(version: 20160426193151) do
     t.integer  "author_id"
     t.boolean  "random"
     t.integer  "user_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.float    "average_rating"
-  end
-
-  add_index "mixtapes", ["user_id"], name: "index_mixtapes_on_user_id", using: :btree
-
-  create_table "ratings", force: :cascade do |t|
-    t.integer  "score"
-    t.integer  "user_id"
-    t.integer  "mixtape_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "ratings", ["mixtape_id"], name: "index_ratings_on_mixtape_id", using: :btree
-  add_index "ratings", ["user_id"], name: "index_ratings_on_user_id", using: :btree
+  add_index "mixtapes", ["user_id"], name: "index_mixtapes_on_user_id", using: :btree
 
   create_table "songs", force: :cascade do |t|
     t.string   "name"
@@ -94,6 +82,7 @@ ActiveRecord::Schema.define(version: 20160426193151) do
     t.boolean  "demo"
     t.boolean  "confirmed_picture"
     t.boolean  "cta"
+    t.string   "twitter_user"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
