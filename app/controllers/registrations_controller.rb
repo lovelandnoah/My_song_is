@@ -59,7 +59,6 @@ class RegistrationsController < Devise::RegistrationsController
 
 
   def update
-    binding.pry
     @user = User.find(current_user.id)
     if params[:user][:name].blank? || params[:user][:name] == "Full Name"
       params[:user][:name] = nil
