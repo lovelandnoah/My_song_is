@@ -23,6 +23,7 @@
         :value => "Current Password",
         :class => "new-user",
         :type => "text",
+        :name => "user[password]",
         :autocomplete => "off",
         :style => "color:#000000;background-color:white;",
         :onfocus => "if(this.value=='Current Password'){this.value='';this.style.color = '#000000';this.type='password'}",
@@ -31,6 +32,7 @@
         :value => "New Password",
         :autocomplete => "off",
         :type => "text",
+        :name => "user[password]",
         :class => "new-user",
         :style => "color:#000000;background-color:white;",
         :onfocus => "if(this.value=='New Password'){this.value='';this.style.color = '#000000';this.type='password'}",
@@ -110,6 +112,17 @@
       #target
         = f.submit "Save", :class => "submit-button"
 :javascript
+
+  $(document).ready(function () {
+    $("#edit_user").validate({
+        rules: {
+        "user[username]": {remote: "/user_exists"},
+        "user[email]": {email: true, remote: "/email_exists"},
+        "user[password]": {minlength: 4}
+      }
+    })
+  });
+
   $(function showImage() {
     $('#pictureInput').on('change', function(event) {
       var files = event.target.files;

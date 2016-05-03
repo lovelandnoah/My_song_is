@@ -6,7 +6,7 @@
     - msg.each do |message|
       = content_tag :div, message, :id => "flash_#{name}"
 %div.form-box
-  = form_for(resource, as: resource_name, url: registration_path(resource_name), id: "register-form", builder: Judge::FormBuilder) do |f|
+  = form_for(resource, as: resource_name, url: registration_path(resource_name), id: "register-form") do |f|
     = devise_error_messages!
     -if !@omni
       = f.text_field :username, 
@@ -39,6 +39,7 @@
         :onblur => "if(this.value==''){this.value='#{@email}';this.style.color = '#525252';}"
       = f.text_field :username,
         :class => "new-user",
+        :id => "username-field",
         :value => "#{@username}",
         :style => "color:#525252;background-color:white;",
         :onfocus => "if(this.value=='#{@username}'){this.value='';this.style.color = '#000000';}",
@@ -56,6 +57,29 @@
       .section#separator
         = f.submit "Save", :class => "submit-button"
 :javascript
+
+  $("#new_user").submit( function( event ) {
+    if ($("#username-field").val() == "Username"){
+      $("#username-field").val("");
+      }
+  })
+
+  $(document).ready(function () {
+    $("#edit_user").validate({
+        rules: {
+        "user[username]": {required: true, remote: "/user_exists"},
+        "user[email]": {email: true, required: true, remote: "/email_exists"}
+      }
+    });
+
+    // $.get("/user_exists", {username: $("#username-field").val()}, function(response) {
+    //   if(response == "false") {
+    //     $('#runner-new-job-errors').html('');
+    //     e.preventDefault();
+    //     $('#runner-new-job-errors').append('<small style="color:red"> User doesnt exist </small>');
+    //     }
+    //   });
+  });
 
 
   // judge.validate(document.getElementById('username-field'), {

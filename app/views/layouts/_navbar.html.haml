@@ -1,4 +1,3 @@
-
 / %nav
 /   .nav-wrapper.z-depth-3.bott
 /     %ul#nav-mobile.right
@@ -45,9 +44,10 @@
 
     -if @user
       %img#qr-code{:alt => "My QR code", :src => @qr}
-  -if @user.twitter_user && @user != current_user
-    -twitter_page = @user.twitter_user.match(/twitter.com\/.*/)
-    %p.log.rel#nav-link #{twitter_page}
+  -if @user
+    -if @user.twitter_user && @user != current_user
+      -twitter_page = @user.twitter_user.match(/twitter.com\/.*/)
+      %p.log.rel#nav-link #{twitter_page}
     / .row
     /   = image_tag('real_b.png', :class =>"one image")
     /   %a#about-us.bigger.image.white-text.stroke{:href => "/static_pages/bio"} About Us

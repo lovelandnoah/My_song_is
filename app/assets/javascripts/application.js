@@ -22,6 +22,8 @@
 //= require FindStreamingSongs
 //= require jquery.validate
 //= require jquery.validate.additional-methods
+//= require validation-extentions.js
+
 //= require underscore
 //= require json2
 //= require judge

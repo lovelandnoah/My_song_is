@@ -73,8 +73,10 @@ class UsersController < ApplicationController
   end
 
   def call_to_action
-    @url = "mysongis.herokuapp.com/" + current_user.username
-    @username = current_user.username
+    if current_user.username
+      @url = "mysongis.herokuapp.com/" + current_user.username
+      @username = current_user.username
+    end
   end
 
   def update_bio
@@ -87,8 +89,6 @@ class UsersController < ApplicationController
   def update
 
 
-    @user.twitter_user = current_user.username
-    @user.update_attributes(twitter_user_params)
     # if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
     #   params[:user].delete(:password)
     #   params[:user].delete(:password_confirmation)
@@ -96,6 +96,7 @@ class UsersController < ApplicationController
 
     # self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
     # prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
+
 
     resource_updated = update_resource(resource, user_params)
 

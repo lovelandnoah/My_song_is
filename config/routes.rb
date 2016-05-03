@@ -30,6 +30,9 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     get '/login', to: 'registrations#login', via: [:post]
+    get 'user_exists/', to: 'registrations#user_exists?', via: [:get]
+    get 'email_exists/', to: 'registrations#email_exists?', via: [:get]
+    get 'new_email_exists/', to: 'registrations#new_email_exists?', via: [:get]
   end
 
   put 'users/bio', to: 'users#update_bio'

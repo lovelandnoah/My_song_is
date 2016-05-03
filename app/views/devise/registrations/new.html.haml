@@ -1,35 +1,13 @@
-
-
 = render 'layouts/navNotLoggedIn'
 = stylesheet_link_tag "registrations.css"
-%h1.away-from-edge#title-card Login
-.left-justify#display-log-in
-  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-    = f.text_field :email,
-      :value => "Email",
-      :type => "email",
-      :class => "left-justify",
-      :style => "color:#525252;background-color:white;",
-      :onfocus => "if(this.value=='Email'){this.value='';this.style.color = '#000000';}",
-      :color => "white",
-      :onblur => "if(this.value==''){this.value='Email';this.style.color = '#525252';}",
-      :autocapitalize => "none"
-    = f.text_field :password,
-      :value => "Password",
-      :type => "text",
-      :autocomplete => "off",
-      :style => "color:#525252;background-color:white;",
-      :onfocus => "if(this.value=='Password'){this.value='';this.style.color = '#000000';this.type='password'}",
-      :onblur => "if(this.value==''){this.value='Password';this.style.color = '#525252';this.type='text'}",
-      :autocapitalize => "none"
-    = f.submit "Login", :class => "submit-button"
 
-/ - if @user == current_user
-/   =best_in_place @user, :bio, as: :textarea, url: 'users/bio/'
-/ - else
-/   =@user.bio
+= javascript_include_tag("jquery.validate")
+= javascript_include_tag("jquery.validate.additional-methods")
+
+%h1.away-from-edge#title-card Login
+
 %div.form-box.left-justify#display-sign-in
-  = form_for(resource, as: resource_name, url: registration_path(resource_name), validate: true, id: 'new-user') do |f|
+  = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { id: "create_user" }) do |f|
     = f.text_field :email,
     :value => "Email",
     :id => "user-email",
@@ -43,6 +21,7 @@
     = f.text_field :password, autocomplete: "off", :class => 'new-account-form',
     :value => "New Password",
     :type => "text",
+    :id => "new-password",
     :class => "password-margin new-user big-form left-justify",
     :autocomplete => "off",
     :style => "color:#525252;background-color:white;",
@@ -50,6 +29,34 @@
     :onblur => "if(this.value==''){this.value='New Password';this.style.color = '#525252';this.type='text'}",
     :autocapitalize => "none"
     = f.submit "Create Account", :class => "submit-button"
+
+.left-justify#display-log-in
+  = form_for(resource, as: resource_name, url: session_path(resource_name), class: 'new-user') do |f|
+    = f.text_field :email,
+      :value => "Email",
+      :type => "email",
+      :id => "login-email",
+      :style => "color:#525252;background-color:white;text-indent: 10px",
+      :onfocus => "if(this.value=='Email'){this.value='';this.style.color = '#000000';}",
+      :color => "white",
+      :onblur => "if(this.value==''){this.value='Email';this.style.color = '#525252';}",
+      :autocapitalize => "none"
+    = f.text_field :password,
+      :value => "Password",
+      :id => "login-password",
+      :type => "text",
+      :autocomplete => "off",
+      :style => "color:#525252;background-color:white;text-indent: 10px",
+      :onfocus => "if(this.value=='Password'){this.value='';this.style.color = '#000000';this.type='password'}",
+      :onblur => "if(this.value==''){this.value='Password';this.style.color = '#525252';this.type='text'}",
+      :autocapitalize => "none"
+    = f.submit "Login", :class => "submit-button"
+
+/ - if @user == current_user
+/   =best_in_place @user, :bio, as: :textarea, url: 'users/bio/'
+/ - else
+/   =@user.bio
+
 
 %a.logout-button.left-justify#view-signup{:href => "javascript:;"} Or Create Account
 :javascript
@@ -63,9 +70,50 @@
   // }
   // });
   // });
+
+  $("#new_user").submit( function( event ) {
+    if ($("#login-email").val() == "Email"){
+      $("#login-email").val("");
+      }
+    if ($("#login-password").val() == "Password"){
+      $("#login-password").val("");
+      }
+    })
+
+  $("#create_user").submit( function( event ) {
+    if ($("#user-email").val() == "Email"){
+      $("#user-email").val("");
+      }
+    if ($("#new-password").val() == "New Password"){
+      $("#new-password").val("");
+      }
+      })
+
+  $(document).ready(function () {
+    $("#new_user").validate({
+        rules: {
+        "user[email]": {required: true, email: true},
+        "user[password]": {required: true, minlength: 4}
+      }
+      });
+        $("#create_user").validate({
+      rules: {
+        "user[email]": {required: true, email: true, remote: "/new_email_exists"},
+        "user[password]": {required: true, minlength: 4}
+      }
+      });
+
+
+    });
+
+
+
+
+
   $("#display-sign-in").hide();
   $("#view-signup").click( function() {
     $("#display-sign-in").toggle();
+
     $("#display-log-in").toggle();
     if ($("#view-signup").text() == "Or Create Account"){
       $("#view-signup").text("Change to Login");
