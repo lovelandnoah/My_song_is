@@ -65,6 +65,9 @@
   })
 
   $(document).ready(function () {
+
+    $.extend($.validator.messages, { remote: "This is already taken!" })
+
     $("#edit_user").validate({
         rules: {
         "user[username]": {required: true, remote: "/user_exists"},

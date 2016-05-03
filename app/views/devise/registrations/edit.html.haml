@@ -114,6 +114,7 @@
 :javascript
 
   $(document).ready(function () {
+    $.extend($.validator.messages, { remote: "This is already taken!" })
     $("#edit_user").validate({
         rules: {
         "user[username]": {remote: "/user_exists"},

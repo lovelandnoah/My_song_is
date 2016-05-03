@@ -26,4 +26,3 @@
 
 //= require underscore
 //= require json2
-//= require judge

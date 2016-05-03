@@ -90,6 +90,8 @@
       })
 
   $(document).ready(function () {
+
+    $.extend($.validator.messages, { remote: "This is already taken!" })
     $("#new_user").validate({
         rules: {
         "user[email]": {required: true, email: true},
@@ -127,4 +129,3 @@
     }
 
     });
-
