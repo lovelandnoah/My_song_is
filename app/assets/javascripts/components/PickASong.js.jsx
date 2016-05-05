@@ -33,6 +33,7 @@
     this.play = this.play.bind(this);
 
     this.doneButton = this.doneButton.bind(this);
+    this.removeDoneButton = this.removeDoneButton.bind(this);
   }
 
   componentWillMount(){
@@ -338,6 +339,12 @@
   doneButton() {
     if($("label.mysong-label").length){
       $("#done-button").show();
+    } 
+  }
+
+  removeDoneButton(){
+    if($("label.mysong-label").length == 1){
+      $("#done-button").hide();
     }
   }
 
@@ -363,12 +370,13 @@
     if(this.state.results[0] != undefined) {
       searchResultCards = this.state.results.length ? (
       this.state.results[0].songmatch.map( Sartist => {
-        return(<Artist title={Sartist.title} songIndex={"result" + self.state.results[0].songmatch.indexOf(Sartist)} songs={this.state.songs} getSongs={this.getSongs} artist={Sartist.artist} key={`artist-${i += 1}`} rplay={self.playSong} mixtapeId={self.state.mixtape_id} current_user={self.props.current_user} changeStationId={this.changeStationId} songId={Sartist.artist.replace(/\s/g, "")+Sartist.title.replace(/\s/g, "")}/>)
+        return(<Artist title={Sartist.title} songIndex={"result" + self.state.results[0].songmatch.indexOf(Sartist)} songs={this.state.songs} getSongs={this.getSongs} artist={Sartist.artist} key={"artist" + (i += 1)} mixtapeId={self.state.mixtape_id} current_user={self.props.current_user} changeStationId={this.changeStationId} songId={Sartist.artist.replace(/\s/g, "")+Sartist.title.replace(/\s/g, "")}/>)
       })):([])
     }
+    debugger
     let songs = self.state.songs.map( song => {
     // let key = `mixtapeSong-${song.song_id}`;
-      return(<div className="inline-container"><SelectedArtist songs={this.state.songs} key={`mixtapeSong-${song.song_id}`} songIndex={"favorite" + self.state.songs.indexOf(song)} title={song.song_name} artist={song.artist_name} songId={"selected" + song.song_id} onChange={this.changeHandler} getSongs={this.getSongs} changeStationId={this.changeStationId} doneButton={this.doneButton}/>
+      return(<div className="inline-container"><SelectedArtist songs={this.state.songs} key={`mixtapeSong-${song.song_id}`} songIndex={"favorite" + self.state.songs.indexOf(song)} title={song.song_name} artist={song.artist_name} songId={"selected" + song.song_id} onChange={this.changeHandler} getSongs={this.getSongs} changeStationId={this.changeStationId} doneButton={this.doneButton} removeDoneButton={this.removeDoneButton} ref={Sartist.artist.replace(/\s/g, "")+Sartist.title.replace(/\s/g, "")} />
       <p className="my-song-title">{song.song_name}</p>
       <p className="my-song-artist">{song.artist_name}</p>
       </div>);

@@ -152,16 +152,21 @@
   float: none !important;
 }
 
-label.active{
+@media screen and (min-width: 800px) {
+  .error{
+    width: 500px !important;
+    margin-left: 20px;
+    margin-right: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+  }
 }
 
-#username-field-error::after { 
-    content: "Username Taken";
-    color: red;
-    font-weight: bold;
-    opacity: 0;
-    margin-top: 250px;
+.input{
+  margin: 10px 0 0 0;
 }
+
+
 
 .indented{
   text-indent: 10px;
@@ -325,6 +330,33 @@ label.active{
   background-image: image-url('cursor.gif');
   padding-top: 20%;
   margin-left: 35%;
+}
+
+.select-profile-pic {
+  background-repeat: no-repeat;
+  background-image: image-url('select-profile.png');
+  width: 25%;
+  background-size: contain;
+  padding-top: 10.2%;
+  float: right;
+}
+
+.edit-profile-pic {
+  width: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: image-url('edit-profile.png');
+  background-size: contain;
+  padding-top: 10.2%;
+}
+
+.add-to-bio-pic {
+  width: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: image-url('add-to-bio.png');
+  background-size: contain;
+  padding-top: 15.2%;
 }
 
 @media all {

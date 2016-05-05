@@ -126,7 +126,7 @@ class Artist extends React.Component{
           // this.setState({songs: data.songs});
           this.state.isChecked = false;
           self.props.getSongs();
-          $(this.props.songId).attr('checked', false);
+          //$(this.props.songId).attr('checked', false);
         });
       }
     }

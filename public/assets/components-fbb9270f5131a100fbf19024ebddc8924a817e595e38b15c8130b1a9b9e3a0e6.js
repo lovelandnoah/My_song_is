@@ -152,7 +152,7 @@ var Artist = (function (_React$Component) {
             // this.setState({songs: data.songs});
             _this2.state.isChecked = false;
             self.props.getSongs();
-            $(_this2.props.songId).attr('checked', false);
+            //$(this.props.songId).attr('checked', false);
           });
         }
       }
@@ -472,6 +472,7 @@ var PickASong = (function (_React$Component) {
     this.play = this.play.bind(this);
 
     this.doneButton = this.doneButton.bind(this);
+    this.removeDoneButton = this.removeDoneButton.bind(this);
   }
 
   _createClass(PickASong, [{
@@ -830,6 +831,13 @@ var PickASong = (function (_React$Component) {
         $("#done-button").show();
       }
     }
+  }, {
+    key: 'removeDoneButton',
+    value: function removeDoneButton() {
+      if ($("label.mysong-label").length == 1) {
+        $("#done-button").hide();
+      }
+    }
 
     //   let songs = this.state.songs.map( song => {
     // let key = `song-${song.song_id}`;
@@ -856,15 +864,16 @@ var PickASong = (function (_React$Component) {
       var searchResultCards = null;
       if (this.state.results[0] != undefined) {
         searchResultCards = this.state.results.length ? this.state.results[0].songmatch.map(function (Sartist) {
-          return React.createElement(Artist, { title: Sartist.title, songIndex: "result" + self.state.results[0].songmatch.indexOf(Sartist), songs: _this6.state.songs, getSongs: _this6.getSongs, artist: Sartist.artist, key: 'artist-' + (i += 1), rplay: self.playSong, mixtapeId: self.state.mixtape_id, current_user: self.props.current_user, changeStationId: _this6.changeStationId, songId: Sartist.artist.replace(/\s/g, "") + Sartist.title.replace(/\s/g, "") });
+          return React.createElement(Artist, { title: Sartist.title, songIndex: "result" + self.state.results[0].songmatch.indexOf(Sartist), songs: _this6.state.songs, getSongs: _this6.getSongs, artist: Sartist.artist, key: "artist" + (i += 1), mixtapeId: self.state.mixtape_id, current_user: self.props.current_user, changeStationId: _this6.changeStationId, songId: Sartist.artist.replace(/\s/g, "") + Sartist.title.replace(/\s/g, "") });
         }) : [];
       }
+      debugger;
       var songs = self.state.songs.map(function (song) {
         // let key = `mixtapeSong-${song.song_id}`;
         return React.createElement(
           'div',
           { className: 'inline-container' },
-          React.createElement(SelectedArtist, { songs: _this6.state.songs, key: 'mixtapeSong-' + song.song_id, songIndex: "favorite" + self.state.songs.indexOf(song), title: song.song_name, artist: song.artist_name, songId: "selected" + song.song_id, onChange: _this6.changeHandler, getSongs: _this6.getSongs, changeStationId: _this6.changeStationId, doneButton: _this6.doneButton }),
+          React.createElement(SelectedArtist, { songs: _this6.state.songs, key: 'mixtapeSong-' + song.song_id, songIndex: "favorite" + self.state.songs.indexOf(song), title: song.song_name, artist: song.artist_name, songId: "selected" + song.song_id, onChange: _this6.changeHandler, getSongs: _this6.getSongs, changeStationId: _this6.changeStationId, doneButton: _this6.doneButton, removeDoneButton: _this6.removeDoneButton, ref: Sartist.artist.replace(/\s/g, "") + Sartist.title.replace(/\s/g, "") }),
           React.createElement(
             'p',
             { className: 'my-song-title' },
@@ -2076,7 +2085,6 @@ var SelectedArtist = (function (_React$Component) {
       this.state.songTitle = self.props.title;
       ////
       this.state.songId = this.props.songId;
-      // this.state.isChecked = false;
       for (i = 0; i < this.props.songs.length; i++) {
         if (this.props.songs[i].song_name == this.props.title && this.props.songs[i].artist_name == this.props.artist) {
           this.state.isChecked = true;
@@ -2088,6 +2096,14 @@ var SelectedArtist = (function (_React$Component) {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
       this.state.isMounted = false;
+      if (this.props.removeDoneButton) {
+        this.props.removeDoneButton();
+      }
+      for (i = 0; i < this.props.songs.length; i++) {
+        if (this.props.songs[i].song_name == this.props.title && this.props.songs[i].artist_name == this.props.artist) {
+          this.state.isChecked = false;
+        }
+      }
     }
   }, {
     key: "componentWillUpdate",
@@ -2188,6 +2204,9 @@ var SelectedArtist = (function (_React$Component) {
             self.props.getSongs();
             $(_this2.props.songId).attr('checked', false);
           });
+          if (this.props.doneButton) {
+            this.props.doneButton();
+          }
         }
       }
       $("#" + self.props.songId + "Image").toggleClass("image-checked");

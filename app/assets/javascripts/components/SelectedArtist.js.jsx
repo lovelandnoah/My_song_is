@@ -27,7 +27,6 @@ class SelectedArtist extends React.Component{
     this.state.songTitle = self.props.title;
     ////
     this.state.songId = this.props.songId;
-    // this.state.isChecked = false;
     for(i=0;i<this.props.songs.length;i++){
       if(this.props.songs[i].song_name == this.props.title && this.props.songs[i].artist_name == this.props.artist){
         this.state.isChecked = true;
@@ -38,6 +37,14 @@ class SelectedArtist extends React.Component{
 
   componentWillUnmount(){
     this.state.isMounted = false;
+    if(this.props.removeDoneButton){
+      this.props.removeDoneButton();
+    }
+    for(i=0;i<this.props.songs.length;i++){
+      if(this.props.songs[i].song_name == this.props.title && this.props.songs[i].artist_name == this.props.artist){
+        this.state.isChecked = false;
+      }
+    }
   }
 
   componentWillUpdate(){
@@ -128,6 +135,10 @@ class SelectedArtist extends React.Component{
           self.props.getSongs();
           $(this.props.songId).attr('checked', false);
         });
+        if(this.props.doneButton){
+          this.props.doneButton();
+        }
+
       }
     }
     $("#" + self.props.songId + "Image").toggleClass("image-checked");
