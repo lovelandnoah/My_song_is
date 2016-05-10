@@ -4,7 +4,7 @@
 = javascript_include_tag("jquery.validate")
 = javascript_include_tag("jquery.validate.additional-methods")
 
-%h1.away-from-edge#title-card Login
+%h1.away-from-edge.vertical-spacing#title-card Login
 
 %div.form-box.left-justify#display-sign-in
   = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { id: "create_user" }) do |f|

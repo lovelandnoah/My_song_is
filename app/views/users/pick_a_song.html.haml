@@ -1,4 +1,4 @@
 = render 'layouts/nolognav'
-%h1.away-from-edge.not-bold Now Select Your Favorite Song!
+%h1.away-from-edge.not-bold.vertical-spacing Now Select Your Favorite Song!
 .inner
 = react_component 'PickASong', { current_user: current_user, mixtape_id: current_user.id, author_id: current_user.id, play_method: current_user.playMethod }

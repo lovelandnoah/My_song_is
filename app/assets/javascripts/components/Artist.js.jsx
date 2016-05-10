@@ -1,7 +1,7 @@
 class Artist extends React.Component{
   constructor(props){
     super(props)
-    this.state = {albumCoverUrl: "", key: "", title: this.props.title, artist: this.props.artist, isMounted: false, isChecked: null}
+    this.state = {albumCoverUrl: "", key: "", title: this.props.title, artist: this.props.artist, isMounted: false, isChecked: false}
     this.play = this.play.bind(this)
     this.add = this.add.bind(this)
     this.albumCover = this.albumCover.bind(this)
@@ -27,13 +27,23 @@ class Artist extends React.Component{
     this.state.songTitle = self.props.title;
     ////
     this.state.songId = this.props.songId;
-    // this.state.isChecked = false;
+    // this.props.unCheck(this);
     for(i=0;i<this.props.songs.length;i++){
       if(this.props.songs[i].song_name == this.props.title && this.props.songs[i].artist_name == this.props.artist){
-        this.state.isChecked = true;
+        this.props.check(this);
       }
     }
     // document.getElementById(self.props.songId).checked = this.state.isChecked;
+
+    currentArtist = this
+
+
+    if ($("#selected" + this.state.title.replace(/\W+/g, "") + this.state.artist.replace(/\W+/g, "")).is("input")) {
+      $("#selected" + this.state.title.replace(/\W+/g, "") + this.state.artist.replace(/\W+/g, "")).on("change", function(){
+        currentArtist.props.unCheck(currentArtist);
+      });
+    }
+
   }
 
   componentWillUnmount(){
@@ -41,11 +51,11 @@ class Artist extends React.Component{
   }
 
   componentWillUpdate(){
-    // this.state.isChecked = false;
+    // this.props.unCheck(this);
 
     // for(i=0;i<this.props.songs.length;i++){
     //   if(this.props.songs[i].song_name == this.props.title && this.props.songs[i].artist_name == this.props.artist){
-    //     this.state.isChecked = true;
+    //     this.props.check(this);
     //   }
     // }
     // document.getElementById(this.props.title).checked = this.state.isChecked;
@@ -92,8 +102,7 @@ class Artist extends React.Component{
     let pictureDisplay = document.getElementById("main-art").style.backgroundImage = `url(${this.state.albumCoverUrl})`;
   }
 
-  add(songName, artist){
-    let self = this;
+  add(songName, artist){ let that = this;
     if(!this.state.isChecked){
       if(this.props.songs.length<4){
         $.ajax({
@@ -101,19 +110,19 @@ class Artist extends React.Component{
           type: 'POST',
           data: {name: songName, artist: artist, mixtape_id: this.props.mixtapeId}
         }).success( data => {
-          this.state.isChecked = true;
-          self.props.getSongs();
-        document.getElementById(self.props.songId).checked = true;
+          that.props.check(that);
+          that.props.getSongs();
+          document.getElementById(that.props.songId).checked = true;
         });
       }
       if(this.props.songs.length>=4){
-        document.getElementById(self.props.songId).checked = false;
+        document.getElementById(that.props.songId).checked = false;
       }
     } else {
       let song_id;
-      for(i=0;i<this.props.songs.length;i++){
-        if(this.props.songs[i].song_name == songName && this.props.songs[i].artist_name == artist){
-          song_id = this.props.songs[i].song_id;
+      for(i=0;i<that.props.songs.length;i++){
+        if(that.props.songs[i].song_name == songName && that.props.songs[i].artist_name == artist){
+          song_id = that.props.songs[i].song_id;
         }
       }
       if(song_id){
@@ -124,19 +133,19 @@ class Artist extends React.Component{
         }).success( data => {
           //       data: {name: self.state.songs[songIndex].song_name, artist: self.state.songs[songIndex].artist_name, mixtape_id: self.props.mixtapeId}
           // this.setState({songs: data.songs});
-          this.state.isChecked = false;
-          self.props.getSongs();
+          that.props.unCheck(that);
+          that.props.getSongs();
           //$(this.props.songId).attr('checked', false);
         });
       }
     }
-    $("#" + self.props.songId.replace(/\s/g, "") + "Image").toggleClass("image-checked");
+    $("#" + that.state.artist.replace(/\s/g, "") + that.state.title.replace(/\s/g, "") + "Image").toggleClass("image-checked");
   }
 
   albumCover(){
-    self = this;
+    that = this;
     $.ajax({
-      url: "http://api.dar.fm/songart.php?artist=" + self.props.artist + "&title=" + self.props.title + "&res=med&partner_token=9388418650",
+      url: "http://api.dar.fm/songart.php?artist=" + that.props.artist + "&title=" + that.props.title + "&res=med&partner_token=9388418650",
       jsonp: 'callback',
       type: 'GET',
       dataType: 'jsonp',
@@ -156,17 +165,17 @@ class Artist extends React.Component{
 
   displayAdd(){
     var styles = {backgroundImage: 'url(' + this.state.albumCoverUrl + ')'}
-    var isChecked = false;
+    var imgIsChecked = false;
     for(i=0;i<this.props.songs.length;i++){
       if(this.props.songs[i].artist_name.replace(/\s/g, "") + this.props.songs[i].song_name.replace(/\s/g, "") == this.props.songId){
-        isChecked = true;
+        imgIsChecked = true;
       }
     }
 
-    if(isChecked){
+    if(imgIsChecked){
       return(
       <div>
-        <input id={this.props.songId.replace(/\s/g, "")} type='checkbox' className='checkbox' name={this.props.songId.replace(/\s/g, "")} checked={this.state.isChecked}
+        <input id={this.props.songId.replace(/\W+/g, "")} type='checkbox' className='checkbox' name={this.props.songId.replace(/\W+/g, "")} checked={this.state.isChecked}
           onClick={() => this.add(this.props.title, this.props.artist, this.state.isChecked)}></input>
         <label id={this.props.songId.replace(/\s/g, "") + "Image"}htmlFor={this.props.songId} style={styles} className="checkbox-label image-checked"></label>
       </div>
@@ -174,9 +183,9 @@ class Artist extends React.Component{
     }else{
       return(
       <div>
-        <input id={this.props.songId.replace(/\s/g, "")} type='checkbox' className='checkbox' name={this.props.songId.replace(/\s/g, "")} checked={this.state.isChecked}
+        <input id={this.props.songId.replace(/\W+/g, "")} type='checkbox' className='checkbox' name={this.props.songId.replace(/\W+/g, "")} checked={this.state.isChecked}
           onClick={() => this.add(this.props.title, this.props.artist, this.state.isChecked)}></input>
-        <label id={this.props.songId.replace(/\s/g, "") + "Image"}htmlFor={this.props.songId} style={styles} className="checkbox-label"></label>
+        <label id={this.props.songId.replace(/\W+/g, "") + "Image"}htmlFor={this.props.songId} style={styles} className="checkbox-label"></label>
       </div>
       );
     }
@@ -190,15 +199,15 @@ class Artist extends React.Component{
     if(this.state.title != this.props.title || this.state.artist != this.props.artist){
       this.state.title = this.props.title;
       this.state.artist = this.props.artist;
-      this.state.isChecked = false;
+      this.props.unCheck(this);
       // set perm id?
       document.getElementById(this.state.songId).checked = false;
       document.getElementById(this.state.songId).id = this.props.songId;
       this.state.songId = this.props.songId;
       for(i=0;i<this.props.songs.length;i++){
       if(this.props.songs[i].song_name == this.props.title && this.props.songs[i].artist_name == this.props.artist){
-        document.getElementById(this.props.songId.replace(/\s/g, "")).checked = true;
-        this.state.isChecked = true;
+      document.getElementById(this.props.songId.replace(/\s/g, "")).checked = true;
+      this.props.check(this);
       }
     }
   }

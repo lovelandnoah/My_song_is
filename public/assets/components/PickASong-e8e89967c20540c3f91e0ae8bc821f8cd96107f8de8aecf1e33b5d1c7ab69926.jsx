@@ -14,8 +14,6 @@
     // this.doSearch = this.doSearch.bind(this);
 
     //mixtape
-    this.songNameInPlayer = this.songNameInPlayer.bind(this);
-    this.pictureInPlayer = this.pictureInPlayer.bind(this);
     this.albumCover = this.albumCover.bind(this);
     // this.findPlay = this.findPlay.bind(this);
     // this.shuffle = this.shuffle.bind(this);
@@ -34,11 +32,14 @@
 
     this.doneButton = this.doneButton.bind(this);
     this.removeDoneButton = this.removeDoneButton.bind(this);
+
+    this.check = this.check.bind(this);
+    this.unCheck = this.unCheck.bind(this);
   }
 
   componentWillMount(){
     this.setState({mixtapeUrl: "/mixtapes/" + this.props.mixtape_id});
-    
+
     // $("#main-art").addClass("hidden-desktop");
     // $("#player-bottom").addClass("hidden-desktop");
   }
@@ -94,8 +95,6 @@
   }
 
   play(title, artist){
-    this.songNameInPlayer(title,artist);
-    this.pictureInPlayer();
     title = title.replace(/\s/g, '%20');
     artist = artist.replace(/\s/g, '%20');
     $.ajax({
@@ -140,7 +139,6 @@
             let player = document.getElementById("player");
             player.src = "http://api.dar.fm/player_api.php?station_id=" + data[0].result[0].station_id + "&custom_style=radioslice&partner_token=9388418650"
             that.albumCover(data[0].songmatch[0].title, data[0].songmatch[0].artist);
-            that.songNameInPlayer(data[0].songmatch[0].title, data[0].songmatch[0].artist);
             that.changeStationId(data[0].result[0].station_id);
           }
         }else{
@@ -156,7 +154,7 @@
     let event = new CustomEvent('DOMContentLoaded', { "detail": "Example of an event" });
     document.dispatchEvent(event);
   }
-  
+
   attemptUpdate(){
     if(this.state.station_id != "") {
       let that = this;
@@ -168,8 +166,6 @@
       }).success( data => {
         if(data[0] != undefined){
           if(data[0].title != document.getElementById("player-title").innerHTML || data[0].artist != document.getElementById("player-artist").innerHTML) {
-          that.albumCover(data[0].title, data[0].artist);
-          that.songNameInPlayer(data[0].title, data[0].artist);
         };
       }
       });
@@ -178,17 +174,6 @@
 
   changeStationId(newId){
     this.state.stationId = newId;
-  }
-
-  songNameInPlayer(title, artist){
-    let titleDisplay = document.getElementById("player-title").innerHTML = title;
-    let artistDisplay = document.getElementById("player-artist").innerHTML = artist;
-  }
-
-  pictureInPlayer(){
-    let pictureDisplay = document.getElementById("main-art").style.backgroundImage = `url(${this.state.albumCoverUrl})`;
-    $("main-art").removeClass("hidden-desktop");
-    $("player-bottom").removeClass("hidden-desktop");
   }
 
   albumCover(title, artist){
@@ -214,7 +199,7 @@
       // this.setState({mixtapeName: data.name});
       that.setState({songs: data.songs});
     })
-  } 
+  }
   remove(songIndex){
     $.ajax({
       url: '/song/' + self.state.songs[songIndex].song_id,
@@ -282,7 +267,7 @@
   showSuggestions(){
     that = this;
     $("#search").autocomplete( {
-      source(request, response){ 
+      source(request, response){
         $.ajax({
           url: "http://api.dar.fm/songartist.php?q=*" + request.term + "*&callback=jsonp&web=1&partner_token=9388418650",
           jsonp: "callback",
@@ -293,11 +278,14 @@
 
         });
       },
-    select(event, ui){
-      that.filteredSearchResults();
-    }
-    });
+
+  });
   }
+
+  select(event, ui){
+    that.filteredSearchResults();
+    }
+
 
    pass(){
     $("#mixtapeForm").slideToggle("slow");
@@ -336,10 +324,22 @@
     }
   }
 
+  check(currentArtist){
+    currentArtist.state.isChecked = true;
+    document.getElementById(currentArtist.props.songId).checked = true;
+  }
+
+  unCheck(currentArtist){
+    currentArtist.state.isChecked = false;
+    if(document.getElementById(currentArtist.props.songId)) {
+      document.getElementById(currentArtist.props.songId).checked = false;
+    }
+  }
+
   doneButton() {
     if($("label.mysong-label").length){
       $("#done-button").show();
-    } 
+    }
   }
 
   removeDoneButton(){
@@ -357,7 +357,7 @@
     // let searchResultCards = <Artist/>;
     let i = 0;
 
-    // if(this.state.results.length){ 
+    // if(this.state.results.length){
     //   searchResultCards = this.state.results[0].songmatch.map( artist => {
     //   return(<Artist rplay={self.playSong} mixtapeId={self.state.mixtape_id} getSongs={self.getSongs}/>)})}
     //}
@@ -368,19 +368,21 @@
     // });
     let searchResultCards = null;
     if(this.state.results[0] != undefined) {
+
       searchResultCards = this.state.results.length ? (
       this.state.results[0].songmatch.map( Sartist => {
-        return(<Artist title={Sartist.title} songIndex={"result" + self.state.results[0].songmatch.indexOf(Sartist)} songs={this.state.songs} getSongs={this.getSongs} artist={Sartist.artist} key={"artist" + (i += 1)} mixtapeId={self.state.mixtape_id} current_user={self.props.current_user} changeStationId={this.changeStationId} songId={Sartist.artist.replace(/\s/g, "")+Sartist.title.replace(/\s/g, "")}/>)
+        return(<Artist title={Sartist.title} songIndex={"result" + self.state.results[0].songmatch.indexOf(Sartist)} songs={this.state.songs} getSongs={this.getSongs} artist={Sartist.artist} key={`artist-${Sartist.artist}${Sartist.title}`} mixtapeId={self.state.mixtape_id} current_user={self.props.current_user} changeStationId={this.changeStationId} songId={Sartist.artist.replace(/\W+/g, "")+Sartist.title.replace(/\W+/g, "")} check={this.check} unCheck={this.unCheck} />)
       })):([])
     }
-    debugger
     let songs = self.state.songs.map( song => {
     // let key = `mixtapeSong-${song.song_id}`;
-      return(<div className="inline-container"><SelectedArtist songs={this.state.songs} key={`mixtapeSong-${song.song_id}`} songIndex={"favorite" + self.state.songs.indexOf(song)} title={song.song_name} artist={song.artist_name} songId={"selected" + song.song_id} onChange={this.changeHandler} getSongs={this.getSongs} changeStationId={this.changeStationId} doneButton={this.doneButton} removeDoneButton={this.removeDoneButton} ref={Sartist.artist.replace(/\s/g, "")+Sartist.title.replace(/\s/g, "")} />
+      return(<div className="inline-container"><SelectedArtist songs={this.state.songs} key={`mixtapeSong-${song.artist}`} songIndex={"favorite" + self.state.songs.indexOf(song)} title={song.song_name} artist={song.artist_name} songId={"selected-" + song.song_name.replace(/\W+/g, "") + song.artist_name.replace(/\W+/g, "")} onChange={this.changeHandler} getSongs={this.getSongs} changeStationId={this.changeStationId} doneButton={this.doneButton} removeDoneButton={this.removeDoneButton}  />
       <p className="my-song-title">{song.song_name}</p>
       <p className="my-song-artist">{song.artist_name}</p>
       </div>);
     });
+    // ref={Sartist.artist.replace(/\W+/g, "")+Sartist.title.replace(/\W+/g, "")}
+
 
     return(<div id="search-box">
             <div className='selected-songs-container' id="">
@@ -393,9 +395,9 @@
             </div>
 
             <h5 className="salt searchLabel">Search for an Artist or Song:</h5>
-              <input id='search' className='large-search' type='text' ref='searchText' autofocus='true' placeholder='Song or Artist'/>
+              <input id='search' className='large-search word-spacing' type='text' ref='searchText' autofocus='true' placeholder='Song or Artist'/>
             <button onClick={this.filteredSearchResults} className='btn waves-effect waves-light black-text'>Search</button>
-            <div id="search-list"> 
+            <div id="search-list">
               {this.noArtists(searchResultCards)}
               {searchResultCards}
             </div>

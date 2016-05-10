@@ -1,6 +1,6 @@
 = stylesheet_link_tag "registrations.css" 
 = render 'layouts/nolognav'
-%h1.away-from-edge Choose Username
+%h1.away-from-edge.vertical-spacing Choose Username
 - flash.each do |name, msg|
   - if msg.class == Array
     - msg.each do |message|

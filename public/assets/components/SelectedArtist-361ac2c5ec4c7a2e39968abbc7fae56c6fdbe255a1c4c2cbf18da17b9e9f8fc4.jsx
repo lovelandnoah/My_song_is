@@ -169,16 +169,16 @@ class SelectedArtist extends React.Component{
     var styles = {backgroundImage: 'url(' + this.state.albumCoverUrl + ')'}
     var isChecked = false;
     for(i=0;i<this.props.songs.length;i++){
-      if(this.props.songs[i].artist_name.replace(/\s/g, "") + this.props.songs[i].song_name.replace(/\s/g, "") == this.props.songId){
+      if(this.props.songs[i].artist_name.replace(/\W+/g, "") + this.props.songs[i].song_name.replace(/\W+/g, "") == this.props.songId){
         isChecked = true;
       }
     }
 
     return(
     <span>
-      <input id={this.props.songId.replace(/\s/g, "")} type='checkbox' className='checkbox' name={this.props.songId.replace(/\s/g, "")} checked={this.state.isChecked}
+      <input id={this.props.songId.replace(/\W+/g, "")} type='checkbox' className='checkbox' name={this.props.songId.replace(/\W+/g, "")} checked={this.state.isChecked}
         onClick={() => this.add(this.props.title, this.props.artist, this.state.isChecked)}></input>
-      <label id={this.props.songId.replace(/\s/g, "") + "Image"}htmlFor={this.props.songId} style={styles} className="mysong-label image-checked"></label>
+      <label id={this.props.songId.replace(/\W+/g, "") + "Image"}htmlFor={this.props.songId} style={styles} className="mysong-label image-checked"></label>
     </span>
     );
   }
@@ -193,6 +193,7 @@ class SelectedArtist extends React.Component{
       this.state.artist = this.props.artist;
       this.state.isChecked = false;
       // set perm id?
+      debugger
       document.getElementById(this.state.songId).checked = false;
       document.getElementById(this.state.songId).id = this.props.songId;
       this.state.songId = this.props.songId;

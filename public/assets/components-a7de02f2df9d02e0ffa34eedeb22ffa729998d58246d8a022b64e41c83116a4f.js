@@ -13,7 +13,7 @@ var Artist = (function (_React$Component) {
     _classCallCheck(this, Artist);
 
     _get(Object.getPrototypeOf(Artist.prototype), "constructor", this).call(this, props);
-    this.state = { albumCoverUrl: "", key: "", title: this.props.title, artist: this.props.artist, isMounted: false, isChecked: null };
+    this.state = { albumCoverUrl: "", key: "", title: this.props.title, artist: this.props.artist, isMounted: false, isChecked: false };
     this.play = this.play.bind(this);
     this.add = this.add.bind(this);
     this.albumCover = this.albumCover.bind(this);
@@ -42,13 +42,22 @@ var Artist = (function (_React$Component) {
       this.state.songTitle = self.props.title;
       ////
       this.state.songId = this.props.songId;
-      // this.state.isChecked = false;
+      // this.props.unCheck(this);
       for (i = 0; i < this.props.songs.length; i++) {
         if (this.props.songs[i].song_name == this.props.title && this.props.songs[i].artist_name == this.props.artist) {
-          this.state.isChecked = true;
+          this.props.check(this);
         }
       }
       // document.getElementById(self.props.songId).checked = this.state.isChecked;
+
+      currentArtist = this;
+
+      if ($("#selected-" + this.state.title.replace(/\W+/g, "") + this.state.artist.replace(/\W+/g, "")).is("input")) {
+        $("#selected-" + this.state.title.replace(/\W+/g, "") + this.state.artist.replace(/\W+/g, "")).on("change", function () {
+          currentArtist.props.unCheck(currentArtist);
+          debugger;
+        });
+      }
     }
   }, {
     key: "componentWillUnmount",
@@ -58,11 +67,11 @@ var Artist = (function (_React$Component) {
   }, {
     key: "componentWillUpdate",
     value: function componentWillUpdate() {
-      // this.state.isChecked = false;
+      // this.props.unCheck(this);
 
       // for(i=0;i<this.props.songs.length;i++){
       //   if(this.props.songs[i].song_name == this.props.title && this.props.songs[i].artist_name == this.props.artist){
-      //     this.state.isChecked = true;
+      //     this.props.check(this);
       //   }
       // }
       // document.getElementById(this.props.title).checked = this.state.isChecked;
@@ -117,9 +126,8 @@ var Artist = (function (_React$Component) {
   }, {
     key: "add",
     value: function add(songName, artist) {
-      var _this2 = this;
-
-      var self = this;
+      var that = this;
+      debugger;
       if (!this.state.isChecked) {
         if (this.props.songs.length < 4) {
           $.ajax({
@@ -127,19 +135,19 @@ var Artist = (function (_React$Component) {
             type: 'POST',
             data: { name: songName, artist: artist, mixtape_id: this.props.mixtapeId }
           }).success(function (data) {
-            _this2.state.isChecked = true;
-            self.props.getSongs();
-            document.getElementById(self.props.songId).checked = true;
+            that.props.check(that);
+            that.props.getSongs();
+            document.getElementById(that.props.songId).checked = true;
           });
         }
         if (this.props.songs.length >= 4) {
-          document.getElementById(self.props.songId).checked = false;
+          document.getElementById(that.props.songId).checked = false;
         }
       } else {
         var song_id = undefined;
-        for (i = 0; i < this.props.songs.length; i++) {
-          if (this.props.songs[i].song_name == songName && this.props.songs[i].artist_name == artist) {
-            song_id = this.props.songs[i].song_id;
+        for (i = 0; i < that.props.songs.length; i++) {
+          if (that.props.songs[i].song_name == songName && that.props.songs[i].artist_name == artist) {
+            song_id = that.props.songs[i].song_id;
           }
         }
         if (song_id) {
@@ -150,28 +158,28 @@ var Artist = (function (_React$Component) {
           }).success(function (data) {
             //       data: {name: self.state.songs[songIndex].song_name, artist: self.state.songs[songIndex].artist_name, mixtape_id: self.props.mixtapeId}
             // this.setState({songs: data.songs});
-            _this2.state.isChecked = false;
-            self.props.getSongs();
+            that.props.unCheck(that);
+            that.props.getSongs();
             //$(this.props.songId).attr('checked', false);
           });
         }
       }
-      $("#" + self.props.songId.replace(/\s/g, "") + "Image").toggleClass("image-checked");
+      $("#" + that.state.artist.replace(/\s/g, "") + that.state.title.replace(/\s/g, "") + "Image").toggleClass("image-checked");
     }
   }, {
     key: "albumCover",
     value: function albumCover() {
-      var _this3 = this;
+      var _this2 = this;
 
-      self = this;
+      that = this;
       $.ajax({
-        url: "http://api.dar.fm/songart.php?artist=" + self.props.artist + "&title=" + self.props.title + "&res=med&partner_token=9388418650",
+        url: "http://api.dar.fm/songart.php?artist=" + that.props.artist + "&title=" + that.props.title + "&res=med&partner_token=9388418650",
         jsonp: 'callback',
         type: 'GET',
         dataType: 'jsonp'
       }).success(function (data) {
-        if (_this3.state.isMounted == true) {
-          _this3.setState({ albumCoverUrl: data[0].arturl });
+        if (_this2.state.isMounted == true) {
+          _this2.setState({ albumCoverUrl: data[0].arturl });
         }
       });
     }
@@ -186,23 +194,23 @@ var Artist = (function (_React$Component) {
   }, {
     key: "displayAdd",
     value: function displayAdd() {
-      var _this4 = this;
+      var _this3 = this;
 
       var styles = { backgroundImage: 'url(' + this.state.albumCoverUrl + ')' };
-      var isChecked = false;
+      var imgIsChecked = false;
       for (i = 0; i < this.props.songs.length; i++) {
         if (this.props.songs[i].artist_name.replace(/\s/g, "") + this.props.songs[i].song_name.replace(/\s/g, "") == this.props.songId) {
-          isChecked = true;
+          imgIsChecked = true;
         }
       }
 
-      if (isChecked) {
+      if (imgIsChecked) {
         return React.createElement(
           "div",
           null,
-          React.createElement("input", { id: this.props.songId.replace(/\s/g, ""), type: "checkbox", className: "checkbox", name: this.props.songId.replace(/\s/g, ""), checked: this.state.isChecked,
+          React.createElement("input", { id: this.props.songId.replace(/\W+/g, ""), type: "checkbox", className: "checkbox", name: this.props.songId.replace(/\W+/g, ""), checked: this.state.isChecked,
             onClick: function () {
-              return _this4.add(_this4.props.title, _this4.props.artist, _this4.state.isChecked);
+              return _this3.add(_this3.props.title, _this3.props.artist, _this3.state.isChecked);
             } }),
           React.createElement("label", { id: this.props.songId.replace(/\s/g, "") + "Image", htmlFor: this.props.songId, style: styles, className: "checkbox-label image-checked" })
         );
@@ -210,18 +218,18 @@ var Artist = (function (_React$Component) {
         return React.createElement(
           "div",
           null,
-          React.createElement("input", { id: this.props.songId.replace(/\s/g, ""), type: "checkbox", className: "checkbox", name: this.props.songId.replace(/\s/g, ""), checked: this.state.isChecked,
+          React.createElement("input", { id: this.props.songId.replace(/\W+/g, ""), type: "checkbox", className: "checkbox", name: this.props.songId.replace(/\W+/g, ""), checked: this.state.isChecked,
             onClick: function () {
-              return _this4.add(_this4.props.title, _this4.props.artist, _this4.state.isChecked);
+              return _this3.add(_this3.props.title, _this3.props.artist, _this3.state.isChecked);
             } }),
-          React.createElement("label", { id: this.props.songId.replace(/\s/g, "") + "Image", htmlFor: this.props.songId, style: styles, className: "checkbox-label" })
+          React.createElement("label", { id: this.props.songId.replace(/\W+/g, "") + "Image", htmlFor: this.props.songId, style: styles, className: "checkbox-label" })
         );
       }
     }
   }, {
     key: "render",
     value: function render() {
-      var _this5 = this;
+      var _this4 = this;
 
       // if(self.props.current_user) {
       checkBox = this.displayAdd();
@@ -229,7 +237,7 @@ var Artist = (function (_React$Component) {
       if (this.state.title != this.props.title || this.state.artist != this.props.artist) {
         this.state.title = this.props.title;
         this.state.artist = this.props.artist;
-        this.state.isChecked = false;
+        this.props.unCheck(this);
         // set perm id?
         document.getElementById(this.state.songId).checked = false;
         document.getElementById(this.state.songId).id = this.props.songId;
@@ -237,7 +245,7 @@ var Artist = (function (_React$Component) {
         for (i = 0; i < this.props.songs.length; i++) {
           if (this.props.songs[i].song_name == this.props.title && this.props.songs[i].artist_name == this.props.artist) {
             document.getElementById(this.props.songId.replace(/\s/g, "")).checked = true;
-            this.state.isChecked = true;
+            this.props.check(this);
           }
         }
       }
@@ -270,7 +278,7 @@ var Artist = (function (_React$Component) {
             React.createElement(
               "a",
               { className: "btn individual-play-button", onClick: function () {
-                  return _this5.mobilePlayButton(_this5.props.title, _this5.props.artist);
+                  return _this4.mobilePlayButton(_this4.props.title, _this4.props.artist);
                 } },
               " Play "
             )
@@ -453,8 +461,6 @@ var PickASong = (function (_React$Component) {
     // this.doSearch = this.doSearch.bind(this);
 
     //mixtape
-    this.songNameInPlayer = this.songNameInPlayer.bind(this);
-    this.pictureInPlayer = this.pictureInPlayer.bind(this);
     this.albumCover = this.albumCover.bind(this);
     // this.findPlay = this.findPlay.bind(this);
     // this.shuffle = this.shuffle.bind(this);
@@ -473,6 +479,9 @@ var PickASong = (function (_React$Component) {
 
     this.doneButton = this.doneButton.bind(this);
     this.removeDoneButton = this.removeDoneButton.bind(this);
+
+    this.check = this.check.bind(this);
+    this.unCheck = this.unCheck.bind(this);
   }
 
   _createClass(PickASong, [{
@@ -543,8 +552,6 @@ var PickASong = (function (_React$Component) {
   }, {
     key: 'play',
     value: function play(title, artist) {
-      this.songNameInPlayer(title, artist);
-      this.pictureInPlayer();
       title = title.replace(/\s/g, '%20');
       artist = artist.replace(/\s/g, '%20');
       $.ajax({
@@ -590,7 +597,6 @@ var PickASong = (function (_React$Component) {
             var player = document.getElementById("player");
             player.src = "http://api.dar.fm/player_api.php?station_id=" + data[0].result[0].station_id + "&custom_style=radioslice&partner_token=9388418650";
             that.albumCover(data[0].songmatch[0].title, data[0].songmatch[0].artist);
-            that.songNameInPlayer(data[0].songmatch[0].title, data[0].songmatch[0].artist);
             that.changeStationId(data[0].result[0].station_id);
           }
         } else {
@@ -610,44 +616,24 @@ var PickASong = (function (_React$Component) {
   }, {
     key: 'attemptUpdate',
     value: function attemptUpdate() {
-      var _this2 = this;
-
       if (this.state.station_id != "") {
-        (function () {
-          var that = _this2;
-          $.ajax({
-            url: "http://api.dar.fm/playlist.php?station_id=" + that.state.station_id + "&partner_token=9388418650",
-            jsonp: 'callback',
-            type: 'GET',
-            dataType: 'jsonp'
-          }).success(function (data) {
-            if (data[0] != undefined) {
-              if (data[0].title != document.getElementById("player-title").innerHTML || data[0].artist != document.getElementById("player-artist").innerHTML) {
-                that.albumCover(data[0].title, data[0].artist);
-                that.songNameInPlayer(data[0].title, data[0].artist);
-              };
-            }
-          });
-        })();
+        var _that = this;
+        $.ajax({
+          url: "http://api.dar.fm/playlist.php?station_id=" + _that.state.station_id + "&partner_token=9388418650",
+          jsonp: 'callback',
+          type: 'GET',
+          dataType: 'jsonp'
+        }).success(function (data) {
+          if (data[0] != undefined) {
+            if (data[0].title != document.getElementById("player-title").innerHTML || data[0].artist != document.getElementById("player-artist").innerHTML) {};
+          }
+        });
       };
     }
   }, {
     key: 'changeStationId',
     value: function changeStationId(newId) {
       this.state.stationId = newId;
-    }
-  }, {
-    key: 'songNameInPlayer',
-    value: function songNameInPlayer(title, artist) {
-      var titleDisplay = document.getElementById("player-title").innerHTML = title;
-      var artistDisplay = document.getElementById("player-artist").innerHTML = artist;
-    }
-  }, {
-    key: 'pictureInPlayer',
-    value: function pictureInPlayer() {
-      var pictureDisplay = document.getElementById("main-art").style.backgroundImage = 'url(' + this.state.albumCoverUrl + ')';
-      $("main-art").removeClass("hidden-desktop");
-      $("player-bottom").removeClass("hidden-desktop");
     }
   }, {
     key: 'albumCover',
@@ -697,7 +683,7 @@ var PickASong = (function (_React$Component) {
   }, {
     key: 'getSearchResults',
     value: function getSearchResults() {
-      var _this3 = this;
+      var _this2 = this;
 
       var self = this;
       var searchTerm = self.refs.searchText.value.replace(/\s/g, "%20");
@@ -707,14 +693,14 @@ var PickASong = (function (_React$Component) {
         type: 'GET',
         dataType: 'jsonp'
       }).success(function (data) {
-        _this3.state.searched = true;
-        _this3.setState({ results: data });
+        _this2.state.searched = true;
+        _this2.setState({ results: data });
       });
     }
   }, {
     key: 'filteredSearchResults',
     value: function filteredSearchResults() {
-      var _this4 = this;
+      var _this3 = this;
 
       var self = this;
       var searchTerm = self.refs.searchText.value.replace(/\s/g, "%20");
@@ -732,14 +718,14 @@ var PickASong = (function (_React$Component) {
         // }
         // });
         // this.setState({results: data});
-        _this4.showFilteredResults(data);
+        _this3.showFilteredResults(data);
       });
       $(".ui-helper-hidden-accessible").hide();
     }
   }, {
     key: 'showFilteredResults',
     value: function showFilteredResults(results) {
-      var _this5 = this;
+      var _this4 = this;
 
       var self = this;
       $.ajax({
@@ -748,8 +734,8 @@ var PickASong = (function (_React$Component) {
         type: 'GET',
         dataType: 'jsonp'
       }).success(function (data) {
-        _this5.state.searched = true;
-        _this5.setState({ results: data });
+        _this4.state.searched = true;
+        _this4.setState({ results: data });
       });
     }
   }, {
@@ -766,11 +752,14 @@ var PickASong = (function (_React$Component) {
           }).success(function (data) {
             response(data);
           });
-        },
-        select: function (event, ui) {
-          that.filteredSearchResults();
         }
+
       });
+    }
+  }, {
+    key: 'select',
+    value: function select(event, ui) {
+      that.filteredSearchResults();
     }
   }, {
     key: 'pass',
@@ -825,6 +814,20 @@ var PickASong = (function (_React$Component) {
       }
     }
   }, {
+    key: 'check',
+    value: function check(currentArtist) {
+      currentArtist.state.isChecked = true;
+      document.getElementById(currentArtist.props.songId).checked = true;
+    }
+  }, {
+    key: 'unCheck',
+    value: function unCheck(currentArtist) {
+      currentArtist.state.isChecked = false;
+      if (document.getElementById(currentArtist.props.songId)) {
+        document.getElementById(currentArtist.props.songId).checked = false;
+      }
+    }
+  }, {
     key: 'doneButton',
     value: function doneButton() {
       if ($("label.mysong-label").length) {
@@ -846,7 +849,7 @@ var PickASong = (function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this6 = this;
+      var _this5 = this;
 
       self = this;
       // let searchResultCards = <Artist/>;
@@ -863,17 +866,17 @@ var PickASong = (function (_React$Component) {
       // });
       var searchResultCards = null;
       if (this.state.results[0] != undefined) {
+
         searchResultCards = this.state.results.length ? this.state.results[0].songmatch.map(function (Sartist) {
-          return React.createElement(Artist, { title: Sartist.title, songIndex: "result" + self.state.results[0].songmatch.indexOf(Sartist), songs: _this6.state.songs, getSongs: _this6.getSongs, artist: Sartist.artist, key: "artist" + (i += 1), mixtapeId: self.state.mixtape_id, current_user: self.props.current_user, changeStationId: _this6.changeStationId, songId: Sartist.artist.replace(/\s/g, "") + Sartist.title.replace(/\s/g, "") });
+          return React.createElement(Artist, { title: Sartist.title, songIndex: "result" + self.state.results[0].songmatch.indexOf(Sartist), songs: _this5.state.songs, getSongs: _this5.getSongs, artist: Sartist.artist, key: 'artist-' + Sartist.artist + Sartist.title, mixtapeId: self.state.mixtape_id, current_user: self.props.current_user, changeStationId: _this5.changeStationId, songId: Sartist.artist.replace(/\W+/g, "") + Sartist.title.replace(/\W+/g, ""), check: _this5.check, unCheck: _this5.unCheck });
         }) : [];
       }
-      debugger;
       var songs = self.state.songs.map(function (song) {
         // let key = `mixtapeSong-${song.song_id}`;
         return React.createElement(
           'div',
           { className: 'inline-container' },
-          React.createElement(SelectedArtist, { songs: _this6.state.songs, key: 'mixtapeSong-' + song.song_id, songIndex: "favorite" + self.state.songs.indexOf(song), title: song.song_name, artist: song.artist_name, songId: "selected" + song.song_id, onChange: _this6.changeHandler, getSongs: _this6.getSongs, changeStationId: _this6.changeStationId, doneButton: _this6.doneButton, removeDoneButton: _this6.removeDoneButton, ref: Sartist.artist.replace(/\s/g, "") + Sartist.title.replace(/\s/g, "") }),
+          React.createElement(SelectedArtist, { songs: _this5.state.songs, key: 'mixtapeSong-' + song.artist, songIndex: "favorite" + self.state.songs.indexOf(song), title: song.song_name, artist: song.artist_name, songId: "selected-" + song.song_name.replace(/\W+/g, "") + song.artist_name.replace(/\W+/g, ""), onChange: _this5.changeHandler, getSongs: _this5.getSongs, changeStationId: _this5.changeStationId, doneButton: _this5.doneButton, removeDoneButton: _this5.removeDoneButton }),
           React.createElement(
             'p',
             { className: 'my-song-title' },
@@ -886,6 +889,7 @@ var PickASong = (function (_React$Component) {
           )
         );
       });
+      // ref={Sartist.artist.replace(/\W+/g, "")+Sartist.title.replace(/\W+/g, "")}
 
       return React.createElement(
         'div',
@@ -906,7 +910,7 @@ var PickASong = (function (_React$Component) {
           { className: 'salt searchLabel' },
           'Search for an Artist or Song:'
         ),
-        React.createElement('input', { id: 'search', className: 'large-search', type: 'text', ref: 'searchText', autofocus: 'true', placeholder: 'Song or Artist' }),
+        React.createElement('input', { id: 'search', className: 'large-search word-spacing', type: 'text', ref: 'searchText', autofocus: 'true', placeholder: 'Song or Artist' }),
         React.createElement(
           'button',
           { onClick: this.filteredSearchResults, className: 'btn waves-effect waves-light black-text' },
@@ -2244,7 +2248,7 @@ var SelectedArtist = (function (_React$Component) {
       var styles = { backgroundImage: 'url(' + this.state.albumCoverUrl + ')' };
       var isChecked = false;
       for (i = 0; i < this.props.songs.length; i++) {
-        if (this.props.songs[i].artist_name.replace(/\s/g, "") + this.props.songs[i].song_name.replace(/\s/g, "") == this.props.songId) {
+        if (this.props.songs[i].artist_name.replace(/\W+/g, "") + this.props.songs[i].song_name.replace(/\W+/g, "") == this.props.songId) {
           isChecked = true;
         }
       }
@@ -2252,11 +2256,11 @@ var SelectedArtist = (function (_React$Component) {
       return React.createElement(
         "span",
         null,
-        React.createElement("input", { id: this.props.songId.replace(/\s/g, ""), type: "checkbox", className: "checkbox", name: this.props.songId.replace(/\s/g, ""), checked: this.state.isChecked,
+        React.createElement("input", { id: this.props.songId.replace(/\W+/g, ""), type: "checkbox", className: "checkbox", name: this.props.songId.replace(/\W+/g, ""), checked: this.state.isChecked,
           onClick: function () {
             return _this4.add(_this4.props.title, _this4.props.artist, _this4.state.isChecked);
           } }),
-        React.createElement("label", { id: this.props.songId.replace(/\s/g, "") + "Image", htmlFor: this.props.songId, style: styles, className: "mysong-label image-checked" })
+        React.createElement("label", { id: this.props.songId.replace(/\W+/g, "") + "Image", htmlFor: this.props.songId, style: styles, className: "mysong-label image-checked" })
       );
     }
   }, {
@@ -2273,6 +2277,7 @@ var SelectedArtist = (function (_React$Component) {
         this.state.artist = this.props.artist;
         this.state.isChecked = false;
         // set perm id?
+        debugger;
         document.getElementById(this.state.songId).checked = false;
         document.getElementById(this.state.songId).id = this.props.songId;
         this.state.songId = this.props.songId;
